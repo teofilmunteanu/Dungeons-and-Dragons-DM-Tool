@@ -40,6 +40,18 @@ namespace Deez_Notes_Dm
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.NewPlayerForm.Visibility = Visibility.Visible;
+
+            this.NameInput.Text = "";
+            this.RaceInput.Text = "";
+            this.HPInput.Text = "";
+            this.ACInput.Text = "";
+
+            this.STRInput.Text = "";
+            this.DEXInput.Text = "";
+            this.CONInput.Text = "";
+            this.INTInput.Text = "";
+            this.WISInput.Text = "";
+            this.CHAInput.Text = "";
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -48,7 +60,7 @@ namespace Deez_Notes_Dm
             {
                 String Name = this.NameInput.Text;
                 String Race = this.RaceInput.Text;
-                int HP = Int32.Parse(this.ACInput.Text);
+                int HP = Int32.Parse(this.HPInput.Text);
                 int AC = Int32.Parse(this.ACInput.Text);
                 Dictionary<String, int> Stats = new Dictionary<String, int>
                 {
@@ -79,6 +91,23 @@ namespace Deez_Notes_Dm
             OutputJson();
 
             this.NewPlayerForm.Visibility = Visibility.Collapsed;
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            this.NewPlayerForm.Visibility = Visibility.Collapsed;
+
+            this.NameInput.Text = "";
+            this.RaceInput.Text = "";
+            this.HPInput.Text = "";
+            this.ACInput.Text = "";
+
+            this.STRInput.Text = "";
+            this.DEXInput.Text = "";
+            this.CONInput.Text = "";
+            this.INTInput.Text = "";
+            this.WISInput.Text = "";
+            this.CHAInput.Text = "";
         }
     }
 }

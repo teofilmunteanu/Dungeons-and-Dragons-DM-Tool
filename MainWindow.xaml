@@ -201,7 +201,7 @@
                             </Grid.ColumnDefinitions>
 
                             <Button x:Name="PlayerCreateBtn" Content="Create" FontWeight="Bold" Grid.Row="1" Grid.Column="1" Click="Button_Click_1" Background="#FF838383" Foreground="White"/>
-                            <Button x:Name="PlayerCancelBtn" Content="Cancel" FontWeight="Bold" Grid.Row="1" Grid.Column="1" Click="Button_Click_1" Background="IndianRed" Foreground="White"/>
+                            <Button x:Name="PlayerCancelBtn" Content="Cancel" FontWeight="Bold" Grid.Row="2" Grid.Column="1" Click="Button_Click_2" Background="IndianRed" Foreground="White"/>
                             
                         </Grid>
                     </Grid>
