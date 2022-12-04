@@ -10,7 +10,7 @@
     <Window.Resources>
         <!-- Data Template (applied to each bound task item in the task collection) -->
         <DataTemplate x:Key="PlayerListData">
-            <Border Name="border" BorderBrush="DeepSkyBlue" Background="LightGray" BorderThickness="2"  
+            <Border Name="border" BorderBrush="DeepSkyBlue" Background="White" BorderThickness="2"  
       CornerRadius="2" Padding="5" Margin="5">
                 <Grid x:Name="PlayerContainer">
                     <Grid.RowDefinitions>
@@ -18,9 +18,12 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <Grid Grid.Row="0" Margin="15" HorizontalAlignment="Center">
+                    <Grid x:Name="PlayerDescBlock" Grid.Row="0" Margin="15" HorizontalAlignment="Center">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
                             <RowDefinition />
                             <RowDefinition />
                             <RowDefinition />
@@ -34,18 +37,24 @@
                         <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Path=Name}" HorizontalAlignment="Center" FontWeight="Bold"/>
                         <TextBlock Grid.Row="1" Grid.Column="0" Text="Race" HorizontalAlignment="Center"/>
                         <Separator Grid.Row="2"/>
-                        <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center">
-                            <TextBlock.Text>
+
+                        <TextBlock Text="{Binding Path=XP, StringFormat='XP: {0}'}" Grid.Column="0" Grid.Row="3"/>
+
+                        <TextBlock Text="{Binding Path=totalLevel, StringFormat='Level: {0}'}" Grid.Column="0" Grid.Row="4"/>
+                        <Separator Grid.Row="5"/>
+                        <TextBlock Text="Class - 1" Grid.Row="6" Grid.Column="0">
+                            <!--<TextBlock.Text>
                                 <MultiBinding StringFormat=" {0} - {1}">
+                                
                                     <Binding Path="Name"/>
-                                    <Binding Path="ID[0]"/>
+                                    <Binding Path="Name"/>
                                 </MultiBinding>
-                            </TextBlock.Text>
+                            </TextBlock.Text>-->
                         </TextBlock>
-                        <Separator Grid.Row="4"/>
+                        <Separator Grid.Row="7"/>
                     </Grid>
 
-                    <Grid Grid.Row="1" Margin="15,0,15,0">
+                    <Grid x:Name="PlayerStatsBlock" Grid.Row="1" Margin="15,0,15,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition />
@@ -59,22 +68,21 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Row="0" Grid.Column="0" Text="STR" HorizontalAlignment="Center" Padding="0,0,5,0" FontWeight="Bold"/>
-                        <TextBlock Grid.Row="0" Grid.Column="1" Text="5" HorizontalAlignment="Center" Padding="0,0,20,0"/>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="STR" HorizontalAlignment="Center" Padding="0,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=Stats[STR]}" HorizontalAlignment="Center" Padding="0,0,20,0"/>
                         <TextBlock Grid.Row="0" Grid.Column="2" Text="DEX" HorizontalAlignment="Center" Padding="0,0,5,0" FontWeight="Bold"/>
-                        <TextBlock Grid.Row="0" Grid.Column="3" Text="10" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Row="0" Grid.Column="3" Text="{Binding Path=Stats[DEX]}" HorizontalAlignment="Center"/>
                         <TextBlock Grid.Row="1" Grid.Column="0" Text="CON" HorizontalAlignment="Center" Padding="0,0,5,0" FontWeight="Bold"/>
-                        <TextBlock Grid.Row="1" Grid.Column="1" Text="5" HorizontalAlignment="Center" Padding="0,0,20,0"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=Stats[CON]}" HorizontalAlignment="Center" Padding="0,0,20,0"/>
                         <TextBlock Grid.Row="1" Grid.Column="2" Text="INT" HorizontalAlignment="Center" Padding="0,0,5,0" FontWeight="Bold"/>
-                        <TextBlock Grid.Row="1" Grid.Column="3" Text="10" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Row="1" Grid.Column="3" Text="{Binding Path=Stats[INT]}" HorizontalAlignment="Center"/>
                         <TextBlock Grid.Row="2" Grid.Column="0" Text="WIS" HorizontalAlignment="Center" Padding="0,0,5,0" FontWeight="Bold"/>
-                        <TextBlock Grid.Row="2" Grid.Column="1" Text="5" HorizontalAlignment="Center" Padding="0,0,20,0"/>
+                        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=Stats[WIS]}" HorizontalAlignment="Center" Padding="0,0,20,0"/>
                         <TextBlock Grid.Row="2" Grid.Column="2" Text="CHA" HorizontalAlignment="Center" Padding="0,0,5,0" FontWeight="Bold"/>
-                        <TextBlock Grid.Row="2" Grid.Column="3" Text="10" HorizontalAlignment="Center"/>
-
+                        <TextBlock Grid.Row="2" Grid.Column="3" Text="{Binding Path=Stats[CHA]}" HorizontalAlignment="Center"/>
                     </Grid>
                 </Grid>
-                
+
             </Border>
         </DataTemplate>
     </Window.Resources>
@@ -82,36 +90,120 @@
     <Grid>
         <TabControl Grid.Row="1">
             <TabItem Header="Players">
-                <!--<DockPanel x:Name="MainPanel">
-                    -->
-                <!--<Label DockPanel.Dock="Top" Content="Players:"/>-->
-                <!--
-                    <Button DockPanel.Dock="Bottom" Content="Add" Height="20" RenderTransformOrigin="0,0.5" Width="80"/>
-                    <ListBox DockPanel.Dock="Left" x:Name="PlayerList" Width="2*" ItemsSource="{Binding}" ItemTemplate="{StaticResource PlayerListData}" IsSynchronizedWithCurrentItem="True" BorderBrush="#FF5F5F5F" BorderThickness="3,3,3,3" Margin="0,0,5,0"/>
-                    <ListBox x:Name="PlayerProperties" DockPanel.Dock="Right" Width="3*" BorderBrush="#FF5F5F5F" BorderThickness="3,3,3,3" Margin="5,0,0,0"/>
-                </DockPanel>-->
-                <Grid >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="7*" />
-                        <ColumnDefinition Width="3*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="9*" />
-                        <RowDefinition Height="1*" />
-                    </Grid.RowDefinitions>
+                <Grid x:Name="TabRoot">
+                    <Grid x:Name="PlayersContainer" Background="#FF616161">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="7*" />
+                            <ColumnDefinition Width="3*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="9*" />
+                            <RowDefinition Height="1*" />
+                        </Grid.RowDefinitions>
 
-                    <ListBox Grid.Column="0" Grid.Row="0" x:Name="PlayerList" ItemsSource="{Binding}" ItemTemplate="{StaticResource PlayerListData}" IsSynchronizedWithCurrentItem="True" BorderBrush="#FF5F5F5F" BorderThickness="3,3,3,3" Margin="5,5,5,5">
-                        <ListBox.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal"/>
-                            </ItemsPanelTemplate>
-                        </ListBox.ItemsPanel>
-                    </ListBox>
-                    <ListBox Grid.Column="1" Grid.Row="0" x:Name="PlayerProperties" BorderBrush="#FF5F5F5F" BorderThickness="3,3,3,3" Margin="5,5,5,5"/>
-                    <Button Grid.Column="0" Grid.Row="1" Content="+" Width="50" FontSize="24" Height="31" VerticalAlignment="Center" Cursor="Hand" Click="Button_Click" FontFamily="Cascadia Code" />
+                        <ListBox Grid.Column="0" Grid.Row="0" x:Name="PlayerList" ItemsSource="{Binding}" ItemTemplate="{StaticResource PlayerListData}" IsSynchronizedWithCurrentItem="True" BorderBrush="DarkGray" BorderThickness="3,3,3,3" Margin="5,5,5,5">
+                            <ListBox.Background>
+                                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
+                            </ListBox.Background>
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                        </ListBox>
+                        <ListBox Grid.Column="1" Grid.Row="0" x:Name="PlayerProperties" BorderBrush="DarkGray" BorderThickness="3,3,3,3" Margin="5,5,5,5" Background="#FFAEAEAE"/>
+                        <Button Grid.Column="0" Grid.Row="1" Content="+" Width="50" FontSize="24" Height="31" VerticalAlignment="Center" Cursor="Hand" Click="Button_Click" FontFamily="Cascadia Code" />
+                    </Grid>
+                    
+                    <Grid x:Name="NewPlayerForm" Panel.ZIndex="100" Background="#B2484848" Visibility="Collapsed">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Row="1" Grid.Column="1" x:Name="CharDescriptionForm" Background="LightGray">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="Name" FontWeight="Bold" VerticalAlignment="Center"/>
+                            <TextBox x:Name="NameInput" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Row="1" Grid.Column="1" Text="Race" FontWeight="Bold" VerticalAlignment="Center"/>
+                            <TextBox x:Name="RaceInput" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Row="2" Grid.Column="1" Text="HP" FontWeight="Bold" VerticalAlignment="Center"/>
+                            <TextBox x:Name="HPInput" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Row="3" Grid.Column="1" Text="AC" FontWeight="Bold" VerticalAlignment="Center"/>
+                            <TextBox x:Name="ACInput" Grid.Row="3" Grid.Column="2" VerticalAlignment="Center"/>
+                        </Grid>
+
+                        <Grid Grid.Row="2" Grid.Column="1" x:Name="CharStatsForm" Background="LightGray">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="STR" VerticalAlignment="Center" FontWeight="Bold"/>
+                            <TextBox x:Name="STRInput" Grid.Row="0" Grid.Column="2" Width="Auto"  VerticalAlignment="Center"/>
+                            <TextBlock Grid.Row="0" Grid.Column="4" Text="DEX" VerticalAlignment="Center" FontWeight="Bold"/>
+                            <TextBox x:Name="DEXInput" Grid.Row="0" Grid.Column="5" Width="Auto"  VerticalAlignment="Center"/>
+                            <TextBlock Grid.Row="1" Grid.Column="1" Text="CON" VerticalAlignment="Center" FontWeight="Bold"/>
+                            <TextBox x:Name="CONInput" Grid.Row="1" Grid.Column="2" Width="Auto"  VerticalAlignment="Center"/>
+                            <TextBlock Grid.Row="1" Grid.Column="4" Text="INT" VerticalAlignment="Center" FontWeight="Bold"/>
+                            <TextBox x:Name="INTInput" Grid.Row="1" Grid.Column="5" Width="Auto"  VerticalAlignment="Center"/>
+                            <TextBlock Grid.Row="2" Grid.Column="1" Text="WIS" VerticalAlignment="Center" FontWeight="Bold"/>
+                            <TextBox x:Name="WISInput" Grid.Row="2" Grid.Column="2" Width="Auto"  VerticalAlignment="Center"/>
+                            <TextBlock Grid.Row="2" Grid.Column="4" Text="CHA"  VerticalAlignment="Center" FontWeight="Bold"/>
+                            <TextBox x:Name="CHAInput" Grid.Row="2" Grid.Column="5" Width="Auto"  VerticalAlignment="Center"/>
+                        </Grid>
+
+                        <Grid Grid.Row="3" Grid.Column="1" Background="LightGray">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button x:Name="PlayerCreateBtn" Content="Create" FontWeight="Bold" Grid.Row="1" Grid.Column="1" Click="Button_Click_1" Background="#FF838383" Foreground="White"/>
+                        </Grid>
+                    </Grid>
                 </Grid>
-
-
             </TabItem>
             <TabItem Header="DM Screen">
                 <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="0,1" >
