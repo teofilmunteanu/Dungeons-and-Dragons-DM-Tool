@@ -1,14 +1,3 @@
 [
-  {
-    "Name": "John Doe",
-    "HP": "100",
-    "stats": {
-      "STR": 3,
-      "DEX": 3,
-      "CON": 3,
-      "INT": 3,
-      "WIS": 3,
-      "CHA": 3
-    }
-  }
+  
 ]  
