@@ -35,7 +35,7 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Path=Name}" HorizontalAlignment="Center" FontWeight="Bold"/>
-                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Race" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding Path=Race}" HorizontalAlignment="Center"/>
                         <Separator Grid.Row="2"/>
 
                         <TextBlock Text="{Binding Path=XP, StringFormat='XP: {0}'}" Grid.Column="0" Grid.Row="3"/>
@@ -201,6 +201,8 @@
                             </Grid.ColumnDefinitions>
 
                             <Button x:Name="PlayerCreateBtn" Content="Create" FontWeight="Bold" Grid.Row="1" Grid.Column="1" Click="Button_Click_1" Background="#FF838383" Foreground="White"/>
+                            <Button x:Name="PlayerCancelBtn" Content="Cancel" FontWeight="Bold" Grid.Row="1" Grid.Column="1" Click="Button_Click_1" Background="IndianRed" Foreground="White"/>
+                            
                         </Grid>
                     </Grid>
                 </Grid>
