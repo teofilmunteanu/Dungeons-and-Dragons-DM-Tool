@@ -6,9 +6,138 @@
         xmlns:local="clr-namespace:Deez_Notes_Dm" xmlns:wpf="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+
+    <Window.Resources>
+        <!-- Data Template (applied to each bound task item in the task collection) -->
+        <DataTemplate x:Key="PlayerListData">
+            <Border Name="border" BorderBrush="DeepSkyBlue" Background="LightGray" BorderThickness="2"  
+      CornerRadius="2" Padding="5" Margin="5">
+                <Grid x:Name="PlayerContainer">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" Margin="15" HorizontalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Path=Name}" HorizontalAlignment="Center" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Race" HorizontalAlignment="Center"/>
+                        <Separator Grid.Row="2"/>
+                        <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat=" {0} - {1}">
+                                    <Binding Path="Name"/>
+                                    <Binding Path="ID[0]"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                        <Separator Grid.Row="4"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Margin="15,0,15,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="STR" HorizontalAlignment="Center" Padding="0,0,5,0" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="5" HorizontalAlignment="Center" Padding="0,0,20,0"/>
+                        <TextBlock Grid.Row="0" Grid.Column="2" Text="DEX" HorizontalAlignment="Center" Padding="0,0,5,0" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="0" Grid.Column="3" Text="10" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="CON" HorizontalAlignment="Center" Padding="0,0,5,0" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="5" HorizontalAlignment="Center" Padding="0,0,20,0"/>
+                        <TextBlock Grid.Row="1" Grid.Column="2" Text="INT" HorizontalAlignment="Center" Padding="0,0,5,0" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="1" Grid.Column="3" Text="10" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="WIS" HorizontalAlignment="Center" Padding="0,0,5,0" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="2" Grid.Column="1" Text="5" HorizontalAlignment="Center" Padding="0,0,20,0"/>
+                        <TextBlock Grid.Row="2" Grid.Column="2" Text="CHA" HorizontalAlignment="Center" Padding="0,0,5,0" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="2" Grid.Column="3" Text="10" HorizontalAlignment="Center"/>
+
+                    </Grid>
+                </Grid>
+                
+            </Border>
+        </DataTemplate>
+    </Window.Resources>
+
     <Grid>
-        <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="0,1">
-            <wpf:ChromiumWebBrowser x:Name="Browser" Address="www.google.com"/>
-        </Border>
+        <TabControl Grid.Row="1">
+            <TabItem Header="Players">
+                <!--<DockPanel x:Name="MainPanel">
+                    -->
+                <!--<Label DockPanel.Dock="Top" Content="Players:"/>-->
+                <!--
+                    <Button DockPanel.Dock="Bottom" Content="Add" Height="20" RenderTransformOrigin="0,0.5" Width="80"/>
+                    <ListBox DockPanel.Dock="Left" x:Name="PlayerList" Width="2*" ItemsSource="{Binding}" ItemTemplate="{StaticResource PlayerListData}" IsSynchronizedWithCurrentItem="True" BorderBrush="#FF5F5F5F" BorderThickness="3,3,3,3" Margin="0,0,5,0"/>
+                    <ListBox x:Name="PlayerProperties" DockPanel.Dock="Right" Width="3*" BorderBrush="#FF5F5F5F" BorderThickness="3,3,3,3" Margin="5,0,0,0"/>
+                </DockPanel>-->
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="7*" />
+                        <ColumnDefinition Width="3*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="9*" />
+                        <RowDefinition Height="1*" />
+                    </Grid.RowDefinitions>
+
+                    <ListBox Grid.Column="0" Grid.Row="0" x:Name="PlayerList" ItemsSource="{Binding}" ItemTemplate="{StaticResource PlayerListData}" IsSynchronizedWithCurrentItem="True" BorderBrush="#FF5F5F5F" BorderThickness="3,3,3,3" Margin="5,5,5,5">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                    </ListBox>
+                    <ListBox Grid.Column="1" Grid.Row="0" x:Name="PlayerProperties" BorderBrush="#FF5F5F5F" BorderThickness="3,3,3,3" Margin="5,5,5,5"/>
+                    <Button Grid.Column="0" Grid.Row="1" Content="+" Width="50" FontSize="24" Height="31" VerticalAlignment="Center" Cursor="Hand" Click="Button_Click" FontFamily="Cascadia Code" />
+                </Grid>
+
+
+            </TabItem>
+            <TabItem Header="DM Screen">
+                <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="0,1" >
+                    <!--<wpf:ChromiumWebBrowser x:Name="Browser1" Address="file:///C:/Users/andre/Documents/DnD%20Resources//DMScreen.png"/>-->
+                    <WebBrowser x:Name="webBrowser"></WebBrowser>
+                </Border>
+            </TabItem>
+            <!--
+            <TabItem Header="TabItem">
+                <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="0,1" >
+                    <WebBrowser Source="file:///C:/Users/andre/Documents/DnD%20Resources/Lost-Mine-of-Phandelver.pdf"></WebBrowser>
+                </Border>
+            </TabItem>
+            <TabItem Header="TabItem">
+                <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="0,1" >
+                    <wpf:ChromiumWebBrowser x:Name="Browser0" Address="file:///C:/Users/andre/Documents/DnD%20Resources/Lost-Mine-of-Phandelver.pdf"/>
+                </Border>
+            </TabItem>
+            <TabItem Header="DnD Beyond">
+                <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="0,1">
+                    <wpf:ChromiumWebBrowser x:Name="Browser2" Address="https://www.dndbeyond.com/"/>
+                </Border>
+            </TabItem>
+            -->
+        </TabControl>
     </Grid>
 </Window>
+
+

@@ -1,17 +1,9 @@
-﻿using System;
+﻿using Deez_Notes_Dm.Models;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Deez_Notes_Dm
 {
@@ -23,6 +15,31 @@ namespace Deez_Notes_Dm
         public MainWindow()
         {
             InitializeComponent();
+            string curDir = Directory.GetCurrentDirectory();
+            this.webBrowser.Source = new Uri(String.Format("file:///{0}/Resources/DMSCreen.png", curDir));
+
+            OutputJson();
+        }
+
+        public void OutputJson()
+        {
+            try
+            {
+
+                string json = System.IO.File.ReadAllText(@"Resources/Players/Test.json");
+
+
+                PlayerList.ItemsSource = JsonConvert.DeserializeObject<List<Test>>(json);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
