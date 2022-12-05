@@ -72,8 +72,8 @@
                         <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Padding="0,0,10,0">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat=" {0} ({1})">
-                                    <Binding Path="Stats[STR]"/>
-                                    <Binding Path="StatsMod[STR]"/>
+                                    <Binding Path="Stats.STR"/>
+                                    <Binding Path="StatsMod.STR"/>
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>
@@ -81,8 +81,8 @@
                         <TextBlock Grid.Row="0" Grid.Column="3" HorizontalAlignment="Left">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat=" {0} ({1})">
-                                    <Binding Path="Stats[DEX]"/>
-                                    <Binding Path="StatsMod[DEX]"/>
+                                    <Binding Path="Stats.DEX"/>
+                                    <Binding Path="StatsMod.DEX"/>
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>
@@ -90,8 +90,8 @@
                         <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"  Padding="0,0,10,0">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat=" {0} ({1})">
-                                    <Binding Path="Stats[CON]"/>
-                                    <Binding Path="StatsMod[CON]"/>
+                                    <Binding Path="Stats.CON"/>
+                                    <Binding Path="StatsMod.CON"/>
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>
@@ -99,17 +99,17 @@
                         <TextBlock Grid.Row="1" Grid.Column="3" HorizontalAlignment="Left">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat=" {0} ({1})">
-                                    <Binding Path="Stats[INT]"/>
-                                    <Binding Path="StatsMod[INT]"/>
+                                    <Binding Path="Stats.INT"/>
+                                    <Binding Path="StatsMod.INT"/>
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>
                         <TextBlock Grid.Row="2" Grid.Column="0" Text="WIS" HorizontalAlignment="Left" FontWeight="Bold"/>
-                        <TextBlock Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center"  Padding="0,0,10,0">
+                        <TextBlock Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left"  Padding="0,0,10,0">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat=" {0} ({1})">
-                                    <Binding Path="Stats[WIS]"/>
-                                    <Binding Path="StatsMod[WIS]"/>
+                                    <Binding Path="Stats.WIS"/>
+                                    <Binding Path="StatsMod.WIS"/>
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>
@@ -117,8 +117,8 @@
                         <TextBlock Grid.Row="2" Grid.Column="3" HorizontalAlignment="Left">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat=" {0} ({1})">
-                                    <Binding Path="Stats[CHA]"/>
-                                    <Binding Path="StatsMod[CHA]"/>
+                                    <Binding Path="Stats.CHA"/>
+                                    <Binding Path="StatsMod.CHA"/>
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>

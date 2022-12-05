@@ -28,15 +28,34 @@ namespace Deez_Notes_Dm.Models
 
         //private Dictionary<String, int> _Stats;
 
-        public Dictionary<String, int> Stats { get; set; }
+        //public Dictionary<String, int> Stats { get; set; }
         //{
         //    get { return _Stats; }
         //    set { _Stats = value; }
         //}
-        public Dictionary<String, int> StatsMod { get; set; }
+        //public Dictionary<String, int> StatsMod { get; set; }
         
+        public class Status
+        {
+            public int STR { get; set; }
+            public int DEX { get; set; }
+            public int CON { get; set; }
+            public int INT { get; set; }
+            public int WIS { get; set; }
+            public int CHA { get; set; }
+        }
+        public Status Stats { get; set; }
 
-
+        public class StatsModifiers
+        {
+            public int STR { get; set; }
+            public int DEX { get; set; }
+            public int CON { get; set; }
+            public int INT { get; set; }
+            public int WIS { get; set; }
+            public int CHA { get; set; }
+        }
+        public StatsModifiers StatsMod { get; set; }
 
         //public int passiveInsight { get; set; }
         //public int passiveInvestigation { get; set; }
@@ -51,9 +70,10 @@ namespace Deez_Notes_Dm.Models
         //public int initiative { get; set; }
 
 
-        int getModifier(String statBlock)
+        int getModifier(int statusValue)
         {
-            return (int)Math.Floor(((Stats[statBlock] - 10)) / 2.0);
+            //return (int)Math.Floor(((Stats[statBlock] - 10)) / 2.0);
+            return (int)Math.Floor(((statusValue - 10)) / 2.0);
         }
 
         public Player()
@@ -61,7 +81,7 @@ namespace Deez_Notes_Dm.Models
 
         }
 
-        public Player(String name, String race, int HP, int AC, Dictionary<string, int> stats)
+        public Player(String name, String race, int HP, int AC, Status stats)
         {
             this.Name = name;
             this.Race = race;
@@ -75,15 +95,26 @@ namespace Deez_Notes_Dm.Models
 
             this.Stats = stats;
 
-            StatsMod = new Dictionary<string, int>()
-            {
-                {"STR", getModifier("STR")},
-                {"DEX", getModifier("DEX")},
-                {"CON", getModifier("CON")},
-                {"INT", getModifier("INT")},
-                {"WIS", getModifier("WIS")},
-                {"CHA", getModifier("CHA")}
-            };
+            this.StatsMod = new StatsModifiers();
+            StatsMod.STR = getModifier(Stats.STR);
+            StatsMod.DEX = getModifier(Stats.DEX);
+            StatsMod.CON = getModifier(Stats.CON);
+            StatsMod.INT = getModifier(Stats.INT);
+            StatsMod.WIS = getModifier(Stats.WIS);
+            StatsMod.CHA = getModifier(Stats.CHA);
+
+
+            //StatsMod = new Dictionary<string, int>()
+            //{
+            //    {"STR", getModifier("STR")},
+            //    {"DEX", getModifier("DEX")},
+            //    {"CON", getModifier("CON")},
+            //    {"INT", getModifier("INT")},
+            //    {"WIS", getModifier("WIS")},
+            //    {"CHA", getModifier("CHA")}
+            //};
+
+            
         }
 
         //public Player(String name, String race, String _class, int HP, int AC, Dictionary<string, int> stats,

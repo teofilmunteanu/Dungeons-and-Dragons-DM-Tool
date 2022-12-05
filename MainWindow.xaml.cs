@@ -58,21 +58,29 @@ namespace Deez_Notes_Dm
         {
             try
             {
-                String Name = this.NameInput.Text;
-                String Race = this.RaceInput.Text;
+                String name = this.NameInput.Text;
+                String race = this.RaceInput.Text;
                 int HP = Int32.Parse(this.HPInput.Text);
                 int AC = Int32.Parse(this.ACInput.Text);
-                Dictionary<String, int> Stats = new Dictionary<String, int>
-                {
-                    {"STR", Int32.Parse(this.STRInput.Text)},
-                    {"DEX", Int32.Parse(this.DEXInput.Text)},
-                    {"CON", Int32.Parse(this.CONInput.Text)},
-                    {"INT", Int32.Parse(this.INTInput.Text)},
-                    {"WIS", Int32.Parse(this.WISInput.Text)},
-                    {"CHA", Int32.Parse(this.CHAInput.Text)}
-                };
+                //Dictionary<String, int> Stats = new Dictionary<String, int>
+                //{
+                //    {"STR", Int32.Parse(this.STRInput.Text)},
+                //    {"DEX", Int32.Parse(this.DEXInput.Text)},
+                //    {"CON", Int32.Parse(this.CONInput.Text)},
+                //    {"INT", Int32.Parse(this.INTInput.Text)},
+                //    {"WIS", Int32.Parse(this.WISInput.Text)},
+                //    {"CHA", Int32.Parse(this.CHAInput.Text)}
+                //};
+                Player.Status stats = new Player.Status();
+                stats.STR = Int32.Parse(this.STRInput.Text);
+                stats.DEX = Int32.Parse(this.DEXInput.Text);
+                stats.CON = Int32.Parse(this.CONInput.Text);
+                stats.INT = Int32.Parse(this.INTInput.Text);
+                stats.WIS = Int32.Parse(this.WISInput.Text);
+                stats.CHA = Int32.Parse(this.CHAInput.Text);
 
-                Player player = new Player(Name, Race, HP, AC, Stats);
+                Player player = new Player(name, race, HP, AC, stats);
+
 
                 string json = System.IO.File.ReadAllText(@"Resources/Players/Players.json");
                 string newJson;
