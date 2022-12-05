@@ -13,7 +13,7 @@ namespace Deez_Notes_Dm.Models
         public String Race { get; set; }
 
         public int XP { get; set; }
-        public int[] XPbyLevel { get; set; } = { -1, 0, 300, 900, 2700, 6500, 14000, 23000, 34000, 48000, 64000, 85000, 100000, 120000, 140000, 165000, 195000, 225000, 265000, 305000, 355000 };
+        static int[] XPbyLevel { get; set; } = { -1, 0, 300, 900, 2700, 6500, 14000, 23000, 34000, 48000, 64000, 85000, 100000, 120000, 140000, 165000, 195000, 225000, 265000, 305000, 355000 };
         public int totalLevel { get; set; }
         public Dictionary<string, int> levelByClass { get; set; } = new Dictionary<string, int>();
 
@@ -26,13 +26,15 @@ namespace Deez_Notes_Dm.Models
         public int succededDeathSaves { get; set; }
         public int failedDeathSaves { get; set; }
 
-        private Dictionary<String, int> _Stats;
+        //private Dictionary<String, int> _Stats;
 
-        public Dictionary<String, int> Stats
-        {
-            get { return _Stats; }
-            set { _Stats = value; }
-        }
+        public Dictionary<String, int> Stats { get; set; }
+        //{
+        //    get { return _Stats; }
+        //    set { _Stats = value; }
+        //}
+        public Dictionary<String, int> StatsMod { get; set; }
+        
 
 
 
@@ -61,15 +63,6 @@ namespace Deez_Notes_Dm.Models
 
         public Player(String name, String race, int HP, int AC, Dictionary<string, int> stats)
         {
-            Stats = new Dictionary<String, int> {
-                {"STR", 0},
-                {"DEX", 0},
-                {"CON", 0},
-                {"INT", 0},
-                {"WIS", 0},
-                {"CHA", 0}
-            };
-
             this.Name = name;
             this.Race = race;
 
@@ -81,6 +74,16 @@ namespace Deez_Notes_Dm.Models
             this.HitDice = 1;
 
             this.Stats = stats;
+
+            StatsMod = new Dictionary<string, int>()
+            {
+                {"STR", getModifier("STR")},
+                {"DEX", getModifier("DEX")},
+                {"CON", getModifier("CON")},
+                {"INT", getModifier("INT")},
+                {"WIS", getModifier("WIS")},
+                {"CHA", getModifier("CHA")}
+            };
         }
 
         //public Player(String name, String race, String _class, int HP, int AC, Dictionary<string, int> stats,

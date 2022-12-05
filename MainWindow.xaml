@@ -68,18 +68,60 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Row="0" Grid.Column="0" Text="STR" HorizontalAlignment="Center" Padding="0,0,0,0" FontWeight="Bold"/>
-                        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=Stats[STR]}" HorizontalAlignment="Center" Padding="0,0,20,0"/>
-                        <TextBlock Grid.Row="0" Grid.Column="2" Text="DEX" HorizontalAlignment="Center" Padding="0,0,5,0" FontWeight="Bold"/>
-                        <TextBlock Grid.Row="0" Grid.Column="3" Text="{Binding Path=Stats[DEX]}" HorizontalAlignment="Center"/>
-                        <TextBlock Grid.Row="1" Grid.Column="0" Text="CON" HorizontalAlignment="Center" Padding="0,0,5,0" FontWeight="Bold"/>
-                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=Stats[CON]}" HorizontalAlignment="Center" Padding="0,0,20,0"/>
-                        <TextBlock Grid.Row="1" Grid.Column="2" Text="INT" HorizontalAlignment="Center" Padding="0,0,5,0" FontWeight="Bold"/>
-                        <TextBlock Grid.Row="1" Grid.Column="3" Text="{Binding Path=Stats[INT]}" HorizontalAlignment="Center"/>
-                        <TextBlock Grid.Row="2" Grid.Column="0" Text="WIS" HorizontalAlignment="Center" Padding="0,0,5,0" FontWeight="Bold"/>
-                        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=Stats[WIS]}" HorizontalAlignment="Center" Padding="0,0,20,0"/>
-                        <TextBlock Grid.Row="2" Grid.Column="2" Text="CHA" HorizontalAlignment="Center" Padding="0,0,5,0" FontWeight="Bold"/>
-                        <TextBlock Grid.Row="2" Grid.Column="3" Text="{Binding Path=Stats[CHA]}" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="STR" HorizontalAlignment="Left" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Padding="0,0,10,0">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat=" {0} ({1})">
+                                    <Binding Path="Stats[STR]"/>
+                                    <Binding Path="StatsMod[STR]"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                        <TextBlock Grid.Row="0" Grid.Column="2" Text="DEX" HorizontalAlignment="Left" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="0" Grid.Column="3" HorizontalAlignment="Left">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat=" {0} ({1})">
+                                    <Binding Path="Stats[DEX]"/>
+                                    <Binding Path="StatsMod[DEX]"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="CON" HorizontalAlignment="Left" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"  Padding="0,0,10,0">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat=" {0} ({1})">
+                                    <Binding Path="Stats[CON]"/>
+                                    <Binding Path="StatsMod[CON]"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                        <TextBlock Grid.Row="1" Grid.Column="2" Text="INT" HorizontalAlignment="Left" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="1" Grid.Column="3" HorizontalAlignment="Left">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat=" {0} ({1})">
+                                    <Binding Path="Stats[INT]"/>
+                                    <Binding Path="StatsMod[INT]"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="WIS" HorizontalAlignment="Left" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center"  Padding="0,0,10,0">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat=" {0} ({1})">
+                                    <Binding Path="Stats[WIS]"/>
+                                    <Binding Path="StatsMod[WIS]"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                        <TextBlock Grid.Row="2" Grid.Column="2" Text="CHA" HorizontalAlignment="Left" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="2" Grid.Column="3" HorizontalAlignment="Left">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat=" {0} ({1})">
+                                    <Binding Path="Stats[CHA]"/>
+                                    <Binding Path="StatsMod[CHA]"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
                     </Grid>
                 </Grid>
 
