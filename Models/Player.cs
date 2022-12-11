@@ -34,7 +34,7 @@ namespace Deez_Notes_Dm.Models
         //    set { _Stats = value; }
         //}
         //public Dictionary<String, int> StatsMod { get; set; }
-        
+
         public class Status
         {
             public int STR { get; set; }
@@ -78,10 +78,11 @@ namespace Deez_Notes_Dm.Models
 
         }
 
-        public Player(String name, String race, int HP, int AC, Status stats)
+        public Player(String name, String race, String _class, int HP, int AC, Status stats)
         {
             this.Name = name;
             this.Race = race;
+            this.levelByClass.Add(_class, 1);
 
             this.XP = 0;
             this.totalLevel = 1;
@@ -99,19 +100,6 @@ namespace Deez_Notes_Dm.Models
             StatsMod.INT = getModifier(Stats.INT);
             StatsMod.WIS = getModifier(Stats.WIS);
             StatsMod.CHA = getModifier(Stats.CHA);
-
-
-            //StatsMod = new Dictionary<string, int>()
-            //{
-            //    {"STR", getModifier("STR")},
-            //    {"DEX", getModifier("DEX")},
-            //    {"CON", getModifier("CON")},
-            //    {"INT", getModifier("INT")},
-            //    {"WIS", getModifier("WIS")},
-            //    {"CHA", getModifier("CHA")}
-            //};
-
-            
         }
 
         public Player(String name, String race, String _class, int HP, int AC, Status stats,
@@ -119,6 +107,7 @@ namespace Deez_Notes_Dm.Models
         {
             this.Name = name;
             this.Race = race;
+            this.levelByClass.Add(_class, 1);
 
             this.XP = 0;
             this.totalLevel = 1;
@@ -137,9 +126,6 @@ namespace Deez_Notes_Dm.Models
             StatsMod.WIS = getModifier(Stats.WIS);
             StatsMod.CHA = getModifier(Stats.CHA);
 
-            //this.proficiencyInsight = proficiencyInsight;
-            //this.proficiencyInvestigation = proficiencyInvestigation;
-            //this.proficiencyPerception = proficiencyPerception;
             this.passiveInsight = 10 + StatsMod.WIS + (proficiencyInsight ? proficiencyByLevel[1] : 0);
             this.passiveInvestigation = 10 + StatsMod.INT + (proficiencyInvestigation ? proficiencyByLevel[1] : 0);
             this.passivePerception = 10 + StatsMod.WIS + (proficiencyPerception ? proficiencyByLevel[1] : 0);

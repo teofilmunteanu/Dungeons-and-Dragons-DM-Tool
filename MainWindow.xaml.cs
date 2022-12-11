@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Deez_Notes_Dm
 {
@@ -37,14 +38,13 @@ namespace Deez_Notes_Dm
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ResetInputs()
         {
-            this.NewPlayerForm.Visibility = Visibility.Visible;
-
             this.NameInput.Text = "";
             this.RaceInput.Text = "";
             this.HPInput.Text = "";
             this.ACInput.Text = "";
+            this.ClassInput.Text = "";
 
             this.STRInput.Text = "";
             this.DEXInput.Text = "";
@@ -52,6 +52,13 @@ namespace Deez_Notes_Dm
             this.INTInput.Text = "";
             this.WISInput.Text = "";
             this.CHAInput.Text = "";
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.NewPlayerForm.Visibility = Visibility.Visible;
+
+            ResetInputs();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -62,6 +69,7 @@ namespace Deez_Notes_Dm
                 String race = this.RaceInput.Text;
                 int HP = Int32.Parse(this.HPInput.Text);
                 int AC = Int32.Parse(this.ACInput.Text);
+                String _class = this.ClassInput.Text;
                 //Dictionary<String, int> Stats = new Dictionary<String, int>
                 //{
                 //    {"STR", Int32.Parse(this.STRInput.Text)},
@@ -79,7 +87,7 @@ namespace Deez_Notes_Dm
                 stats.WIS = Int32.Parse(this.WISInput.Text);
                 stats.CHA = Int32.Parse(this.CHAInput.Text);
 
-                Player player = new Player(name, race, HP, AC, stats);
+                Player player = new Player(name, race, _class, HP, AC, stats);
 
 
                 string json = System.IO.File.ReadAllText(@"Resources/Players/Players.json");
@@ -105,17 +113,22 @@ namespace Deez_Notes_Dm
         {
             this.NewPlayerForm.Visibility = Visibility.Collapsed;
 
-            this.NameInput.Text = "";
-            this.RaceInput.Text = "";
-            this.HPInput.Text = "";
-            this.ACInput.Text = "";
+            ResetInputs();
+        }
 
-            this.STRInput.Text = "";
-            this.DEXInput.Text = "";
-            this.CONInput.Text = "";
-            this.INTInput.Text = "";
-            this.WISInput.Text = "";
-            this.CHAInput.Text = "";
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void LevelAddInput_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            TextBox obj = sender as TextBox;
+        }
+
+        private void XPAddInput_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+
         }
     }
 }

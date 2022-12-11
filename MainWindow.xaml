@@ -5,16 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Deez_Notes_Dm" xmlns:wpf="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="494.43" Width="800">
 
     <Window.Resources>
+        <DataTemplate x:Key="ClassListData">
+            <TextBlock HorizontalAlignment="Center">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat=" {0} - {1}">
+                        <Binding Path="Key"/>
+                        <Binding Path="Value"/>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+        </DataTemplate>
+        
         <!-- Data Template (applied to each bound task item in the task collection) -->
         <DataTemplate x:Key="PlayerListData">
             <Border Name="border" BorderBrush="DeepSkyBlue" Background="White" BorderThickness="2"  
-      CornerRadius="2" Padding="5" Margin="5">
+                CornerRadius="2" Padding="5" Margin="5">
                 <!-- Player Container(Description + Stats) -->
                 <Grid x:Name="PlayerContainer">
                     <Grid.RowDefinitions>
+                        <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
@@ -22,8 +34,6 @@
                     <!-- Player Description(Name,Race,..) -->
                     <Grid x:Name="PlayerDescBlock" Grid.Row="0" Margin="15" HorizontalAlignment="Center">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition />
                             <RowDefinition />
                             <RowDefinition />
                             <RowDefinition />
@@ -41,32 +51,47 @@
                         <Separator Grid.Row="2"/>
                         <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" FontWeight="Bold">
                             <TextBlock.Text>
-                                <MultiBinding StringFormat=" {0} / {1}">
+                                <MultiBinding StringFormat=" HP: {0} / {1}">
                                     <Binding Path="HP"/>
                                     <Binding Path="maxHP"/>
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>
                         <Separator Grid.Row="4"/>
-                        <TextBlock Text="{Binding Path=XP, StringFormat='XP: {0}'}" Grid.Column="0" Grid.Row="3"/>
-
-                        <TextBlock Text="{Binding Path=totalLevel, StringFormat='Level: {0}'}" Grid.Row="5" Grid.Column="0"/>
-                        <Separator Grid.Row="6"/>
-                        <TextBlock Text="Class - 1" Grid.Row="7" Grid.Column="0">
-                            <!--<TextBlock.Text>
-                                <MultiBinding StringFormat=" {0} - {1}">
-                                
-                                    <Binding Path="Name"/>
-                                    <Binding Path="Name"/>
-                                </MultiBinding>
-                            </TextBlock.Text>-->
-                        </TextBlock>
-                        <Separator Grid.Row="8"/>
+                        <!--<TextBlock Text="{Binding Path=XP, StringFormat='XP: {0}'}" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding Path=totalLevel, StringFormat='Level: {0}'}" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Center"/>
+                        <Separator Grid.Row="5"/>-->
+                        <ListBox Grid.Row="5" Grid.Column="0" ItemsSource="{Binding Path=levelByClass}" ItemTemplate="{StaticResource ClassListData}" BorderThickness="0"/>
                     </Grid>
                     <!-- END Player Description -->
                     
+                    <!-- Player Level -->
+                    <Grid x:Name="PlayerLevelBlock" Grid.Row="1" Margin="15,0,15,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="0.2*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Separator Grid.Row="0" Grid.ColumnSpan="3"/>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding Path=XP, StringFormat='XP: {0}'}" HorizontalAlignment="Center"/>
+                        <Button Grid.Row="1" Grid.Column="1" FontWeight="Bold" FontFamily="Arial" Click="Button_Click_3">+</Button>
+                        <TextBox Grid.Row="1" Grid.Column="2" Name="XPAddInput" TextChanged="XPAddInput_TextChanged"></TextBox>
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="{Binding Path=totalLevel, StringFormat='Level: {0}'}" HorizontalAlignment="Center"/>
+                        <Button Grid.Row="2" Grid.Column="1" FontWeight="Bold" FontFamily="Arial">+</Button>
+                        <TextBox Grid.Row="2" Grid.Column="2" Name="LevelAddInput" TextChanged="LevelAddInput_TextChanged"></TextBox>
+                        <Separator Grid.Row="3" Grid.ColumnSpan="3"/>
+                    </Grid>
+                    <!-- Player Level END -->
+                    
                     <!-- Player Stats(STR,...) -->
-                    <Grid x:Name="PlayerStatsBlock" Grid.Row="1" Margin="15,0,15,0">
+                    <Grid x:Name="PlayerStatsBlock" Grid.Row="2" Margin="15,0,15,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition />
@@ -146,6 +171,7 @@
         <TabControl Grid.Row="1">
             <TabItem Header="Players">
                 <Grid x:Name="TabRoot">
+                    <!-- Player List -->
                     <Grid x:Name="PlayersContainer" Background="#FF616161">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="7*" />
@@ -169,104 +195,120 @@
                         <ListBox Grid.Column="1" Grid.Row="0" x:Name="PlayerProperties" BorderBrush="DarkGray" BorderThickness="3,3,3,3" Margin="5,5,5,5" Background="#FFAEAEAE"/>
                         <Button Grid.Column="0" Grid.Row="1" Content="+" Width="50" FontSize="24" Height="31" VerticalAlignment="Center" Cursor="Hand" Click="Button_Click" FontFamily="Cascadia Code" />
                     </Grid>
+                    <!-- Player List END -->
                     
                     <!-- New Player Form-->
                     <Grid x:Name="NewPlayerForm" Panel.ZIndex="100" Background="#B2484848" Visibility="Collapsed">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="2*"/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="0.4*"/>
+                            <RowDefinition Height="0.7*"/>
+                            <RowDefinition Height="1*"/>
                         </Grid.RowDefinitions>
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="3*"/>
-                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2.3*"/>
                             <ColumnDefinition Width="3*"/>
                         </Grid.ColumnDefinitions>
 
                         <!-- Char Description Form -->
-                        <Grid Grid.Row="1" Grid.Column="1" x:Name="CharDescriptionForm" Background="LightGray">
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
+                        <Border Grid.Row="1" Grid.Column="1" BorderThickness="3,3,3,0" BorderBrush="AliceBlue">
+                            <Grid x:Name="CharDescriptionForm" Background="LightGray">
 
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="2*"/>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="2*"/>
-                            </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*"/>
+                                    <RowDefinition Height="2*"/>
+                                    <RowDefinition Height="2*"/>
+                                    <RowDefinition Height="2*"/>
+                                    <RowDefinition Height="2*"/>
+                                    <RowDefinition Height="2*"/>
+                                    <RowDefinition Height="1*"/>
+                                </Grid.RowDefinitions>
 
-                            <TextBlock Grid.Row="0" Grid.Column="1" Text="Name" FontWeight="Bold" VerticalAlignment="Center"/>
-                            <TextBox x:Name="NameInput" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center"/>
-                            <TextBlock Grid.Row="1" Grid.Column="1" Text="Race" FontWeight="Bold" VerticalAlignment="Center"/>
-                            <TextBox x:Name="RaceInput" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center"/>
-                            <TextBlock Grid.Row="2" Grid.Column="1" Text="HP" FontWeight="Bold" VerticalAlignment="Center"/>
-                            <TextBox x:Name="HPInput" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center"/>
-                            <TextBlock Grid.Row="3" Grid.Column="1" Text="AC" FontWeight="Bold" VerticalAlignment="Center"/>
-                            <TextBox x:Name="ACInput" Grid.Row="3" Grid.Column="2" VerticalAlignment="Center"/>
-                        </Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="Name" FontWeight="Bold" VerticalAlignment="Center"/>
+                                <TextBox x:Name="NameInput" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Row="2" Grid.Column="1" Text="Race" FontWeight="Bold" VerticalAlignment="Center"/>
+                                <TextBox x:Name="RaceInput" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Row="3" Grid.Column="1" Text="Class" FontWeight="Bold" VerticalAlignment="Center"/>
+                                <TextBox x:Name="ClassInput" Grid.Row="3" Grid.Column="2" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Row="4" Grid.Column="1" Text="HP" FontWeight="Bold" VerticalAlignment="Center"/>
+                                <TextBox x:Name="HPInput" Grid.Row="4" Grid.Column="2" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Row="5" Grid.Column="1" Text="AC" FontWeight="Bold" VerticalAlignment="Center"/>
+                                <TextBox x:Name="ACInput" Grid.Row="5" Grid.Column="2" VerticalAlignment="Center"/>
+
+                            </Grid>
+                        </Border>
+                        
                         <!-- END Character Description Form -->
                         
                         <!-- Stats Form -->
-                        <Grid Grid.Row="2" Grid.Column="1" x:Name="CharStatsForm" Background="LightGray">
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
+                        <Border Grid.Row="2" Grid.Column="1" BorderThickness="3,3,3,0" BorderBrush="AliceBlue">
+                            <Grid x:Name="CharStatsForm" Background="LightGray">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*"/>
+                                    <RowDefinition Height="2*"/>
+                                    <RowDefinition Height="2*"/>
+                                    <RowDefinition Height="2*"/>
+                                    <RowDefinition Height="1*"/>
+                                </Grid.RowDefinitions>
 
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.Row="0" Grid.Column="1" Text="STR" VerticalAlignment="Center" FontWeight="Bold"/>
-                            <TextBox x:Name="STRInput" Grid.Row="0" Grid.Column="2" Width="Auto"  VerticalAlignment="Center"/>
-                            <TextBlock Grid.Row="0" Grid.Column="4" Text="DEX" VerticalAlignment="Center" FontWeight="Bold"/>
-                            <TextBox x:Name="DEXInput" Grid.Row="0" Grid.Column="5" Width="Auto"  VerticalAlignment="Center"/>
-                            <TextBlock Grid.Row="1" Grid.Column="1" Text="CON" VerticalAlignment="Center" FontWeight="Bold"/>
-                            <TextBox x:Name="CONInput" Grid.Row="1" Grid.Column="2" Width="Auto"  VerticalAlignment="Center"/>
-                            <TextBlock Grid.Row="1" Grid.Column="4" Text="INT" VerticalAlignment="Center" FontWeight="Bold"/>
-                            <TextBox x:Name="INTInput" Grid.Row="1" Grid.Column="5" Width="Auto"  VerticalAlignment="Center"/>
-                            <TextBlock Grid.Row="2" Grid.Column="1" Text="WIS" VerticalAlignment="Center" FontWeight="Bold"/>
-                            <TextBox x:Name="WISInput" Grid.Row="2" Grid.Column="2" Width="Auto"  VerticalAlignment="Center"/>
-                            <TextBlock Grid.Row="2" Grid.Column="4" Text="CHA"  VerticalAlignment="Center" FontWeight="Bold"/>
-                            <TextBox x:Name="CHAInput" Grid.Row="2" Grid.Column="5" Width="Auto"  VerticalAlignment="Center"/>
-                        </Grid>
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="STR" VerticalAlignment="Center" FontWeight="Bold"/>
+                                <TextBox x:Name="STRInput" Grid.Row="1" Grid.Column="2" Width="Auto"  VerticalAlignment="Center"/>
+                                <TextBlock Grid.Row="1" Grid.Column="4" Text="DEX" VerticalAlignment="Center" FontWeight="Bold"/>
+                                <TextBox x:Name="DEXInput" Grid.Row="1" Grid.Column="5" Width="Auto"  VerticalAlignment="Center"/>
+                                <TextBlock Grid.Row="2" Grid.Column="1" Text="CON" VerticalAlignment="Center" FontWeight="Bold"/>
+                                <TextBox x:Name="CONInput" Grid.Row="2" Grid.Column="2" Width="Auto"  VerticalAlignment="Center"/>
+                                <TextBlock Grid.Row="2" Grid.Column="4" Text="INT" VerticalAlignment="Center" FontWeight="Bold"/>
+                                <TextBox x:Name="INTInput" Grid.Row="2" Grid.Column="5" Width="Auto"  VerticalAlignment="Center"/>
+                                <TextBlock Grid.Row="3" Grid.Column="1" Text="WIS" VerticalAlignment="Center" FontWeight="Bold"/>
+                                <TextBox x:Name="WISInput" Grid.Row="3" Grid.Column="2" Width="Auto"  VerticalAlignment="Center"/>
+                                <TextBlock Grid.Row="3" Grid.Column="4" Text="CHA"  VerticalAlignment="Center" FontWeight="Bold"/>
+                                <TextBox x:Name="CHAInput" Grid.Row="3" Grid.Column="5" Width="Auto"  VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
                         <!-- END Stats Form -->
                         
                         <!-- Form Buttons -->
-                        <Grid Grid.Row="3" Grid.Column="1" Background="LightGray">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="0.5*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                            </Grid.RowDefinitions>
+                        <Border Grid.Row="3" Grid.Column="1" BorderThickness="3,3,3,3" BorderBrush="AliceBlue">
+                            <Grid Background="LightGray">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*"/>
+                                    <RowDefinition Height="2*"/>
+                                    <RowDefinition Height="0.5*"/>
+                                    <RowDefinition Height="2*"/>
+                                    <RowDefinition Height="1*"/>
+                                </Grid.RowDefinitions>
 
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
 
-                            <Button x:Name="PlayerCreateBtn" Content="Create" FontWeight="Bold" Grid.Row="1" Grid.Column="1" Click="Button_Click_1" Background="#FF838383" Foreground="White"/>
-                            <Button x:Name="PlayerCancelBtn" Content="Cancel" FontWeight="Bold" Grid.Row="3" Grid.Column="1" Click="Button_Click_2" Background="IndianRed" Foreground="White"/>
-                            
-                        </Grid>
+                                <Button x:Name="PlayerCreateBtn" Content="Create" FontWeight="Bold" Grid.Row="1" Grid.Column="1" Click="Button_Click_1" Background="#FF838383" Foreground="White"/>
+                                <Button x:Name="PlayerCancelBtn" Content="Cancel" FontWeight="Bold" Grid.Row="3" Grid.Column="1" Click="Button_Click_2" Background="IndianRed" Foreground="White"/>
+
+                            </Grid>
+                        </Border>
                         <!-- END Form Buttons -->
                     </Grid>
                     <!-- END New Player Form -->
