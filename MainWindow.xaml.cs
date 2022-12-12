@@ -73,15 +73,7 @@ namespace Deez_Notes_Dm
                 int HP = Int32.Parse(this.HPInput.Text);
                 int AC = Int32.Parse(this.ACInput.Text);
                 String _class = this.ClassInput.Text;
-                //Dictionary<String, int> Stats = new Dictionary<String, int>
-                //{
-                //    {"STR", Int32.Parse(this.STRInput.Text)},
-                //    {"DEX", Int32.Parse(this.DEXInput.Text)},
-                //    {"CON", Int32.Parse(this.CONInput.Text)},
-                //    {"INT", Int32.Parse(this.INTInput.Text)},
-                //    {"WIS", Int32.Parse(this.WISInput.Text)},
-                //    {"CHA", Int32.Parse(this.CHAInput.Text)}
-                //};
+
                 Player.Status stats = new Player.Status();
                 stats.STR = Int32.Parse(this.STRInput.Text);
                 stats.DEX = Int32.Parse(this.DEXInput.Text);
