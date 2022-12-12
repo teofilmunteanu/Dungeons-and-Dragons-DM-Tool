@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Deez_Notes_Dm
 {
@@ -144,6 +145,18 @@ namespace Deez_Notes_Dm
         {
             TextBox textBox = sender as TextBox;
             //textBox.Text = "";
+        }
+
+        private void Button_Click_ShowXP(object sender, RoutedEventArgs e)
+        {
+            Button XPBtn = sender as Button;
+            XPBtn.Background = new SolidColorBrush(Colors.White);
+        }
+
+        private void Button_LostFocus_HideXP(object sender, RoutedEventArgs e)
+        {
+            Button XPBtn = sender as Button;
+            XPBtn.Background = new SolidColorBrush(Colors.Black);
         }
     }
 }
