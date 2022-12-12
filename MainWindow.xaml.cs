@@ -13,6 +13,8 @@ namespace Deez_Notes_Dm
     /// </summary>
     public partial class MainWindow : Window
     {
+        int[] XpById;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -26,11 +28,12 @@ namespace Deez_Notes_Dm
         {
             try
             {
-
                 string json = System.IO.File.ReadAllText(@"Resources/Players/Players.json");
 
+                List<Player> players = JsonConvert.DeserializeObject<List<Player>>(json);
+                PlayerList.ItemsSource = players;
 
-                PlayerList.ItemsSource = JsonConvert.DeserializeObject<List<Player>>(json);
+                XpById = new int[players.Count + 1];
             }
             catch (Exception ex)
             {
@@ -116,20 +119,39 @@ namespace Deez_Notes_Dm
             ResetInputs();
         }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
+        private void Button_Click_XPAdd(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(this.FindName("LevelAddInput").ToString());
+            Player player = (Player)(sender as Button).DataContext;
+
+            MessageBox.Show(player.ID + " " + XpById[player.ID]);
         }
 
-        //private void LevelAddInput_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
-        //{
-        //    //TextBox obj = sender as TextBox;
-        //    //MessageBox.Show(obj.Parent.ToString());
-        //}
+        private void XPAddInput_TextChanged(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            Player player = (Player)(textBox.DataContext);
 
-        //private void XPAddInput_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
-        //{
+            if (textBox.Text == "")
+            {
+                XpById[player.ID] = 0;
+            }
+            else
+            {
+                try
+                {
+                    XpById[player.ID] = Int32.Parse(textBox.Text);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
 
-        //}
+        private void XPAddInput_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            //textBox.Text = "";
+        }
     }
 }

@@ -32,8 +32,10 @@
                     </Grid.RowDefinitions>
 
                     <!-- Player Description(Name,Race,..) -->
-                    <Grid x:Name="PlayerDescBlock" Grid.Row="0" Margin="15" HorizontalAlignment="Center">
+                    <Grid x:Name="PlayerDescBlock" Grid.Row="0" Margin="15 15 15 0" HorizontalAlignment="Center">
                         <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
                             <RowDefinition />
                             <RowDefinition />
                             <RowDefinition />
@@ -58,17 +60,16 @@
                             </TextBlock.Text>
                         </TextBlock>
                         <Separator Grid.Row="4"/>
-                        <!--<TextBlock Text="{Binding Path=XP, StringFormat='XP: {0}'}" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center"/>
-                        <TextBlock Text="{Binding Path=totalLevel, StringFormat='Level: {0}'}" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Center"/>
-                        <Separator Grid.Row="5"/>-->
-                        <ListBox Grid.Row="5" Grid.Column="0" ItemsSource="{Binding Path=levelByClass}" ItemTemplate="{StaticResource ClassListData}" BorderThickness="0"/>
+                        <!--<TextBlock Text="{Binding Path=XP, StringFormat='XP: {0}'}" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center"/>-->
+                        <TextBlock Text="{Binding Path=totalLevel, StringFormat='Level: {0}'}" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center"/>
+                        <Separator Grid.Row="6"/>
+                        <ListBox Grid.Row="7" Grid.Column="0" ItemsSource="{Binding Path=levelByClass}" ItemTemplate="{StaticResource ClassListData}" BorderThickness="0"/>
                     </Grid>
                     <!-- END Player Description -->
                     
-                    <!-- Player Level -->
+                    <!-- Player XP -->
                     <Grid x:Name="PlayerLevelBlock" Grid.Row="1" Margin="15,0,15,0">
                         <Grid.RowDefinitions>
-                            <RowDefinition/>
                             <RowDefinition/>
                             <RowDefinition/>
                             <RowDefinition/>
@@ -81,14 +82,11 @@
 
                         <Separator Grid.Row="0" Grid.ColumnSpan="3"/>
                         <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding Path=XP, StringFormat='XP: {0}'}" HorizontalAlignment="Center"/>
-                        <Button Grid.Row="1" Grid.Column="1" FontWeight="Bold" FontFamily="Arial" Click="Button_Click_3">+</Button>
-                        <TextBox Grid.Row="1" Grid.Column="2" Name="XPAddInput"></TextBox>
-                        <TextBlock Grid.Row="2" Grid.Column="0" Text="{Binding Path=totalLevel, StringFormat='Level: {0}'}" HorizontalAlignment="Center"/>
-                        <Button Grid.Row="2" Grid.Column="1" FontWeight="Bold" FontFamily="Arial">+</Button>
-                        <TextBox Grid.Row="2" Grid.Column="2" Name="LevelAddInput"></TextBox>
+                        <Button Grid.Row="1" Grid.Column="1" FontWeight="Bold" FontFamily="Arial" Click="Button_Click_XPAdd">+</Button>
+                        <TextBox Grid.Row="1" Grid.Column="2" Name="XPAddInput" MaxLength="6" Width="42" TextChanged="XPAddInput_TextChanged" LostFocus="XPAddInput_LostFocus"></TextBox>
                         <Separator Grid.Row="3" Grid.ColumnSpan="3"/>
                     </Grid>
-                    <!-- Player Level END -->
+                    <!-- Player XP END -->
                     
                     <!-- Player Stats(STR,...) -->
                     <Grid x:Name="PlayerStatsBlock" Grid.Row="2" Margin="15,0,15,0">

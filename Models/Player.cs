@@ -9,6 +9,8 @@ namespace Deez_Notes_Dm.Models
     }
     public class Player
     {
+        static int playerCount;
+        public int ID { get; set; }
         public String Name { get; set; }
         public String Race { get; set; }
 
@@ -75,11 +77,19 @@ namespace Deez_Notes_Dm.Models
 
         public Player()
         {
-
+            playerCount++;
+        }
+        ~Player()
+        {
+            playerCount--;
         }
 
         public Player(String name, String race, String _class, int HP, int AC, Status stats)
         {
+            playerCount++;
+
+            this.ID = playerCount;
+
             this.Name = name;
             this.Race = race;
             this.levelByClass.Add(_class, 1);
@@ -105,6 +115,10 @@ namespace Deez_Notes_Dm.Models
         public Player(String name, String race, String _class, int HP, int AC, Status stats,
             bool proficiencyInsight, bool proficiencyInvestigation, bool proficiencyPerception)
         {
+            playerCount++;
+
+            this.ID = playerCount;
+
             this.Name = name;
             this.Race = race;
             this.levelByClass.Add(_class, 1);
