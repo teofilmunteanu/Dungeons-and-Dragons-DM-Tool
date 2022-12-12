@@ -82,10 +82,10 @@
                         <Separator Grid.Row="0" Grid.ColumnSpan="3"/>
                         <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding Path=XP, StringFormat='XP: {0}'}" HorizontalAlignment="Center"/>
                         <Button Grid.Row="1" Grid.Column="1" FontWeight="Bold" FontFamily="Arial" Click="Button_Click_3">+</Button>
-                        <TextBox Grid.Row="1" Grid.Column="2" Name="XPAddInput" TextChanged="XPAddInput_TextChanged"></TextBox>
+                        <TextBox Grid.Row="1" Grid.Column="2" Name="XPAddInput"></TextBox>
                         <TextBlock Grid.Row="2" Grid.Column="0" Text="{Binding Path=totalLevel, StringFormat='Level: {0}'}" HorizontalAlignment="Center"/>
                         <Button Grid.Row="2" Grid.Column="1" FontWeight="Bold" FontFamily="Arial">+</Button>
-                        <TextBox Grid.Row="2" Grid.Column="2" Name="LevelAddInput" TextChanged="LevelAddInput_TextChanged"></TextBox>
+                        <TextBox Grid.Row="2" Grid.Column="2" Name="LevelAddInput"></TextBox>
                         <Separator Grid.Row="3" Grid.ColumnSpan="3"/>
                     </Grid>
                     <!-- Player Level END -->

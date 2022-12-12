@@ -118,17 +118,18 @@ namespace Deez_Notes_Dm
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-
+            MessageBox.Show(this.FindName("LevelAddInput").ToString());
         }
 
-        private void LevelAddInput_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
-        {
-            TextBox obj = sender as TextBox;
-        }
+        //private void LevelAddInput_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        //{
+        //    //TextBox obj = sender as TextBox;
+        //    //MessageBox.Show(obj.Parent.ToString());
+        //}
 
-        private void XPAddInput_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
-        {
+        //private void XPAddInput_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        //{
 
-        }
+        //}
     }
 }
