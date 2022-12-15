@@ -34,7 +34,10 @@ namespace Deez_Notes_Dm
                 List<Player> players = JsonConvert.DeserializeObject<List<Player>>(json);
                 PlayerList.ItemsSource = players;
 
-                XpById = new int[players.Count + 1];
+                //the count resets at every restart
+                Player.setPlayerCount(players.Count);
+
+                XpById = new int[players.Count];
             }
             catch (Exception ex)
             {
@@ -91,6 +94,8 @@ namespace Deez_Notes_Dm
 
                 List<Player> players = JsonConvert.DeserializeObject<List<Player>>(json);
                 players.Add(player);
+                XpById = new int[players.Count];
+
                 newJson = JsonConvert.SerializeObject(players);
 
                 System.IO.File.WriteAllText(@"Resources/Players/Players.json", newJson);
@@ -116,7 +121,17 @@ namespace Deez_Notes_Dm
         {
             Player player = (Player)(sender as Button).DataContext;
 
-            MessageBox.Show(player.ID + " " + XpById[player.ID]);
+            //MessageBox.Show(player.ID + " " + XpById[player.ID]);
+
+            string json = System.IO.File.ReadAllText(@"Resources/Players/Players.json");
+            List<Player> players = JsonConvert.DeserializeObject<List<Player>>(json);
+            //MessageBox.Show(player.ID + "/" + players.Count());
+            players[player.ID].addXP(XpById[player.ID]);
+            String newJson = JsonConvert.SerializeObject(players);
+
+            System.IO.File.WriteAllText(@"Resources/Players/Players.json", newJson);
+
+            OutputJson();
         }
 
         private void XPAddInput_TextChanged(object sender, RoutedEventArgs e)

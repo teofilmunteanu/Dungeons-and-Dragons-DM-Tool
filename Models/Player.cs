@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Deez_Notes_Dm.Models
 {
@@ -17,7 +18,7 @@ namespace Deez_Notes_Dm.Models
         static int[] XPbyLevel { get; set; } = { -1, 0, 300, 900, 2700, 6500, 14000, 23000, 34000, 48000, 64000, 85000, 100000, 120000, 140000, 165000, 195000, 225000, 265000, 305000, 355000 };
         public int XP { get; set; }
         public int totalLevel { get; set; }
-        public Dictionary<string, int> levelByClass { get; set; } = new Dictionary<string, int>();
+        public SortedDictionary<string, int> levelByClass { get; set; } = new SortedDictionary<string, int>();
 
 
         public int AC { get; set; }
@@ -88,7 +89,7 @@ namespace Deez_Notes_Dm.Models
         {
             playerCount++;
 
-            this.ID = playerCount;
+            this.ID = playerCount - 1;
 
             this.Name = name;
             this.Race = race;
@@ -117,7 +118,7 @@ namespace Deez_Notes_Dm.Models
         {
             playerCount++;
 
-            this.ID = playerCount;
+            this.ID = playerCount - 1;
 
             this.Name = name;
             this.Race = race;
@@ -143,6 +144,31 @@ namespace Deez_Notes_Dm.Models
             this.passiveInsight = 10 + StatsMod.WIS + (proficiencyInsight ? proficiencyByLevel[1] : 0);
             this.passiveInvestigation = 10 + StatsMod.INT + (proficiencyInvestigation ? proficiencyByLevel[1] : 0);
             this.passivePerception = 10 + StatsMod.WIS + (proficiencyPerception ? proficiencyByLevel[1] : 0);
+        }
+
+        public static void setPlayerCount(int count)
+        {
+            playerCount = count;
+        }
+
+        public void addXP(int XP)
+        {
+            if (XP > 0)
+            {
+                this.XP += XP;
+
+                while (totalLevel < 20 && this.XP > XPbyLevel[this.totalLevel + 1])
+                {
+                    this.totalLevel++;
+
+                    if (levelByClass.Count == 1)
+                    {
+                        levelByClass[levelByClass.First().Key]++;
+                    }
+                }
+            }
+
+            //if(nr of classes > 1) choose class (retun message?), separate method for classLevelUp
         }
     }
 }
