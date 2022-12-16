@@ -8,15 +8,36 @@ namespace Deez_Notes_Dm.Models
     {
         public List<Player> players { get; set; }
     }
-    public class Player
+    public class Player// : INotifyPropertyChanged
     {
         static int playerCount;
+
+        //public event PropertyChangedEventHandler? PropertyChanged;
+
         public int ID { get; set; }
         public String Name { get; set; }
         public String Race { get; set; }
 
         static int[] XPbyLevel { get; set; } = { -1, 0, 300, 900, 2700, 6500, 14000, 23000, 34000, 48000, 64000, 85000, 100000, 120000, 140000, 165000, 195000, 225000, 265000, 305000, 355000 };
-        public int XP { get; set; }
+
+        public int xp;
+        public int XP
+        {
+            get { return xp; }
+            set
+            {
+                xp = value;
+                //OnPropertyChanged("XP");
+            }
+        }
+
+        //private void OnPropertyChanged(string propertyName)
+        //{
+        //    var handler = PropertyChanged;
+        //    if (handler != null)
+        //        handler(this, new PropertyChangedEventArgs(propertyName));
+        //}
+
         public int totalLevel { get; set; }
         public SortedDictionary<string, int> levelByClass { get; set; } = new SortedDictionary<string, int>();
 

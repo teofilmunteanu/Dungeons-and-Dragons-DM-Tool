@@ -15,6 +15,7 @@ namespace Deez_Notes_Dm
     public partial class MainWindow : Window
     {
         int[] XpById;
+        List<Player> players;//optional: ObservableCollection 
 
         public MainWindow()
         {
@@ -22,27 +23,54 @@ namespace Deez_Notes_Dm
             string curDir = Directory.GetCurrentDirectory();
             this.webBrowser.Source = new Uri(String.Format("file:///{0}/Resources/DMSCreen.png", curDir));
 
-            OutputJson();
+            reinitializePlayers();
         }
 
-        public void OutputJson()
+        void reinitializePlayers()
         {
             try
             {
                 string json = System.IO.File.ReadAllText(@"Resources/Players/Players.json");
-
-                List<Player> players = JsonConvert.DeserializeObject<List<Player>>(json);
-                PlayerList.ItemsSource = players;
+                players = JsonConvert.DeserializeObject<List<Player>>(json);
 
                 //the count resets at every restart
                 Player.setPlayerCount(players.Count);
-
                 XpById = new int[players.Count];
+
+                PlayerList.ItemsSource = players;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        void updatePlayers()
+        {
+            try
+            {
+                String newJson = JsonConvert.SerializeObject(players);
+                players = JsonConvert.DeserializeObject<List<Player>>(newJson); //wouldn't be needed if working with observableCol
+
+                System.IO.File.WriteAllText(@"Resources/Players/Players.json", newJson);
+
+                PlayerList.ItemsSource = players;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        void addPlayer(Player player)
+        {
+            players.Add(player);
+
+            //the count resets at every restart
+            Player.setPlayerCount(players.Count);
+            XpById = new int[players.Count];
+
+            updatePlayers();
         }
 
         private void ResetInputs()
@@ -88,24 +116,12 @@ namespace Deez_Notes_Dm
 
                 Player player = new Player(name, race, _class, HP, AC, stats);
 
-
-                string json = System.IO.File.ReadAllText(@"Resources/Players/Players.json");
-                string newJson;
-
-                List<Player> players = JsonConvert.DeserializeObject<List<Player>>(json);
-                players.Add(player);
-                XpById = new int[players.Count];
-
-                newJson = JsonConvert.SerializeObject(players);
-
-                System.IO.File.WriteAllText(@"Resources/Players/Players.json", newJson);
+                addPlayer(player);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-
-            OutputJson();
 
             this.NewPlayerForm.Visibility = Visibility.Collapsed;
         }
@@ -121,18 +137,11 @@ namespace Deez_Notes_Dm
         {
             Player player = (Player)(sender as Button).DataContext;
 
-            //MessageBox.Show(player.ID + " " + XpById[player.ID]);
-
-            string json = System.IO.File.ReadAllText(@"Resources/Players/Players.json");
-            List<Player> players = JsonConvert.DeserializeObject<List<Player>>(json);
-            //MessageBox.Show(player.ID + "/" + players.Count());
-
             players[player.ID].addXP(XpById[player.ID]);
-            String newJson = JsonConvert.SerializeObject(players);
 
-            System.IO.File.WriteAllText(@"Resources/Players/Players.json", newJson);
+            updatePlayers();
 
-            OutputJson();
+            //addxptextbox = "" - for the proper version (with propertyChanged events and so)
         }
 
         private void XPAddInput_TextChanged(object sender, RoutedEventArgs e)
@@ -150,11 +159,9 @@ namespace Deez_Notes_Dm
                 {
                     if (textBox.Text.Contains("/"))
                     {
-
                         int dividend = Int32.Parse(textBox.Text.Substring(0, textBox.Text.IndexOf("/")));
-
                         int divisor;
-                        //MessageBox.Show(textBox.Text.IndexOf("/") + "" + textBox.Text.Length);
+
                         if (textBox.Text.IndexOf("/") == textBox.Text.Length - 1)
                         {
                             divisor = 1;
