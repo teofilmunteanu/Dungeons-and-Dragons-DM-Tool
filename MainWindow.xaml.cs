@@ -126,6 +126,7 @@ namespace Deez_Notes_Dm
             string json = System.IO.File.ReadAllText(@"Resources/Players/Players.json");
             List<Player> players = JsonConvert.DeserializeObject<List<Player>>(json);
             //MessageBox.Show(player.ID + "/" + players.Count());
+
             players[player.ID].addXP(XpById[player.ID]);
             String newJson = JsonConvert.SerializeObject(players);
 
@@ -147,7 +148,28 @@ namespace Deez_Notes_Dm
             {
                 try
                 {
-                    XpById[player.ID] = Int32.Parse(textBox.Text);
+                    if (textBox.Text.Contains("/"))
+                    {
+
+                        int dividend = Int32.Parse(textBox.Text.Substring(0, textBox.Text.IndexOf("/")));
+
+                        int divisor;
+                        //MessageBox.Show(textBox.Text.IndexOf("/") + "" + textBox.Text.Length);
+                        if (textBox.Text.IndexOf("/") == textBox.Text.Length - 1)
+                        {
+                            divisor = 1;
+                        }
+                        else
+                        {
+                            divisor = Int32.Parse(textBox.Text.Substring(textBox.Text.IndexOf("/") + 1, textBox.Text.Length - textBox.Text.IndexOf("/") - 1));
+                        }
+
+                        XpById[player.ID] = dividend / divisor;
+                    }
+                    else
+                    {
+                        XpById[player.ID] = Int32.Parse(textBox.Text);
+                    }
                 }
                 catch (Exception ex)
                 {
