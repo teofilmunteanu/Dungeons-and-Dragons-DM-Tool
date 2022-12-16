@@ -8,11 +8,9 @@ namespace Deez_Notes_Dm.Models
     {
         public List<Player> players { get; set; }
     }
-    public class Player// : INotifyPropertyChanged
+    public class Player
     {
         static int playerCount;
-
-        //public event PropertyChangedEventHandler? PropertyChanged;
 
         public int ID { get; set; }
         public String Name { get; set; }
@@ -20,23 +18,7 @@ namespace Deez_Notes_Dm.Models
 
         static int[] XPbyLevel { get; set; } = { -1, 0, 300, 900, 2700, 6500, 14000, 23000, 34000, 48000, 64000, 85000, 100000, 120000, 140000, 165000, 195000, 225000, 265000, 305000, 355000 };
 
-        public int xp;
-        public int XP
-        {
-            get { return xp; }
-            set
-            {
-                xp = value;
-                //OnPropertyChanged("XP");
-            }
-        }
-
-        //private void OnPropertyChanged(string propertyName)
-        //{
-        //    var handler = PropertyChanged;
-        //    if (handler != null)
-        //        handler(this, new PropertyChangedEventArgs(propertyName));
-        //}
+        public int XP { get; set; }
 
         public int totalLevel { get; set; }
         public SortedDictionary<string, int> levelByClass { get; set; } = new SortedDictionary<string, int>();
@@ -49,15 +31,6 @@ namespace Deez_Notes_Dm.Models
 
         public int succededDeathSaves { get; set; }
         public int failedDeathSaves { get; set; }
-
-        //private Dictionary<String, int> _Stats;
-
-        //public Dictionary<String, int> Stats { get; set; }
-        //{
-        //    get { return _Stats; }
-        //    set { _Stats = value; }
-        //}
-        //public Dictionary<String, int> StatsMod { get; set; }
 
         public class Status
         {
@@ -86,14 +59,9 @@ namespace Deez_Notes_Dm.Models
         public int passivePerception { get; set; }
 
         static int[] proficiencyByLevel { get; set; } = { -1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6 };
-        //public bool proficiencyInsight { get; set; }
-        //public bool proficiencyInvestigation { get; set; }
-        //public bool proficiencyPerception { get; set; }
-
 
         int getModifier(int statusValue)
         {
-            //return (int)Math.Floor(((Stats[statBlock] - 10)) / 2.0);
             return (int)Math.Floor(((statusValue - 10)) / 2.0);
         }
 

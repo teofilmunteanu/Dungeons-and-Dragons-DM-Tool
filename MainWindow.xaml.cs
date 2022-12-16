@@ -1,7 +1,7 @@
 ﻿using Deez_Notes_Dm.Models;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,7 +15,7 @@ namespace Deez_Notes_Dm
     public partial class MainWindow : Window
     {
         int[] XpById;
-        List<Player> players;//optional: ObservableCollection 
+        ObservableCollection<Player> players;//optional: ObservableCollection 
 
         public MainWindow()
         {
@@ -31,7 +31,7 @@ namespace Deez_Notes_Dm
             try
             {
                 string json = System.IO.File.ReadAllText(@"Resources/Players/Players.json");
-                players = JsonConvert.DeserializeObject<List<Player>>(json);
+                players = JsonConvert.DeserializeObject<ObservableCollection<Player>>(json);
 
                 //the count resets at every restart
                 Player.setPlayerCount(players.Count);
@@ -50,11 +50,10 @@ namespace Deez_Notes_Dm
             try
             {
                 String newJson = JsonConvert.SerializeObject(players);
-                players = JsonConvert.DeserializeObject<List<Player>>(newJson); //wouldn't be needed if working with observableCol
 
                 System.IO.File.WriteAllText(@"Resources/Players/Players.json", newJson);
 
-                PlayerList.ItemsSource = players;
+                PlayerList.Items.Refresh();
             }
             catch (Exception ex)
             {
@@ -140,8 +139,6 @@ namespace Deez_Notes_Dm
             players[player.ID].addXP(XpById[player.ID]);
 
             updatePlayers();
-
-            //addxptextbox = "" - for the proper version (with propertyChanged events and so)
         }
 
         private void XPAddInput_TextChanged(object sender, RoutedEventArgs e)
@@ -183,12 +180,6 @@ namespace Deez_Notes_Dm
                     MessageBox.Show(ex.Message);
                 }
             }
-        }
-
-        private void XPAddInput_LostFocus(object sender, RoutedEventArgs e)
-        {
-            TextBox textBox = sender as TextBox;
-            //textBox.Text = "";
         }
 
         private void Button_Click_ShowXP(object sender, RoutedEventArgs e)
