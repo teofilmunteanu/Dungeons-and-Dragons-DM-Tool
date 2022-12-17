@@ -193,5 +193,10 @@ namespace Deez_Notes_Dm
             Button XPBtn = sender as Button;
             XPBtn.Background = new SolidColorBrush(Colors.Black);
         }
+
+        private void Button_AddCombatant(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

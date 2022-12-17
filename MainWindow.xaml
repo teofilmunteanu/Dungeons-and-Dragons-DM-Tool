@@ -66,7 +66,7 @@
                         <ListBox Grid.Row="7" Grid.Column="0" ItemsSource="{Binding Path=levelByClass}" ItemTemplate="{StaticResource ClassListData}" BorderThickness="0"/>
                     </Grid>
                     <!-- END Player Description -->
-                    
+
                     <!-- Player XP -->
                     <Grid x:Name="PlayerLevelBlock" Grid.Row="1" Margin="15,0,15,0">
                         <Grid.RowDefinitions>
@@ -75,14 +75,16 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*"/>
                             <ColumnDefinition/>
                             <ColumnDefinition Width="0.2*"/>
                             <ColumnDefinition Width="0.5*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Separator Grid.Row="0" Grid.ColumnSpan="3"/>
+                        <Separator Grid.Row="0" Grid.ColumnSpan="4"/>
 
-                        <Button Grid.Row="1" Grid.Column="0" BorderThickness="0" Background="Black" Click="Button_Click_ShowXP" LostFocus="Button_LostFocus_HideXP">
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="XP:" HorizontalAlignment="Center"/>
+                        <Button Grid.Row="1" Grid.Column="1" BorderThickness="0" Background="Black" Click="Button_Click_ShowXP" LostFocus="Button_LostFocus_HideXP">
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Background" Value="Transparent" />
@@ -97,14 +99,14 @@
                                     </Setter>
                                 </Style>
                             </Button.Style>
-                            <TextBlock Text="{Binding Path=XP, StringFormat='XP: {0}'}" HorizontalAlignment="Center"/>
+                            <TextBlock Text="{Binding Path=XP}" HorizontalAlignment="Center"/>
                         </Button>
-                        <Button Grid.Row="1" Grid.Column="1" FontWeight="Bold" FontFamily="Arial" Click="Button_Click_XPAdd">+</Button>
-                        <TextBox Grid.Row="1" Grid.Column="2" Name="XPAddInput" MaxLength="6" Width="42" TextChanged="XPAddInput_TextChanged"></TextBox>
-                        <Separator Grid.Row="3" Grid.ColumnSpan="3"/>
+                        <Button Grid.Row="1" Grid.Column="2" FontWeight="Bold" FontFamily="Arial" Margin="5,0,0,0" Click="Button_Click_XPAdd">+</Button>
+                        <TextBox Grid.Row="1" Grid.Column="3" Name="XPAddInput" MaxLength="6" Width="42" TextChanged="XPAddInput_TextChanged"></TextBox>
+                        <Separator Grid.Row="3" Grid.ColumnSpan="4"/>
                     </Grid>
                     <!-- Player XP END -->
-                    
+
                     <!-- Player Stats(STR,...) -->
                     <Grid x:Name="PlayerStatsBlock" Grid.Row="2" Margin="15,0,15,0">
                         <Grid.RowDefinitions>
@@ -177,7 +179,6 @@
                     </Grid>
                     <!-- END Player Stats -->
                 </Grid>
-
             </Border>
         </DataTemplate>
     </Window.Resources>
@@ -327,6 +328,35 @@
                         <!-- END Form Buttons -->
                     </Grid>
                     <!-- END New Player Form -->
+                </Grid>
+            </TabItem>
+            <TabItem Header="Combat">
+                <Grid x:Name="CombatTabRoot">
+                    <!-- Combatant List -->
+                    <Grid x:Name="CombatContainer" Background="#FF616161">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="7*" />
+                            <ColumnDefinition Width="3*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="9*" />
+                            <RowDefinition Height="1*" />
+                        </Grid.RowDefinitions>
+
+                        <ListBox Grid.Column="0" Grid.Row="0" x:Name="CombatantsList" ItemsSource="{Binding}" ItemTemplate="{StaticResource PlayerListData}" IsSynchronizedWithCurrentItem="True" BorderBrush="DarkGray" BorderThickness="3,3,3,3" Margin="5,5,5,5">
+                            <ListBox.Background>
+                                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
+                            </ListBox.Background>
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                        </ListBox>
+                        <ListBox Grid.Column="1" Grid.Row="0" x:Name="CombatantProperties" BorderBrush="DarkGray" BorderThickness="3,3,3,3" Margin="5,5,5,5" Background="#FFAEAEAE"/>
+                        <Button Grid.Column="0" Grid.Row="1" Content="+" Width="50" FontSize="24" Height="31" VerticalAlignment="Center" Cursor="Hand" Click="Button_AddCombatant" FontFamily="Cascadia Code" />
+                    </Grid>
+                    <!-- Combatant List END -->
                 </Grid>
             </TabItem>
             <TabItem Header="DM Screen">
