@@ -13,8 +13,8 @@ namespace Deez_Notes_Dm.Models
         static int playerCount;
 
         public int ID { get; set; }
-        public String Name { get; set; }
-        public String Race { get; set; }
+        public string Name { get; set; }
+        public string Race { get; set; }
 
         static int[] XPbyLevel { get; set; } = { -1, 0, 300, 900, 2700, 6500, 14000, 23000, 34000, 48000, 64000, 85000, 100000, 120000, 140000, 165000, 195000, 225000, 265000, 305000, 355000 };
 
@@ -31,6 +31,8 @@ namespace Deez_Notes_Dm.Models
 
         public int succededDeathSaves { get; set; }
         public int failedDeathSaves { get; set; }
+
+        public int speed { get; set; }
 
         public class Status
         {
@@ -74,7 +76,7 @@ namespace Deez_Notes_Dm.Models
             playerCount--;
         }
 
-        public Player(String name, String race, String _class, int HP, int AC, Status stats)
+        public Player(string name, string race, string _class, int HP, int AC, Status stats)
         {
             playerCount++;
 
@@ -102,7 +104,7 @@ namespace Deez_Notes_Dm.Models
             StatsMod.CHA = getModifier(Stats.CHA);
         }
 
-        public Player(String name, String race, String _class, int HP, int AC, Status stats,
+        public Player(string name, string race, string _class, int HP, int AC, Status stats,
             bool proficiencyInsight, bool proficiencyInvestigation, bool proficiencyPerception)
         {
             playerCount++;
@@ -149,6 +151,7 @@ namespace Deez_Notes_Dm.Models
                 while (totalLevel < 20 && this.XP > XPbyLevel[this.totalLevel + 1])
                 {
                     this.totalLevel++;
+                    this.HitDice++;
 
                     if (levelByClass.Count == 1)
                     {

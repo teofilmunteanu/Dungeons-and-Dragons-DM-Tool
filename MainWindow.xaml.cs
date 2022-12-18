@@ -1,4 +1,5 @@
-﻿using Deez_Notes_Dm.Models;
+﻿using Deez_Notes_Dm.Helper;
+using Deez_Notes_Dm.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.ObjectModel;
@@ -15,7 +16,7 @@ namespace Deez_Notes_Dm
     public partial class MainWindow : Window
     {
         int[] XpById;
-        ObservableCollection<Player> players;//optional: ObservableCollection 
+        ObservableCollection<Player> players;
 
         public MainWindow()
         {
@@ -24,6 +25,7 @@ namespace Deez_Notes_Dm
             this.webBrowser.Source = new Uri(String.Format("file:///{0}/Resources/DMSCreen.png", curDir));
 
             reinitializePlayers();
+            reinitializeCombatants();
         }
 
         void reinitializePlayers()
@@ -194,9 +196,38 @@ namespace Deez_Notes_Dm
             XPBtn.Background = new SolidColorBrush(Colors.Black);
         }
 
-        private void Button_AddCombatant(object sender, RoutedEventArgs e)
-        {
 
+        //Combat
+        ObservableCollection<Combatant> combatants;
+        void reinitializeCombatants()
+        {
+            try
+            {
+                string json = System.IO.File.ReadAllText(@"Resources/Players/Players.json");
+
+                //the count resets at every restart
+                Player.setPlayerCount(players.Count);
+                XpById = new int[players.Count];
+
+                CombatantsList.ItemsSource = players;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private async void Button_AddCombatant(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Monster monster = await MonsterFetcher.GetMonsterAsync("goblin");
+                MessageBox.Show(monster.maxHP.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
