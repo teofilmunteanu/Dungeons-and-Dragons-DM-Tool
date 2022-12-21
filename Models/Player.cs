@@ -12,8 +12,6 @@ namespace Deez_Notes_Dm.Models
     {
         public static int PlayerCount { get; set; }
 
-        public string Race { get; set; }
-
 
         static readonly int[] XPbyLevel = { -1, 0, 300, 900, 2700, 6500, 14000, 23000, 34000, 48000, 64000, 85000, 100000, 120000, 140000, 165000, 195000, 225000, 265000, 305000, 355000 };
         public int XP { get; set; }

@@ -48,7 +48,10 @@ namespace Deez_Notes_Dm.Helper
             var dynamicObject = JsonConvert.DeserializeObject<dynamic>(json)!;
 
             string name = dynamicObject.name;
+            string type = dynamicObject.type;
+            type = char.ToUpper(type[0]) + type.Substring(1);
             int maxHP = dynamicObject.hit_points;
+            int AC = dynamicObject.armor_class;
 
             Creature.Speed speed = new Creature.Speed();
             speed.walk = dynamicObject.speed.walk != null ? dynamicObject.speed.walk : 0;
@@ -68,7 +71,7 @@ namespace Deez_Notes_Dm.Helper
             stats.CHA = (int)dynamicObject.charisma;
 
 
-            Monster monster = new Monster(name, maxHP, stats, speed);
+            Monster monster = new Monster(name, type, maxHP, AC, stats, speed);
 
             return monster;
         }

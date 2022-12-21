@@ -12,7 +12,6 @@ namespace Deez_Notes_Dm.Models
     {
         public static int MonsterCount { get; set; }
 
-        //public string Type { get; set; }
         //public string Size { get; set; }
         //public string Alignment { get; set; }
 
@@ -45,14 +44,17 @@ namespace Deez_Notes_Dm.Models
 
         }
 
-        public Monster(string name, int maxHP, Status stats, Speed speed)
+        public Monster(string name, string type, int maxHP, int AC, Status stats, Speed speed)
         {
             MonsterCount++;
             this.ID = MonsterCount - 1;
 
             this.Name = name + MonsterCount;
+            this.Race = type;
+
             this.MaxHP = maxHP;
             this.HP = maxHP;
+            this.AC = AC;
 
             this.Stats = stats;
 
