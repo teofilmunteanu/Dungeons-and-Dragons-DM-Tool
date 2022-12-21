@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Reflection;
 
 namespace Deez_Notes_Dm.Models
 {
@@ -8,52 +8,16 @@ namespace Deez_Notes_Dm.Models
         public List<Monster> monsters { get; set; }
     }
 
-    public class Monster : Combatant
+    public class Monster : Creature
     {
-        //static int monsterCount;
+        public static int MonsterCount { get; set; }
 
-        //public int ID { get; set; }
-        public string Name { get; set; }
         //public string Type { get; set; }
         //public string Size { get; set; }
         //public string Alignment { get; set; }
 
-        //public int AC { get; set; }
-        public int maxHP { get; set; }
-        //public int HP { get; set; }
         //public string HP_Dice { get; set; }
 
-        //public class Speed
-        //{
-        //    public int walk { get; set; }
-        //    public int climb { get; set; }
-        //    public int fly { get; set; }
-        //    public int swim { get; set; }
-        //};
-        //Speed speed { get; set; }
-
-
-        //public class Status
-        //{
-        //    public int STR { get; set; }
-        //    public int DEX { get; set; }
-        //    public int CON { get; set; }
-        //    public int INT { get; set; }
-        //    public int WIS { get; set; }
-        //    public int CHA { get; set; }
-        //}
-        //public Status Stats { get; set; }
-
-        //public class StatsModifiers
-        //{
-        //    public int STR { get; set; }
-        //    public int DEX { get; set; }
-        //    public int CON { get; set; }
-        //    public int INT { get; set; }
-        //    public int WIS { get; set; }
-        //    public int CHA { get; set; }
-        //}
-        //public StatsModifiers StatsMod { get; set; }
 
         //public class SavingThrows
         //{
@@ -76,30 +40,47 @@ namespace Deez_Notes_Dm.Models
         //public string[] actions { get; set; }
         //public string[] legendaryActions { get; set; }
 
-
-        int getModifier(int statusValue)
-        {
-            return (int)Math.Floor(((statusValue - 10)) / 2.0);
-        }
-
         public Monster()
         {
 
         }
 
-        public Monster(string name, int maxHP)
+        public Monster(string name, int maxHP, Status stats, Speed speed)
         {
-            //monsterCount++;
+            MonsterCount++;
+            this.ID = MonsterCount - 1;
 
-            //this.ID = monsterCount - 1;
-            this.Name = name;
-            this.maxHP = maxHP;
+            this.Name = name + MonsterCount;
+            this.MaxHP = maxHP;
+            this.HP = maxHP;
+
+            this.Stats = stats;
+
+            this.StatsMod = new StatsModifiers();
+            StatsMod.STR = getModifier(Stats.STR);
+            StatsMod.DEX = getModifier(Stats.DEX);
+            StatsMod.CON = getModifier(Stats.CON);
+            StatsMod.INT = getModifier(Stats.INT);
+            StatsMod.WIS = getModifier(Stats.WIS);
+            StatsMod.CHA = getModifier(Stats.CHA);
+
+
+            Speeds = speed;
+
+            SpeedsText = new List<string>();
+            foreach (PropertyInfo prop in Speeds.GetType().GetProperties())
+            {
+                if ((int)prop.GetValue(Speeds) != 0)
+                {
+                    SpeedsText.Add(prop.Name + " " + prop.GetValue(Speeds) + " ft.");
+                }
+            }
         }
 
-        //~Monster()
-        //{
-        //    monsterCount--;
-        //}
+        ~Monster()
+        {
+            MonsterCount--;
+        }
 
         //public Monster(String name, String type, int HP, int AC, Status stats)
         //{

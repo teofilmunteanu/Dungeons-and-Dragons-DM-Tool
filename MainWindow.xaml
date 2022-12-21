@@ -18,8 +18,12 @@
                 </TextBlock.Text>
             </TextBlock>
         </DataTemplate>
-        
-        <!-- Data Template (applied to each bound task item in the task collection) -->
+
+        <DataTemplate x:Key="SpeedListData">
+            <TextBlock HorizontalAlignment="Center" Text="{Binding}"/>
+        </DataTemplate>
+
+        <!-- Player List Data -->
         <DataTemplate x:Key="PlayerListData">
             <Border Name="border" BorderBrush="DeepSkyBlue" Background="White" BorderThickness="2"  
                 CornerRadius="2" Padding="5" Margin="5">
@@ -55,12 +59,11 @@
                             <TextBlock.Text>
                                 <MultiBinding StringFormat=" HP: {0} / {1}">
                                     <Binding Path="HP"/>
-                                    <Binding Path="maxHP"/>
+                                    <Binding Path="MaxHP"/>
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>
                         <Separator Grid.Row="4"/>
-                        <!--<TextBlock Text="{Binding Path=XP, StringFormat='XP: {0}'}" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center"/>-->
                         <TextBlock Text="{Binding Path=totalLevel, StringFormat='Level: {0}'}" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center"/>
                         <Separator Grid.Row="6"/>
                         <ListBox Grid.Row="7" Grid.Column="0" ItemsSource="{Binding Path=levelByClass}" ItemTemplate="{StaticResource ClassListData}" BorderThickness="0"/>
@@ -84,7 +87,7 @@
                         <Separator Grid.Row="0" Grid.ColumnSpan="4"/>
 
                         <TextBlock Grid.Row="1" Grid.Column="0" Text="XP:" HorizontalAlignment="Center"/>
-                        <Button Grid.Row="1" Grid.Column="1" BorderThickness="0" Background="Black" Click="Button_Click_ShowXP" LostFocus="Button_LostFocus_HideXP">
+                        <Button Grid.Row="1" Grid.Column="1" BorderThickness="0" Background="Black" Click="Button_Click_ShowInput" LostFocus="Button_LostFocus_HideInput">
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Background" Value="Transparent" />
@@ -181,6 +184,178 @@
                 </Grid>
             </Border>
         </DataTemplate>
+        <!-- END Player List Data -->
+
+        <!-- Combat List Template -->
+        <DataTemplate x:Key="CombatListData">
+            <Border Name="border" BorderBrush="DeepSkyBlue" Background="White" BorderThickness="2"  
+                CornerRadius="2" Padding="5" Margin="5">
+                <!-- Creature Container(Description + Stats) -->
+                <Grid x:Name="CreatureContainer">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Creature Description(Name,Race) -->
+                    <Grid x:Name="CreatureDescBlock1" Grid.Row="0" Margin="15 15 15 0" HorizontalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Path=Name}" HorizontalAlignment="Center" FontWeight="Bold"/>
+                    </Grid>
+                    <!-- END Creature Description -->
+                    
+                    <!-- Creature Speed -->
+                    <Grid x:Name="CreatureDescBlock2" Grid.Row="1" Margin="15 0 15 0" HorizontalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Speed:" HorizontalAlignment="Center" Margin="0 3 0 0"/>
+                        <ListBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Path=SpeedsText}" BorderThickness="0">
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                        </ListBox>
+                    </Grid>
+                    
+                    <!-- END Creature Speed -->
+                    
+                    <!-- Creature HP -->
+                    <Grid x:Name="CreatureHpBlock" Grid.Row="2" Margin="15,0,15,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="0.2*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Separator Grid.Row="0" Grid.ColumnSpan="5"/>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="HP:" HorizontalAlignment="Center"/>
+                        <Button Grid.Row="1" Grid.Column="1" BorderThickness="0" Background="Black" Margin="5,0,0,0"  Click="Button_Click_ShowInput" LostFocus="Button_LostFocus_HideInput">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Transparent" />
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Grid Background="{TemplateBinding Background}">
+                                                    <ContentPresenter />
+                                                </Grid>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                            <TextBlock Text="{Binding Path=HP}" HorizontalAlignment="Center" Padding="7 0"/>
+                        </Button>
+                        <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Path=MaxHP, StringFormat=' /  {0} '}" HorizontalAlignment="Center"/>
+                        <Button Grid.Row="1" Grid.Column="3" FontWeight="Bold" FontFamily="Arial" Margin="5,0,0,0" Click="Button_Click_HPAdd">-</Button>
+                        <TextBox Grid.Row="1" Grid.Column="4" Name="HPAddInput" MaxLength="6" Width="42" TextChanged="HPAddInput_TextChanged"></TextBox>
+                        <Separator Grid.Row="3" Grid.ColumnSpan="5"/>
+                    </Grid>
+                    <!-- END Creature HP -->
+
+                    <!-- Creature Stats(STR,...) -->
+                    <Grid x:Name="PlayerStatsBlock" Grid.Row="3" Margin="15,0,15,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="STR" HorizontalAlignment="Left" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Padding="0,0,10,0">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat=" {0} ({1})">
+                                    <Binding Path="Stats.STR"/>
+                                    <Binding Path="StatsMod.STR"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                        <TextBlock Grid.Row="0" Grid.Column="2" Text="DEX" HorizontalAlignment="Right" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="0" Grid.Column="3" HorizontalAlignment="Left">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat=" {0} ({1})">
+                                    <Binding Path="Stats.DEX"/>
+                                    <Binding Path="StatsMod.DEX"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="CON" HorizontalAlignment="Left" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"  Padding="0,0,10,0">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat=" {0} ({1})">
+                                    <Binding Path="Stats.CON"/>
+                                    <Binding Path="StatsMod.CON"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                        <TextBlock Grid.Row="1" Grid.Column="2" Text="INT" HorizontalAlignment="Right" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="1" Grid.Column="3" HorizontalAlignment="Left">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat=" {0} ({1})">
+                                    <Binding Path="Stats.INT"/>
+                                    <Binding Path="StatsMod.INT"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="WIS" HorizontalAlignment="Left" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left"  Padding="0,0,10,0">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat=" {0} ({1})">
+                                    <Binding Path="Stats.WIS"/>
+                                    <Binding Path="StatsMod.WIS"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                        <TextBlock Grid.Row="2" Grid.Column="2" Text="CHA" HorizontalAlignment="Right" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="2" Grid.Column="3" HorizontalAlignment="Left">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat=" {0} ({1})">
+                                    <Binding Path="Stats.CHA"/>
+                                    <Binding Path="StatsMod.CHA"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </Grid>
+                    <!-- END Creature Stats -->
+                </Grid>
+            </Border>
+        </DataTemplate>
+        <!-- END Combat List Template -->
     </Window.Resources>
 
     <Grid>
@@ -343,7 +518,7 @@
                             <RowDefinition Height="1*" />
                         </Grid.RowDefinitions>
 
-                        <ListBox Grid.Column="0" Grid.Row="0" x:Name="CombatantsList" ItemsSource="{Binding}" ItemTemplate="{StaticResource PlayerListData}" IsSynchronizedWithCurrentItem="True" BorderBrush="DarkGray" BorderThickness="3,3,3,3" Margin="5,5,5,5">
+                        <ListBox Grid.Column="0" Grid.Row="0" x:Name="CombatantsList" ItemsSource="{Binding}" ItemTemplate="{StaticResource CombatListData}" IsSynchronizedWithCurrentItem="True" BorderBrush="DarkGray" BorderThickness="3,3,3,3" Margin="5,5,5,5">
                             <ListBox.Background>
                                 <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
                             </ListBox.Background>

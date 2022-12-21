@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace Deez_Notes_Dm.Models
@@ -8,79 +7,45 @@ namespace Deez_Notes_Dm.Models
     {
         public List<Player> players { get; set; }
     }
-    public class Player
-    {
-        static int playerCount;
 
-        public int ID { get; set; }
-        public string Name { get; set; }
+    public class Player : Creature
+    {
+        public static int PlayerCount { get; set; }
+
         public string Race { get; set; }
 
-        static int[] XPbyLevel { get; set; } = { -1, 0, 300, 900, 2700, 6500, 14000, 23000, 34000, 48000, 64000, 85000, 100000, 120000, 140000, 165000, 195000, 225000, 265000, 305000, 355000 };
 
+        static readonly int[] XPbyLevel = { -1, 0, 300, 900, 2700, 6500, 14000, 23000, 34000, 48000, 64000, 85000, 100000, 120000, 140000, 165000, 195000, 225000, 265000, 305000, 355000 };
         public int XP { get; set; }
-
         public int totalLevel { get; set; }
         public SortedDictionary<string, int> levelByClass { get; set; } = new SortedDictionary<string, int>();
 
 
-        public int AC { get; set; }
-        public int maxHP { get; set; }
-        public int HP { get; set; }
         public int HitDice { get; set; }
+        public (int successes, int fails) DeathSaves { get; set; }
 
-        public int succededDeathSaves { get; set; }
-        public int failedDeathSaves { get; set; }
 
-        public int speed { get; set; }
+        public int PassiveInsight { get; set; }
+        public int PassiveInvestigation { get; set; }
+        public int PassivePerception { get; set; }
 
-        public class Status
-        {
-            public int STR { get; set; }
-            public int DEX { get; set; }
-            public int CON { get; set; }
-            public int INT { get; set; }
-            public int WIS { get; set; }
-            public int CHA { get; set; }
-        }
-        public Status Stats { get; set; }
+        private static readonly int[] proficiencyByLevel = { -1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6 };
 
-        public class StatsModifiers
-        {
-            public int STR { get; set; }
-            public int DEX { get; set; }
-            public int CON { get; set; }
-            public int INT { get; set; }
-            public int WIS { get; set; }
-            public int CHA { get; set; }
-        }
-        public StatsModifiers StatsMod { get; set; }
-
-        public int passiveInsight { get; set; }
-        public int passiveInvestigation { get; set; }
-        public int passivePerception { get; set; }
-
-        static int[] proficiencyByLevel { get; set; } = { -1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6 };
-
-        int getModifier(int statusValue)
-        {
-            return (int)Math.Floor(((statusValue - 10)) / 2.0);
-        }
 
         public Player()
         {
-            playerCount++;
+            PlayerCount++;
         }
         ~Player()
         {
-            playerCount--;
+            PlayerCount--;
         }
 
         public Player(string name, string race, string _class, int HP, int AC, Status stats)
         {
-            playerCount++;
+            PlayerCount++;
 
-            this.ID = playerCount - 1;
+            this.ID = PlayerCount - 1;
 
             this.Name = name;
             this.Race = race;
@@ -90,8 +55,9 @@ namespace Deez_Notes_Dm.Models
             this.totalLevel = 1;
 
             this.AC = AC;
-            this.maxHP = this.HP = HP;
+            this.MaxHP = this.HP = HP;
             this.HitDice = 1;
+            this.DeathSaves = (0, 0);
 
             this.Stats = stats;
 
@@ -107,9 +73,9 @@ namespace Deez_Notes_Dm.Models
         public Player(string name, string race, string _class, int HP, int AC, Status stats,
             bool proficiencyInsight, bool proficiencyInvestigation, bool proficiencyPerception)
         {
-            playerCount++;
+            PlayerCount++;
 
-            this.ID = playerCount - 1;
+            this.ID = PlayerCount - 1;
 
             this.Name = name;
             this.Race = race;
@@ -119,7 +85,7 @@ namespace Deez_Notes_Dm.Models
             this.totalLevel = 1;
 
             this.AC = AC;
-            this.maxHP = this.HP = HP;
+            this.MaxHP = this.HP = HP;
             this.HitDice = 1;
 
             this.Stats = stats;
@@ -132,14 +98,9 @@ namespace Deez_Notes_Dm.Models
             StatsMod.WIS = getModifier(Stats.WIS);
             StatsMod.CHA = getModifier(Stats.CHA);
 
-            this.passiveInsight = 10 + StatsMod.WIS + (proficiencyInsight ? proficiencyByLevel[1] : 0);
-            this.passiveInvestigation = 10 + StatsMod.INT + (proficiencyInvestigation ? proficiencyByLevel[1] : 0);
-            this.passivePerception = 10 + StatsMod.WIS + (proficiencyPerception ? proficiencyByLevel[1] : 0);
-        }
-
-        public static void setPlayerCount(int count)
-        {
-            playerCount = count;
+            this.PassiveInsight = 10 + StatsMod.WIS + (proficiencyInsight ? proficiencyByLevel[1] : 0);
+            this.PassiveInvestigation = 10 + StatsMod.INT + (proficiencyInvestigation ? proficiencyByLevel[1] : 0);
+            this.PassivePerception = 10 + StatsMod.WIS + (proficiencyPerception ? proficiencyByLevel[1] : 0);
         }
 
         public void addXP(int XP)

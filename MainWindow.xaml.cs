@@ -36,7 +36,7 @@ namespace Deez_Notes_Dm
                 players = JsonConvert.DeserializeObject<ObservableCollection<Player>>(json);
 
                 //the count resets at every restart
-                Player.setPlayerCount(players.Count);
+                Player.PlayerCount = players.Count;
                 XpById = new int[players.Count];
 
                 PlayerList.ItemsSource = players;
@@ -68,7 +68,7 @@ namespace Deez_Notes_Dm
             players.Add(player);
 
             //the count resets at every restart
-            Player.setPlayerCount(players.Count);
+            Player.PlayerCount = players.Count;
             XpById = new int[players.Count];
 
             updatePlayers();
@@ -184,21 +184,23 @@ namespace Deez_Notes_Dm
             }
         }
 
-        private void Button_Click_ShowXP(object sender, RoutedEventArgs e)
+        private void Button_Click_ShowInput(object sender, RoutedEventArgs e)
         {
-            Button XPBtn = sender as Button;
-            XPBtn.Background = new SolidColorBrush(Colors.White);
+            Button InputBtn = sender as Button;
+            InputBtn.Background = new SolidColorBrush(Colors.White);
         }
 
-        private void Button_LostFocus_HideXP(object sender, RoutedEventArgs e)
+        private void Button_LostFocus_HideInput(object sender, RoutedEventArgs e)
         {
-            Button XPBtn = sender as Button;
-            XPBtn.Background = new SolidColorBrush(Colors.Black);
+            Button InputBtn = sender as Button;
+            InputBtn.Background = new SolidColorBrush(Colors.Black);
         }
 
 
         //Combat
-        ObservableCollection<Combatant> combatants;
+        ObservableCollection<Creature> combatants;
+        int[] HpById;
+
         void reinitializeCombatants()
         {
             try
@@ -206,10 +208,18 @@ namespace Deez_Notes_Dm
                 string json = System.IO.File.ReadAllText(@"Resources/Players/Players.json");
 
                 //the count resets at every restart
-                Player.setPlayerCount(players.Count);
-                XpById = new int[players.Count];
+                Player.PlayerCount = players.Count;
 
-                CombatantsList.ItemsSource = players;
+                combatants = new ObservableCollection<Creature>();
+
+                foreach (Player player in players)
+                {
+                    combatants.Add((Creature)player);
+                }
+
+                HpById = new int[combatants.Count];
+
+                CombatantsList.ItemsSource = combatants;
             }
             catch (Exception ex)
             {
@@ -217,16 +227,74 @@ namespace Deez_Notes_Dm
             }
         }
 
+        //!!!!!!!!!!!!!!!!!!!!!!! TO FINISH !!!!!!!!!!!!!!!!!!!!!!!!!!
+
+        //private void Button_AddCombatant(object sender, RoutedEventArgs e)
+        //{
+        //    try
+        //    {
+        //        //Monster monster = MonsterFetcher.GetMonster("goblin");
+
+        //        //combatants.Add(monster);
+
+        //        // !!!!!! ADD SEARCH BOX AND SELECT FROM JSON FOUND(ONLY SHOW THE MONSTER NAME)
+
+        //        CombatantsList.Items.Refresh();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message);
+        //    }
+        //}
+
         private async void Button_AddCombatant(object sender, RoutedEventArgs e)
         {
             try
             {
-                Monster monster = await MonsterFetcher.GetMonsterAsync("goblin");
-                MessageBox.Show(monster.maxHP.ToString());
+                Monster monster = await MonsterFetcher.GetMonsterAsync("adult-red-dragon");
+                monster.ID += combatants.Count;
+                combatants.Add(monster);
+
+                HpById = new int[combatants.Count];
+
+                CombatantsList.Items.Refresh();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void Button_Click_HPAdd(object sender, RoutedEventArgs e)
+        {
+            Creature creature = (Creature)(sender as Button).DataContext;
+
+            combatants[creature.ID].dealDamage(HpById[creature.ID]);
+
+            CombatantsList.Items.Refresh();
+
+            updatePlayers();
+        }
+
+        private void HPAddInput_TextChanged(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            Creature creature = (Creature)(textBox.DataContext);
+
+            if (textBox.Text == "")
+            {
+                HpById[creature.ID] = 0;
+            }
+            else
+            {
+                try
+                {
+                    HpById[creature.ID] = Int32.Parse(textBox.Text);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
     }
