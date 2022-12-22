@@ -19,9 +19,9 @@
             </TextBlock>
         </DataTemplate>
 
-        <DataTemplate x:Key="SpeedListData">
+        <!--<DataTemplate x:Key="SpeedListData">
             <TextBlock Text="{Binding}" HorizontalAlignment="Center" FontWeight="Bold"/>
-        </DataTemplate>
+        </DataTemplate>-->
 
         <!-- Player List Data -->
         <DataTemplate x:Key="PlayerListData">
@@ -104,7 +104,7 @@
                             </Button.Style>
                             <TextBlock Text="{Binding Path=XP}" HorizontalAlignment="Center"/>
                         </Button>
-                        <Button Grid.Row="1" Grid.Column="2" FontWeight="Bold" FontFamily="Arial" Margin="5,0,0,0" Click="Button_Click_XPAdd">+</Button>
+                        <Button Grid.Row="1" Grid.Column="2" Content=" + " FontWeight="Bold" FontFamily="Arial" Margin="5,0,0,0" Click="Button_Click_XPAdd"/>
                         <TextBox Grid.Row="1" Grid.Column="3" Name="XPAddInput" MaxLength="6" Width="42" TextChanged="XPAddInput_TextChanged"></TextBox>
                         <Separator Grid.Row="3" Grid.ColumnSpan="4"/>
                     </Grid>
@@ -190,13 +190,16 @@
         <Style TargetType="Border" x:Key="CombatTabStyle">
             <Style.Resources>
                 <Style TargetType="TextBlock">
-                    <Setter Property="FontSize" Value="15" />
+                    <Setter Property="FontSize" Value="13" />
+                    <Setter Property="FontFamily" Value="Roboto" />
                 </Style>
                 <Style TargetType="TextBox">
-                    <Setter Property="FontSize" Value="15" />
+                    <Setter Property="FontSize" Value="13" />
+                    <Setter Property="FontFamily" Value="Roboto" />
                 </Style>
             </Style.Resources>
         </Style>
+        
         <DataTemplate x:Key="CombatListData" >
                 
             <Border Name="border" BorderBrush="DeepSkyBlue" Background="White" BorderThickness="2"  
@@ -234,20 +237,21 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.5*"/>
                             <ColumnDefinition/>
-                            <ColumnDefinition/>
+                            
                             <ColumnDefinition Width="0.2*"/>
                             <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
                         <Separator Grid.Row="0" Grid.ColumnSpan="5"/>
                         
-                        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" HorizontalAlignment="Left" Margin="0,0,0,5">
+                        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Margin="0,0,0,5">
                             <Run FontWeight="Bold" Text="Armor Class: "/>
                             <Run Text="{Binding Path=AC}"/>
                         </TextBlock>
-                        
-                        <TextBlock Grid.Row="2" Grid.Column="0" Text="HP:" FontWeight="Bold" HorizontalAlignment="Center"/>
-                        <Button Grid.Row="2" Grid.Column="1" BorderThickness="0" Background="Black" Margin="5,0,0,0"  Click="Button_Click_ShowInput" LostFocus="Button_LostFocus_HideInput">
+
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="HP:" Margin="0,0,5,0" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <Button Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="0" Background="Black" Click="Button_Click_ShowInput" LostFocus="Button_LostFocus_HideInput">
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Background" Value="Transparent" />
@@ -262,11 +266,19 @@
                                     </Setter>
                                 </Style>
                             </Button.Style>
-                            <TextBlock Text="{Binding Path=HP}" HorizontalAlignment="Center" Padding="7 0"/>
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat=" {0} / {1}">
+                                        <Binding Path="HP"/>
+                                        <Binding Path="MaxHP"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                            <!--<TextBlock Text="{Binding Path=HP}" HorizontalAlignment="Center" Padding="7 0"/>-->
                         </Button>
-                        <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding Path=MaxHP, StringFormat=' /  {0} '}" HorizontalAlignment="Center"/>
-                        <Button Grid.Row="2" Grid.Column="3" FontWeight="Bold" FontFamily="Arial" Margin="5,0,0,0" Click="Button_Click_HPAdd">-</Button>
-                        <TextBox Grid.Row="2" Grid.Column="4" Name="HPAddInput" MaxLength="6" Width="42" TextChanged="HPAddInput_TextChanged"></TextBox>
+                        <!--<TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding Path=MaxHP, StringFormat=' /  {0} '}" HorizontalAlignment="Center"/>-->
+                        <Button Grid.Row="2" Grid.Column="3" FontWeight="Bold" FontFamily="Arial" Margin="5,0,0,0" Click="Button_Click_HPAdd" Content=" &#8211; "/>
+                        <TextBox Grid.Row="2" Grid.Column="4" Name="HPAddInput" MaxLength="6" TextChanged="HPAddInput_TextChanged"></TextBox>
                         <Separator Grid.Row="3" Grid.ColumnSpan="5"/>
                     </Grid>
                     <!-- END Creature HP -->
@@ -284,7 +296,12 @@
 
                         <TextBlock Grid.Row="0" Grid.Column="0" Text="Speed:" FontWeight="Bold" HorizontalAlignment="Center" Margin="0 3 0 0"/>
                         <ListBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Path=SpeedsText}" BorderThickness="0">
-
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="FontSize" Value="13"/>
+                                    <Setter Property="FontFamily" Value="Roboto"/>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
                         </ListBox>
                     </Grid>
                     
@@ -371,7 +388,7 @@
     </Window.Resources>
 
     <Grid>
-        <TabControl Grid.Row="1">
+        <TabControl>
             <TabItem Header="Players">
                 <Grid x:Name="TabRoot">
                     <!-- Player List -->
@@ -402,27 +419,78 @@
                     
                     <!-- New Player Form-->
                     <Grid x:Name="NewPlayerForm" Panel.ZIndex="100" Background="#B2484848" Visibility="Collapsed">
+                        <Grid.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Style.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="FontSize" Value="13" />
+                                        <Setter Property="FontFamily" Value="Roboto" />
+                                        <Setter Property="VerticalAlignment" Value="Center"/>
+                                    </Style>
+                                    <Style TargetType="TextBox">
+                                        <Setter Property="FontSize" Value="13" />
+                                        <Setter Property="FontFamily" Value="Roboto" />
+                                        <Setter Property="TextAlignment" Value="Center"/>
+                                        <Setter Property="VerticalAlignment" Value="Center"/>
+                                    </Style>
+                                    <Style TargetType="CheckBox">
+                                        <Setter Property="FontSize" Value="13" />
+                                        <Setter Property="FontFamily" Value="Roboto" />
+                                    </Style>
+                                </Style.Resources>
+                            </Style>
+                        </Grid.Resources>
+
                         <Grid.RowDefinitions>
                             <RowDefinition Height="1*"/>
-                            <RowDefinition Height="1*"/>
-                            <RowDefinition Height="0.4*"/>
-                            <RowDefinition Height="0.7*"/>
+                            <RowDefinition MinHeight="76" Height="1*"/>
+                            <RowDefinition MinHeight="95" Height="1.2*"/>
+                            <RowDefinition MinHeight="77" Height="1*"/>
+                            <RowDefinition MinHeight="75" Height="1.2*"/>
+                            <RowDefinition MinHeight="70" Height="0.8*"/>
                             <RowDefinition Height="1*"/>
                         </Grid.RowDefinitions>
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="3*"/>
-                            <ColumnDefinition Width="2.3*"/>
+                            <ColumnDefinition MinWidth="300" Width="2.3*"/>
                             <ColumnDefinition Width="3*"/>
                         </Grid.ColumnDefinitions>
 
                         <!-- Char Description Form -->
                         <Border Grid.Row="1" Grid.Column="1" BorderThickness="3,3,3,0" BorderBrush="AliceBlue">
                             <Grid x:Name="CharDescriptionForm" Background="LightGray">
-
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="1*"/>
                                     <RowDefinition Height="2*"/>
+                                    <RowDefinition Height="2*"/>
+                                    <RowDefinition Height="2*"/>
+                                    <RowDefinition Height="1*"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="1.2*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="Name" FontWeight="Bold"/>
+                                <TextBox x:Name="NameInput" Grid.Row="1" Grid.Column="2"/>
+                                <TextBlock Grid.Row="2" Grid.Column="1" Text="Race" FontWeight="Bold"/>
+                                <TextBox x:Name="RaceInput" Grid.Row="2" Grid.Column="2"/>
+                                <TextBlock Grid.Row="3" Grid.Column="1" Text="Class" FontWeight="Bold"/>
+                                <TextBox x:Name="ClassInput" Grid.Row="3" Grid.Column="2"/>
+                            </Grid>
+                        </Border>
+                        <!-- END Character Description Form -->
+
+                        <!-- Char CombatStats Form -->
+                        <Border Grid.Row="2" Grid.Column="1" BorderThickness="3,3,3,0" BorderBrush="AliceBlue">
+                            <Grid x:Name="SpeedForm" Background="LightGray">
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*"/>
                                     <RowDefinition Height="2*"/>
                                     <RowDefinition Height="2*"/>
                                     <RowDefinition Height="2*"/>
@@ -432,29 +500,28 @@
 
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="2*"/>
-                                    <ColumnDefinition Width="1*"/>
-                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1.2*"/>
+                                    <ColumnDefinition Width="0.6*"/>
                                     <ColumnDefinition Width="2*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Grid.Row="1" Grid.Column="1" Text="Name" FontWeight="Bold" VerticalAlignment="Center"/>
-                                <TextBox x:Name="NameInput" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center"/>
-                                <TextBlock Grid.Row="2" Grid.Column="1" Text="Race" FontWeight="Bold" VerticalAlignment="Center"/>
-                                <TextBox x:Name="RaceInput" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center"/>
-                                <TextBlock Grid.Row="3" Grid.Column="1" Text="Class" FontWeight="Bold" VerticalAlignment="Center"/>
-                                <TextBox x:Name="ClassInput" Grid.Row="3" Grid.Column="2" VerticalAlignment="Center"/>
-                                <TextBlock Grid.Row="4" Grid.Column="1" Text="HP" FontWeight="Bold" VerticalAlignment="Center"/>
-                                <TextBox x:Name="HPInput" Grid.Row="4" Grid.Column="2" VerticalAlignment="Center"/>
-                                <TextBlock Grid.Row="5" Grid.Column="1" Text="AC" FontWeight="Bold" VerticalAlignment="Center"/>
-                                <TextBox x:Name="ACInput" Grid.Row="5" Grid.Column="2" VerticalAlignment="Center"/>
-
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="HP" FontWeight="Bold"/>
+                                <TextBox x:Name="HPInput" Grid.Row="1" Grid.Column="2"/>
+                                <TextBlock Grid.Row="2" Grid.Column="1" Text="AC" FontWeight="Bold"/>
+                                <TextBox x:Name="ACInput" Grid.Row="2" Grid.Column="2"/>
+                                <TextBlock Grid.Row="3" Grid.Column="1" Text="Speed" FontWeight="Bold"/>
+                                <TextBox x:Name="SpeedInput" Grid.Row="3" Grid.Column="2"/>
+                                <TextBlock Grid.Row="4" Grid.Column="1">
+                                    <Run Text="Fly Sp." FontWeight="Bold"/>
+                                    <Run Text="(?)" Foreground="Blue"/>
+                                </TextBlock>
+                                <TextBox x:Name="FlySpeedInput" Grid.Row="4" Grid.Column="2"/>
                             </Grid>
                         </Border>
-                        
-                        <!-- END Character Description Form -->
-                        
+                        <!-- END CombatStats Form -->
+
                         <!-- Stats Form -->
-                        <Border Grid.Row="2" Grid.Column="1" BorderThickness="3,3,3,0" BorderBrush="AliceBlue">
+                        <Border Grid.Row="3" Grid.Column="1" BorderThickness="3,3,3,0" BorderBrush="AliceBlue">
                             <Grid x:Name="CharStatsForm" Background="LightGray">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="1*"/>
@@ -474,24 +541,50 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Grid.Row="1" Grid.Column="1" Text="STR" VerticalAlignment="Center" FontWeight="Bold"/>
-                                <TextBox x:Name="STRInput" Grid.Row="1" Grid.Column="2" Width="Auto"  VerticalAlignment="Center"/>
-                                <TextBlock Grid.Row="1" Grid.Column="4" Text="DEX" VerticalAlignment="Center" FontWeight="Bold"/>
-                                <TextBox x:Name="DEXInput" Grid.Row="1" Grid.Column="5" Width="Auto"  VerticalAlignment="Center"/>
-                                <TextBlock Grid.Row="2" Grid.Column="1" Text="CON" VerticalAlignment="Center" FontWeight="Bold"/>
-                                <TextBox x:Name="CONInput" Grid.Row="2" Grid.Column="2" Width="Auto"  VerticalAlignment="Center"/>
-                                <TextBlock Grid.Row="2" Grid.Column="4" Text="INT" VerticalAlignment="Center" FontWeight="Bold"/>
-                                <TextBox x:Name="INTInput" Grid.Row="2" Grid.Column="5" Width="Auto"  VerticalAlignment="Center"/>
-                                <TextBlock Grid.Row="3" Grid.Column="1" Text="WIS" VerticalAlignment="Center" FontWeight="Bold"/>
-                                <TextBox x:Name="WISInput" Grid.Row="3" Grid.Column="2" Width="Auto"  VerticalAlignment="Center"/>
-                                <TextBlock Grid.Row="3" Grid.Column="4" Text="CHA"  VerticalAlignment="Center" FontWeight="Bold"/>
-                                <TextBox x:Name="CHAInput" Grid.Row="3" Grid.Column="5" Width="Auto"  VerticalAlignment="Center"/>
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="STR" FontWeight="Bold"/>
+                                <TextBox x:Name="STRInput" Grid.Row="1" Grid.Column="2"/>
+                                <TextBlock Grid.Row="1" Grid.Column="4" Text="DEX" FontWeight="Bold"/>
+                                <TextBox x:Name="DEXInput" Grid.Row="1" Grid.Column="5"/>
+                                <TextBlock Grid.Row="2" Grid.Column="1" Text="CON" FontWeight="Bold"/>
+                                <TextBox x:Name="CONInput" Grid.Row="2" Grid.Column="2"/>
+                                <TextBlock Grid.Row="2" Grid.Column="4" Text="INT" FontWeight="Bold"/>
+                                <TextBox x:Name="INTInput" Grid.Row="2" Grid.Column="5"/>
+                                <TextBlock Grid.Row="3" Grid.Column="1" Text="WIS" FontWeight="Bold"/>
+                                <TextBox x:Name="WISInput" Grid.Row="3" Grid.Column="2"/>
+                                <TextBlock Grid.Row="3" Grid.Column="4" Text="CHA" FontWeight="Bold"/>
+                                <TextBox x:Name="CHAInput" Grid.Row="3" Grid.Column="5"/>
                             </Grid>
                         </Border>
                         <!-- END Stats Form -->
-                        
+
+                        <!-- Proficiency Form -->
+                        <Border Grid.Row="4" Grid.Column="1" BorderThickness="3,3,3,0" BorderBrush="AliceBlue">
+                            <Grid x:Name="CharProform" Background="LightGray">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*"/>
+                                    <RowDefinition Height="2*"/>
+                                    <RowDefinition Height="2*"/>
+                                    <RowDefinition Height="2*"/>
+                                    <RowDefinition Height="2*"/>
+                                    <RowDefinition Height="1*"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition MinWidth="95" Width="1*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Text="Proficiencies" FontWeight="Bold"/>
+                                <CheckBox Grid.Row="2" Grid.Column="1" Content="Insight" HorizontalAlignment="Left"></CheckBox>
+                                <CheckBox Grid.Row="3" Grid.Column="1" Content="Investigation" HorizontalAlignment="Left"></CheckBox>
+                                <CheckBox Grid.Row="4" Grid.Column="1" Content="Perception" HorizontalAlignment="Left"></CheckBox>
+                            </Grid>
+                        </Border>
+                        <!-- END Proficiency Form -->
+
                         <!-- Form Buttons -->
-                        <Border Grid.Row="3" Grid.Column="1" BorderThickness="3,3,3,3" BorderBrush="AliceBlue">
+                        <Border Grid.Row="5" Grid.Column="1" BorderThickness="3,3,3,3" BorderBrush="AliceBlue">
                             <Grid Background="LightGray">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="1*"/>
@@ -517,6 +610,7 @@
                     <!-- END New Player Form -->
                 </Grid>
             </TabItem>
+            
             <TabItem Header="Combat">
                 <Grid x:Name="CombatTabRoot">
                     <!-- Combatant List -->
