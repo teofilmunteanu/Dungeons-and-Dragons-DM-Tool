@@ -39,7 +39,7 @@ namespace Deez_Notes_Dm.Models
             PlayerCount--;
         }
 
-        public Player(string name, string race, string _class, int HP, int AC, Status stats)
+        public Player(string name, string race, string _class, int HP, int AC, int speed, int flySpeed, Status stats)
         {
             PlayerCount++;
 
@@ -59,16 +59,18 @@ namespace Deez_Notes_Dm.Models
 
             this.Stats = stats;
 
-            this.StatsMod = new StatsModifiers();
-            StatsMod.STR = getModifier(Stats.STR);
-            StatsMod.DEX = getModifier(Stats.DEX);
-            StatsMod.CON = getModifier(Stats.CON);
-            StatsMod.INT = getModifier(Stats.INT);
-            StatsMod.WIS = getModifier(Stats.WIS);
-            StatsMod.CHA = getModifier(Stats.CHA);
+            StatsMod = new Status
+            {
+                STR = getModifier(Stats.STR),
+                DEX = getModifier(Stats.DEX),
+                CON = getModifier(Stats.CON),
+                INT = getModifier(Stats.INT),
+                WIS = getModifier(Stats.WIS),
+                CHA = getModifier(Stats.CHA)
+            };
         }
 
-        public Player(string name, string race, string _class, int HP, int AC, Status stats,
+        public Player(string name, string race, string _class, int HP, int AC, Speed speed, Status stats,
             bool proficiencyInsight, bool proficiencyInvestigation, bool proficiencyPerception)
         {
             PlayerCount++;
@@ -86,15 +88,24 @@ namespace Deez_Notes_Dm.Models
             this.MaxHP = this.HP = HP;
             this.HitDice = 1;
 
+            SpeedsText = new List<string>();
+            this.SpeedsText.Add(Speed.toSpeedText("walk", speed.walk));
+            if (speed.fly != 0)
+            {
+                this.SpeedsText.Add(Speed.toSpeedText("walk", speed.fly));
+            }
+
             this.Stats = stats;
 
-            this.StatsMod = new StatsModifiers();
-            StatsMod.STR = getModifier(Stats.STR);
-            StatsMod.DEX = getModifier(Stats.DEX);
-            StatsMod.CON = getModifier(Stats.CON);
-            StatsMod.INT = getModifier(Stats.INT);
-            StatsMod.WIS = getModifier(Stats.WIS);
-            StatsMod.CHA = getModifier(Stats.CHA);
+            this.StatsMod = new Status
+            {
+                STR = getModifier(Stats.STR),
+                DEX = getModifier(Stats.DEX),
+                CON = getModifier(Stats.CON),
+                INT = getModifier(Stats.INT),
+                WIS = getModifier(Stats.WIS),
+                CHA = getModifier(Stats.CHA)
+            };
 
             this.PassiveInsight = 10 + StatsMod.WIS + (proficiencyInsight ? proficiencyByLevel[1] : 0);
             this.PassiveInvestigation = 10 + StatsMod.INT + (proficiencyInvestigation ? proficiencyByLevel[1] : 0);

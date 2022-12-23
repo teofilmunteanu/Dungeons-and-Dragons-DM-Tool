@@ -81,6 +81,8 @@ namespace Deez_Notes_Dm
             this.HPInput.Text = "";
             this.ACInput.Text = "";
             this.ClassInput.Text = "";
+            this.SpeedInput.Text = "";
+            this.FlySpeedInput.Text = "";
 
             this.STRInput.Text = "";
             this.DEXInput.Text = "";
@@ -88,6 +90,10 @@ namespace Deez_Notes_Dm
             this.INTInput.Text = "";
             this.WISInput.Text = "";
             this.CHAInput.Text = "";
+
+            this.InsightProfInput.IsChecked = false;
+            this.PerceptionProfInput.IsChecked = false;
+            this.InvestigationProfInput.IsChecked = false;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -107,15 +113,29 @@ namespace Deez_Notes_Dm
                 int AC = Int32.Parse(this.ACInput.Text);
                 String _class = this.ClassInput.Text;
 
-                Player.Status stats = new Player.Status();
-                stats.STR = Int32.Parse(this.STRInput.Text);
-                stats.DEX = Int32.Parse(this.DEXInput.Text);
-                stats.CON = Int32.Parse(this.CONInput.Text);
-                stats.INT = Int32.Parse(this.INTInput.Text);
-                stats.WIS = Int32.Parse(this.WISInput.Text);
-                stats.CHA = Int32.Parse(this.CHAInput.Text);
+                Speed speed = new()
+                {
+                    walk = Int32.Parse(this.SpeedInput.Text),
+                    fly = this.FlySpeedInput.Text != "" ? Int32.Parse(this.FlySpeedInput.Text) : 0
+                };
 
-                Player player = new Player(name, race, _class, HP, AC, stats);
+                bool insightProficiency = (bool)this.InsightProfInput.IsChecked;
+                bool perceptionProficiency = (bool)this.PerceptionProfInput.IsChecked;
+                bool investigationProficiency = (bool)this.InvestigationProfInput.IsChecked;
+
+                Status stats = new()
+                {
+                    STR = Int32.Parse(this.STRInput.Text),
+                    DEX = Int32.Parse(this.DEXInput.Text),
+                    CON = Int32.Parse(this.CONInput.Text),
+                    INT = Int32.Parse(this.INTInput.Text),
+                    WIS = Int32.Parse(this.WISInput.Text),
+                    CHA = Int32.Parse(this.CHAInput.Text)
+                };
+
+
+                Player player = new Player(name, race, _class, HP, AC, speed, stats,
+                    insightProficiency, perceptionProficiency, investigationProficiency);
 
                 addPlayer(player);
             }

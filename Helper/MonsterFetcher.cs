@@ -53,22 +53,25 @@ namespace Deez_Notes_Dm.Helper
             int maxHP = dynamicObject.hit_points;
             int AC = dynamicObject.armor_class;
 
-            Creature.Speed speed = new Creature.Speed();
-            speed.walk = dynamicObject.speed.walk != null ? dynamicObject.speed.walk : 0;
-            speed.climb = dynamicObject.speed.climb != null ? dynamicObject.speed.climb : 0;
-            speed.swim = dynamicObject.speed.swim != null ? dynamicObject.speed.climb : 0;
-            speed.burrow = dynamicObject.speed.burrow != null ? dynamicObject.speed.climb : 0;
-            speed.fly = dynamicObject.speed.fly != null ? dynamicObject.speed.climb : 0;
-            speed.hover = dynamicObject.speed.hover != null ? dynamicObject.speed.climb : 0;
+            Speed speed = new()
+            {
+                walk = dynamicObject.speed.walk != null ? dynamicObject.speed.walk : 0,
+                climb = dynamicObject.speed.climb != null ? dynamicObject.speed.climb : 0,
+                swim = dynamicObject.speed.swim != null ? dynamicObject.speed.climb : 0,
+                burrow = dynamicObject.speed.burrow != null ? dynamicObject.speed.climb : 0,
+                fly = dynamicObject.speed.fly != null ? dynamicObject.speed.climb : 0,
+                hover = dynamicObject.speed.hover != null ? dynamicObject.speed.climb : 0
+            };
 
-            Creature.Status stats = new Creature.Status();
-
-            stats.STR = (int)dynamicObject.strength;
-            stats.DEX = (int)dynamicObject.dexterity;
-            stats.CON = (int)dynamicObject.constitution;
-            stats.INT = (int)dynamicObject.intelligence;
-            stats.WIS = (int)dynamicObject.wisdom;
-            stats.CHA = (int)dynamicObject.charisma;
+            Status stats = new Status
+            {
+                STR = (int)dynamicObject.strength,
+                DEX = (int)dynamicObject.dexterity,
+                CON = (int)dynamicObject.constitution,
+                INT = (int)dynamicObject.intelligence,
+                WIS = (int)dynamicObject.wisdom,
+                CHA = (int)dynamicObject.charisma
+            };
 
 
             Monster monster = new Monster(name, type, maxHP, AC, stats, speed);

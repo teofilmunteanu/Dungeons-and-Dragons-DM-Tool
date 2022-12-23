@@ -58,23 +58,25 @@ namespace Deez_Notes_Dm.Models
 
             this.Stats = stats;
 
-            this.StatsMod = new StatsModifiers();
-            StatsMod.STR = getModifier(Stats.STR);
-            StatsMod.DEX = getModifier(Stats.DEX);
-            StatsMod.CON = getModifier(Stats.CON);
-            StatsMod.INT = getModifier(Stats.INT);
-            StatsMod.WIS = getModifier(Stats.WIS);
-            StatsMod.CHA = getModifier(Stats.CHA);
-
+            StatsMod = new Status
+            {
+                STR = getModifier(Stats.STR),
+                DEX = getModifier(Stats.DEX),
+                CON = getModifier(Stats.CON),
+                INT = getModifier(Stats.INT),
+                WIS = getModifier(Stats.WIS),
+                CHA = getModifier(Stats.CHA)
+            };
 
             Speeds = speed;
 
             SpeedsText = new List<string>();
             foreach (PropertyInfo prop in Speeds.GetType().GetProperties())
             {
-                if ((int)prop.GetValue(Speeds) != 0)
+                int speedVal = (int)prop.GetValue(Speeds);
+                if (speedVal != 0)
                 {
-                    SpeedsText.Add(prop.Name + " " + prop.GetValue(Speeds) + " ft.");
+                    SpeedsText.Add(Speed.toSpeedText(prop.Name, speedVal));
                 }
             }
         }

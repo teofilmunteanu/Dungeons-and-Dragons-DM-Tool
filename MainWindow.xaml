@@ -576,9 +576,9 @@
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Text="Proficiencies" FontWeight="Bold"/>
-                                <CheckBox Grid.Row="2" Grid.Column="1" Content="Insight" HorizontalAlignment="Left"></CheckBox>
-                                <CheckBox Grid.Row="3" Grid.Column="1" Content="Investigation" HorizontalAlignment="Left"></CheckBox>
-                                <CheckBox Grid.Row="4" Grid.Column="1" Content="Perception" HorizontalAlignment="Left"></CheckBox>
+                                <CheckBox x:Name="InsightProfInput" Grid.Row="2" Grid.Column="1" Content="Insight" HorizontalAlignment="Left"></CheckBox>
+                                <CheckBox x:Name="PerceptionProfInput" Grid.Row="3" Grid.Column="1" Content="Investigation" HorizontalAlignment="Left"></CheckBox>
+                                <CheckBox x:Name="InvestigationProfInput" Grid.Row="4" Grid.Column="1" Content="Perception" HorizontalAlignment="Left"></CheckBox>
                             </Grid>
                         </Border>
                         <!-- END Proficiency Form -->
