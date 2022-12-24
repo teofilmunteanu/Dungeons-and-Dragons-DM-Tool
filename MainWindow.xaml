@@ -372,22 +372,6 @@
                     </Grid>
                     <!-- END Creature HP -->
 
-                    <!-- Creature Speed -->
-                    <Grid x:Name="CreatureSpeed" Grid.Row="2" Margin="15,0" HorizontalAlignment="Center">
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-
-                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Speed:" FontWeight="Bold" HorizontalAlignment="Center" Margin="0 3 0 0"/>
-                        <ListBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Path=SpeedsText}" BorderThickness="0"/>
-                    </Grid>
-                    <!-- END Creature Speed -->
-
                     <!-- Creature Stats(STR,...) -->
                     <Grid x:Name="PlayerStatsBlock" Grid.Row="3" Margin="15,0">
                         <Grid.RowDefinitions>
