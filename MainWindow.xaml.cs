@@ -96,14 +96,14 @@ namespace Deez_Notes_Dm
             this.InvestigationProfInput.IsChecked = false;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click_ShowPlayerForm(object sender, RoutedEventArgs e)
         {
             this.NewPlayerForm.Visibility = Visibility.Visible;
 
             ResetInputs();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Button_Click_CreatePlayer(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -147,14 +147,14 @@ namespace Deez_Notes_Dm
             this.NewPlayerForm.Visibility = Visibility.Collapsed;
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void Button_Click_HidePlayerForm(object sender, RoutedEventArgs e)
         {
             this.NewPlayerForm.Visibility = Visibility.Collapsed;
 
             ResetInputs();
         }
 
-        private void Button_Click_XPAdd(object sender, RoutedEventArgs e)
+        private void Button_Click_AddXP(object sender, RoutedEventArgs e)
         {
             Player player = (Player)(sender as Button).DataContext;
 
@@ -285,7 +285,7 @@ namespace Deez_Notes_Dm
             }
         }
 
-        private void Button_Click_HPAdd(object sender, RoutedEventArgs e)
+        private void Button_Click_SubtractHP(object sender, RoutedEventArgs e)
         {
             Creature creature = (Creature)(sender as Button).DataContext;
 
@@ -296,7 +296,7 @@ namespace Deez_Notes_Dm
             updatePlayers();
         }
 
-        private void HPAddInput_TextChanged(object sender, RoutedEventArgs e)
+        private void HPModifyInput_TextChanged(object sender, RoutedEventArgs e)
         {
             TextBox textBox = sender as TextBox;
             Creature creature = (Creature)(textBox.DataContext);
@@ -316,6 +316,17 @@ namespace Deez_Notes_Dm
                     MessageBox.Show(ex.Message);
                 }
             }
+        }
+
+        private void Button_Click_AddHP(object sender, RoutedEventArgs e)
+        {
+            Creature creature = (Creature)(sender as Button).DataContext;
+
+            combatants[creature.ID].heal(HpById[creature.ID]);
+
+            CombatantsList.Items.Refresh();
+
+            updatePlayers();
         }
     }
 }

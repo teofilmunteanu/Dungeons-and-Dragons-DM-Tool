@@ -41,14 +41,22 @@ namespace Deez_Notes_Dm.Models
             {
                 this.HP -= dmg;
 
-                if (this.HP < 0)
+                if (this.HP <= 0)
                 {
                     MessageBox.Show(this.Name + " is unconscious");
                     this.HP = 0;
                 }
             }
+        }
 
+        public void heal(int hpAdder)
+        {
+            this.HP += hpAdder;
 
+            if (this.HP > MaxHP)
+            {
+                this.HP = MaxHP;
+            }
         }
     }
     public class Status
