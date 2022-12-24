@@ -10,14 +10,13 @@
 
     <Window.Resources>
         <DataTemplate x:Key="ClassListData">
+            
             <TextBlock HorizontalAlignment="Center">
-                <TextBlock.Text>
-                    <MultiBinding StringFormat=" {0} - {1}">
-                        <Binding Path="Key"/>
-                        <Binding Path="Value"/>
-                    </MultiBinding>
-                </TextBlock.Text>
+                <Run Text="&#9672;" Foreground="DeepSkyBlue"/>
+                <Run Text="{Binding Path=Key, Mode=OneWay}"/>
+                <Run Text="{Binding Path=Value, StringFormat='({0})', Mode=OneWay}"/>
             </TextBlock>
+            
         </DataTemplate>
 
         <!-- Player List Data -->
@@ -45,86 +44,37 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <!-- Player Description(Name,Race) -->
-                    <Grid x:Name="CreatureDescBlock1" Grid.Row="0" Margin="15 15 15 0" HorizontalAlignment="Center">
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
+                    <!-- Player Description(Name,Race,Level,Classes) -->
+                    <Border Grid.Row="0" BorderThickness="0 0 0 3" Margin ="5 0" BorderBrush="Gray" >
+                        <Grid x:Name="CreatureDescBlock1" Margin="15 15 15 10" HorizontalAlignment="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
 
-                        <TextBlock Grid.Row="0" Text="{Binding Path=Name}" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center"/>
-                        <TextBlock Grid.Row="1" Text="{Binding Path=Race}" HorizontalAlignment="Center"/>
-                    </Grid>
+                            <TextBlock Grid.Row="0" Text="{Binding Path=Name}" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Row="1"  HorizontalAlignment="Center" Margin="0 5">
+                                <Run Text="{Binding Path=Race}"/>
+                                <Run Text="&#8211; Level"/>
+                                <Run Text="{Binding Path=totalLevel}"/>
+                            </TextBlock>
+                            <ListBox Grid.Row="2" ItemsSource="{Binding Path=levelByClass}" ItemTemplate="{StaticResource ClassListData}" BorderThickness="0" HorizontalAlignment="Center">
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel Orientation="Horizontal"/>
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                            </ListBox>
+
+                        </Grid>
+                    </Border>
                     <!-- END Player Description -->
 
-                    <!-- Player Description2(AC, HP, Speed) -->
-                    <Grid x:Name="PlayerHpBlock" Grid.Row="1" Margin="15,2">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="3*" MinWidth="10"/>
-                            <ColumnDefinition Width="25"/>
-                            <ColumnDefinition Width ="40"/>
-                            <ColumnDefinition Width="25"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Rectangle Grid.Row="0" Grid.ColumnSpan="6"/>
-
-                        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Margin="0,0,0,5">
-                            <Run FontWeight="Bold" Text="Armor Class: "/>
-                            <Run Text="{Binding Path=AC}"/>
-                        </TextBlock>
-
-                        <TextBlock Grid.Row="2" Grid.Column="0" x:Name="PlayerHp" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center">
-                            <TextBlock.Text>
-                                <MultiBinding StringFormat="HP: {0} / {1}">
-                                    <Binding Path="HP"/>
-                                    <Binding Path="MaxHP"/>
-                                </MultiBinding>
-                            </TextBlock.Text>
-                        </TextBlock>
-
-                        <Button Grid.Row="2" Grid.Column="3" FontWeight="Bold" FontFamily="Arial" Margin="5,0,0,0" Click="Button_Click_SubtractHP" Content=" &#8211; "/>
-                        <TextBox Grid.Row="2" Grid.Column="4" Name="HPAddInput" MaxLength="3" Margin="5,0,0,0" TextChanged="HPModifyInput_TextChanged" FontSize="14"></TextBox>
-                        <Button Grid.Row="2" Grid.Column="5" FontWeight="Bold" FontFamily="Arial" Margin="5,0,0,0" Click="Button_Click_AddHP" Content=" + "/>
-
-                        <TextBlock Grid.Row="3" Grid.Column="0" Text="Speed:" FontWeight="Bold" HorizontalAlignment="Left" Margin="0 3 0 0"/>
-                        <ListBox Grid.Row="3" Grid.Column="0" Margin="40 0 0 0" ItemsSource="{Binding Path=SpeedsText}" BorderThickness="0"/>
-                        
-                        <Rectangle Grid.Row="4" Grid.ColumnSpan="6"/>
-                    </Grid>
-                    <!-- END Player Description2 -->
-
-                    <!-- Player Levels -->
-                    <Grid x:Name="PlayerLevelBlock" Grid.Row="3" Margin="15,2">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        
-                        <TextBlock Grid.Row="0"  HorizontalAlignment="Center" Margin="0 0 0 5">
-                            <Run FontWeight="Bold" Text="Level: "/>
-                            <Run Text="{Binding Path=totalLevel}"/>
-                        </TextBlock>
-
-                        <ListBox Grid.Row="1" ItemsSource="{Binding Path=levelByClass}" ItemTemplate="{StaticResource ClassListData}" BorderThickness="0" HorizontalAlignment="Center"/>
-                    </Grid>
-                    
-                    <!-- END Player Levels -->
-                    
                     <!-- Player XP -->
-                    <Grid x:Name="PlayerXPBlock" Grid.Row="4" Margin="15,10,15,2">
+                    <Grid x:Name="PlayerXPBlock" Grid.Row="1" Margin="15,12,15,2">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>
@@ -165,24 +115,71 @@
                     </Grid>
                     <!-- END Player XP -->
 
-                    <!-- Player Stats(STR,...) -->
-                    <Grid x:Name="PlayerStatsBlock" Grid.Row="5" Margin="15,2">
+                    <!-- Player Description2(AC, HP, Speed) -->
+                    <Grid x:Name="PlayerHpBlock" Grid.Row="2" Margin="15,2">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="3*" MinWidth="10"/>
+                            <ColumnDefinition Width="25"/>
+                            <ColumnDefinition Width ="40"/>
+                            <ColumnDefinition Width="25"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Margin="0,0,0,5">
+                            <Run FontWeight="Bold" Text="AC: "/>
+                            <Run Text="{Binding Path=AC}"/>
+                            <Run Text="&#128737;" Foreground="SlateGray"/>
+                        </TextBlock>
+
+                        <TextBlock Grid.Row="2" Grid.Column="0" x:Name="PlayerHp" HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <Run FontWeight="Bold" Text="HP: "/>
+                            <Run Text="{Binding Path=HP}"/>
+                            <Run Text="/"/>
+                            <Run Text="{Binding Path=MaxHP}"/>
+                            <Run Text="&#9829;" Foreground="Crimson"/>
+                        </TextBlock>
+
+                        <Button Grid.Row="2" Grid.Column="3" FontWeight="Bold" FontFamily="Arial" Margin="5,0,0,0" Click="Button_Click_SubtractHP" Content=" &#8211; "/>
+                        <TextBox Grid.Row="2" Grid.Column="4" Name="HPAddInput" MaxLength="3" Margin="5,0,0,0" TextChanged="HPModifyInput_TextChanged" FontSize="14"></TextBox>
+                        <Button Grid.Row="2" Grid.Column="5" FontWeight="Bold" FontFamily="Arial" Margin="5,0,0,0" Click="Button_Click_AddHP" Content=" + "/>
+
+                        <TextBlock Grid.Row="3" Grid.Column="0" Text="Speed:" FontWeight="Bold" HorizontalAlignment="Left" Margin="0 3 0 0"/>
+
+                        <ListBox Grid.Row="3" Grid.Column="0" Margin="42 0 0 0" ItemsSource="{Binding Path=SpeedsText}" BorderThickness="0"/>
+
+                        <Rectangle Grid.Row="4" Grid.ColumnSpan="6"/>
+                    </Grid>
+                    <!-- END Player Description2 -->
+
+                    <!-- Player Stats(STR,...) -->
+                    <Grid x:Name="PlayerStatsBlock" Grid.Row="3" Margin="15,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
                             <RowDefinition />
                             <RowDefinition />
                             <RowDefinition />
                         </Grid.RowDefinitions>
 
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="15"/>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Row="0" Grid.Column="0" Text="STR" HorizontalAlignment="Left" FontWeight="Bold"/>
-                        <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Padding="0,0,10,0">
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="STR" HorizontalAlignment="Left" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat=" {0} ({1})">
                                     <Binding Path="Stats.STR"/>
@@ -190,8 +187,8 @@
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>
-                        <TextBlock Grid.Row="0" Grid.Column="2" Text="DEX" HorizontalAlignment="Left" FontWeight="Bold"/>
-                        <TextBlock Grid.Row="0" Grid.Column="3" HorizontalAlignment="Left">
+                        <TextBlock Grid.Row="0" Grid.Column="4" Text="DEX" HorizontalAlignment="Left" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="0" Grid.Column="5" HorizontalAlignment="Left">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat=" {0} ({1})">
                                     <Binding Path="Stats.DEX"/>
@@ -199,8 +196,8 @@
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>
-                        <TextBlock Grid.Row="1" Grid.Column="0" Text="CON" HorizontalAlignment="Left" FontWeight="Bold"/>
-                        <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"  Padding="0,0,10,0">
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="CON" HorizontalAlignment="Left" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat=" {0} ({1})">
                                     <Binding Path="Stats.CON"/>
@@ -208,8 +205,8 @@
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>
-                        <TextBlock Grid.Row="1" Grid.Column="2" Text="INT" HorizontalAlignment="Left" FontWeight="Bold"/>
-                        <TextBlock Grid.Row="1" Grid.Column="3" HorizontalAlignment="Left">
+                        <TextBlock Grid.Row="1" Grid.Column="4" Text="INT" HorizontalAlignment="Left" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="1" Grid.Column="5" HorizontalAlignment="Left">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat=" {0} ({1})">
                                     <Binding Path="Stats.INT"/>
@@ -217,8 +214,8 @@
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>
-                        <TextBlock Grid.Row="2" Grid.Column="0" Text="WIS" HorizontalAlignment="Left" FontWeight="Bold"/>
-                        <TextBlock Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left"  Padding="0,0,10,0">
+                        <TextBlock Grid.Row="2" Grid.Column="1" Text="WIS" HorizontalAlignment="Left" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat=" {0} ({1})">
                                     <Binding Path="Stats.WIS"/>
@@ -226,8 +223,8 @@
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>
-                        <TextBlock Grid.Row="2" Grid.Column="2" Text="CHA" HorizontalAlignment="Left" FontWeight="Bold"/>
-                        <TextBlock Grid.Row="2" Grid.Column="3" HorizontalAlignment="Left">
+                        <TextBlock Grid.Row="2" Grid.Column="4" Text="CHA" HorizontalAlignment="Left" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="2" Grid.Column="5" HorizontalAlignment="Left">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat=" {0} ({1})">
                                     <Binding Path="Stats.CHA"/>
@@ -235,12 +232,13 @@
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>
-                        <Rectangle Grid.Row="3" Grid.ColumnSpan="4"/>
+
+                        <Rectangle Grid.Row="3" Grid.ColumnSpan="7"/>
                     </Grid>
                     <!-- END Player Stats -->
 
                     <!-- Player PassiveSkills(Passive Perception, ...) -->
-                    <Grid x:Name="PlayerPassiveSkillsBlock" Grid.Row="6" HorizontalAlignment="Left" Margin="15,2">
+                    <Grid x:Name="PlayerPassiveSkillsBlock" Grid.Row="4" HorizontalAlignment="Left" Margin="15,2">
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition />
@@ -363,7 +361,7 @@
 
                         <Button Grid.Row="2" Grid.Column="3" FontWeight="Bold" FontFamily="Arial" Margin="5,0,0,0" Click="Button_Click_SubtractHP" Content=" &#8211; "/>
                         <TextBox Grid.Row="2" Grid.Column="4" Name="HPAddInput" MaxLength="3" Margin="5,0,0,0" TextChanged="HPModifyInput_TextChanged" FontSize="14"></TextBox>
-                        <Button Grid.Row="2" Grid.Column="5" FontWeight="Bold" FontFamily="Arial" Margin="5,0,0,0" Click="Button_Click_AddHP" Content=" + "/>
+                        <Button Grid.Row="2" Grid.Column="5" FontWeight="Bold" FontFamily="Arial" Margin="5,0,0,0" Click="Button_Click_AddHP" Content =" + "/>
 
                         <TextBlock Grid.Row="3" Grid.Column="0" Text="Speed:" FontWeight="Bold" HorizontalAlignment="Left" Margin="0 3 0 0"/>
                         <ListBox Grid.Row="3" Grid.Column="1" ItemsSource="{Binding Path=SpeedsText}" BorderThickness="0"/>
@@ -373,10 +371,9 @@
                     <!-- END Creature HP -->
 
                     <!-- Creature Stats(STR,...) -->
-                    <Grid x:Name="PlayerStatsBlock" Grid.Row="3" Margin="15,0">
+                    <Grid x:Name="CreatureStatsBlock" Grid.Row="3" Margin="15,0">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
-                            <RowDefinition />
                             <RowDefinition />
                             <RowDefinition />
                         </Grid.RowDefinitions>
@@ -391,11 +388,8 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-
-                        <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="7"/>
-
-                        <TextBlock Grid.Row="1" Grid.Column="1" Text="STR" HorizontalAlignment="Left" FontWeight="Bold"/>
-                        <TextBlock Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left">
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="STR" HorizontalAlignment="Left" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat=" {0} ({1})">
                                     <Binding Path="Stats.STR"/>
@@ -403,8 +397,8 @@
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>
-                        <TextBlock Grid.Row="1" Grid.Column="4" Text="DEX" HorizontalAlignment="Left" FontWeight="Bold"/>
-                        <TextBlock Grid.Row="1" Grid.Column="5" HorizontalAlignment="Left">
+                        <TextBlock Grid.Row="0" Grid.Column="4" Text="DEX" HorizontalAlignment="Left" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="0" Grid.Column="5" HorizontalAlignment="Left">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat=" {0} ({1})">
                                     <Binding Path="Stats.DEX"/>
@@ -412,8 +406,8 @@
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>
-                        <TextBlock Grid.Row="2" Grid.Column="1" Text="CON" HorizontalAlignment="Left" FontWeight="Bold"/>
-                        <TextBlock Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left">
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="CON" HorizontalAlignment="Left" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat=" {0} ({1})">
                                     <Binding Path="Stats.CON"/>
@@ -421,8 +415,8 @@
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>
-                        <TextBlock Grid.Row="2" Grid.Column="4" Text="INT" HorizontalAlignment="Left" FontWeight="Bold"/>
-                        <TextBlock Grid.Row="2" Grid.Column="5" HorizontalAlignment="Left">
+                        <TextBlock Grid.Row="1" Grid.Column="4" Text="INT" HorizontalAlignment="Left" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="1" Grid.Column="5" HorizontalAlignment="Left">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat=" {0} ({1})">
                                     <Binding Path="Stats.INT"/>
@@ -430,8 +424,8 @@
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>
-                        <TextBlock Grid.Row="3" Grid.Column="1" Text="WIS" HorizontalAlignment="Left" FontWeight="Bold"/>
-                        <TextBlock Grid.Row="3" Grid.Column="2" HorizontalAlignment="Left">
+                        <TextBlock Grid.Row="2" Grid.Column="1" Text="WIS" HorizontalAlignment="Left" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat=" {0} ({1})">
                                     <Binding Path="Stats.WIS"/>
@@ -439,8 +433,8 @@
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>
-                        <TextBlock Grid.Row="3" Grid.Column="4" Text="CHA" HorizontalAlignment="Left" FontWeight="Bold"/>
-                        <TextBlock Grid.Row="3" Grid.Column="5" HorizontalAlignment="Left">
+                        <TextBlock Grid.Row="2" Grid.Column="4" Text="CHA" HorizontalAlignment="Left" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="2" Grid.Column="5" HorizontalAlignment="Left">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat=" {0} ({1})">
                                     <Binding Path="Stats.CHA"/>
@@ -484,7 +478,7 @@
                         <ListBox Grid.Column="1" Grid.Row="0" x:Name="PlayerProperties" BorderBrush="DarkGray" BorderThickness="3,3,3,3" Margin="5,5,5,5" Background="#FFAEAEAE"/>
                         <Button Grid.Column="0" Grid.Row="1" Content="+" Width="50" FontSize="24" Height="31" VerticalAlignment="Center" Cursor="Hand" Click="Button_Click_ShowPlayerForm"/>
                     </Grid>
-                    <!-- Player List END -->
+                    <!-- END Player List -->
                     
                     <!-- New Player Form-->
                     <Grid x:Name="NewPlayerForm" Panel.ZIndex="100" Background="#B2484848" Visibility="Collapsed">
@@ -699,7 +693,7 @@
                         <ListBox Grid.Column="1" Grid.Row="0" x:Name="CombatantProperties" BorderBrush="DarkGray" BorderThickness="3,3,3,3" Margin="5,5,5,5" Background="#FFAEAEAE"/>
                         <Button Grid.Column="0" Grid.Row="1" Content="+" Width="50" FontSize="24" Height="31" VerticalAlignment="Center" Cursor="Hand" Click="Button_AddCombatant"/>
                     </Grid>
-                    <!-- Combatant List END -->
+                    <!-- END Combatant List -->
                 </Grid>
             </TabItem>
             <TabItem Header="DM Screen">

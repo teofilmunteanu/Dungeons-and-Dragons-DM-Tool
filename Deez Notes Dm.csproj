@@ -38,4 +38,8 @@
     <PackageReference Update="chromiumembeddedframework.runtime.win-x86" Version="107.1.12" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+
 </Project>
