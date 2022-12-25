@@ -19,9 +19,9 @@ namespace Deez_Notes_Dm.Models
         public List<string> SpeedsText { get; set; }
 
 
-        public Status Stats { get; set; }
+        public Stats BaseStats { get; set; }
 
-        public Status StatsMod { get; set; }
+        public Stats StatsMod { get; set; }
 
         public double initiative { get; set; }
 
@@ -58,29 +58,30 @@ namespace Deez_Notes_Dm.Models
                 this.HP = MaxHP;
             }
         }
-    }
-    public class Status
-    {
-        public int STR { get; set; }
-        public int DEX { get; set; }
-        public int CON { get; set; }
-        public int INT { get; set; }
-        public int WIS { get; set; }
-        public int CHA { get; set; }
-    }
 
-    public class Speed
-    {
-        public int walk { get; set; }
-        public int climb { get; set; }
-        public int swim { get; set; }
-        public int burrow { get; set; }
-        public int fly { get; set; }
-        public int hover { get; set; }
-
-        public static String toSpeedText(String speed, int value)
+        public class Stats
         {
-            return speed + " " + value + " ft";
+            public int STR { get; set; }
+            public int DEX { get; set; }
+            public int CON { get; set; }
+            public int INT { get; set; }
+            public int WIS { get; set; }
+            public int CHA { get; set; }
         }
-    };
+
+        public class Speed
+        {
+            public int walk { get; set; }
+            public int climb { get; set; }
+            public int swim { get; set; }
+            public int burrow { get; set; }
+            public int fly { get; set; }
+            public int hover { get; set; }
+
+            public static String toSpeedText(String speed, int value)
+            {
+                return speed + " " + value + " ft";
+            }
+        }
+    }
 }

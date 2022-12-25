@@ -42,7 +42,7 @@ namespace Deez_Notes_Dm.Models
             PlayerCount--;
         }
 
-        public Player(string name, string race, string _class, int HP, int AC, Speed speed, Status stats,
+        public Player(string name, string race, string _class, int HP, int AC, Speed speed, Stats stats,
             bool proficiencyInsight, bool proficiencyInvestigation, bool proficiencyPerception)
         {
             PlayerCount++;
@@ -67,16 +67,16 @@ namespace Deez_Notes_Dm.Models
                 this.SpeedsText.Add(Speed.toSpeedText("fly", speed.fly));
             }
 
-            this.Stats = stats;
+            this.BaseStats = stats;
 
-            this.StatsMod = new Status
+            this.StatsMod = new Stats
             {
-                STR = getModifier(Stats.STR),
-                DEX = getModifier(Stats.DEX),
-                CON = getModifier(Stats.CON),
-                INT = getModifier(Stats.INT),
-                WIS = getModifier(Stats.WIS),
-                CHA = getModifier(Stats.CHA)
+                STR = getModifier(BaseStats.STR),
+                DEX = getModifier(BaseStats.DEX),
+                CON = getModifier(BaseStats.CON),
+                INT = getModifier(BaseStats.INT),
+                WIS = getModifier(BaseStats.WIS),
+                CHA = getModifier(BaseStats.CHA)
             };
 
             this.proficiencyInsight = proficiencyInsight;

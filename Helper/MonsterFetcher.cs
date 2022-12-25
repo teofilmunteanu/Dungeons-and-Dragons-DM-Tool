@@ -53,7 +53,7 @@ namespace Deez_Notes_Dm.Helper
             int maxHP = dynamicObject.hit_points;
             int AC = dynamicObject.armor_class;
 
-            Speed speed = new()
+            Creature.Speed speed = new()
             {
                 walk = dynamicObject.speed.walk != null ? dynamicObject.speed.walk : 0,
                 climb = dynamicObject.speed.climb != null ? dynamicObject.speed.climb : 0,
@@ -63,7 +63,7 @@ namespace Deez_Notes_Dm.Helper
                 hover = dynamicObject.speed.hover != null ? dynamicObject.speed.climb : 0
             };
 
-            Status stats = new Status
+            Creature.Stats stats = new Creature.Stats
             {
                 STR = (int)dynamicObject.strength,
                 DEX = (int)dynamicObject.dexterity,

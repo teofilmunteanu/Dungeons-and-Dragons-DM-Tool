@@ -194,7 +194,7 @@
                         <TextBlock Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat=" {0} ({1})">
-                                    <Binding Path="Stats.STR"/>
+                                    <Binding Path="BaseStats.STR"/>
                                     <Binding Path="StatsMod.STR"/>
                                 </MultiBinding>
                             </TextBlock.Text>
@@ -203,7 +203,7 @@
                         <TextBlock Grid.Row="0" Grid.Column="5" HorizontalAlignment="Left">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat=" {0} ({1})">
-                                    <Binding Path="Stats.DEX"/>
+                                    <Binding Path="BaseStats.DEX"/>
                                     <Binding Path="StatsMod.DEX"/>
                                 </MultiBinding>
                             </TextBlock.Text>
@@ -212,7 +212,7 @@
                         <TextBlock Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat=" {0} ({1})">
-                                    <Binding Path="Stats.CON"/>
+                                    <Binding Path="BaseStats.CON"/>
                                     <Binding Path="StatsMod.CON"/>
                                 </MultiBinding>
                             </TextBlock.Text>
@@ -221,7 +221,7 @@
                         <TextBlock Grid.Row="1" Grid.Column="5" HorizontalAlignment="Left">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat=" {0} ({1})">
-                                    <Binding Path="Stats.INT"/>
+                                    <Binding Path="BaseStats.INT"/>
                                     <Binding Path="StatsMod.INT"/>
                                 </MultiBinding>
                             </TextBlock.Text>
@@ -230,7 +230,7 @@
                         <TextBlock Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat=" {0} ({1})">
-                                    <Binding Path="Stats.WIS"/>
+                                    <Binding Path="BaseStats.WIS"/>
                                     <Binding Path="StatsMod.WIS"/>
                                 </MultiBinding>
                             </TextBlock.Text>
@@ -239,7 +239,7 @@
                         <TextBlock Grid.Row="2" Grid.Column="5" HorizontalAlignment="Left">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat=" {0} ({1})">
-                                    <Binding Path="Stats.CHA"/>
+                                    <Binding Path="BaseStats.CHA"/>
                                     <Binding Path="StatsMod.CHA"/>
                                 </MultiBinding>
                             </TextBlock.Text>
@@ -409,7 +409,7 @@
                         <TextBlock Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat=" {0} ({1})">
-                                    <Binding Path="Stats.STR"/>
+                                    <Binding Path="BaseStats.STR"/>
                                     <Binding Path="StatsMod.STR"/>
                                 </MultiBinding>
                             </TextBlock.Text>
@@ -418,7 +418,7 @@
                         <TextBlock Grid.Row="0" Grid.Column="5" HorizontalAlignment="Left">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat=" {0} ({1})">
-                                    <Binding Path="Stats.DEX"/>
+                                    <Binding Path="BaseStats.DEX"/>
                                     <Binding Path="StatsMod.DEX"/>
                                 </MultiBinding>
                             </TextBlock.Text>
@@ -427,7 +427,7 @@
                         <TextBlock Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat=" {0} ({1})">
-                                    <Binding Path="Stats.CON"/>
+                                    <Binding Path="BaseStats.CON"/>
                                     <Binding Path="StatsMod.CON"/>
                                 </MultiBinding>
                             </TextBlock.Text>
@@ -436,7 +436,7 @@
                         <TextBlock Grid.Row="1" Grid.Column="5" HorizontalAlignment="Left">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat=" {0} ({1})">
-                                    <Binding Path="Stats.INT"/>
+                                    <Binding Path="BaseStats.INT"/>
                                     <Binding Path="StatsMod.INT"/>
                                 </MultiBinding>
                             </TextBlock.Text>
@@ -445,7 +445,7 @@
                         <TextBlock Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat=" {0} ({1})">
-                                    <Binding Path="Stats.WIS"/>
+                                    <Binding Path="BaseStats.WIS"/>
                                     <Binding Path="StatsMod.WIS"/>
                                 </MultiBinding>
                             </TextBlock.Text>
@@ -454,7 +454,7 @@
                         <TextBlock Grid.Row="2" Grid.Column="5" HorizontalAlignment="Left">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat=" {0} ({1})">
-                                    <Binding Path="Stats.CHA"/>
+                                    <Binding Path="BaseStats.CHA"/>
                                     <Binding Path="StatsMod.CHA"/>
                                 </MultiBinding>
                             </TextBlock.Text>

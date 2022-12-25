@@ -113,7 +113,7 @@ namespace Deez_Notes_Dm
                 int AC = Int32.Parse(this.ACInput.Text);
                 String _class = this.ClassInput.Text;
 
-                Speed speed = new()
+                Creature.Speed speed = new()
                 {
                     walk = Int32.Parse(this.SpeedInput.Text),
                     fly = this.FlySpeedInput.Text != "" ? Int32.Parse(this.FlySpeedInput.Text) : 0
@@ -123,7 +123,7 @@ namespace Deez_Notes_Dm
                 bool perceptionProficiency = (bool)this.PerceptionProfInput.IsChecked;
                 bool investigationProficiency = (bool)this.InvestigationProfInput.IsChecked;
 
-                Status stats = new()
+                Creature.Stats stats = new()
                 {
                     STR = Int32.Parse(this.STRInput.Text),
                     DEX = Int32.Parse(this.DEXInput.Text),

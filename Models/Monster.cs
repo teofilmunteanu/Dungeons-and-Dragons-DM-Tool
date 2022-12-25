@@ -44,7 +44,7 @@ namespace Deez_Notes_Dm.Models
 
         }
 
-        public Monster(string name, string type, int maxHP, int AC, Status stats, Speed speed)
+        public Monster(string name, string type, int maxHP, int AC, Stats stats, Speed speed)
         {
             MonsterCount++;
             this.ID = MonsterCount - 1;
@@ -56,16 +56,16 @@ namespace Deez_Notes_Dm.Models
             this.HP = maxHP;
             this.AC = AC;
 
-            this.Stats = stats;
+            this.BaseStats = stats;
 
-            StatsMod = new Status
+            StatsMod = new Stats
             {
-                STR = getModifier(Stats.STR),
-                DEX = getModifier(Stats.DEX),
-                CON = getModifier(Stats.CON),
-                INT = getModifier(Stats.INT),
-                WIS = getModifier(Stats.WIS),
-                CHA = getModifier(Stats.CHA)
+                STR = getModifier(BaseStats.STR),
+                DEX = getModifier(BaseStats.DEX),
+                CON = getModifier(BaseStats.CON),
+                INT = getModifier(BaseStats.INT),
+                WIS = getModifier(BaseStats.WIS),
+                CHA = getModifier(BaseStats.CHA)
             };
 
             Speeds = speed;
