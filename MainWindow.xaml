@@ -297,7 +297,11 @@
                                     <Setter Property="Fill" Value="Gray" />
                                     <Setter Property="Margin" Value="0 3"/>
                                 </Style>
-                            </Style.Resources>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="Focusable" Value="False"/>
+                                    <Setter Property="IsHitTestVisible" Value="False"/>
+                                </Style>
+                        </Style.Resources>
                         </Style>
                     </Grid.Resources>
                     
