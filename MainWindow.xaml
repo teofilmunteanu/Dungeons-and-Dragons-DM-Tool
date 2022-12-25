@@ -38,10 +38,13 @@
                                     <Setter Property="Fill" Value="Gray" />
                                     <Setter Property="Margin" Value="0 3"/>
                                 </Style>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="Focusable" Value="False"/>
+                                    <Setter Property="IsHitTestVisible" Value="False"/>
+                                </Style>
                             </Style.Resources>
                         </Style>
                     </Grid.Resources>
-
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
@@ -461,17 +464,6 @@
     </Window.Resources>
 
     <Grid>
-        <Grid.Resources>
-            <Style TargetType="Grid">
-                <Style.Resources>
-                    <Style TargetType="ListBoxItem">
-                        <Setter Property="Focusable" Value="False"/>
-                        <Setter Property="IsHitTestVisible" Value="False"/>
-                    </Style>
-                </Style.Resources>
-            </Style>
-        </Grid.Resources>
-        
         <TabControl>
             <TabItem Header="Players">
                 <Grid x:Name="TabRoot">
