@@ -28,6 +28,10 @@
                     <Grid.Resources>
                         <Style TargetType="Grid">
                             <Style.Resources>
+                                <Style TargetType="TextBox">
+                                    <Setter Property="TextAlignment" Value="Center"/>
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                </Style>
                                 <Style TargetType="Rectangle">
                                     <Setter Property="Height" Value="1.6" />
                                     <Setter Property="Stroke" Value="Gray" />
@@ -91,7 +95,8 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Grid.Row="1" Grid.Column="0" Text="XP:" Margin="0,0,5,0" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                        <Button Grid.Row="1" Grid.Column="1" Name="PlayerXP" HorizontalAlignment="Left" VerticalAlignment="Center" MinWidth="30" BorderThickness="0" Background="Black" Click="Button_Click_ShowInput" LostFocus="Button_LostFocus_HideInput">
+                        <Button Grid.Row="1" Grid.Column="1" Name="PlayerXP" HorizontalAlignment="Left" VerticalAlignment="Center" MinWidth="30" BorderThickness="0" 
+                                Background="DeepSkyBlue" Foreground="DeepSkyBlue" Click="Button_Click_ShowInput" LostFocus="ButtonXP_LostFocus_HideInput">
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Background" Value="Transparent" />
@@ -106,10 +111,14 @@
                                     </Setter>
                                 </Style>
                             </Button.Style>
-                            <TextBlock Text="{Binding Path=XP}" HorizontalAlignment="Center"/>
+                            
+                            <TextBlock HorizontalAlignment="Center">
+                                <Run Text="{Binding Path=XP}"/>
+                                <Run Text="&#9733;" Foreground="DeepSkyBlue"/>
+                            </TextBlock>
                         </Button>
 
-                        <TextBox Grid.Row="1" Grid.Column="3" Name="XPAddInput" MaxLength="6" FontSize="14" Width="52" Margin="5,0,0,0" TextChanged="XPAddInput_TextChanged"></TextBox>
+                        <TextBox Grid.Row="1" Grid.Column="3" Name="XPAddInput" MaxLength="6" FontSize="14" Width="62" Margin="5,0,0,0" TextChanged="XPAddInput_TextChanged"></TextBox>
                         <Button Grid.Row="1" Grid.Column="4" FontWeight="Bold" FontFamily="Arial" Margin="5,0,0,0" Click="Button_Click_AddXP" Content=" + "/>
                         <Rectangle Grid.Row="4" Grid.ColumnSpan="6"/>
                     </Grid>
@@ -327,14 +336,17 @@
                         </Grid.ColumnDefinitions>
 
                         <Rectangle Grid.Row="0" Grid.ColumnSpan="6"/>
-                        
-                        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Margin="0,0,0,5">
-                            <Run FontWeight="Bold" Text="Armor Class: "/>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="AC: " FontWeight="Bold" Grid.ColumnSpan="4" Margin="0,0,0,5"/>
+
+                        <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Margin="0,0,0,5">
                             <Run Text="{Binding Path=AC}"/>
+                            <Run Text="&#128737;" Foreground="SlateGray"/>
                         </TextBlock>
 
                         <TextBlock Grid.Row="2" Grid.Column="0" Text="HP:" Margin="0,0,5,0" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                        <Button Name="CombatHP" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="0" Background="Black" Click="Button_Click_ShowInput" LostFocus="Button_LostFocus_HideInput">
+                        <Button Name="CombatHP" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                Background="Crimson" Foreground="Crimson" Click="Button_Click_ShowInput" LostFocus="ButtonHP_LostFocus_HideInput">
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Background" Value="Transparent" />
@@ -350,12 +362,10 @@
                                 </Style>
                             </Button.Style>
                             <TextBlock>
-                                <TextBlock.Text>
-                                    <MultiBinding StringFormat=" {0} / {1}">
-                                        <Binding Path="HP"/>
-                                        <Binding Path="MaxHP"/>
-                                    </MultiBinding>
-                                </TextBlock.Text>
+                                <Run Text="{Binding Path=HP}"/>
+                                <Run Text="/"/>
+                                <Run Text="{Binding Path=MaxHP}"/>
+                                <Run Text="&#9829;" Foreground="Crimson"/>
                             </TextBlock>
                         </Button>
 

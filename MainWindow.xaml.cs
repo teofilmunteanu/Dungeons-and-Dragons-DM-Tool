@@ -208,12 +208,22 @@ namespace Deez_Notes_Dm
         {
             Button InputBtn = sender as Button;
             InputBtn.Background = new SolidColorBrush(Colors.White);
+            InputBtn.Foreground = new SolidColorBrush(Colors.Black);
+
         }
 
-        private void Button_LostFocus_HideInput(object sender, RoutedEventArgs e)
+        private void ButtonHP_LostFocus_HideInput(object sender, RoutedEventArgs e)
         {
             Button InputBtn = sender as Button;
-            InputBtn.Background = new SolidColorBrush(Colors.Black);
+            InputBtn.Background = new SolidColorBrush(Colors.Crimson);
+            InputBtn.Foreground = new SolidColorBrush(Colors.Crimson);
+        }
+
+        private void ButtonXP_LostFocus_HideInput(object sender, RoutedEventArgs e)
+        {
+            Button InputBtn = sender as Button;
+            InputBtn.Background = new SolidColorBrush(Colors.DeepSkyBlue);
+            InputBtn.Foreground = new SolidColorBrush(Colors.DeepSkyBlue);
         }
 
 
