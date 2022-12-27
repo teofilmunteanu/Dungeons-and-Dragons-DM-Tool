@@ -1,31 +1,70 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Windows;
 
 namespace Deez_Notes_Dm.Models
 {
     public class Creature
     {
-        public int ID { get; set; }
+        public int ID { get; }
 
         public string Name { get; set; }
         public string Race { get; set; }
 
-        public int AC { get; set; }
         public int MaxHP { get; set; }
         public int HP { get; set; }
+        public int AC { get; set; }
 
         public Speed Speeds { get; set; }
-        public List<string> SpeedsText { get; set; }
-
+        public List<string> SpeedsList { get; set; }
 
         public Stats BaseStats { get; set; }
 
         public Stats StatsMod { get; set; }
 
-        public double initiative { get; set; }
+        public double Initiative { get; set; }
 
-        protected int getModifier(int statusValue)
+        public Creature()
+        {
+
+        }
+        public Creature(int id, string name, string race, int maxHP, int ac, Speed speeds, Stats baseStats)
+        {
+            ID = id;
+            Name = name;
+            Race = race;
+            MaxHP = HP = maxHP;
+            AC = ac;
+            Speeds = speeds;
+            BaseStats = baseStats;
+
+            StatsMod = new Stats
+            {
+                STR = getModifier(baseStats.STR),
+                DEX = getModifier(baseStats.DEX),
+                CON = getModifier(baseStats.CON),
+                INT = getModifier(baseStats.INT),
+                WIS = getModifier(baseStats.WIS),
+                CHA = getModifier(baseStats.CHA)
+            };
+
+            SpeedsList = new List<string>();
+            if (speeds is not null)
+            {
+                foreach (PropertyInfo prop in speeds.GetType().GetProperties())
+                {
+                    int? speedVal = (int?)prop.GetValue(speeds);
+
+                    if (speedVal != 0)
+                    {
+                        SpeedsList.Add(speeds.ToSpeedText(prop.Name));
+                    }
+                }
+            }
+        }
+
+        protected static int getModifier(int statusValue)
         {
             return (int)Math.Floor(((statusValue - 10)) / 2.0);
         }
@@ -78,9 +117,15 @@ namespace Deez_Notes_Dm.Models
             public int fly { get; set; }
             public int hover { get; set; }
 
-            public static String toSpeedText(String speed, int value)
+            public string ToSpeedText(string speedType)
             {
-                return speed + " " + value + " ft";
+                PropertyInfo? speed = this.GetType().GetProperty(speedType);
+                if (speed is not null)
+                {
+                    return $"{speedType} {speed.GetValue(this)} ft";
+                }
+                else
+                    throw new Exception("Invalid Speed Type");
             }
         }
     }
