@@ -9,14 +9,18 @@
         Title="Deez Notes DM" Width="800" Height="560"
         FontFamily="Roboto" FontSize="13">
 
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
+    </Window.Resources>
     <Grid>
         <TabControl>
             <TabItem Header="Players">
                 <Grid x:Name="PlayersTabRoot">
                     <views:PlayerListView DataContext="{Binding CurrentViewModel}"/>
-                    <modalcontrol:Modal Panel.ZIndex="1" IsOpen="{Binding IsModalOpen}">
-                        <views:NewPlayerFormView DataContext="{Binding PlayerFormViewModel}"/>
-                    </modalcontrol:Modal>
+
+                    <Grid Visibility="{Binding Path=IsModalOpen, Converter={StaticResource BoolToVisibility}}">
+                        <views:NewPlayerFormView DataContext="{Binding PlayerFormViewModel}" />
+                    </Grid>
                 </Grid>
             </TabItem>
             

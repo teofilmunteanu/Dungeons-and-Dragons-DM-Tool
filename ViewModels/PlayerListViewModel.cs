@@ -17,11 +17,13 @@ namespace Deez_Notes_Dm.ViewModels
             PlayersManager pm = new PlayersManager();
             List<Player> playersList = pm.GetPlayers();
 
-            foreach (Player p in playersList)
+            if (playersList is not null)
             {
-                _players.Add(new PlayerViewModel(p));
+                foreach (Player p in playersList)
+                {
+                    _players.Add(new PlayerViewModel(p));
+                }
             }
-
         }
     }
 }
