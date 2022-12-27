@@ -1,0 +1,193 @@
+﻿<UserControl x:Class="Deez_Notes_Dm.Views.NewPlayerFormView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Deez_Notes_Dm.Views"
+             mc:Ignorable="d" >
+    
+        <!-- New Player Form-->
+        <Grid x:Name="NewPlayerForm" Background="#B2484848">
+            <Grid.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Style.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                        </Style>
+                        <Style TargetType="TextBox">
+                            <Setter Property="TextAlignment" Value="Center"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                        </Style>
+                    </Style.Resources>
+                </Style>
+            </Grid.Resources>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition MinHeight="76" Height="1*"/>
+                <RowDefinition MinHeight="95" Height="1.2*"/>
+                <RowDefinition MinHeight="77" Height="1*"/>
+                <RowDefinition MinHeight="75" Height="1.2*"/>
+                <RowDefinition MinHeight="70" Height="0.8*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition MinWidth="300" Width="2.3*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Char Description Form -->
+            <Border Grid.Row="1" Grid.Column="1" BorderThickness="3,3,3,0" BorderBrush="AliceBlue">
+                <Grid x:Name="CharDescriptionForm" Background="LightGray">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="1.2*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="Name" FontWeight="Bold"/>
+                    <TextBox x:Name="NameInput" Grid.Row="1" Grid.Column="2"/>
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="Race" FontWeight="Bold"/>
+                    <TextBox x:Name="RaceInput" Grid.Row="2" Grid.Column="2"/>
+                    <TextBlock Grid.Row="3" Grid.Column="1" Text="Class" FontWeight="Bold"/>
+                    <TextBox x:Name="ClassInput" Grid.Row="3" Grid.Column="2"/>
+                </Grid>
+            </Border>
+            <!-- END Character Description Form -->
+
+            <!-- Char BattleStats Form -->
+            <Border Grid.Row="2" Grid.Column="1" BorderThickness="3,3,3,0" BorderBrush="AliceBlue">
+                <Grid x:Name="SpeedForm" Background="LightGray">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="1.2*"/>
+                        <ColumnDefinition Width="0.6*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="HP" FontWeight="Bold"/>
+                    <TextBox x:Name="HPInput" Grid.Row="1" Grid.Column="2"/>
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="AC" FontWeight="Bold"/>
+                    <TextBox x:Name="ACInput" Grid.Row="2" Grid.Column="2"/>
+                    <TextBlock Grid.Row="3" Grid.Column="1" Text="Speed" FontWeight="Bold"/>
+                    <TextBox x:Name="SpeedInput" Grid.Row="3" Grid.Column="2"/>
+                    <TextBlock Grid.Row="4" Grid.Column="1">
+                                    <Run Text="Fly Sp." FontWeight="Bold"/>
+                                    <Run Text="(?)" Foreground="Blue"/>
+                    </TextBlock>
+                    <TextBox x:Name="FlySpeedInput" Grid.Row="4" Grid.Column="2"/>
+                </Grid>
+            </Border>
+            <!-- END BattleStats Form -->
+
+            <!-- Stats Form -->
+            <Border Grid.Row="3" Grid.Column="1" BorderThickness="3,3,3,0" BorderBrush="AliceBlue">
+                <Grid x:Name="CharStatsForm" Background="LightGray">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="STR" FontWeight="Bold"/>
+                    <TextBox x:Name="STRInput" Grid.Row="1" Grid.Column="2"/>
+                    <TextBlock Grid.Row="1" Grid.Column="4" Text="DEX" FontWeight="Bold"/>
+                    <TextBox x:Name="DEXInput" Grid.Row="1" Grid.Column="5"/>
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="CON" FontWeight="Bold"/>
+                    <TextBox x:Name="CONInput" Grid.Row="2" Grid.Column="2"/>
+                    <TextBlock Grid.Row="2" Grid.Column="4" Text="INT" FontWeight="Bold"/>
+                    <TextBox x:Name="INTInput" Grid.Row="2" Grid.Column="5"/>
+                    <TextBlock Grid.Row="3" Grid.Column="1" Text="WIS" FontWeight="Bold"/>
+                    <TextBox x:Name="WISInput" Grid.Row="3" Grid.Column="2"/>
+                    <TextBlock Grid.Row="3" Grid.Column="4" Text="CHA" FontWeight="Bold"/>
+                    <TextBox x:Name="CHAInput" Grid.Row="3" Grid.Column="5"/>
+                </Grid>
+            </Border>
+            <!-- END Stats Form -->
+
+            <!-- Proficiency Form -->
+            <Border Grid.Row="4" Grid.Column="1" BorderThickness="3,3,3,0" BorderBrush="AliceBlue">
+                <Grid x:Name="CharProform" Background="LightGray">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition MinWidth="95" Width="1*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Text="Proficiencies" FontWeight="Bold"/>
+                    <CheckBox x:Name="InsightProfInput" Grid.Row="2" Grid.Column="1" Content="Insight" HorizontalAlignment="Left"></CheckBox>
+                    <CheckBox x:Name="PerceptionProfInput" Grid.Row="3" Grid.Column="1" Content="Investigation" HorizontalAlignment="Left"></CheckBox>
+                    <CheckBox x:Name="InvestigationProfInput" Grid.Row="4" Grid.Column="1" Content="Perception" HorizontalAlignment="Left"></CheckBox>
+                </Grid>
+            </Border>
+            <!-- END Proficiency Form -->
+
+            <!-- Form Buttons -->
+            <Border Grid.Row="5" Grid.Column="1" BorderThickness="3,3,3,3" BorderBrush="AliceBlue">
+                <Grid Background="LightGray">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="0.5*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="PlayerCreateBtn" Content="Create" FontWeight="Bold" Grid.Row="1" Grid.Column="1" Background="#FF838383" Foreground="White"/>
+                <Button x:Name="PlayerCancelBtn" Content="Cancel" FontWeight="Bold" Grid.Row="3" Grid.Column="1" Background="IndianRed" Foreground="White" Command="{Binding CancelCommand}"/>
+            </Grid>
+            </Border>
+            <!-- END Form Buttons -->
+        </Grid>
+        <!-- END New Player Form -->
+    
+
+</UserControl>
