@@ -1,4 +1,5 @@
-﻿using Deez_Notes_Dm.Stores;
+﻿using Deez_Notes_Dm.Models;
+using Deez_Notes_Dm.Stores;
 
 namespace Deez_Notes_Dm.ViewModels
 {
@@ -12,12 +13,12 @@ namespace Deez_Notes_Dm.ViewModels
         public bool IsModalOpen => _newPLayerFormStore.IsOpen;
 
 
-        public MainViewModel(NewPLayerFormStore newPLayerFormStore)
+        public MainViewModel(PlayersManager playersManager, NewPLayerFormStore newPLayerFormStore)
         {
             _newPLayerFormStore = newPLayerFormStore;
 
-            PlayersViewModel = new PlayerListViewModel(newPLayerFormStore);
-            PlayerFormViewModel = new NewPlayerFormViewModel(newPLayerFormStore);
+            PlayersViewModel = new PlayerListViewModel(playersManager, newPLayerFormStore);
+            PlayerFormViewModel = new NewPlayerFormViewModel(playersManager, newPLayerFormStore);
 
             _newPLayerFormStore.IsOpenChanged += OnIsModalOpenChanged;
         }

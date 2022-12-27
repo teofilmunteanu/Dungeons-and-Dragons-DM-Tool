@@ -1,4 +1,5 @@
-﻿using Deez_Notes_Dm.Stores;
+﻿using Deez_Notes_Dm.Models;
+using Deez_Notes_Dm.Stores;
 using Deez_Notes_Dm.ViewModels;
 using System.Windows;
 
@@ -9,11 +10,13 @@ namespace Deez_Notes_Dm
     /// </summary>
     public partial class App : Application
     {
+        private readonly PlayersManager _playersManager;
         private readonly NewPLayerFormStore _newPLayerFormStore;
 
 
         public App()
         {
+            _playersManager = new PlayersManager();
             _newPLayerFormStore = new NewPLayerFormStore();
         }
 
@@ -21,7 +24,7 @@ namespace Deez_Notes_Dm
         {
             MainWindow = new MainWindow()
             {
-                DataContext = new MainViewModel(_newPLayerFormStore)
+                DataContext = new MainViewModel(_playersManager, _newPLayerFormStore)
             };
             MainWindow.Show();
 

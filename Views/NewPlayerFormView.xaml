@@ -57,11 +57,11 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Row="1" Grid.Column="1" Text="Name" FontWeight="Bold"/>
-                    <TextBox x:Name="NameInput" Grid.Row="1" Grid.Column="2"/>
+                    <TextBox x:Name="NameInput" Grid.Row="1" Grid.Column="2" Text="{Binding Name}"/>
                     <TextBlock Grid.Row="2" Grid.Column="1" Text="Race" FontWeight="Bold"/>
-                    <TextBox x:Name="RaceInput" Grid.Row="2" Grid.Column="2"/>
+                    <TextBox x:Name="RaceInput" Grid.Row="2" Grid.Column="2" Text="{Binding Race}"/>
                     <TextBlock Grid.Row="3" Grid.Column="1" Text="Class" FontWeight="Bold"/>
-                    <TextBox x:Name="ClassInput" Grid.Row="3" Grid.Column="2"/>
+                    <TextBox x:Name="ClassInput" Grid.Row="3" Grid.Column="2" Text="{Binding MainClass}"/>
                 </Grid>
             </Border>
             <!-- END Character Description Form -->
@@ -87,16 +87,16 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Row="1" Grid.Column="1" Text="HP" FontWeight="Bold"/>
-                    <TextBox x:Name="HPInput" Grid.Row="1" Grid.Column="2"/>
+                    <TextBox x:Name="HPInput" Grid.Row="1" Grid.Column="2" Text="{Binding HP}"/>
                     <TextBlock Grid.Row="2" Grid.Column="1" Text="AC" FontWeight="Bold"/>
-                    <TextBox x:Name="ACInput" Grid.Row="2" Grid.Column="2"/>
+                    <TextBox x:Name="ACInput" Grid.Row="2" Grid.Column="2" Text="{Binding AC}"/>
                     <TextBlock Grid.Row="3" Grid.Column="1" Text="Speed" FontWeight="Bold"/>
-                    <TextBox x:Name="SpeedInput" Grid.Row="3" Grid.Column="2"/>
+                    <TextBox x:Name="SpeedInput" Grid.Row="3" Grid.Column="2" Text="{Binding Speed}"/>
                     <TextBlock Grid.Row="4" Grid.Column="1">
                                     <Run Text="Fly Sp." FontWeight="Bold"/>
                                     <Run Text="(?)" Foreground="Blue"/>
                     </TextBlock>
-                    <TextBox x:Name="FlySpeedInput" Grid.Row="4" Grid.Column="2"/>
+                    <TextBox x:Name="FlySpeedInput" Grid.Row="4" Grid.Column="2" Text="{Binding FlySpeed}"/>
                 </Grid>
             </Border>
             <!-- END BattleStats Form -->
@@ -123,17 +123,17 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Row="1" Grid.Column="1" Text="STR" FontWeight="Bold"/>
-                    <TextBox x:Name="STRInput" Grid.Row="1" Grid.Column="2"/>
+                    <TextBox x:Name="STRInput" Grid.Row="1" Grid.Column="2" Text="{Binding STR}"/>
                     <TextBlock Grid.Row="1" Grid.Column="4" Text="DEX" FontWeight="Bold"/>
-                    <TextBox x:Name="DEXInput" Grid.Row="1" Grid.Column="5"/>
+                    <TextBox x:Name="DEXInput" Grid.Row="1" Grid.Column="5" Text="{Binding DEX}"/>
                     <TextBlock Grid.Row="2" Grid.Column="1" Text="CON" FontWeight="Bold"/>
-                    <TextBox x:Name="CONInput" Grid.Row="2" Grid.Column="2"/>
+                    <TextBox x:Name="CONInput" Grid.Row="2" Grid.Column="2" Text="{Binding CON}"/>
                     <TextBlock Grid.Row="2" Grid.Column="4" Text="INT" FontWeight="Bold"/>
-                    <TextBox x:Name="INTInput" Grid.Row="2" Grid.Column="5"/>
+                    <TextBox x:Name="INTInput" Grid.Row="2" Grid.Column="5" Text="{Binding INT}"/>
                     <TextBlock Grid.Row="3" Grid.Column="1" Text="WIS" FontWeight="Bold"/>
-                    <TextBox x:Name="WISInput" Grid.Row="3" Grid.Column="2"/>
+                    <TextBox x:Name="WISInput" Grid.Row="3" Grid.Column="2" Text="{Binding WIS}"/>
                     <TextBlock Grid.Row="3" Grid.Column="4" Text="CHA" FontWeight="Bold"/>
-                    <TextBox x:Name="CHAInput" Grid.Row="3" Grid.Column="5"/>
+                    <TextBox x:Name="CHAInput" Grid.Row="3" Grid.Column="5" Text="{Binding CHA}"/>
                 </Grid>
             </Border>
             <!-- END Stats Form -->
@@ -157,10 +157,10 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Text="Proficiencies" FontWeight="Bold"/>
-                    <CheckBox x:Name="InsightProfInput" Grid.Row="2" Grid.Column="1" Content="Insight" HorizontalAlignment="Left"></CheckBox>
-                    <CheckBox x:Name="PerceptionProfInput" Grid.Row="3" Grid.Column="1" Content="Investigation" HorizontalAlignment="Left"></CheckBox>
-                    <CheckBox x:Name="InvestigationProfInput" Grid.Row="4" Grid.Column="1" Content="Perception" HorizontalAlignment="Left"></CheckBox>
-                </Grid>
+                    <CheckBox x:Name="InsightProfInput" Grid.Row="2" Grid.Column="1" Content="Insight" HorizontalAlignment="Left" IsChecked="{Binding InsightProficiency}"/>
+                    <CheckBox x:Name="PerceptionProfInput" Grid.Row="3" Grid.Column="1" Content="Perception" HorizontalAlignment="Left" IsChecked="{Binding PerceptionProficiency}"/>
+                    <CheckBox x:Name="InvestigationProfInput" Grid.Row="4" Grid.Column="1" Content="Investigation" HorizontalAlignment="Left" IsChecked="{Binding InvestigationProficiency}"/>
+            </Grid>
             </Border>
             <!-- END Proficiency Form -->
 
@@ -181,7 +181,7 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <Button x:Name="PlayerCreateBtn" Content="Create" FontWeight="Bold" Grid.Row="1" Grid.Column="1" Background="#FF838383" Foreground="White"/>
+                <Button x:Name="PlayerCreateBtn" Content="Create" FontWeight="Bold" Grid.Row="1" Grid.Column="1" Background="#FF838383" Foreground="White" Command="{Binding CreateCommand}"/>
                 <Button x:Name="PlayerCancelBtn" Content="Cancel" FontWeight="Bold" Grid.Row="3" Grid.Column="1" Background="IndianRed" Foreground="White" Command="{Binding CancelCommand}"/>
             </Grid>
             </Border>

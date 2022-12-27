@@ -14,7 +14,7 @@ namespace Deez_Notes_Dm.Commands
 
         public abstract void Execute(object? parameter);
 
-        protected void OnCanExecuteChanged(object? parameter)
+        protected void OnCanExecuteChanged(object? parameter = null)
         {
             CanExecuteChanged?.Invoke(this, new EventArgs());
         }

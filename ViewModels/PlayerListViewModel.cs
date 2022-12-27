@@ -15,12 +15,11 @@ namespace Deez_Notes_Dm.ViewModels
 
         public ICommand ShowPlayerFormCommand { get; }
 
-        public PlayerListViewModel(NewPLayerFormStore newPLayerFormStore)
+        public PlayerListViewModel(PlayersManager playersManager, NewPLayerFormStore newPLayerFormStore)
         {
             _players = new ObservableCollection<PlayerViewModel>();
 
-            PlayersManager pm = new PlayersManager();
-            List<Player> playersList = pm.GetPlayers();
+            List<Player> playersList = playersManager.GetPlayers();
 
             if (playersList is not null)
             {

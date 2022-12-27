@@ -14,25 +14,6 @@ namespace Deez_Notes_Dm
             InitializeComponent();
             string curDir = Directory.GetCurrentDirectory();
             this.webBrowser.Source = new Uri(String.Format("file:///{0}/Resources/DMSCreen.png", curDir));
-
-
-            //reinitializeCombatants();
-        }
-        private void Button_Click_CloseModal(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click_OpenModal(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click_ShowPlayerForm(object sender, RoutedEventArgs e)
-        {
-            //this.NewPlayerForm.Visibility = Visibility.Visible;
-
-            //ResetInputs();
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Windows;
 
 namespace Deez_Notes_Dm.Models
 {
@@ -31,7 +33,19 @@ namespace Deez_Notes_Dm.Models
 
         public void AddPlayer(Player player)
         {
-            players.Add(player);
+            try
+            {
+                players.Add(player);
+
+                String newJson = JsonConvert.SerializeObject(players);
+
+                System.IO.File.WriteAllText(@"Resources/Players/Players.json", newJson);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
     }
 }
