@@ -16,7 +16,7 @@
         <TabControl>
             <TabItem Header="Players">
                 <Grid x:Name="PlayersTabRoot">
-                    <views:PlayerListView DataContext="{Binding CurrentViewModel}"/>
+                    <views:PlayerListView DataContext="{Binding PlayersViewModel}"/>
 
                     <Grid Visibility="{Binding Path=IsModalOpen, Converter={StaticResource BoolToVisibility}}">
                         <views:NewPlayerFormView DataContext="{Binding PlayerFormViewModel}" />

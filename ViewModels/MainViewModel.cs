@@ -4,7 +4,7 @@ namespace Deez_Notes_Dm.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        public ViewModelBase CurrentViewModel { get; }
+        public PlayerListViewModel PlayersViewModel { get; }
         public NewPlayerFormViewModel PlayerFormViewModel { get; }
 
 
@@ -16,7 +16,7 @@ namespace Deez_Notes_Dm.ViewModels
         {
             _newPLayerFormStore = newPLayerFormStore;
 
-            CurrentViewModel = new PlayerListViewModel();
+            PlayersViewModel = new PlayerListViewModel(newPLayerFormStore);
             PlayerFormViewModel = new NewPlayerFormViewModel(newPLayerFormStore);
 
             _newPLayerFormStore.IsOpenChanged += OnIsModalOpenChanged;

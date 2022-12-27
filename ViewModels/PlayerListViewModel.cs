@@ -1,6 +1,9 @@
-﻿using Deez_Notes_Dm.Models;
+﻿using Deez_Notes_Dm.Commands;
+using Deez_Notes_Dm.Models;
+using Deez_Notes_Dm.Stores;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace Deez_Notes_Dm.ViewModels
 {
@@ -10,7 +13,9 @@ namespace Deez_Notes_Dm.ViewModels
 
         public IEnumerable<PlayerViewModel> Players => _players;
 
-        public PlayerListViewModel()
+        public ICommand ShowPlayerFormCommand { get; }
+
+        public PlayerListViewModel(NewPLayerFormStore newPLayerFormStore)
         {
             _players = new ObservableCollection<PlayerViewModel>();
 
@@ -24,6 +29,8 @@ namespace Deez_Notes_Dm.ViewModels
                     _players.Add(new PlayerViewModel(p));
                 }
             }
+
+            ShowPlayerFormCommand = new ShowPlayerFormCommand(newPLayerFormStore);
         }
     }
 }

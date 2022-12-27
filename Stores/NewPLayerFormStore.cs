@@ -4,7 +4,7 @@ namespace Deez_Notes_Dm.Stores
 {
     public class NewPLayerFormStore
     {
-        public bool isOpen = true;
+        public bool isOpen = false;
         public bool IsOpen
         {
             get => isOpen;
