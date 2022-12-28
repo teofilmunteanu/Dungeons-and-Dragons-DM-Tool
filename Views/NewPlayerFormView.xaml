@@ -57,11 +57,11 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Row="1" Grid.Column="1" Text="Name" FontWeight="Bold"/>
-                    <TextBox x:Name="NameInput" Grid.Row="1" Grid.Column="2" Text="{Binding Name}"/>
+                    <TextBox x:Name="NameInput" Grid.Row="1" Grid.Column="2" Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Grid.Row="2" Grid.Column="1" Text="Race" FontWeight="Bold"/>
-                    <TextBox x:Name="RaceInput" Grid.Row="2" Grid.Column="2" Text="{Binding Race}"/>
+                    <TextBox x:Name="RaceInput" Grid.Row="2" Grid.Column="2" Text="{Binding Race,UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Grid.Row="3" Grid.Column="1" Text="Class" FontWeight="Bold"/>
-                    <TextBox x:Name="ClassInput" Grid.Row="3" Grid.Column="2" Text="{Binding MainClass}"/>
+                    <TextBox x:Name="ClassInput" Grid.Row="3" Grid.Column="2" Text="{Binding MainClass,UpdateSourceTrigger=PropertyChanged}"/>
                 </Grid>
             </Border>
             <!-- END Character Description Form -->
@@ -87,16 +87,16 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Row="1" Grid.Column="1" Text="HP" FontWeight="Bold"/>
-                    <TextBox x:Name="HPInput" Grid.Row="1" Grid.Column="2" Text="{Binding HP}"/>
+                    <TextBox x:Name="HPInput" Grid.Row="1" Grid.Column="2" Text="{Binding HP,UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Grid.Row="2" Grid.Column="1" Text="AC" FontWeight="Bold"/>
-                    <TextBox x:Name="ACInput" Grid.Row="2" Grid.Column="2" Text="{Binding AC}"/>
+                    <TextBox x:Name="ACInput" Grid.Row="2" Grid.Column="2" Text="{Binding AC,UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Grid.Row="3" Grid.Column="1" Text="Speed" FontWeight="Bold"/>
-                    <TextBox x:Name="SpeedInput" Grid.Row="3" Grid.Column="2" Text="{Binding Speed}"/>
+                    <TextBox x:Name="SpeedInput" Grid.Row="3" Grid.Column="2" Text="{Binding Speed,UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Grid.Row="4" Grid.Column="1">
                                     <Run Text="Fly Sp." FontWeight="Bold"/>
                                     <Run Text="(?)" Foreground="Blue"/>
                     </TextBlock>
-                    <TextBox x:Name="FlySpeedInput" Grid.Row="4" Grid.Column="2" Text="{Binding FlySpeed}"/>
+                    <TextBox x:Name="FlySpeedInput" Grid.Row="4" Grid.Column="2" Text="{Binding FlySpeed,UpdateSourceTrigger=PropertyChanged}"/>
                 </Grid>
             </Border>
             <!-- END BattleStats Form -->
@@ -123,17 +123,17 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Row="1" Grid.Column="1" Text="STR" FontWeight="Bold"/>
-                    <TextBox x:Name="STRInput" Grid.Row="1" Grid.Column="2" Text="{Binding STR}"/>
+                    <TextBox x:Name="STRInput" Grid.Row="1" Grid.Column="2" Text="{Binding STR,UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Grid.Row="1" Grid.Column="4" Text="DEX" FontWeight="Bold"/>
-                    <TextBox x:Name="DEXInput" Grid.Row="1" Grid.Column="5" Text="{Binding DEX}"/>
+                    <TextBox x:Name="DEXInput" Grid.Row="1" Grid.Column="5" Text="{Binding DEX,UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Grid.Row="2" Grid.Column="1" Text="CON" FontWeight="Bold"/>
-                    <TextBox x:Name="CONInput" Grid.Row="2" Grid.Column="2" Text="{Binding CON}"/>
+                    <TextBox x:Name="CONInput" Grid.Row="2" Grid.Column="2" Text="{Binding CON,UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Grid.Row="2" Grid.Column="4" Text="INT" FontWeight="Bold"/>
-                    <TextBox x:Name="INTInput" Grid.Row="2" Grid.Column="5" Text="{Binding INT}"/>
+                    <TextBox x:Name="INTInput" Grid.Row="2" Grid.Column="5" Text="{Binding INT,UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Grid.Row="3" Grid.Column="1" Text="WIS" FontWeight="Bold"/>
-                    <TextBox x:Name="WISInput" Grid.Row="3" Grid.Column="2" Text="{Binding WIS}"/>
+                    <TextBox x:Name="WISInput" Grid.Row="3" Grid.Column="2" Text="{Binding WIS,UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Grid.Row="3" Grid.Column="4" Text="CHA" FontWeight="Bold"/>
-                    <TextBox x:Name="CHAInput" Grid.Row="3" Grid.Column="5" Text="{Binding CHA}"/>
+                    <TextBox x:Name="CHAInput" Grid.Row="3" Grid.Column="5" Text="{Binding CHA,UpdateSourceTrigger=PropertyChanged}"/>
                 </Grid>
             </Border>
             <!-- END Stats Form -->
@@ -181,7 +181,7 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                <Button x:Name="PlayerCreateBtn" Content="Create" FontWeight="Bold" Grid.Row="1" Grid.Column="1" Background="#FF838383" Foreground="White" Command="{Binding CreateCommand}"/>
+                <Button x:Name="PlayerCreateBtn" Content="Create" FontWeight="Bold" Grid.Row="1" Grid.Column="1" Background="#FF838383" Foreground="White" Command="{Binding CreateCommand,UpdateSourceTrigger=PropertyChanged}"/>
                 <Button x:Name="PlayerCancelBtn" Content="Cancel" FontWeight="Bold" Grid.Row="3" Grid.Column="1" Background="IndianRed" Foreground="White" Command="{Binding CancelCommand}"/>
             </Grid>
             </Border>
