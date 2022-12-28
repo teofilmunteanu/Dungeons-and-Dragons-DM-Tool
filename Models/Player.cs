@@ -74,9 +74,14 @@ namespace Deez_Notes_Dm.Models
 
             //if(nr of classes > 1) choose class (retun message?), separate method for classLevelUp
 
-            PassiveInsight = 10 + StatsMod.WIS + (proficiencyInsight ? proficiencyByLevel[totalLevel] : 0);
-            PassiveInvestigation = 10 + StatsMod.INT + (proficiencyInvestigation ? proficiencyByLevel[totalLevel] : 0);
-            PassivePerception = 10 + StatsMod.WIS + (proficiencyPerception ? proficiencyByLevel[totalLevel] : 0);
+            PassiveInsight = getPassiveStat(StatsMod.WIS, proficiencyInsight);
+            PassiveInvestigation = getPassiveStat(StatsMod.INT, proficiencyInvestigation);
+            PassivePerception = getPassiveStat(StatsMod.WIS, proficiencyPerception);
+        }
+
+        public int getPassiveStat(int statMod, bool isProficient)
+        {
+            return 10 + statMod + (isProficient ? proficiencyByLevel[totalLevel] : 0);
         }
     }
 }

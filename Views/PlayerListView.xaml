@@ -161,7 +161,7 @@
 
                         <TextBlock Grid.Row="3" Grid.Column="0" Text="Speed:" FontWeight="Bold" HorizontalAlignment="Left" Margin="0 3 0 0"/>
 
-                        <!--<ListBox Grid.Row="3" Grid.Column="0" Margin="42 0 0 0" ItemsSource="{Binding Path=SpeedsText}" BorderThickness="0"/>-->
+                        <ListBox Grid.Row="3" Grid.Column="0" Margin="42 0 0 0" ItemsSource="{Binding Path=SpeedsList}" BorderThickness="0"/>
 
                         <Rectangle Grid.Row="4" Grid.ColumnSpan="6"/>
                     </Grid>
@@ -286,7 +286,7 @@
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
 
-        <ListBox Grid.Column="0" Grid.Row="0" x:Name="PlayerList" ItemsSource="{Binding Players}" ItemTemplate="{StaticResource PlayerListData}" IsSynchronizedWithCurrentItem="True" BorderBrush="DarkGray" BorderThickness="3,3,3,3" Margin="5,5,5,5">
+        <ListBox Grid.Column="0" Grid.Row="0" x:Name="PlayerList" ItemsSource="{Binding Players,UpdateSourceTrigger=PropertyChanged}" ItemTemplate="{StaticResource PlayerListData}" IsSynchronizedWithCurrentItem="True" BorderBrush="DarkGray" BorderThickness="3,3,3,3" Margin="5,5,5,5">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal"/>

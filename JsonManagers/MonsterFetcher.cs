@@ -1,7 +1,7 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Deez_Notes_Dm.Helper
+namespace Deez_Notes_Dm.JsonManagers
 {
     public class MonsterFetcher
     {

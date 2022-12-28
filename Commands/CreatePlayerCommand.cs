@@ -10,11 +10,13 @@ namespace Deez_Notes_Dm.Commands
     public class CreatePlayerCommand : CommandBase
     {
         private readonly NewPlayerFormViewModel _newPlayerFormViewModel;
+        private readonly PlayerListViewModel _playerListViewModel;
         private readonly PlayersManager _playersManager;
 
-        public CreatePlayerCommand(NewPlayerFormViewModel newPlayerFormViewModel, PlayersManager playersManager)
+        public CreatePlayerCommand(NewPlayerFormViewModel newPlayerFormViewModel, PlayerListViewModel playerListViewModel, PlayersManager playersManager)
         {
             _newPlayerFormViewModel = newPlayerFormViewModel;
+            _playerListViewModel = playerListViewModel;
             _playersManager = playersManager;
 
             _newPlayerFormViewModel.PropertyChanged += OnViewModelPropertyChanged;
@@ -72,11 +74,13 @@ namespace Deez_Notes_Dm.Commands
                 );
 
                 _playersManager.AddPlayer(player);
+                _playerListViewModel.UpdatePlayerList(_playersManager.GetPlayers());
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+
 
             _newPlayerFormViewModel.CancelCommand.Execute(null);
 

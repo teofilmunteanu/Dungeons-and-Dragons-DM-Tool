@@ -10,7 +10,7 @@ namespace Deez_Notes_Dm.Models
     {
         private readonly List<Player>? players;
 
-        //TO SEPARATE SERIALIZATION(maybe separate objects)
+        //TO SEPARATE SERIALIZATION(maybe separate objects): Manager + Services(for creations etc.)
         public PlayersManager()
         {
             string playerSavesPath = Directory.GetCurrentDirectory() + "/Resources/Players/Players.json";

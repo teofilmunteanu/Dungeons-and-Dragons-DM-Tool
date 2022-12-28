@@ -8,7 +8,6 @@ namespace Deez_Notes_Dm.ViewModels
 {
     public class NewPlayerFormViewModel : ViewModelBase
     {
-        //add and bind data - watch 3rd video from SingletonSean
         protected void SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {
             field = value;
@@ -132,10 +131,10 @@ namespace Deez_Notes_Dm.ViewModels
         public ICommand CancelCommand { get; }
         public ICommand CreateCommand { get; }
 
-        public NewPlayerFormViewModel(PlayersManager playersManager, NewPLayerFormStore newPLayerFormStore)
+        public NewPlayerFormViewModel(PlayerListViewModel playerListViewModel, PlayersManager playersManager, NewPLayerFormStore newPLayerFormStore)
         {
             CancelCommand = new CancelPlayerFormCommand(this, newPLayerFormStore);
-            CreateCommand = new CreatePlayerCommand(this, playersManager);
+            CreateCommand = new CreatePlayerCommand(this, playerListViewModel, playersManager);
         }
     }
 }

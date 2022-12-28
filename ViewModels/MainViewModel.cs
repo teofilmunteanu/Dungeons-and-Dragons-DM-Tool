@@ -18,7 +18,7 @@ namespace Deez_Notes_Dm.ViewModels
             _newPLayerFormStore = newPLayerFormStore;
 
             PlayersViewModel = new PlayerListViewModel(playersManager, newPLayerFormStore);
-            PlayerFormViewModel = new NewPlayerFormViewModel(playersManager, newPLayerFormStore);
+            PlayerFormViewModel = new NewPlayerFormViewModel(PlayersViewModel, playersManager, newPLayerFormStore);
 
             _newPLayerFormStore.IsOpenChanged += OnIsModalOpenChanged;
         }

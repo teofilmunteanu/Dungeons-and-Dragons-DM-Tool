@@ -23,7 +23,6 @@ namespace Deez_Notes_Dm.Stores
 
         public void Open()
         {
-            //reset inputs
             IsOpen = true;
         }
 
