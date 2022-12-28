@@ -24,18 +24,18 @@ namespace Deez_Notes_Dm.Commands
         {
             _newPlayerFormViewModel.Name = "";
             _newPlayerFormViewModel.Race = "";
-            _newPlayerFormViewModel.HP = 0;
-            _newPlayerFormViewModel.AC = 0;
+            _newPlayerFormViewModel.HP = "";
+            _newPlayerFormViewModel.AC = "";
             _newPlayerFormViewModel.MainClass = "";
-            _newPlayerFormViewModel.Speed = 0;
-            _newPlayerFormViewModel.FlySpeed = 0;
+            _newPlayerFormViewModel.Speed = "";
+            _newPlayerFormViewModel.FlySpeed = "";
 
-            _newPlayerFormViewModel.STR = 0;
-            _newPlayerFormViewModel.DEX = 0;
-            _newPlayerFormViewModel.CON = 0;
-            _newPlayerFormViewModel.INT = 0;
-            _newPlayerFormViewModel.WIS = 0;
-            _newPlayerFormViewModel.CHA = 0;
+            _newPlayerFormViewModel.STR = "";
+            _newPlayerFormViewModel.DEX = "";
+            _newPlayerFormViewModel.CON = "";
+            _newPlayerFormViewModel.INT = "";
+            _newPlayerFormViewModel.WIS = "";
+            _newPlayerFormViewModel.CHA = "";
 
             _newPlayerFormViewModel.InsightProficiency = false;
             _newPlayerFormViewModel.PerceptionProficiency = false;

@@ -37,71 +37,71 @@ namespace Deez_Notes_Dm.ViewModels
             set => SetField(ref mainClass, value);
         }
 
-        private int hp;
-        public int HP
+        private string hp;
+        public string HP
         {
             get => hp;
             set => SetField(ref hp, value);
         }
 
-        private int ac;
-        public int AC
+        private string ac;
+        public string AC
         {
             get => ac;
             set => SetField(ref ac, value);
         }
 
-        private int speed;
-        public int Speed
+        private string speed;
+        public string Speed
         {
             get => speed;
             set => SetField(ref speed, value);
         }
 
-        private int flySpeed;
-        public int FlySpeed
+        private string flySpeed;
+        public string FlySpeed
         {
             get => flySpeed;
             set => SetField(ref flySpeed, value);
         }
 
-        private int _str;
-        public int STR
+        private string _str;
+        public string STR
         {
             get => _str;
             set => SetField(ref _str, value);
         }
 
-        private int _dex;
-        public int DEX
+        private string _dex;
+        public string DEX
         {
             get => _dex;
             set => SetField(ref _dex, value);
         }
 
-        private int _con;
-        public int CON
+        private string _con;
+        public string CON
         {
             get => _con;
             set => SetField(ref _con, value);
         }
 
-        private int _int;
-        public int INT
+        private string _int;
+        public string INT
         {
             get => _int;
             set => SetField(ref _int, value);
         }
 
-        private int _wis;
-        public int WIS
+        private string _wis;
+        public string WIS
         {
             get => _wis;
             set => SetField(ref _wis, value);
         }
 
-        private int _cha;
-        public int CHA
+        private string _cha;
+        public string CHA
         {
             get => _cha;
             set => SetField(ref _cha, value);

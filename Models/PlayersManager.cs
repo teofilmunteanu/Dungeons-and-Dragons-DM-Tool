@@ -10,6 +10,7 @@ namespace Deez_Notes_Dm.Models
     {
         private readonly List<Player>? players;
 
+        //TO SEPARATE SERIALIZATION(maybe separate objects)
         public PlayersManager()
         {
             string playerSavesPath = Directory.GetCurrentDirectory() + "/Resources/Players/Players.json";
@@ -18,6 +19,7 @@ namespace Deez_Notes_Dm.Models
             {
                 string json = System.IO.File.ReadAllText(@"Resources/Players/Players.json");
 
+                players = new List<Player>();
                 players = JsonConvert.DeserializeObject<List<Player>>(json);
             }
             else
@@ -45,7 +47,6 @@ namespace Deez_Notes_Dm.Models
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
     }
 }

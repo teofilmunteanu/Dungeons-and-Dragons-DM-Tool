@@ -42,18 +42,18 @@ namespace Deez_Notes_Dm.Commands
             int playerID = _playersManager.GetPlayers().Count - 1;
             Speed speed = new()
             {
-                walk = _newPlayerFormViewModel.Speed,
-                fly = _newPlayerFormViewModel.FlySpeed
+                walk = int.Parse(_newPlayerFormViewModel.Speed),
+                fly = int.Parse(_newPlayerFormViewModel.FlySpeed)
             };
 
             Stats baseStats = new()
             {
-                STR = _newPlayerFormViewModel.STR,
-                DEX = _newPlayerFormViewModel.DEX,
-                CON = _newPlayerFormViewModel.CON,
-                INT = _newPlayerFormViewModel.INT,
-                WIS = _newPlayerFormViewModel.WIS,
-                CHA = _newPlayerFormViewModel.CHA
+                STR = int.Parse(_newPlayerFormViewModel.STR),
+                DEX = int.Parse(_newPlayerFormViewModel.DEX),
+                CON = int.Parse(_newPlayerFormViewModel.CON),
+                INT = int.Parse(_newPlayerFormViewModel.INT),
+                WIS = int.Parse(_newPlayerFormViewModel.WIS),
+                CHA = int.Parse(_newPlayerFormViewModel.CHA)
             };
 
             try
@@ -61,8 +61,8 @@ namespace Deez_Notes_Dm.Commands
                 Player player = new Player(playerID,
                 _newPlayerFormViewModel.Name,
                 _newPlayerFormViewModel.Race,
-                _newPlayerFormViewModel.HP,
-                _newPlayerFormViewModel.AC,
+                int.Parse(_newPlayerFormViewModel.HP),
+                int.Parse(_newPlayerFormViewModel.AC),
                 speed,
                 baseStats,
                 _newPlayerFormViewModel.MainClass,
@@ -77,6 +77,8 @@ namespace Deez_Notes_Dm.Commands
             {
                 MessageBox.Show(ex.Message);
             }
+
+            _newPlayerFormViewModel.CancelCommand.Execute(null);
 
         }
     }
