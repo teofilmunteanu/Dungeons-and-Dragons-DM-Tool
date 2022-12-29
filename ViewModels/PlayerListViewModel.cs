@@ -29,10 +29,13 @@ namespace Deez_Notes_Dm.ViewModels
         {
             _players.Clear();
 
-            foreach (Player player in playerList)
+            if(playerList != null)
             {
-                PlayerViewModel playerViewModel = new PlayerViewModel(player);
-                _players.Add(playerViewModel);
+                foreach (Player player in playerList)
+                {
+                    PlayerViewModel playerViewModel = new PlayerViewModel(player);
+                    _players.Add(playerViewModel);
+                }
             }
         }
     }
