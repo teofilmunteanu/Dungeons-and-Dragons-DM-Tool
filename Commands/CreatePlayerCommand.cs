@@ -24,7 +24,9 @@ namespace Deez_Notes_Dm.Commands
 
         private void OnViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(NewPlayerFormViewModel.Name)) // || restul parametrilor
+            if (e.PropertyName == nameof(NewPlayerFormViewModel.Name) ||
+                e.PropertyName == nameof(NewPlayerFormViewModel.Race) ||
+                e.PropertyName == nameof(NewPlayerFormViewModel.MainClass)) // || restul parametrilor
             {
                 OnCanExecuteChanged();
             }
@@ -33,33 +35,36 @@ namespace Deez_Notes_Dm.Commands
         public override bool CanExecute(object? parameter)
         {
             bool HasName = !string.IsNullOrEmpty(_newPlayerFormViewModel.Name);
-            //bool HasRace = !string.IsNullOrEmpty(_newPlayerFormViewModel.Race);
-            //bool HasClass = !string.IsNullOrEmpty(_newPlayerFormViewModel.MainClass);
+            bool HasRace = !string.IsNullOrEmpty(_newPlayerFormViewModel.Race);
+            bool HasClass = !string.IsNullOrEmpty(_newPlayerFormViewModel.MainClass);
+            //restul param
 
-            return HasName && base.CanExecute(parameter);
+            return HasName && HasRace && HasClass && base.CanExecute(parameter);
         }
 
         public override void Execute(object? parameter)
         {
-            int playerID = _playersManager.GetPlayers().Count - 1;
-            Speed speed = new()
-            {
-                walk = int.Parse(_newPlayerFormViewModel.Speed),
-                fly = int.Parse(_newPlayerFormViewModel.FlySpeed)
-            };
-
-            Stats baseStats = new()
-            {
-                STR = int.Parse(_newPlayerFormViewModel.STR),
-                DEX = int.Parse(_newPlayerFormViewModel.DEX),
-                CON = int.Parse(_newPlayerFormViewModel.CON),
-                INT = int.Parse(_newPlayerFormViewModel.INT),
-                WIS = int.Parse(_newPlayerFormViewModel.WIS),
-                CHA = int.Parse(_newPlayerFormViewModel.CHA)
-            };
-
             try
             {
+                int playerID = _playersManager.GetPlayers().Count;
+
+                Speed speed = new()
+                {
+                    walk = int.Parse(_newPlayerFormViewModel.Speed),
+                    fly = string.IsNullOrEmpty(_newPlayerFormViewModel.FlySpeed) ? 0 : int.Parse(_newPlayerFormViewModel.FlySpeed)
+                };
+
+                Stats baseStats = new()
+                {
+                    STR = int.Parse(_newPlayerFormViewModel.STR),
+                    DEX = int.Parse(_newPlayerFormViewModel.DEX),
+                    CON = int.Parse(_newPlayerFormViewModel.CON),
+                    INT = int.Parse(_newPlayerFormViewModel.INT),
+                    WIS = int.Parse(_newPlayerFormViewModel.WIS),
+                    CHA = int.Parse(_newPlayerFormViewModel.CHA)
+                };
+
+
                 Player player = new Player(playerID,
                 _newPlayerFormViewModel.Name,
                 _newPlayerFormViewModel.Race,

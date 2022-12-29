@@ -1,11 +1,11 @@
 ﻿using Deez_Notes_Dm.Json_DTOs;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
 namespace Deez_Notes_Dm.JsonManagers
 {
-    //to initialize in App.cs
     public class PlayersJsonManager
     {
         private PlayersJsonManager() { }
@@ -26,7 +26,7 @@ namespace Deez_Notes_Dm.JsonManagers
         private string playerSavesPath = Directory.GetCurrentDirectory() + "/Resources/Players/Players.json";
         public List<PlayerDTO> Players { get; set; }
 
-        //just initialization here - in constructor?
+
         public List<PlayerDTO> GetPlayers()
         {
             Players = new List<PlayerDTO>();
@@ -43,6 +43,14 @@ namespace Deez_Notes_Dm.JsonManagers
             }
 
             return Players;
+        }
+
+
+        public void SavePlayers()
+        {
+            String newJson = JsonConvert.SerializeObject(Players);
+
+            System.IO.File.WriteAllText(@"Resources/Players/Players.json", newJson);
         }
     }
 }

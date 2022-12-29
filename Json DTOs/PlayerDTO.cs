@@ -10,7 +10,6 @@ namespace Deez_Notes_Dm.Json_DTOs
 
         public int HitDice { get; set; }
 
-        //store proficiencies or passives?
         public int PassiveInsight { get; set; }
         public int PassivePerception { get; set; }
         public int PassiveInvestigation { get; set; }

@@ -1,4 +1,5 @@
 ﻿using Deez_Notes_Dm.Models;
+using Deez_Notes_Dm.Services;
 using Deez_Notes_Dm.Stores;
 using Deez_Notes_Dm.ViewModels;
 using System.Windows;
@@ -13,10 +14,12 @@ namespace Deez_Notes_Dm
         private readonly PlayersManager _playersManager;
         private readonly NewPLayerFormStore _newPLayerFormStore;
 
-
         public App()
         {
-            _playersManager = new PlayersManager();
+            PlayerCreatorService playerCreatorService = new PlayerCreatorService();
+            PlayerProviderService playerProviderService = new PlayerProviderService(); ;
+            _playersManager = new PlayersManager(playerProviderService, playerCreatorService);
+
             _newPLayerFormStore = new NewPLayerFormStore();
         }
 

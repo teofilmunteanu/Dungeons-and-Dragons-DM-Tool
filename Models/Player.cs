@@ -13,7 +13,6 @@ namespace Deez_Notes_Dm.Models
 
 
         public int HitDice { get; set; }
-        public (int successes, int fails) DeathSaves { get; set; }
 
 
         public int PassiveInsight { get; set; }
@@ -44,9 +43,23 @@ namespace Deez_Notes_Dm.Models
             proficiencyPerception = proficiency_perception;
             proficiencyInvestigation = proficiency_investigation;
 
-            PassiveInsight = 10 + StatsMod.WIS + (proficiencyInsight ? proficiencyByLevel[1] : 0);
-            PassiveInvestigation = 10 + StatsMod.INT + (proficiencyInvestigation ? proficiencyByLevel[1] : 0);
-            PassivePerception = 10 + StatsMod.WIS + (proficiencyPerception ? proficiencyByLevel[1] : 0);
+            PassiveInsight = getPassiveStat(StatsMod.WIS, proficiencyInsight);
+            PassivePerception = getPassiveStat(StatsMod.WIS, proficiencyPerception);
+            PassiveInvestigation = getPassiveStat(StatsMod.INT, proficiencyInvestigation);
+        }
+
+        public Player(int id, string name, string race, int maxHP, int ac, Speed speed, Stats stats,
+            SortedDictionary<string, int> classes, int passiveInsight, int passivePerception, int passiveInvestigation) : base(id, name, race, maxHP, ac, speed, stats)
+        {
+            XP = 0;
+            totalLevel = 1;
+            levelByClass = classes;
+
+            HitDice = 1;
+
+            PassiveInsight = passiveInsight;
+            PassivePerception = passivePerception;
+            PassiveInvestigation = passiveInvestigation;
         }
 
         public void addXP(int XP)

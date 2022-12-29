@@ -11,7 +11,6 @@ namespace Deez_Notes_Dm.ViewModels
 
 
         public int HitDice { get; set; }
-        public (int successes, int fails) DeathSaves { get; set; }
 
 
         public int PassiveInsight { get; set; }
@@ -26,7 +25,6 @@ namespace Deez_Notes_Dm.ViewModels
             totalLevel = player.totalLevel;
             levelByClass = player.levelByClass;
             HitDice = player.HitDice;
-            DeathSaves = player.DeathSaves;
             PassiveInsight = player.PassiveInsight;
             PassivePerception = player.PassivePerception;
             PassiveInvestigation = player.PassiveInvestigation;

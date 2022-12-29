@@ -13,7 +13,6 @@ namespace Deez_Notes_Dm.Json_DTOs
         public int HP { get; set; }
         public int AC { get; set; }
 
-        //store speedsText or just speeds?
         public Speed Speeds { get; set; }
 
         public Stats BaseStats { get; set; }
