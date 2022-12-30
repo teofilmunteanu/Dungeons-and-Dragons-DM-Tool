@@ -23,7 +23,7 @@ namespace Deez_Notes_Dm.Services
                 return playerDTOs.Select(p => ToPlayer(p)).ToList<Player>();
             }
 
-            return null;
+            return new List<Player>();
         }
 
         private static Player ToPlayer(PlayerDTO p)

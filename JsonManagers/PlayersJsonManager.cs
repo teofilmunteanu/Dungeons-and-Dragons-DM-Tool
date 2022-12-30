@@ -8,6 +8,9 @@ namespace Deez_Notes_Dm.JsonManagers
 {
     public class PlayersJsonManager
     {
+        private string playerSavesPath = Directory.GetCurrentDirectory() + "/Resources/Players/Players.json";
+        public List<PlayerDTO> Players { get; set; }
+
         private PlayersJsonManager() { }
         private static PlayersJsonManager instance = null;
         public static PlayersJsonManager Instance
@@ -17,14 +20,12 @@ namespace Deez_Notes_Dm.JsonManagers
                 if (instance == null)
                 {
                     instance = new PlayersJsonManager();
+                    instance.Players = new List<PlayerDTO>();
                 }
 
                 return instance;
             }
         }
-
-        private string playerSavesPath = Directory.GetCurrentDirectory() + "/Resources/Players/Players.json";
-        public List<PlayerDTO> Players { get; set; }
 
 
         public List<PlayerDTO> GetPlayers()

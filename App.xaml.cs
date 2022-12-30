@@ -17,7 +17,7 @@ namespace Deez_Notes_Dm
         public App()
         {
             PlayerCreatorService playerCreatorService = new PlayerCreatorService();
-            PlayerProviderService playerProviderService = new PlayerProviderService(); ;
+            PlayerProviderService playerProviderService = new PlayerProviderService();
             _playersManager = new PlayersManager(playerProviderService, playerCreatorService);
 
             _newPLayerFormStore = new NewPLayerFormStore();
