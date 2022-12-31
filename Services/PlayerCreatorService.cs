@@ -17,6 +17,7 @@ namespace Deez_Notes_Dm.Services
             PlayerDTO playerDTO = ToPlayerDTO(player);
 
             _playersJsonManager.Players.Add(playerDTO);
+
             _playersJsonManager.SavePlayers();
         }
 

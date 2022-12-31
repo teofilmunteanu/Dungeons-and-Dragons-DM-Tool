@@ -11,16 +11,22 @@ namespace Deez_Notes_Dm.JsonManagers
         private string playerSavesPath = Directory.GetCurrentDirectory() + "/Resources/Players/Players.json";
         public List<PlayerDTO> Players { get; set; }
 
-        private PlayersJsonManager() { }
-        private static PlayersJsonManager instance = null;
+        private PlayersJsonManager()
+        {
+
+        }
+
+        private static PlayersJsonManager? instance = null;
         public static PlayersJsonManager Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new PlayersJsonManager();
-                    instance.Players = new List<PlayerDTO>();
+                    instance = new PlayersJsonManager
+                    {
+                        Players = new List<PlayerDTO>()
+                    };
                 }
 
                 return instance;
@@ -30,17 +36,21 @@ namespace Deez_Notes_Dm.JsonManagers
 
         public List<PlayerDTO> GetPlayers()
         {
-            Players = new List<PlayerDTO>();
-
             if (File.Exists(playerSavesPath))
             {
                 string json = System.IO.File.ReadAllText(@"Resources/Players/Players.json");
 
                 Players = JsonConvert.DeserializeObject<List<PlayerDTO>>(json);
+
+                if (Players == null)
+                {
+                    Players = new List<PlayerDTO>();
+                }
             }
             else
             {
                 File.Create(playerSavesPath);
+                Players = new List<PlayerDTO>();
             }
 
             return Players;

@@ -18,12 +18,7 @@ namespace Deez_Notes_Dm.Services
         {
             List<PlayerDTO> playerDTOs = _playersJsonManager.GetPlayers();
 
-            if(playerDTOs != null)
-            {
-                return playerDTOs.Select(p => ToPlayer(p)).ToList<Player>();
-            }
-
-            return new List<Player>();
+            return playerDTOs.Select(p => ToPlayer(p)).ToList();
         }
 
         private static Player ToPlayer(PlayerDTO p)
