@@ -30,6 +30,7 @@ namespace Deez_Notes_Dm.Models
 
         }
 
+        //for creator
         public Player(int id, string name, string race, int maxHP, int ac, Speed speed, Stats stats,
             string _class, bool proficiency_insight, bool proficiency_perception, bool proficiency_investigation) : base(id, name, race, maxHP, ac, speed, stats)
         {
@@ -48,6 +49,7 @@ namespace Deez_Notes_Dm.Models
             PassiveInvestigation = getPassiveStat(StatsMod.INT, proficiencyInvestigation);
         }
 
+        //for provider
         public Player(int id, string name, string race, int maxHP, int ac, Speed speed, Stats stats,
             SortedDictionary<string, int> classes, int passiveInsight, int passivePerception, int passiveInvestigation) : base(id, name, race, maxHP, ac, speed, stats)
         {
