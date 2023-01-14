@@ -79,7 +79,7 @@ namespace Deez_Notes_Dm.Commands
                 );
 
                 _playersManager.AddPlayer(player);
-                _playerListViewModel.UpdatePlayerList(_playersManager.GetPlayers());
+                _playerListViewModel.UpdatePlayerList();
             }
             catch (Exception ex)
             {

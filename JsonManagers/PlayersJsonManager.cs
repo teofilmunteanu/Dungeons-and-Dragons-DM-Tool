@@ -6,6 +6,7 @@ using System.IO;
 
 namespace Deez_Notes_Dm.JsonManagers
 {
+    //ONLY operations on the json!!!
     public class PlayersJsonManager
     {
         private string playerSavesPath = Directory.GetCurrentDirectory() + "/Resources/Players/Players.json";
@@ -55,7 +56,6 @@ namespace Deez_Notes_Dm.JsonManagers
 
             return Players;
         }
-
 
         public void SavePlayers()
         {

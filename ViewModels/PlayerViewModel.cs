@@ -1,11 +1,30 @@
-﻿using Deez_Notes_Dm.Models;
+﻿using Deez_Notes_Dm.Commands;
+using Deez_Notes_Dm.Models;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Windows.Input;
 
 namespace Deez_Notes_Dm.ViewModels
 {
     public class PlayerViewModel : CreatureViewModel
     {
-        public int XP { get; set; }
+        protected void SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        {
+            field = value;
+            OnPropertyChanged(propertyName);
+        }
+
+
+        public string XP { get; set; }
+
+        private string xpInput;
+        public string XP_Input
+        {
+            get => xpInput;
+            set => SetField(ref xpInput, value);
+        }
+
+
         public int totalLevel { get; set; }
         public SortedDictionary<string, int> levelByClass { get; set; }
 
@@ -16,18 +35,21 @@ namespace Deez_Notes_Dm.ViewModels
         public int PassiveInsight { get; set; }
         public int PassivePerception { get; set; }
         public int PassiveInvestigation { get; set; }
+        public ICommand AddXPCommand { get; }
 
 
-        public PlayerViewModel(Player player) : base(player.ID, player.Name, player.Race, player.MaxHP, player.AC,
+        public PlayerViewModel(Player player, PlayerListViewModel playerListViewModel, PlayersManager playersManager) : base(player.ID, player.Name, player.Race, player.MaxHP, player.AC,
             player.SpeedsList, player.BaseStats, player.StatsMod)
         {
-            XP = player.XP;
+            XP = player.XP + "";
             totalLevel = player.totalLevel;
             levelByClass = player.levelByClass;
             HitDice = player.HitDice;
             PassiveInsight = player.PassiveInsight;
             PassivePerception = player.PassivePerception;
             PassiveInvestigation = player.PassiveInvestigation;
+
+            AddXPCommand = new AddXPCommand(this, playerListViewModel, playersManager);
         }
     }
 }

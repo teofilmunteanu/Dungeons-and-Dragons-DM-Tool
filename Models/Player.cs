@@ -7,7 +7,17 @@ namespace Deez_Notes_Dm.Models
     public class Player : Creature
     {
         static readonly int[] XPbyLevel = { -1, 0, 300, 900, 2700, 6500, 14000, 23000, 34000, 48000, 64000, 85000, 100000, 120000, 140000, 165000, 195000, 225000, 265000, 305000, 355000 };
-        public int XP { get; set; }
+
+        public int xp { get; set; }
+        public int XP
+        {
+            get => xp;
+            set
+            {
+                xp = value;
+            }
+        }
+
         public int totalLevel { get; set; }
         public SortedDictionary<string, int> levelByClass { get; set; } = new SortedDictionary<string, int>();
 
@@ -51,31 +61,35 @@ namespace Deez_Notes_Dm.Models
 
         //for provider
         public Player(int id, string name, string race, int maxHP, int ac, Speed speed, Stats stats,
-            SortedDictionary<string, int> classes, int passiveInsight, int passivePerception, int passiveInvestigation) : base(id, name, race, maxHP, ac, speed, stats)
+            int xp, SortedDictionary<string, int> classes, int hitDiceLeft, int passiveInsight, int passivePerception, int passiveInvestigation) : base(id, name, race, maxHP, ac, speed, stats)
         {
-            XP = 0;
-            totalLevel = 1;
+            XP = xp;
+            foreach (var item in classes)
+            {
+                totalLevel += item.Value;
+            }
+
             levelByClass = classes;
 
-            HitDice = 1;
+            HitDice = hitDiceLeft;
 
             PassiveInsight = passiveInsight;
             PassivePerception = passivePerception;
             PassiveInvestigation = passiveInvestigation;
         }
 
-        public void addXP(int XP)
-        {
-            if (XP > 0)
-            {
-                this.XP += XP;
+        //public void addXP(int XP)
+        //{
+        //    if (XP > 0)
+        //    {
+        //        this.XP += XP;
 
-                while (totalLevel < 20 && this.XP > XPbyLevel[this.totalLevel + 1])
-                {
-                    levelUp();
-                }
-            }
-        }
+        //        while (totalLevel < 20 && this.XP > XPbyLevel[this.totalLevel + 1])
+        //        {
+        //            levelUp();
+        //        }
+        //    }
+        //}
 
         public void levelUp()
         {

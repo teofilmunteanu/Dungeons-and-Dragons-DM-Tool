@@ -10,11 +10,12 @@ namespace Deez_Notes_Dm.ViewModels
     public class PlayerListViewModel : ViewModelBase
     {
         private readonly ObservableCollection<PlayerViewModel> _players;
+        private readonly PlayersManager _playersManager;
 
         public ObservableCollection<PlayerViewModel> Players => _players;
 
         public ICommand ShowPlayerFormCommand { get; }
-        public ICommand LoadPlayersCommand { get; }
+
 
         public PlayerListViewModel(PlayersManager playersManager, NewPLayerFormStore newPLayerFormStore)
         {
@@ -22,18 +23,21 @@ namespace Deez_Notes_Dm.ViewModels
 
             ShowPlayerFormCommand = new ShowPlayerFormCommand(newPLayerFormStore);
 
-            UpdatePlayerList(playersManager.GetPlayers());
+            _playersManager = playersManager;
+
+            UpdatePlayerList();
         }
 
-        public void UpdatePlayerList(List<Player> playerList)
+        public void UpdatePlayerList()
         {
             _players.Clear();
+            List<Player> playerList = _playersManager.GetPlayers();
 
-            if(playerList != null)
+            if (playerList != null)
             {
                 foreach (Player player in playerList)
                 {
-                    PlayerViewModel playerViewModel = new PlayerViewModel(player);
+                    PlayerViewModel playerViewModel = new PlayerViewModel(player, this, _playersManager);
                     _players.Add(playerViewModel);
                 }
             }

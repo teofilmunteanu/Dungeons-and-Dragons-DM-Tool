@@ -11,16 +11,6 @@ namespace Deez_Notes_Dm.Services
         {
             _playersJsonManager = PlayersJsonManager.Instance;
         }
-
-        public void CreatePlayer(Player player)
-        {
-            PlayerDTO playerDTO = ToPlayerDTO(player);
-
-            _playersJsonManager.Players.Add(playerDTO);
-
-            _playersJsonManager.SavePlayers();
-        }
-
         private PlayerDTO ToPlayerDTO(Player player)
         {
             return new PlayerDTO()
@@ -34,13 +24,21 @@ namespace Deez_Notes_Dm.Services
                 Speeds = player.Speeds,
                 BaseStats = player.BaseStats,
                 XP = player.XP,
-                totalLevel = player.totalLevel,
                 levelByClass = player.levelByClass,
                 HitDice = player.HitDice,
                 PassiveInsight = player.PassiveInsight,
                 PassivePerception = player.PassivePerception,
                 PassiveInvestigation = player.PassiveInvestigation
             };
+        }
+
+        public void CreatePlayer(Player player)
+        {
+            PlayerDTO playerDTO = ToPlayerDTO(player);
+
+            _playersJsonManager.Players.Add(playerDTO);
+
+            _playersJsonManager.SavePlayers();
         }
     }
 }

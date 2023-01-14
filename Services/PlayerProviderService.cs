@@ -14,6 +14,11 @@ namespace Deez_Notes_Dm.Services
             _playersJsonManager = PlayersJsonManager.Instance;
         }
 
+        private static Player ToPlayer(PlayerDTO p)
+        {
+            return new Player(p.ID, p.Name, p.Race, p.MaxHP, p.AC, p.Speeds, p.BaseStats, p.XP, p.levelByClass, p.HitDice, p.PassiveInsight, p.PassivePerception, p.PassiveInvestigation);
+        }
+
         public List<Player> GetPlayers()
         {
             List<PlayerDTO> playerDTOs = _playersJsonManager.GetPlayers();
@@ -21,9 +26,10 @@ namespace Deez_Notes_Dm.Services
             return playerDTOs.Select(p => ToPlayer(p)).ToList();
         }
 
-        private static Player ToPlayer(PlayerDTO p)
+        public Player GetPlayerById(int id)
         {
-            return new Player(p.ID, p.Name, p.Race, p.MaxHP, p.AC, p.Speeds, p.BaseStats, p.levelByClass, p.PassiveInsight, p.PassivePerception, p.PassiveInvestigation);
+            List<PlayerDTO> playerDTOs = _playersJsonManager.GetPlayers();
+            return ToPlayer(playerDTOs.Where(p => p.ID == id).First());
         }
     }
 }
