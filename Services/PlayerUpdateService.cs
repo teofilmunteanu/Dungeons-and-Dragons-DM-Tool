@@ -38,7 +38,6 @@ namespace Deez_Notes_Dm.Services
             };
         }
 
-        //sometimes doesnt work
         public void AddXpToPlayer(int id, int xp)
         {
             if (xp > 0)
@@ -49,8 +48,7 @@ namespace Deez_Notes_Dm.Services
 
                 while (player.totalLevel < 20 && player.XP > Player.XPbyLevel[player.totalLevel + 1])
                 {
-                    LevelUpPlayer(id);
-                    player = ToPlayer(_playersJsonManager.Players[id]);
+                    LevelUpPlayer(player);
                 }
 
                 _playersJsonManager.Players[id] = ToPlayerDTO(player);
@@ -59,10 +57,8 @@ namespace Deez_Notes_Dm.Services
             }
         }
 
-        public void LevelUpPlayer(int id)
+        public void LevelUpPlayer(Player player)
         {
-            Player player = ToPlayer(_playersJsonManager.Players[id]);
-
             if (player.levelByClass.Count == 1)
             {
                 player.levelByClass[player.levelByClass.First().Key]++;
@@ -77,7 +73,7 @@ namespace Deez_Notes_Dm.Services
             player.PassiveInvestigation = player.getPassiveStat(player.StatsMod.INT, player.ProficiencyInvestigation);
 
 
-            _playersJsonManager.Players[id] = ToPlayerDTO(player);
+            _playersJsonManager.Players[player.ID] = ToPlayerDTO(player);
 
             _playersJsonManager.SavePlayers();
         }
