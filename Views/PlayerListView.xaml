@@ -155,9 +155,9 @@
                             <Run Text="&#9829;" Foreground="Crimson"/>
                         </TextBlock>
 
-                        <Button Grid.Row="2" Grid.Column="3" FontWeight="Bold" FontFamily="Arial" Margin="5,0,0,0" Content=" &#8211; "/>
-                        <TextBox Grid.Row="2" Grid.Column="4" Name="HPAddInput" MaxLength="3" Margin="5,0,0,0" FontSize="14"></TextBox>
-                        <Button Grid.Row="2" Grid.Column="5" FontWeight="Bold" FontFamily="Arial" Margin="5,0,0,0" Content=" + "/>
+                        <Button Grid.Row="2" Grid.Column="3" FontWeight="Bold" FontFamily="Arial" Margin="5,0,0,0" Content=" &#8211; " Command="{Binding SubtractHPCommand}"/>
+                        <TextBox Grid.Row="2" Grid.Column="4" Name="HPAddInput" MaxLength="3" Margin="5,0,0,0" FontSize="14" Text="{Binding Path = HP_Input, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Button Grid.Row="2" Grid.Column="5" FontWeight="Bold" FontFamily="Arial" Margin="5,0,0,0" Content=" + "  Command="{Binding AddHPCommand}"/>
 
                         <TextBlock Grid.Row="3" Grid.Column="0" Text="Speed:" FontWeight="Bold" HorizontalAlignment="Left" Margin="0 3 0 0"/>
 

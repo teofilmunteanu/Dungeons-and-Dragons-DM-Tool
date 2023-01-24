@@ -24,6 +24,13 @@ namespace Deez_Notes_Dm.ViewModels
             set => SetField(ref xpInput, value);
         }
 
+        private string hpInput;
+        public string HP_Input
+        {
+            get => hpInput;
+            set => SetField(ref hpInput, value);
+        }
+
 
         public int totalLevel { get; set; }
         public SortedDictionary<string, int> levelByClass { get; set; }
@@ -35,7 +42,11 @@ namespace Deez_Notes_Dm.ViewModels
         public int PassiveInsight { get; set; }
         public int PassivePerception { get; set; }
         public int PassiveInvestigation { get; set; }
+
         public ICommand AddXPCommand { get; }
+
+        public ICommand AddHPCommand { get; }
+        public ICommand SubtractHPCommand { get; }
 
 
         public PlayerViewModel(Player player, PlayerListViewModel playerListViewModel, PlayersManager playersManager) : base(player.ID, player.Name, player.Race, player.MaxHP, player.AC,
@@ -50,6 +61,9 @@ namespace Deez_Notes_Dm.ViewModels
             PassiveInvestigation = player.PassiveInvestigation;
 
             AddXPCommand = new AddXPCommand(this, playerListViewModel, playersManager);
+
+            AddHPCommand = new AddHPCommand(this, playerListViewModel, playersManager);
+            SubtractHPCommand = new SubtractHPCommand(this, playerListViewModel, playersManager);
         }
     }
 }

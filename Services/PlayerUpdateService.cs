@@ -14,7 +14,7 @@ namespace Deez_Notes_Dm.Services
         }
         private static Player ToPlayer(PlayerDTO p)
         {
-            return new Player(p.ID, p.Name, p.Race, p.MaxHP, p.AC, p.Speeds, p.BaseStats, p.XP, p.levelByClass, p.HitDice, p.PassiveInsight, p.PassivePerception, p.PassiveInvestigation);
+            return new Player(p.ID, p.Name, p.Race, p.HP, p.MaxHP, p.AC, p.Speeds, p.BaseStats, p.XP, p.levelByClass, p.HitDice, p.PassiveInsight, p.PassivePerception, p.PassiveInvestigation);
         }
 
         private PlayerDTO ToPlayerDTO(Player player)
@@ -76,6 +76,34 @@ namespace Deez_Notes_Dm.Services
             _playersJsonManager.Players[player.ID] = ToPlayerDTO(player);
 
             _playersJsonManager.SavePlayers();
+        }
+
+        public void HealPlayer(int id, int hp)
+        {
+            if (hp > 0)
+            {
+                Player player = ToPlayer(_playersJsonManager.Players[id]);
+
+                player.HP += hp;
+
+                _playersJsonManager.Players[id] = ToPlayerDTO(player);
+
+                _playersJsonManager.SavePlayers();
+            }
+        }
+
+        public void DamagePlayer(int id, int dmg)
+        {
+            if (dmg > 0)
+            {
+                Player player = ToPlayer(_playersJsonManager.Players[id]);
+
+                player.HP -= dmg;
+
+                _playersJsonManager.Players[id] = ToPlayerDTO(player);
+
+                _playersJsonManager.SavePlayers();
+            }
         }
     }
 }

@@ -44,5 +44,15 @@ namespace Deez_Notes_Dm.Models
         {
             _playerUpdateService.AddXpToPlayer(id, xp);
         }
+
+        public void HealPlayerWithId(int id, int hp)
+        {
+            _playerUpdateService.HealPlayer(id, hp);
+        }
+
+        public void DamagePlayerWithId(int id, int dmg)
+        {
+            _playerUpdateService.DamagePlayer(id, dmg);
+        }
     }
 }
