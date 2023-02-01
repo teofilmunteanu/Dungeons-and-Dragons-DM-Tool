@@ -22,13 +22,14 @@ namespace Deez_Notes_Dm.ViewModels
 
         public double Initiative { get; set; }
 
-        public CreatureViewModel(int id, string name, string race, int maxHP, int ac,
+        public CreatureViewModel(int id, string name, string race, int hp, int maxHP, int ac,
             List<string> speedsList, Stats baseStats, Stats statsMod)
         {
             ID = id;
             Name = name;
             Race = race;
-            MaxHP = HP = maxHP;
+            HP = hp;
+            MaxHP = maxHP;
             AC = ac;
             SpeedsList = speedsList;
             BaseStats = baseStats;

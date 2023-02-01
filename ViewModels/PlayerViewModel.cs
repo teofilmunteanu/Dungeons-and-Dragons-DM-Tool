@@ -49,7 +49,7 @@ namespace Deez_Notes_Dm.ViewModels
         public ICommand SubtractHPCommand { get; }
 
 
-        public PlayerViewModel(Player player, PlayerListViewModel playerListViewModel, PlayersManager playersManager) : base(player.ID, player.Name, player.Race, player.MaxHP, player.AC,
+        public PlayerViewModel(Player player, PlayerListViewModel playerListViewModel, PlayersManager playersManager) : base(player.ID, player.Name, player.Race, player.HP, player.MaxHP, player.AC,
             player.SpeedsList, player.BaseStats, player.StatsMod)
         {
             XP = player.XP + "";

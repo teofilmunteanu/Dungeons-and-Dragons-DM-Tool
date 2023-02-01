@@ -80,10 +80,10 @@ namespace Deez_Notes_Dm.Services
 
         public void HealPlayer(int id, int hp)
         {
-            if (hp > 0)
-            {
-                Player player = ToPlayer(_playersJsonManager.Players[id]);
+            Player player = ToPlayer(_playersJsonManager.Players.Where((p) => p.ID == id).First());// ToPlayer(_playersJsonManager.Players[id]);
 
+            if (hp > 0 && player.HP + hp <= player.MaxHP)
+            {
                 player.HP += hp;
 
                 _playersJsonManager.Players[id] = ToPlayerDTO(player);
@@ -96,14 +96,21 @@ namespace Deez_Notes_Dm.Services
         {
             if (dmg > 0)
             {
-                Player player = ToPlayer(_playersJsonManager.Players[id]);
+                Player player = ToPlayer(_playersJsonManager.Players.Where((p) => p.ID == id).First());// ToPlayer(_playersJsonManager.Players[id]);
 
                 player.HP -= dmg;
 
                 _playersJsonManager.Players[id] = ToPlayerDTO(player);
 
                 _playersJsonManager.SavePlayers();
+
+                if (player.HP < 0)
+                {
+                    player.HP = 0;
+                }
             }
+
+            
         }
     }
 }
