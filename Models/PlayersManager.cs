@@ -93,7 +93,11 @@ namespace Deez_Notes_Dm.Models
             }
         }
 
-        public void DamagePlayerWithId(int id, int dmg)
+        ///<summary>
+        ///Descreases the hp of player with id "id" by the value of "dmg". 
+        ///Returns true if player has died, false otherwise.
+        ///</summary>
+        public bool DamagePlayerWithId(int id, int dmg)
         {
             if (dmg > 0)
             {
@@ -103,15 +107,20 @@ namespace Deez_Notes_Dm.Models
 
                 if (player.HP < 0)
                 {
-                    if (player.HP < -player.MaxHP)
+                    if (-player.HP >= player.MaxHP)
                     {
-                        //player died
+                        player.HP = 0;
+
+                        return true;
                     }
+
                     player.HP = 0;
                 }
 
                 _playerUpdateService.UpdatePlayer(player);
             }
+
+            return false;
         }
     }
 }

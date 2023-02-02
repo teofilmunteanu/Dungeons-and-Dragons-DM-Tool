@@ -42,7 +42,10 @@ namespace Deez_Notes_Dm.Commands
             {
                 int damage = int.Parse(_playerViewModel.HP_Input);
 
-                _playersManager.DamagePlayerWithId(_playerViewModel.ID, damage);
+                if (_playersManager.DamagePlayerWithId(_playerViewModel.ID, damage))
+                {
+                    MessageBox.Show(_playerViewModel.Name + " has died!");
+                }
 
                 _playerListViewModel.UpdatePlayerList();
             }
