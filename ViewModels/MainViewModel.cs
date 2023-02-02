@@ -5,27 +5,29 @@ namespace Deez_Notes_Dm.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        public PlayerListViewModel PlayersViewModel { get; }
-        public NewPlayerFormViewModel PlayerFormViewModel { get; }
-
+        public PlayerListViewModel PlayerListVM { get; }
+        public NewPlayerFormViewModel NewPlayerFormVM { get; }
+        public CombatViewModel CombatVM { get; }
 
         private readonly NewPLayerFormStore _newPLayerFormStore;
-        public bool IsModalOpen => _newPLayerFormStore.IsOpen;
-
+        public bool IsPlayerFormOpen => _newPLayerFormStore.IsOpen;
 
         public MainViewModel(PlayersManager playersManager, NewPLayerFormStore newPLayerFormStore)
         {
             _newPLayerFormStore = newPLayerFormStore;
 
-            PlayersViewModel = new PlayerListViewModel(playersManager, newPLayerFormStore);
-            PlayerFormViewModel = new NewPlayerFormViewModel(PlayersViewModel, playersManager, newPLayerFormStore);
+            PlayerListVM = new PlayerListViewModel(playersManager, newPLayerFormStore);
+            NewPlayerFormVM = new NewPlayerFormViewModel(PlayerListVM, playersManager, newPLayerFormStore);
 
             _newPLayerFormStore.IsOpenChanged += OnIsModalOpenChanged;
+
+
+            CombatVM = new CombatViewModel(playersManager, newPLayerFormStore, PlayerListVM);
         }
 
         private void OnIsModalOpenChanged()
         {
-            OnPropertyChanged(nameof(IsModalOpen));
+            OnPropertyChanged(nameof(IsPlayerFormOpen));
         }
     }
 }

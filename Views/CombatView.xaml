@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Deez_Notes_Dm.Views.PlayerListView"
+﻿<UserControl x:Class="Deez_Notes_Dm.Views.CombatView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -75,53 +75,6 @@
                         </Grid>
                     </Border>
                     <!-- END Player Description -->
-
-                    <!-- Player XP -->
-                    <Grid x:Name="PlayerXPBlock" Grid.Row="1" Margin="15,12,15,2">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="25"/>
-                        </Grid.ColumnDefinitions>
-
-                        <TextBlock Grid.Row="1" Grid.Column="0" Text="XP:" Margin="0,0,5,0" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                        <Button Grid.Row="1" Grid.Column="1" Name="PlayerXP" HorizontalAlignment="Left" VerticalAlignment="Center" MinWidth="30" BorderThickness="0" 
-                                Background="DeepSkyBlue" Foreground="DeepSkyBlue" Click="ButtonXP_Click_ShowInput" LostFocus="ButtonXP_LostFocus_HideInput">
-                            <Button.Style>
-                                <Style TargetType="Button">
-                                    <Setter Property="Background" Value="Transparent" />
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="Button">
-                                                <Grid Background="{TemplateBinding Background}">
-                                                    <ContentPresenter />
-                                                </Grid>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </Button.Style>
-
-                            <TextBlock HorizontalAlignment="Center">
-                                <Run Text="{Binding Path=XP}"/>
-                                <Run Text="&#9733;" Foreground="DeepSkyBlue"/>
-                            </TextBlock>
-                        </Button>
-
-                        <TextBox Grid.Row="1" Grid.Column="3" Name="XPAddInput" MaxLength="6" FontSize="14" Width="62" Margin="5,0,0,0" Text="{Binding Path = XP_Input, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                        <Button Grid.Row="1" Grid.Column="4" FontWeight="Bold" FontFamily="Arial" Margin="5,0,0,0" Content=" + " Command="{Binding AddXPCommand}"/>
-                        <Rectangle Grid.Row="4" Grid.ColumnSpan="6"/>
-                    </Grid>
-                    <!-- END Player XP -->
 
                     <!-- Player Description2(AC, HP, Speed) -->
                     <Grid x:Name="PlayerHpBlock" Grid.Row="2" Margin="15,2">
@@ -244,31 +197,6 @@
                         <Rectangle Grid.Row="3" Grid.ColumnSpan="7"/>
                     </Grid>
                     <!-- END Player Stats -->
-
-                    <!-- Player PassiveSkills(Passive Perception, ...) -->
-                    <Grid x:Name="PlayerPassiveSkillsBlock" Grid.Row="4" HorizontalAlignment="Left" Margin="15,2">
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Grid.Row="0" Text="Passive Skills: " FontWeight="Bold" />
-                        <TextBlock Grid.Row="1">
-                            <Run Text="&#8211; Insight: "/>
-                            <Run Text="{Binding Path=PassiveInsight}"/>
-                        </TextBlock>
-                        <TextBlock Grid.Row="2">
-                            <Run Text="&#8211; Perception: "/>
-                            <Run Text="{Binding Path=PassivePerception}"/>
-                        </TextBlock>
-                        <TextBlock Grid.Row="3">
-                            <Run Text="&#8211; Investigation: "/>
-                            <Run Text="{Binding Path=PassiveInvestigation}"/>
-                        </TextBlock>
-                    </Grid>
-                    <!-- END Player PassiveSkills -->
                 </Grid>
             </Border>
         </DataTemplate>

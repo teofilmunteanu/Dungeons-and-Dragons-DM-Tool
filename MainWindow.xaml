@@ -16,16 +16,22 @@
         <TabControl>
             <TabItem Header="Players">
                 <Grid x:Name="PlayersTabRoot">
-                    <views:PlayerListView DataContext="{Binding PlayersViewModel}"/>
+                    <views:PlayerListView DataContext="{Binding PlayerListVM}"/>
 
-                    <Grid Visibility="{Binding Path=IsModalOpen, Converter={StaticResource BoolToVisibility}}">
-                        <views:NewPlayerFormView DataContext="{Binding PlayerFormViewModel}" />
+                    <Grid Visibility="{Binding Path=IsPlayerFormOpen, Converter={StaticResource BoolToVisibility}}">
+                        <views:NewPlayerFormView DataContext="{Binding NewPlayerFormVM}" />
                     </Grid>
                 </Grid>
             </TabItem>
             
             <TabItem Header="Combat">
-                
+                <Grid x:Name="CombatTabRoot">
+                    <views:CombatView DataContext="{Binding CombatVM}"/>
+
+                    <!--<Grid Visibility="{Binding Path=IsModalOpen, Converter={StaticResource BoolToVisibility}}">
+                        <views:NewPlayerFormView DataContext="{Binding CombatantsSelectionVM}" />
+                    </Grid>-->
+                </Grid>
             </TabItem>
             <TabItem Header="DM Screen">
                 <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="0,1" >

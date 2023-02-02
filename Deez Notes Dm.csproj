@@ -37,4 +37,10 @@
     <PackageReference Update="chromiumembeddedframework.runtime.win-x86" Version="107.1.12" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Page Update="Views\CombatView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+  </ItemGroup>
+
 </Project>
