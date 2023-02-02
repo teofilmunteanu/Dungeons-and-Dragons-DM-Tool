@@ -110,6 +110,7 @@ namespace Deez_Notes_Dm.Models
                     if (-player.HP >= player.MaxHP)
                     {
                         player.HP = 0;
+                        _playerUpdateService.UpdatePlayer(player);
 
                         return true;
                     }
