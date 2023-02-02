@@ -1,6 +1,7 @@
 ﻿using Deez_Notes_Dm.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 
 namespace Deez_Notes_Dm.Models
@@ -42,17 +43,75 @@ namespace Deez_Notes_Dm.Models
 
         public void AddXpToPlayerWithId(int id, int xp)
         {
-            _playerUpdateService.AddXpToPlayer(id, xp);
+            if (xp > 0)
+            {
+                Player player = GetPlayerById(id);
+
+                player.XP += xp;
+
+                while (player.totalLevel < 20 && player.XP > Player.XPbyLevel[player.totalLevel + 1])
+                {
+                    LevelUpPlayer(player);
+                }
+
+                _playerUpdateService.UpdatePlayer(player);
+            }
+        }
+
+        public void LevelUpPlayer(Player player)
+        {
+            if (player.levelByClass.Count == 1)
+            {
+                player.levelByClass[player.levelByClass.First().Key]++;
+            }
+            //else choose class to level
+
+            player.totalLevel++;
+            player.HitDice++;
+
+            player.PassiveInsight = player.getPassiveStat(player.StatsMod.WIS, player.ProficiencyInsight);
+            player.PassivePerception = player.getPassiveStat(player.StatsMod.WIS, player.ProficiencyPerception);
+            player.PassiveInvestigation = player.getPassiveStat(player.StatsMod.INT, player.ProficiencyInvestigation);
+
+            _playerUpdateService.UpdatePlayer(player);
         }
 
         public void HealPlayerWithId(int id, int hp)
         {
-            _playerUpdateService.HealPlayer(id, hp);
+            if (hp > 0)
+            {
+                Player player = GetPlayerById(id);
+
+                player.HP += hp;
+
+                if (player.HP > player.MaxHP)
+                {
+                    player.HP = player.MaxHP;
+                }
+
+                _playerUpdateService.UpdatePlayer(player);
+            }
         }
 
         public void DamagePlayerWithId(int id, int dmg)
         {
-            _playerUpdateService.DamagePlayer(id, dmg);
+            if (dmg > 0)
+            {
+                Player player = GetPlayerById(id);
+
+                player.HP -= dmg;
+
+                if (player.HP < 0)
+                {
+                    if (player.HP < -player.MaxHP)
+                    {
+                        //player died
+                    }
+                    player.HP = 0;
+                }
+
+                _playerUpdateService.UpdatePlayer(player);
+            }
         }
     }
 }
