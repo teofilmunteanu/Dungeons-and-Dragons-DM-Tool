@@ -25,7 +25,10 @@ namespace Deez_Notes_Dm.Models
 
         public double Initiative { get; set; }
 
-        //senses + immunities
+        //public string DamageVulnerabilities { get; set; }
+        //public string DamageResistances { get; set; }
+        //public string DamageImunities { get; set; }
+        //public string ConditionImunities { get; set; }
 
         public Creature()
         {
