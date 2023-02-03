@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Reflection;
-using System.Windows;
 
 namespace Deez_Notes_Dm.Models
 {
@@ -17,18 +15,12 @@ namespace Deez_Notes_Dm.Models
         public int AC { get; set; }
 
         public Speed Speeds { get; set; }
-        public List<string> SpeedsList { get; set; }
 
         public Stats BaseStats { get; set; }
-
         public Stats StatsMod { get; set; }
 
         public double Initiative { get; set; }
 
-        //public string DamageVulnerabilities { get; set; }
-        //public string DamageResistances { get; set; }
-        //public string DamageImunities { get; set; }
-        //public string ConditionImunities { get; set; }
 
         public Creature()
         {
@@ -43,8 +35,8 @@ namespace Deez_Notes_Dm.Models
             MaxHP = maxHP;
             AC = ac;
             Speeds = speeds;
-            BaseStats = baseStats;
 
+            BaseStats = baseStats;
             StatsMod = new Stats
             {
                 STR = getModifier(baseStats.STR),
@@ -54,54 +46,11 @@ namespace Deez_Notes_Dm.Models
                 WIS = getModifier(baseStats.WIS),
                 CHA = getModifier(baseStats.CHA)
             };
-
-            SpeedsList = new List<string>();
-            if (speeds is not null)
-            {
-                foreach (PropertyInfo prop in speeds.GetType().GetProperties())
-                {
-                    int? speedVal = (int?)prop.GetValue(speeds);
-
-                    if (speedVal != 0)
-                    {
-                        SpeedsList.Add(speeds.ToSpeedText(prop.Name));
-                    }
-                }
-            }
         }
 
         protected static int getModifier(int statusValue)
         {
             return (int)Math.Floor(((statusValue - 10)) / 2.0);
-        }
-
-        public void dealDamage(int dmg)
-        {
-            if (dmg - HP >= MaxHP)
-            {
-                MessageBox.Show(this.Name + " died");
-                this.HP = 0;
-            }
-            else
-            {
-                this.HP -= dmg;
-
-                if (this.HP <= 0)
-                {
-                    MessageBox.Show(this.Name + " is unconscious");
-                    this.HP = 0;
-                }
-            }
-        }
-
-        public void heal(int hpAdder)
-        {
-            this.HP += hpAdder;
-
-            if (this.HP > MaxHP)
-            {
-                this.HP = MaxHP;
-            }
         }
 
         public class Stats

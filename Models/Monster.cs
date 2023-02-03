@@ -11,6 +11,12 @@
         public Stats SavingThrows { get; set; }
         //if null, take deafult(calculate)
         public string Skills { get; set; }
+
+        public string DamageVulnerabilities { get; set; }
+        public string DamageResistances { get; set; }
+        public string DamageImmunities { get; set; }
+        public string ConditionImmunities { get; set; }
+
         public string Senses { get; set; }
 
         public string Languages { get; set; }

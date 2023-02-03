@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Reflection;
 using static Deez_Notes_Dm.Models.Creature;
 
 namespace Deez_Notes_Dm.ViewModels
@@ -23,7 +24,7 @@ namespace Deez_Notes_Dm.ViewModels
         public double Initiative { get; set; }
 
         public CreatureViewModel(int id, string name, string race, int hp, int maxHP, int ac,
-            List<string> speedsList, Stats baseStats, Stats statsMod)
+            Speed speeds, Stats baseStats, Stats statsMod)
         {
             ID = id;
             Name = name;
@@ -31,9 +32,22 @@ namespace Deez_Notes_Dm.ViewModels
             HP = hp;
             MaxHP = maxHP;
             AC = ac;
-            SpeedsList = speedsList;
             BaseStats = baseStats;
             StatsMod = statsMod;
+
+            SpeedsList = new List<string>();
+            if (speeds is not null)
+            {
+                foreach (PropertyInfo prop in speeds.GetType().GetProperties())
+                {
+                    int? speedVal = (int?)prop.GetValue(speeds);
+
+                    if (speedVal != 0)
+                    {
+                        SpeedsList.Add(speeds.ToSpeedText(prop.Name));
+                    }
+                }
+            }
         }
     }
 }
