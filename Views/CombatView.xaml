@@ -7,14 +7,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <DataTemplate x:Key="ClassListData">
-            <TextBlock HorizontalAlignment="Center">
-                <Run Text="&#9672;" Foreground="DeepSkyBlue"/>
-                <Run Text="{Binding Path=Key, Mode=OneWay}"/>
-                <Run Text="{Binding Path=Value, StringFormat='({0})', Mode=OneWay}"/>
-            </TextBlock>
-        </DataTemplate>
-
         <!-- Player List Data -->
         <DataTemplate x:Key="PlayerListData">
             <Border Name="border" BorderBrush="DeepSkyBlue" Background="White" BorderThickness="2"  
@@ -64,14 +56,6 @@
                                 <Run Text="&#8211; Level"/>
                                 <Run Text="{Binding Path=totalLevel}"/>
                             </TextBlock>
-                            <ListBox Grid.Row="2" ItemsSource="{Binding Path=levelByClass}" ItemTemplate="{StaticResource ClassListData}" BorderThickness="0" HorizontalAlignment="Center">
-                                <ListBox.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <VirtualizingStackPanel Orientation="Horizontal"/>
-                                    </ItemsPanelTemplate>
-                                </ListBox.ItemsPanel>
-                            </ListBox>
-
                         </Grid>
                     </Border>
                     <!-- END Player Description -->
