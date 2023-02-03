@@ -61,7 +61,7 @@
                     <!-- END Player Description -->
 
                     <!-- Player Description2(AC, HP, Speed) -->
-                    <Grid x:Name="PlayerHpBlock" Grid.Row="2" Margin="15,2">
+                    <Grid x:Name="PlayerHpBlock" Grid.Row="2" Margin="15,12,15,2">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>
