@@ -32,7 +32,7 @@ namespace Deez_Notes_Dm.JsonManagers
         public static async Task<string> fetchMonsterAsync(string monsterName)
         {
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync("https://api.open5e.com/monsters/" + monsterName + "/?format=json");
+            HttpResponseMessage response = await client.GetAsync("https://api.open5e.com/monsters/?format=json&search=" + monsterName);
             response.EnsureSuccessStatusCode();
             var responseBody = await response.Content.ReadAsStringAsync();
 
