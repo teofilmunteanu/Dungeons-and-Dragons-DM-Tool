@@ -1,7 +1,7 @@
 ﻿using Deez_Notes_Dm.Models;
-using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using static Deez_Notes_Dm.Models.Creature;
+using static Deez_Notes_Dm.Models.Monster;
 
 namespace Deez_Notes_Dm.ViewModels
 {
@@ -35,20 +35,20 @@ namespace Deez_Notes_Dm.ViewModels
         public int XP_Drop { get; set; } // generate using challangeRating
 
 
-        public string[] Actions { get; set; } //make class?
-        public string[] Reactions { get; set; }
+        public Action[] Actions { get; set; } //make class?
+        public Action[] Reactions { get; set; }
 
 
         public string LegendaryActionDescription { get; set; }
-        public string[] LegendaryActions { get; set; }
+        public Action[] LegendaryActions { get; set; }
 
-        public string[] SpecialAbilities { get; set; }
+        public Action[] SpecialAbilities { get; set; }
 
 
         public ICommand AddHPCommand { get; }
         public ICommand SubtractHPCommand { get; }
 
-        public MonsterViewModel(Monster monster): base(monster.ID, monster.Name, monster.Race, monster.HP, monster.MaxHP, monster.AC,
+        public MonsterViewModel(Monster monster) : base(monster.ID, monster.Name, monster.Race, monster.HP, monster.MaxHP, monster.AC,
             monster.Speeds, monster.BaseStats, monster.StatsMod)
         {
             Size = monster.Size;
