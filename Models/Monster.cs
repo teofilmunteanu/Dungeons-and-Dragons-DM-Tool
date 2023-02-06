@@ -40,10 +40,11 @@
 
         }
 
-        public Monster(string size, string alignment, string hit_Dice, Stats savingThrows, string skills,
+        public Monster(int id, string name, string race, int maxHP, int ac, Speed speeds, Stats stats,
+            string size, string alignment, string hit_Dice, Stats savingThrows, string skills,
             string damageVulnerabilities, string damageResistances, string damageImmunities, string conditionImmunities,
             string senses, string languages, double challengeRating, int xP_Drop, Action[] actions, Action[] reactions,
-            string legendaryActionDescription, Action[] legendaryActions, Action[] specialAbilities)
+            string legendaryActionDescription, Action[] legendaryActions, Action[] specialAbilities) : base(id, name, race, maxHP, maxHP, ac, speeds, stats)
         {
             Size = size;
             Alignment = alignment;
