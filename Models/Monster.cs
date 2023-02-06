@@ -40,6 +40,8 @@
 
         }
 
+        //At the mosnter creator service: if id> players.count, then it's a mosnter
+        //Show on right stats of monster with id same as current creature(cuz the monster attributes can't be accessed from the creature class)
         public Monster(int id, string name, string race, int maxHP, int ac, Speed speeds, Stats stats,
             string size, string alignment, string hit_Dice, Stats savingThrows, string skills,
             string damageVulnerabilities, string damageResistances, string damageImmunities, string conditionImmunities,
