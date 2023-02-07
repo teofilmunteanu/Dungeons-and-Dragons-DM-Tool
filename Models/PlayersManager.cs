@@ -8,32 +8,28 @@ namespace Deez_Notes_Dm.Models
 {
     public class PlayersManager
     {
-        private readonly PlayerProviderService _playerProviderService;
-        private readonly PlayerCreatorService _playerCreatorService;
-        private readonly PlayerUpdateService _playerUpdateService;
+        private readonly PlayerServices _playerServices;
 
-        public PlayersManager(PlayerProviderService playerProviderService, PlayerCreatorService playerCreatorService, PlayerUpdateService playerUpdateService)
+        public PlayersManager(PlayerServices playerServices)
         {
-            _playerProviderService = playerProviderService;
-            _playerCreatorService = playerCreatorService;
-            _playerUpdateService = playerUpdateService;
+            _playerServices = playerServices;
         }
 
         public List<Player> GetPlayers()
         {
-            return _playerProviderService.GetPlayers();
+            return _playerServices.GetPlayers();
         }
 
         public Player GetPlayerById(int id)
         {
-            return _playerProviderService.GetPlayerById(id);
+            return _playerServices.GetPlayerById(id);
         }
 
         public void AddPlayer(Player player)
         {
             try
             {
-                _playerCreatorService.CreatePlayer(player);
+                _playerServices.CreatePlayer(player);
             }
             catch (Exception ex)
             {
@@ -54,7 +50,7 @@ namespace Deez_Notes_Dm.Models
                     LevelUpPlayer(player);
                 }
 
-                _playerUpdateService.UpdatePlayer(player);
+                _playerServices.UpdatePlayer(player);
             }
         }
 
@@ -73,7 +69,7 @@ namespace Deez_Notes_Dm.Models
             player.PassivePerception = player.getPassiveStat(player.StatsMod.WIS, player.ProficiencyPerception);
             player.PassiveInvestigation = player.getPassiveStat(player.StatsMod.INT, player.ProficiencyInvestigation);
 
-            _playerUpdateService.UpdatePlayer(player);
+            _playerServices.UpdatePlayer(player);
         }
 
         public void HealPlayerWithId(int id, int hp)
@@ -89,7 +85,7 @@ namespace Deez_Notes_Dm.Models
                     player.HP = player.MaxHP;
                 }
 
-                _playerUpdateService.UpdatePlayer(player);
+                _playerServices.UpdatePlayer(player);
             }
         }
 
@@ -110,7 +106,7 @@ namespace Deez_Notes_Dm.Models
                     if (-player.HP >= player.MaxHP)
                     {
                         player.HP = 0;
-                        _playerUpdateService.UpdatePlayer(player);
+                        _playerServices.UpdatePlayer(player);
 
                         return true;
                     }
@@ -118,7 +114,7 @@ namespace Deez_Notes_Dm.Models
                     player.HP = 0;
                 }
 
-                _playerUpdateService.UpdatePlayer(player);
+                _playerServices.UpdatePlayer(player);
             }
 
             return false;
