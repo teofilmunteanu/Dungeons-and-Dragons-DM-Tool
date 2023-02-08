@@ -7,30 +7,30 @@ using System.IO;
 namespace Deez_Notes_Dm.JsonManagers
 {
     //ONLY operations on the json!!!
-    public class PlayersJsonManager
+    public static class PlayersJsonManager
     {
-        private string playerSavesPath = Directory.GetCurrentDirectory() + "/Resources/Players/Players.json";
+        private static string playerSavesPath = Directory.GetCurrentDirectory() + "/Resources/Players/Players.json";
 
-        private PlayersJsonManager()
-        {
+        //private PlayersJsonManager()
+        //{
 
-        }
+        //}
 
-        private static PlayersJsonManager? instance = null;
-        public static PlayersJsonManager Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new PlayersJsonManager();
-                }
+        //private static PlayersJsonManager? instance = null;
+        //public static PlayersJsonManager Instance
+        //{
+        //    get
+        //    {
+        //        if (instance == null)
+        //        {
+        //            instance = new PlayersJsonManager();
+        //        }
 
-                return instance;
-            }
-        }
+        //        return instance;
+        //    }
+        //}
 
-        public List<PlayerDTO> GetPlayersFromJson()
+        public static List<PlayerDTO> GetPlayersFromJson()
         {
             List<PlayerDTO> Players = new List<PlayerDTO>();
 
@@ -48,7 +48,7 @@ namespace Deez_Notes_Dm.JsonManagers
             return Players;
         }
 
-        public void SavePlayers(List<PlayerDTO> Players)
+        public static void SavePlayers(List<PlayerDTO> Players)
         {
             String newJson = JsonConvert.SerializeObject(Players);
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Deez_Notes_Dm.API_Managers
 {
-    public class MonsterAPI
+    public static class MonsterAPI
     {
         public static async Task<string> fetchMonsterAsync(string monsterName)
         {
