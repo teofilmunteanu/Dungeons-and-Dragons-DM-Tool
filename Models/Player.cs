@@ -82,9 +82,9 @@ namespace Deez_Notes_Dm.Models
             return 10 + statMod + (isProficient ? proficiencyByLevel[totalLevel] : 0);
         }
 
-        public static int getPassiveStat(int statMod, bool isProficient, int totalLevel)
-        {
-            return 10 + statMod + (isProficient ? proficiencyByLevel[totalLevel] : 0);
-        }
+        //public static int getPassiveStat(int statMod, bool isProficient, int totalLevel)
+        //{
+        //    return 10 + statMod + (isProficient ? proficiencyByLevel[totalLevel] : 0);
+        //}
     }
 }

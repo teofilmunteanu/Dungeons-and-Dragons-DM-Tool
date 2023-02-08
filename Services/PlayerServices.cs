@@ -40,34 +40,17 @@ namespace Deez_Notes_Dm.Services
             return new Player(p.ID, p.Name, p.Race, p.HP, p.MaxHP, p.AC, p.Speeds, p.BaseStats, p.XP, p.levelByClass, p.HitDice, p.PassiveInsight, p.PassivePerception, p.PassiveInvestigation);
         }
 
-        public List<Player> GetPlayers()
+        public List<Player> GetPlayersData()
         {
-            List<PlayerDTO> playerDTOs = _playersJsonManager.GetPlayers();
+            List<PlayerDTO> playerDTOs = _playersJsonManager.GetPlayersFromJson();
 
             return playerDTOs.Select(p => ToPlayer(p)).ToList();
         }
 
-        public Player GetPlayerById(int id)
+        public void UpdatePlayerData(List<Player> players)
         {
-            List<PlayerDTO> playerDTOs = _playersJsonManager.GetPlayers();
-            return ToPlayer(playerDTOs.Where(p => p.ID == id).First());
-        }
-
-        public void CreatePlayer(Player player)
-        {
-            PlayerDTO playerDTO = ToPlayerDTO(player);
-
-            _playersJsonManager.Players.Add(playerDTO);
-
-            _playersJsonManager.SavePlayers();
-        }
-
-        public void UpdatePlayer(Player player)
-        {
-            int index = _playersJsonManager.Players.FindIndex(p => p.ID == player.ID);
-            _playersJsonManager.Players[index] = ToPlayerDTO(player);
-
-            _playersJsonManager.SavePlayers();
+            List<PlayerDTO> playerDTOs = players.Select(p => ToPlayerDTO(p)).ToList();
+            _playersJsonManager.SavePlayers(playerDTOs);
         }
     }
 }

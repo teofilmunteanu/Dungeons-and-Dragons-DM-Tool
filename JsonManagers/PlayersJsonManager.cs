@@ -10,7 +10,6 @@ namespace Deez_Notes_Dm.JsonManagers
     public class PlayersJsonManager
     {
         private string playerSavesPath = Directory.GetCurrentDirectory() + "/Resources/Players/Players.json";
-        public List<PlayerDTO> Players { get; set; }
 
         private PlayersJsonManager()
         {
@@ -24,40 +23,32 @@ namespace Deez_Notes_Dm.JsonManagers
             {
                 if (instance == null)
                 {
-                    instance = new PlayersJsonManager
-                    {
-                        Players = new List<PlayerDTO>()
-                    };
+                    instance = new PlayersJsonManager();
                 }
 
                 return instance;
             }
         }
 
-
-        public List<PlayerDTO> GetPlayers()
+        public List<PlayerDTO> GetPlayersFromJson()
         {
+            List<PlayerDTO> Players = new List<PlayerDTO>();
+
             if (File.Exists(playerSavesPath))
             {
                 string json = System.IO.File.ReadAllText(@"Resources/Players/Players.json");
 
                 Players = JsonConvert.DeserializeObject<List<PlayerDTO>>(json);
-
-                if (Players == null)
-                {
-                    Players = new List<PlayerDTO>();
-                }
             }
             else
             {
                 File.Create(playerSavesPath);
-                Players = new List<PlayerDTO>();
             }
 
             return Players;
         }
 
-        public void SavePlayers()
+        public void SavePlayers(List<PlayerDTO> Players)
         {
             String newJson = JsonConvert.SerializeObject(Players);
 

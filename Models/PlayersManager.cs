@@ -8,28 +8,33 @@ namespace Deez_Notes_Dm.Models
 {
     public class PlayersManager
     {
+        private List<Player> Players;
+
         private readonly PlayerServices _playerServices;
 
         public PlayersManager(PlayerServices playerServices)
         {
             _playerServices = playerServices;
+
+            Players = _playerServices.GetPlayersData();
         }
 
         public List<Player> GetPlayers()
         {
-            return _playerServices.GetPlayers();
+            return Players;
         }
 
         public Player GetPlayerById(int id)
         {
-            return _playerServices.GetPlayerById(id);
+            return Players.Where(p => p.ID == id).First(); //_playerServices.GetPlayerById(id);
         }
 
         public void AddPlayer(Player player)
         {
             try
             {
-                _playerServices.CreatePlayer(player);
+                Players.Add(player);
+                _playerServices.UpdatePlayerData(Players);
             }
             catch (Exception ex)
             {
@@ -50,7 +55,7 @@ namespace Deez_Notes_Dm.Models
                     LevelUpPlayer(player);
                 }
 
-                _playerServices.UpdatePlayer(player);
+                _playerServices.UpdatePlayerData(Players);
             }
         }
 
@@ -69,7 +74,7 @@ namespace Deez_Notes_Dm.Models
             player.PassivePerception = player.getPassiveStat(player.StatsMod.WIS, player.ProficiencyPerception);
             player.PassiveInvestigation = player.getPassiveStat(player.StatsMod.INT, player.ProficiencyInvestigation);
 
-            _playerServices.UpdatePlayer(player);
+            _playerServices.UpdatePlayerData(Players);
         }
 
         public void HealPlayerWithId(int id, int hp)
@@ -85,7 +90,7 @@ namespace Deez_Notes_Dm.Models
                     player.HP = player.MaxHP;
                 }
 
-                _playerServices.UpdatePlayer(player);
+                _playerServices.UpdatePlayerData(Players);
             }
         }
 
@@ -106,7 +111,7 @@ namespace Deez_Notes_Dm.Models
                     if (-player.HP >= player.MaxHP)
                     {
                         player.HP = 0;
-                        _playerServices.UpdatePlayer(player);
+                        _playerServices.UpdatePlayerData(Players);
 
                         return true;
                     }
@@ -114,7 +119,7 @@ namespace Deez_Notes_Dm.Models
                     player.HP = 0;
                 }
 
-                _playerServices.UpdatePlayer(player);
+                _playerServices.UpdatePlayerData(Players);
             }
 
             return false;

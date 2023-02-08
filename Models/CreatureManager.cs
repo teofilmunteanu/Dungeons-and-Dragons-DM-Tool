@@ -6,20 +6,17 @@ namespace Deez_Notes_Dm.Models
 {
     public class CreatureManager
     {
-        private readonly PlayerServices _playerService;
         public List<Creature> Creatures { get; set; }
 
         public CreatureManager(PlayerServices playerServices)
         {
-            _playerService = playerServices;
-
             Creatures = GetCreatures();
         }
 
         public List<Creature> GetCreatures()
         {
             Creatures.Clear();
-            Creatures.AddRange(_playerService.GetPlayers());
+            //Creatures.AddRange(playersmanager.GetPlayers());
             //Creatures.AddRange(Monsters);
 
             return Creatures;
