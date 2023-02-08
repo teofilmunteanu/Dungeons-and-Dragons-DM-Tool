@@ -35,7 +35,7 @@ namespace Deez_Notes_Dm.Services
             };
         }
 
-        private static Player ToPlayer(PlayerDTO p)
+        private Player ToPlayer(PlayerDTO p)
         {
             return new Player(p.ID, p.Name, p.Race, p.HP, p.MaxHP, p.AC, p.Speeds, p.BaseStats, p.XP, p.levelByClass, p.HitDice, p.PassiveInsight, p.PassivePerception, p.PassiveInvestigation);
         }
