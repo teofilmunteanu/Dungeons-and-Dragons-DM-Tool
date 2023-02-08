@@ -12,7 +12,6 @@ namespace Deez_Notes_Dm.Models
         public CreatureManager(PlayerServices playerServices)
         {
             _playerService = playerServices;
-            //_playerUpdateService = playerUpdateService;
 
             Creatures = GetCreatures();
         }

@@ -1,6 +1,5 @@
 ﻿using Deez_Notes_Dm.Models;
 using System.Windows.Input;
-using static Deez_Notes_Dm.Models.Creature;
 using static Deez_Notes_Dm.Models.Monster;
 
 namespace Deez_Notes_Dm.ViewModels
@@ -13,7 +12,7 @@ namespace Deez_Notes_Dm.ViewModels
 
         public string Hit_Dice { get; set; }
 
-        public Stats SavingThrows { get; set; }
+        public SavingStats SavingThrows { get; set; }
         //if null, take deafult(calculate)
         public string Skills { get; set; }
 
@@ -31,7 +30,7 @@ namespace Deez_Notes_Dm.ViewModels
         public string Languages { get; set; }
 
 
-        public double ChallengeRating { get; set; }
+        public string ChallengeRating { get; set; }
         public int XP_Drop { get; set; } // generate using challangeRating
 
 

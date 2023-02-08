@@ -3,7 +3,6 @@ using System.Linq;
 
 namespace Deez_Notes_Dm.Models
 {
-    //make monster service to convert from MonsterDTO to Monster
     public class MonsterManager
     {
         public List<Monster> Monsters { get; set; }
