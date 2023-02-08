@@ -1,10 +1,9 @@
 ﻿using Deez_Notes_Dm.Json_DTOs;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace Deez_Notes_Dm.JsonManagers
+namespace Deez_Notes_Dm.DataManagers
 {
     //ONLY operations on the json!!!
     public static class PlayersJsonManager
@@ -36,7 +35,7 @@ namespace Deez_Notes_Dm.JsonManagers
 
             if (File.Exists(playerSavesPath))
             {
-                string json = System.IO.File.ReadAllText(@"Resources/Players/Players.json");
+                string json = File.ReadAllText(@"Resources/Players/Players.json");
 
                 Players = JsonConvert.DeserializeObject<List<PlayerDTO>>(json);
             }
@@ -50,9 +49,9 @@ namespace Deez_Notes_Dm.JsonManagers
 
         public static void SavePlayers(List<PlayerDTO> Players)
         {
-            String newJson = JsonConvert.SerializeObject(Players);
+            string newJson = JsonConvert.SerializeObject(Players);
 
-            System.IO.File.WriteAllText(@"Resources/Players/Players.json", newJson);
+            File.WriteAllText(@"Resources/Players/Players.json", newJson);
         }
     }
 }

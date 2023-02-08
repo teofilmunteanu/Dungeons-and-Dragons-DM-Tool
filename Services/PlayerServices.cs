@@ -1,5 +1,5 @@
-﻿using Deez_Notes_Dm.Json_DTOs;
-using Deez_Notes_Dm.JsonManagers;
+﻿using Deez_Notes_Dm.DataManagers;
+using Deez_Notes_Dm.Json_DTOs;
 using Deez_Notes_Dm.Models;
 using System.Collections.Generic;
 using System.Linq;
