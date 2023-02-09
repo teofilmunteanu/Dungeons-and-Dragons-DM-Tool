@@ -6,9 +6,9 @@ using System.Linq;
 
 namespace Deez_Notes_Dm.Services
 {
-    public class PlayerServices
+    public static class PlayerServices
     {
-        private PlayerDTO ToPlayerDTO(Player player)
+        private static PlayerDTO ToPlayerDTO(Player player)
         {
             return new PlayerDTO()
             {
@@ -29,19 +29,19 @@ namespace Deez_Notes_Dm.Services
             };
         }
 
-        private Player ToPlayer(PlayerDTO p)
+        private static Player ToPlayer(PlayerDTO p)
         {
             return new Player(p.ID, p.Name, p.Race, p.HP, p.MaxHP, p.AC, p.Speeds, p.BaseStats, p.XP, p.levelByClass, p.HitDice, p.PassiveInsight, p.PassivePerception, p.PassiveInvestigation);
         }
 
-        public List<Player> GetPlayersData()
+        public static List<Player> GetPlayersData()
         {
             List<PlayerDTO> playerDTOs = PlayersJsonManager.GetPlayersFromJson();
 
             return playerDTOs.Select(p => ToPlayer(p)).ToList();
         }
 
-        public void UpdatePlayerDataWith(List<Player> players)
+        public static void UpdatePlayerDataWith(List<Player> players)
         {
             List<PlayerDTO> playerDTOs = players.Select(p => ToPlayerDTO(p)).ToList();
             PlayersJsonManager.SavePlayers(playerDTOs);

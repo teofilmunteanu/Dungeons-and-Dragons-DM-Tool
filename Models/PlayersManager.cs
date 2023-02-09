@@ -10,13 +10,9 @@ namespace Deez_Notes_Dm.Models
     {
         private List<Player> Players;
 
-        private readonly PlayerServices _playerServices;
-
         public PlayersManager()
         {
-            _playerServices = new PlayerServices();
-
-            Players = _playerServices.GetPlayersData();
+            Players = PlayerServices.GetPlayersData();
         }
 
         public List<Player> GetPlayers()
@@ -34,7 +30,7 @@ namespace Deez_Notes_Dm.Models
             try
             {
                 Players.Add(player);
-                _playerServices.UpdatePlayerDataWith(Players);
+                PlayerServices.UpdatePlayerDataWith(Players);
             }
             catch (Exception ex)
             {
@@ -55,7 +51,7 @@ namespace Deez_Notes_Dm.Models
                     LevelUpPlayer(player);
                 }
 
-                _playerServices.UpdatePlayerDataWith(Players);
+                PlayerServices.UpdatePlayerDataWith(Players);
             }
         }
 
@@ -74,7 +70,7 @@ namespace Deez_Notes_Dm.Models
             player.PassivePerception = player.getPassiveStat(player.StatsMod.WIS, player.ProficiencyPerception);
             player.PassiveInvestigation = player.getPassiveStat(player.StatsMod.INT, player.ProficiencyInvestigation);
 
-            _playerServices.UpdatePlayerDataWith(Players);
+            PlayerServices.UpdatePlayerDataWith(Players);
         }
 
         public void HealPlayerWithId(int id, int hp)
@@ -90,7 +86,7 @@ namespace Deez_Notes_Dm.Models
                     player.HP = player.MaxHP;
                 }
 
-                _playerServices.UpdatePlayerDataWith(Players);
+                PlayerServices.UpdatePlayerDataWith(Players);
             }
         }
 
@@ -111,7 +107,7 @@ namespace Deez_Notes_Dm.Models
                     if (-player.HP >= player.MaxHP)
                     {
                         player.HP = 0;
-                        _playerServices.UpdatePlayerDataWith(Players);
+                        PlayerServices.UpdatePlayerDataWith(Players);
 
                         return true;
                     }
@@ -119,7 +115,7 @@ namespace Deez_Notes_Dm.Models
                     player.HP = 0;
                 }
 
-                _playerServices.UpdatePlayerDataWith(Players);
+                PlayerServices.UpdatePlayerDataWith(Players);
             }
 
             return false;
