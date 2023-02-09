@@ -13,9 +13,9 @@ namespace Deez_Notes_Dm.Services
 {
     public class MonsterServices
     {
-        public CreatureManager _creatureManager;
+        public CombatantsManager _creatureManager;
 
-        public MonsterServices(CreatureManager creatureManager)
+        public MonsterServices(CombatantsManager creatureManager)
         {
             _creatureManager = creatureManager;
         }

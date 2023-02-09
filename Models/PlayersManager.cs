@@ -92,9 +92,9 @@ namespace Deez_Notes_Dm.Models
 
         ///<summary>
         ///Descreases the hp of player with id "id" by the value of "dmg". 
-        ///Returns true if player has died, false otherwise.
+        ///Returns 2 if player has died, 1 if player is unconscious, 0 otherwise.
         ///</summary>
-        public bool DamagePlayerWithId(int id, int dmg)
+        public int DamagePlayerWithId(int id, int dmg)
         {
             if (dmg > 0)
             {
@@ -109,16 +109,21 @@ namespace Deez_Notes_Dm.Models
                         player.HP = 0;
                         PlayerServices.UpdatePlayerDataWith(Players);
 
-                        return true;
+                        return 2;
                     }
 
                     player.HP = 0;
                 }
 
                 PlayerServices.UpdatePlayerDataWith(Players);
+
+                if (player.HP == 0)
+                {
+                    return 1;
+                }
             }
 
-            return false;
+            return 0;
         }
     }
 }

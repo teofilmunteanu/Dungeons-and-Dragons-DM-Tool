@@ -3,11 +3,12 @@ using System.Linq;
 
 namespace Deez_Notes_Dm.Models
 {
-    public class MonsterManager
+    public class MonstersManager
     {
+        //use for locally saved monsters
         public List<Monster> Monsters { get; set; }
 
-        public MonsterManager()
+        public MonstersManager()
         {
             Monsters = new List<Monster>();
         }

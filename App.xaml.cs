@@ -11,11 +11,15 @@ namespace Deez_Notes_Dm
     public partial class App : Application
     {
         private readonly PlayersManager _playersManager;
+        private readonly MonstersManager _monstersManager;
+
+
         private readonly NewPLayerFormStore _newPLayerFormStore;
 
         public App()
         {
             _playersManager = new PlayersManager();
+            _monstersManager = new MonstersManager();
 
             _newPLayerFormStore = new NewPLayerFormStore();
         }
