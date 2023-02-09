@@ -8,11 +8,6 @@ namespace Deez_Notes_Dm.Services
 {
     public class PlayerServices
     {
-        public PlayerServices()
-        {
-
-        }
-
         private PlayerDTO ToPlayerDTO(Player player)
         {
             return new PlayerDTO()
@@ -46,7 +41,7 @@ namespace Deez_Notes_Dm.Services
             return playerDTOs.Select(p => ToPlayer(p)).ToList();
         }
 
-        public void UpdatePlayerData(List<Player> players)
+        public void UpdatePlayerDataWith(List<Player> players)
         {
             List<PlayerDTO> playerDTOs = players.Select(p => ToPlayerDTO(p)).ToList();
             PlayersJsonManager.SavePlayers(playerDTOs);
