@@ -42,9 +42,14 @@ namespace Deez_Notes_Dm.Commands
             {
                 int damage = int.Parse(_playerViewModel.HP_Input);
 
-                if (_playersManager.DamagePlayerWithId(_playerViewModel.ID, damage))
+                int dmgResult = _playersManager.DamagePlayerWithId(_playerViewModel.ID, damage);
+                if (dmgResult == 2)
                 {
                     MessageBox.Show(_playerViewModel.Name + " has died!");
+                }
+                else if (dmgResult == 1)
+                {
+                    MessageBox.Show(_playerViewModel.Name + " is unconscious!");
                 }
 
                 _playerListViewModel.UpdatePlayerList();

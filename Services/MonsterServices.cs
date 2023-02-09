@@ -39,7 +39,7 @@ namespace Deez_Notes_Dm.Services
 
         private Monster ToMonster(MonsterDTO monsterDTO)
         {
-            int ID = _creatureManager.GetCreatures().Count();
+            int ID = _creatureManager.GetCombatants().Count();
 
             Stats stats = new Stats()
             {
