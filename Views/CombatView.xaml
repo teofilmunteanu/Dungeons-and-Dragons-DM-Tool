@@ -7,11 +7,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <!-- Player List Data -->
-        <DataTemplate x:Key="PlayerListData">
+        <!-- Combatants List Data -->
+        <DataTemplate x:Key="CombatantListData">
             <Border Name="border" BorderBrush="DeepSkyBlue" Background="White" BorderThickness="2"  
                 CornerRadius="2" Padding="5" Margin="5">
-                <!-- Player Container(Description + Stats) -->
+                <!-- Combatant Container(Description + Stats) -->
                 <Grid x:Name="PlayerContainer">
                     <Grid.Resources>
                         <Style TargetType="Grid">
@@ -41,7 +41,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <!-- Player Description(Name,Race,Level,Classes) -->
+                    <!-- Combatant Description(Name,Race,Level,Classes) -->
                     <Border Grid.Row="0" BorderThickness="0 0 0 3" Padding="15" BorderBrush="Gray" >
                         <Grid x:Name="CreatureDescBlock1"  HorizontalAlignment="Center">
                             <Grid.RowDefinitions>
@@ -58,9 +58,9 @@
                             </TextBlock>
                         </Grid>
                     </Border>
-                    <!-- END Player Description -->
+                    <!-- END Combatant Description -->
 
-                    <!-- Player Description2(AC, HP, Speed) -->
+                    <!-- Combatant Description2(AC, HP, Speed) -->
                     <Grid x:Name="PlayerHpBlock" Grid.Row="2" Margin="15,12,15,2">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
@@ -102,9 +102,9 @@
 
                         <Rectangle Grid.Row="4" Grid.ColumnSpan="6"/>
                     </Grid>
-                    <!-- END Player Description2 -->
+                    <!-- END Combatant Description2 -->
 
-                    <!-- Player Stats(STR,...) -->
+                    <!-- Combatant Stats(STR,...) -->
                     <Grid x:Name="PlayerStatsBlock" Grid.Row="3" Margin="15,0">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
@@ -180,14 +180,14 @@
 
                         <Rectangle Grid.Row="3" Grid.ColumnSpan="7"/>
                     </Grid>
-                    <!-- END Player Stats -->
+                    <!-- END Combatant Stats -->
                 </Grid>
             </Border>
         </DataTemplate>
-        <!-- END Player List Data -->
+        <!-- END Combatant List Data -->
     </UserControl.Resources>
 
-    <!-- Player List -->
+    <!-- Combatants List -->
     <Grid x:Name="PlayersContainer" Background="#FF616161">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="7*" />
@@ -198,7 +198,7 @@
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
 
-        <ListBox Grid.Column="0" Grid.Row="0" x:Name="PlayerList" ItemsSource="{Binding Players,UpdateSourceTrigger=PropertyChanged}" ItemTemplate="{StaticResource PlayerListData}" IsSynchronizedWithCurrentItem="True" BorderBrush="DarkGray" BorderThickness="3,3,3,3" Margin="5,5,5,5">
+        <ListBox Grid.Column="0" Grid.Row="0" x:Name="PlayerList" ItemsSource="{Binding Players,UpdateSourceTrigger=PropertyChanged}" ItemTemplate="{StaticResource CombatantListData}" IsSynchronizedWithCurrentItem="True" BorderBrush="DarkGray" BorderThickness="3,3,3,3" Margin="5,5,5,5">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal"/>
@@ -206,7 +206,7 @@
             </ListBox.ItemsPanel>
         </ListBox>
         <ListBox Grid.Column="1" Grid.Row="0" x:Name="PlayerProperties" BorderBrush="DarkGray" BorderThickness="3,3,3,3" Margin="5,5,5,5" Background="#FFAEAEAE"/>
-        <Button Grid.Column="0" Grid.Row="1" Content="+" Width="50" FontSize="24" Height="31" VerticalAlignment="Center" Cursor="Hand" Command="{Binding ShowPlayerFormCommand}"/>
+        <Button Grid.Column="0" Grid.Row="1" Content="+" Width="50" FontSize="24" Height="31" VerticalAlignment="Center" Cursor="Hand" Command="{Binding ShowCombatSelectList}"/>
     </Grid>
-    <!-- END Player List --> 
+    <!-- END Combatants List --> 
 </UserControl>

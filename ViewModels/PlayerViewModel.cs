@@ -6,7 +6,7 @@ using System.Windows.Input;
 
 namespace Deez_Notes_Dm.ViewModels
 {
-    public class PlayerViewModel : CreatureViewModel
+    public class PlayerViewModel : CombatantViewModel
     {
         protected void SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {

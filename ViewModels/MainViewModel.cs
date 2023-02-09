@@ -7,7 +7,7 @@ namespace Deez_Notes_Dm.ViewModels
     {
         public PlayerListViewModel PlayerListVM { get; }
         public NewPlayerFormViewModel NewPlayerFormVM { get; }
-        public CombatViewModel CombatVM { get; }
+        public CombatListViewModel CombatVM { get; }
 
         private readonly NewPLayerFormStore _newPLayerFormStore;
         public bool IsPlayerFormOpen => _newPLayerFormStore.IsOpen;
@@ -22,7 +22,7 @@ namespace Deez_Notes_Dm.ViewModels
             _newPLayerFormStore.IsOpenChanged += OnIsModalOpenChanged;
 
 
-            CombatVM = new CombatViewModel(playersManager, newPLayerFormStore, PlayerListVM);
+            //CombatVM = new CombatViewModel(playersManager, newPLayerFormStore, PlayerListVM);
         }
 
         private void OnIsModalOpenChanged()

@@ -4,7 +4,7 @@ using static Deez_Notes_Dm.Models.Monster;
 
 namespace Deez_Notes_Dm.ViewModels
 {
-    public class MonsterViewModel : CreatureViewModel
+    public class MonsterViewModel : CombatantViewModel
     {
         public string Size { get; set; }
         public string Alignment { get; set; }

@@ -4,7 +4,7 @@ using static Deez_Notes_Dm.Models.Creature;
 
 namespace Deez_Notes_Dm.ViewModels
 {
-    public class CreatureViewModel : ViewModelBase
+    public class CombatantViewModel : ViewModelBase
     {
         public int ID { get; }
 
@@ -23,7 +23,7 @@ namespace Deez_Notes_Dm.ViewModels
 
         public double Initiative { get; set; }
 
-        public CreatureViewModel(int id, string name, string race, int hp, int maxHP, int ac,
+        public CombatantViewModel(int id, string name, string race, int hp, int maxHP, int ac,
             Speed speeds, Stats baseStats, Stats statsMod)
         {
             ID = id;

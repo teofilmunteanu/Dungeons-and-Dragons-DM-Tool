@@ -37,10 +37,8 @@ namespace Deez_Notes_Dm.Services
             };
         }
 
-        private Monster ToMonster(MonsterDTO monsterDTO)
+        private Monster ToMonster(int id, MonsterDTO monsterDTO)
         {
-            int ID = _creatureManager.GetCombatants().Count();
-
             Stats stats = new Stats()
             {
                 STR = monsterDTO.strength,
@@ -77,7 +75,7 @@ namespace Deez_Notes_Dm.Services
             Action[]? specialAbilities = (Action[])monsterDTO.special_abilities.Select(a => ToAction(a));
 
             return new Monster(
-                ID,
+                id,
                 monsterDTO.name,
                 monsterDTO.type,
                 monsterDTO.hit_points,
@@ -105,11 +103,20 @@ namespace Deez_Notes_Dm.Services
             );
         }
 
-        public async Task<List<Monster>> FindMonster(string name)
+        public async Task<List<MonsterDTO>> FindMonster(string name)
         {
             List<MonsterDTO> monsterDTOs = await MonsterAPI.GetMonsterAsync(name);
 
-            return (List<Monster>)monsterDTOs.Select(m => ToMonster(m));
+            return monsterDTOs;
+
+            //nu tb convertit aici, ci unde se adauga in lupta, dar tb sa aiba un id cand e selectat in lista (??),
+            //eventual primeste MonsterDTO direct din lista? sau index-ul monstrului gasit?
+
+            //return (List<Monster>)monsterDTOs.Select(monsterDTO => ToMonster(
+            //        _creatureManager.GetCombatants().Count(),
+            //        monsterDTO
+            //    )
+            //);
         }
     }
 }

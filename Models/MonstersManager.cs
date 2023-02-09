@@ -5,27 +5,26 @@ namespace Deez_Notes_Dm.Models
 {
     public class MonstersManager
     {
-        //use for locally saved monsters
-        public List<Monster> Monsters { get; set; }
+        public List<Monster> SavedMonsters { get; set; }
 
         public MonstersManager()
         {
-            Monsters = new List<Monster>();
+            SavedMonsters = new List<Monster>();
         }
 
-        public List<Monster> GetMonsters()
+        public List<Monster> GetSavedMonsters()
         {
-            return Monsters;
+            return SavedMonsters;
         }
 
-        public Monster GetMonsterById(int id)
+        public Monster GetSavedMonsterById(int id)
         {
-            return Monsters.Where(c => c.ID == id).First();
+            return SavedMonsters.Where(c => c.ID == id).First();
         }
 
         public void AddMonster(Monster monster)
         {
-            Monsters.Add(monster);
+            SavedMonsters.Add(monster);
         }
     }
 }
