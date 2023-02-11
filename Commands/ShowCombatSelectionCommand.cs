@@ -11,14 +11,9 @@ namespace Deez_Notes_Dm.Commands
             this._combatSelectionStore = combatSelectionStore;
         }
 
-        //async
         public override void Execute(object? parameter)
         {
             _combatSelectionStore.Open();
-
-            //testing monsters api
-            //List<MonsterDTO> m = await MonsterAPI.GetMonsterAsync("goblin");
-            //MessageBox.Show(m[0].name);
         }
     }
 }

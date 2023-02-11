@@ -23,11 +23,15 @@ namespace Deez_Notes_Dm.Commands
         private void ResetInputs()
         {
             _combatSelectionViewModel.SearchInput = "";
+
             if (_combatSelectionViewModel.FoundMonsters != null)
             {
                 _combatSelectionViewModel.FoundMonsters.Clear();
             }
-
+            if (_combatSelectionViewModel.SelectedCombatants != null)
+            {
+                _combatSelectionViewModel.SelectedCombatants.Clear();
+            }
         }
     }
 }

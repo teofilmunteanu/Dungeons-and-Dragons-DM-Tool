@@ -15,19 +15,23 @@ namespace Deez_Notes_Dm.ViewModels
             OnPropertyChanged(propertyName);
         }
 
-        protected void SetSearchInput(string value)
-        {
-            searchInput = value;
-            OnPropertyChanged(SearchInput);
-
-            SearchMonsterCommand.Execute(null);
-        }
 
         private string searchInput;
         public string SearchInput
         {
-            get => searchInput;
-            set => SetSearchInput(value);
+            get
+            {
+                return searchInput;
+            }
+            set
+            {
+                searchInput = value;
+                OnPropertyChanged(nameof(SearchInput));
+                if (searchInput != "")
+                {
+                    SearchMonsterCommand.Execute(null);
+                }
+            }
         }
 
         List<string> foundMonsters;
@@ -37,15 +41,38 @@ namespace Deez_Notes_Dm.ViewModels
             set => SetField(ref foundMonsters, value);
         }
 
+        string selectedItem;
+        public string SelectedItem
+        {
+            get => selectedItem;
+            set
+            {
+                selectedItem = value;
+                OnPropertyChanged(nameof(SelectedItem));
+                AddSelectedCombatantCommand.Execute(null);
+            }
+        }
+
+        List<string> selectedCombatants;
+        public List<string> SelectedCombatants
+        {
+            get => selectedCombatants;
+            set => SetField(ref selectedCombatants, value);
+        }
+
         public ICommand CancelCommand { get; }
         public ICommand StartCommand { get; }
         public ICommand SearchMonsterCommand { get; }
+        public ICommand AddSelectedCombatantCommand { get; }
 
         public CombatSelectionViewModel(CombatListViewModel combatListViewModel, CombatantsManager combatantsManager, CombatSelectionStore combatSelectionStore, MonstersManager monstersManager)
         {
+            selectedCombatants = new List<string>();
+
             CancelCommand = new CancelCombatSelectionCommand(this, combatSelectionStore);
             SearchMonsterCommand = new SearchMonsterCommand(this, monstersManager);
-            //CreateCommand = new CreatePlayerCommand(this, playerListViewModel, playersManager);
+            AddSelectedCombatantCommand = new AddSelectedCombatantCommand(this);
+            //StartCommand = new StartCombatCommand(this, playerListViewModel, playersManager);
         }
     }
 }

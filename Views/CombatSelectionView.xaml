@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Deez_Notes_Dm.Views"
              mc:Ignorable="d">
+    
     <!-- Combat Selection -->
     <Grid x:Name="CombatSelection" Background="#B2484848">
         <Grid.Resources>
@@ -46,14 +47,23 @@
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1.3*"/>
                     <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="3*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Row="1" Grid.Column="1" Text="Search:" FontWeight="Bold" TextAlignment="Center"/>
                 <TextBox x:Name="SearchField" Grid.Row="1" Grid.Column="2" Text="{Binding SearchInput,UpdateSourceTrigger=PropertyChanged, Delay=100}"/>
-                <ListBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" ItemsSource="{Binding FoundMonsters,UpdateSourceTrigger=PropertyChanged}" IsSynchronizedWithCurrentItem="True" >
+                <ListBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" ItemsSource="{Binding FoundMonsters,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" SelectionChanged="ListBox_SelectionChanged">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel IsItemsHost="True" Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
+
+                <ListBox x:Name="SelectedCombatantsList" Grid.Row="2" Grid.Column="3" Background="DarkGray" ItemsSource="{Binding SelectedCombatants,UpdateSourceTrigger=PropertyChanged}" IsSynchronizedWithCurrentItem="True">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <VirtualizingStackPanel IsItemsHost="True" Orientation="Vertical"/>
