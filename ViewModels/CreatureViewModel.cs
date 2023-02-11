@@ -57,25 +57,7 @@ namespace Deez_Notes_Dm.ViewModels
             SpeedsList = new List<string>();
             if (speeds is not null)
             {
-                foreach (PropertyInfo prop in speeds.GetType().GetProperties())
-                {
-                    if (prop.Name != "hover")
-                    {
-                        int? speedVal = (int?)prop.GetValue(speeds);
-
-                        if (speedVal != 0)
-                        {
-                            SpeedsList.Add(speeds.ToSpeedText(prop.Name));
-                        }
-                    }
-                    else
-                    {
-                        if (speeds.hover != null && speeds.hover == true)
-                        {
-                            SpeedsList.Add("hover True");
-                        }
-                    }
-                }
+                SpeedsList = ToSpeedList(speeds);
             }
         }
 
@@ -94,30 +76,34 @@ namespace Deez_Notes_Dm.ViewModels
             SpeedsList = new List<string>();
             if (creature.Speeds is not null)
             {
-                foreach (PropertyInfo prop in creature.Speeds.GetType().GetProperties())
-                {
-                    if (prop.Name != "hover")
-                    {
-                        int? speedVal = (int?)prop.GetValue(creature.Speeds);
-
-                        if (speedVal != 0 && speedVal != null)
-                        {
-                            SpeedsList.Add(creature.Speeds.ToSpeedText(prop.Name));
-                        }
-                    }
-                    else
-                    {
-                        if (creature.Speeds.hover != null && creature.Speeds.hover == true)
-                        {
-                            SpeedsList.Add("hover True");
-                        }
-                    }
-                }
+                SpeedsList = ToSpeedList(creature.Speeds);
             }
 
             AddHPCommand = new AddHPCombatCommand(this, combatListViewModel, combatantsManager);
             SubtractHPCommand = new SubtractHPCombatCommand(this, combatListViewModel, combatantsManager);
+        }
 
+        public List<string> ToSpeedList(Speed speeds)
+        {
+            List<string> SpeedsList = new List<string>();
+            foreach (PropertyInfo prop in speeds.GetType().GetProperties())
+            {
+                if (prop.Name != "hover")
+                {
+                    int? speedVal = (int?)prop.GetValue(speeds);
+
+                    if (speedVal != 0 && speedVal != null)
+                    {
+                        SpeedsList.Add($"{prop.Name} {speedVal} ft");
+                    }
+                }
+                else if (speeds.hover != null && speeds.hover == true)
+                {
+                    SpeedsList.Add("hovers");
+                }
+            }
+
+            return SpeedsList;
         }
     }
 }

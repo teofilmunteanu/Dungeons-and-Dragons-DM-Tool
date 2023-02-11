@@ -21,7 +21,7 @@ namespace Deez_Notes_Dm
         public App()
         {
             _playersManager = new PlayersManager();
-            _monstersManager = new MonstersManager();
+            _monstersManager = new MonstersManager(_playersManager);
             _newPLayerFormStore = new NewPLayerFormStore();
 
             _combatantsManager = new CombatantsManager(_playersManager);

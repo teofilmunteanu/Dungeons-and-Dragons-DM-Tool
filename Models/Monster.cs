@@ -26,7 +26,6 @@ namespace Deez_Notes_Dm.Models
 
         public string ChallengeRating { get; set; }
 
-        // TO COMPLETE
         public static readonly Dictionary<string, int> XPbyCR = new Dictionary<string, int>
         {
             {"0",0},
@@ -65,7 +64,6 @@ namespace Deez_Notes_Dm.Models
             {"30", 155000 }
         };
         public int XP_Drop { get; set; }
-
 
         public List<Action>? Actions { get; set; }
         public List<Action>? Reactions { get; set; }

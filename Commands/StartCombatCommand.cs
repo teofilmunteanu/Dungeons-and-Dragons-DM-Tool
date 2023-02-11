@@ -1,16 +1,15 @@
 ﻿using Deez_Notes_Dm.Models;
 using Deez_Notes_Dm.ViewModels;
-using System.Collections.Generic;
 
 namespace Deez_Notes_Dm.Commands
 {
     class StartCombatCommand : CommandBase
     {
-        CombatSelectionViewModel _combatSelectionViewModel;
-        CombatListViewModel _combatListViewModel;
-        PlayersManager _playersManager;
-        MonstersManager _monstersManager;
-        CombatantsManager _combatantsManager;
+        private readonly CombatSelectionViewModel _combatSelectionViewModel;
+        private readonly CombatListViewModel _combatListViewModel;
+        private readonly PlayersManager _playersManager;
+        private readonly MonstersManager _monstersManager;
+        private readonly CombatantsManager _combatantsManager;
 
         public StartCombatCommand(CombatSelectionViewModel combatSelectionViewModel, CombatListViewModel combatListViewModel, PlayersManager playersManager, MonstersManager monstersManager, CombatantsManager combatantsManager)
         {
@@ -25,15 +24,17 @@ namespace Deez_Notes_Dm.Commands
         {
             _combatantsManager.Reset();
 
+            //TO DO: add only selected players (make separate player selection list)
             foreach (Player player in _playersManager.GetPlayers())
             {
                 _combatantsManager.AddCombatant(player);
             }
 
-            List<Monster> monsters = await _monstersManager.GetMonstersForCombatAsync(_combatSelectionViewModel.SelectedCombatants);
-            foreach (Monster monster in monsters)
+            foreach (string monsterName in _combatSelectionViewModel.SelectedMonsters)
             {
+                Monster monster = await _monstersManager.GetMonsterForCombatAsync(monsterName);
                 _combatantsManager.AddCombatant(monster);
+                _monstersManager.AddMonsterToCombat(monster);
             }
 
             _combatListViewModel.UpdateCombatList();

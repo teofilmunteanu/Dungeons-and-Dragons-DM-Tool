@@ -1,6 +1,5 @@
 ﻿using Deez_Notes_Dm.Services;
 using System;
-using System.Reflection;
 
 namespace Deez_Notes_Dm.Models
 {
@@ -20,6 +19,7 @@ namespace Deez_Notes_Dm.Models
         public Stats BaseStats { get; set; }
         public Stats StatsMod { get; set; }
 
+        //TO USE FOR SORTING COMBATANTS
         public double Initiative { get; set; }
 
 
@@ -54,7 +54,7 @@ namespace Deez_Notes_Dm.Models
             return (int)Math.Floor(((statusValue - 10)) / 2.0);
         }
 
-        protected bool isMonster()
+        public bool isMonster()
         {
             return ID >= PlayerServices.GetPlayersData().Count;
         }
@@ -77,17 +77,6 @@ namespace Deez_Notes_Dm.Models
             public int? burrow { get; set; }
             public int? fly { get; set; }
             public bool? hover { get; set; }
-
-            public string ToSpeedText(string speedType)
-            {
-                PropertyInfo? speed = this.GetType().GetProperty(speedType);
-                if (speed is not null)
-                {
-                    return $"{speedType} {speed.GetValue(this)} ft";
-                }
-                else
-                    throw new Exception("Invalid Speed Type");
-            }
         }
     }
 }

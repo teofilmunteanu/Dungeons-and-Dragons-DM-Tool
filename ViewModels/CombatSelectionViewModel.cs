@@ -41,22 +41,22 @@ namespace Deez_Notes_Dm.ViewModels
             set => SetField(ref foundMonsters, value);
         }
 
-        string selectedItem;
-        public string SelectedItem
+        string selectedMonsterItem;
+        public string SelectedMonsterItem
         {
-            get => selectedItem;
+            get => selectedMonsterItem;
             set
             {
-                SetField(ref selectedItem, value);
-                SelectedCombatants.Add(selectedItem);
+                SetField(ref selectedMonsterItem, value);
+                SelectedMonsters.Add(selectedMonsterItem);
             }
         }
 
-        List<string> selectedCombatants;
-        public List<string> SelectedCombatants
+        List<string> selectedMonsters;
+        public List<string> SelectedMonsters
         {
-            get => selectedCombatants;
-            set => SetField(ref selectedCombatants, value);
+            get => selectedMonsters;
+            set => SetField(ref selectedMonsters, value);
         }
 
         public ICommand CancelCommand { get; }
@@ -65,7 +65,7 @@ namespace Deez_Notes_Dm.ViewModels
 
         public CombatSelectionViewModel(CombatListViewModel combatListViewModel, CombatantsManager combatantsManager, CombatSelectionStore combatSelectionStore, PlayersManager playersManager, MonstersManager monstersManager)
         {
-            selectedCombatants = new List<string>();
+            selectedMonsters = new List<string>();
 
             CancelCommand = new CancelCombatSelectionCommand(this, combatSelectionStore);
             SearchMonsterCommand = new SearchMonsterCommand(this, monstersManager);

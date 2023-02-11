@@ -9,10 +9,16 @@ namespace Deez_Notes_Dm.Models
     public class MonstersManager
     {
         public List<Monster> SavedMonsters { get; set; }
+        //for calculating id and for (TO DO) properties, so the search by name is only executed here
+        private List<Monster> MonstersInCombat { get; set; }
+        private readonly PlayersManager _playersManager;
 
-        public MonstersManager()
+        public MonstersManager(PlayersManager playersManager)
         {
             SavedMonsters = new List<Monster>();
+            MonstersInCombat = new List<Monster>();
+
+            _playersManager = playersManager;
         }
 
         public List<Monster> GetSavedMonsters()
@@ -40,22 +46,21 @@ namespace Deez_Notes_Dm.Models
             return await MonsterServices.GetSingleMonsterData(monsterName);
         }
 
-        public async Task<List<Monster>> GetMonstersForCombatAsync(List<string> monstersNames)
+        public async Task<Monster> GetMonsterForCombatAsync(string monsterName)
         {
-            int id = PlayerServices.GetPlayersData().Count;
+            //ensures monster ids are higher than player ids, in case a player joins the combat later
+            int id = _playersManager.GetPlayers().Count + MonstersInCombat.Count;
 
-            List<Monster> monsters = new List<Monster>();
+            MonsterDTO monsterDTO = await GetSingleMonsterDataAsync(monsterName);
 
-            foreach (string monsterName in monstersNames)
-            {
-                MonsterDTO monsterDTO = await GetSingleMonsterDataAsync(monsterName);
+            Monster monster = MonsterServices.ToMonster(id, monsterDTO);
 
-                monsters.Add(MonsterServices.ToMonster(id, monsterDTO));
+            return monster;
+        }
 
-                id++;
-            }
-
-            return monsters;
+        public void AddMonsterToCombat(Monster monster)
+        {
+            MonstersInCombat.Add(monster);
         }
     }
 }

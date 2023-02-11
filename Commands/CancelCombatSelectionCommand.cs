@@ -28,9 +28,9 @@ namespace Deez_Notes_Dm.Commands
             {
                 _combatSelectionViewModel.FoundMonsters.Clear();
             }
-            if (_combatSelectionViewModel.SelectedCombatants != null)
+            if (_combatSelectionViewModel.SelectedMonsters != null)
             {
-                _combatSelectionViewModel.SelectedCombatants.Clear();
+                _combatSelectionViewModel.SelectedMonsters.Clear();
             }
         }
     }
