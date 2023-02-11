@@ -40,9 +40,16 @@ namespace Deez_Notes_Dm.ViewModels
             {
                 foreach (PropertyInfo prop in speeds.GetType().GetProperties())
                 {
-                    int? speedVal = (int?)prop.GetValue(speeds);
+                    if (prop.Name != "hover")
+                    {
+                        int? speedVal = (int?)prop.GetValue(speeds);
 
-                    if (speedVal != 0)
+                        if (speedVal != 0)
+                        {
+                            SpeedsList.Add(speeds.ToSpeedText(prop.Name));
+                        }
+                    }
+                    else
                     {
                         SpeedsList.Add(speeds.ToSpeedText(prop.Name));
                     }

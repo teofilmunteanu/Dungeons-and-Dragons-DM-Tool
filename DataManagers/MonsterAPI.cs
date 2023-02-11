@@ -25,6 +25,7 @@ namespace Deez_Notes_Dm.API_Managers
 
             var dynamicObject = JsonConvert.DeserializeObject<dynamic>(json)!;
 
+            //API only has 50 per page!!!
             List<MonsterDTO> Monsters = dynamicObject.results.ToObject<List<MonsterDTO>>();
 
             return Monsters;

@@ -14,14 +14,14 @@ namespace Deez_Notes_Dm.ViewModels
 
         public ObservableCollection<CombatantViewModel> Combatants => _combatants;
 
-        //public ICommand ShowPlayerFormCommand { get; }
+        public ICommand ShowCombatSelectionCommand { get; }
 
 
-        public CombatListViewModel(CombatantsManager combatantsManager/*, NewPLayerFormStore newPLayerFormStore*/)
+        public CombatListViewModel(CombatantsManager combatantsManager, CombatSelectionStore combatSelectionStore)
         {
             _combatants = new ObservableCollection<CombatantViewModel>();
 
-            //ShowPlayerFormCommand = new ShowPlayerFormCommand(newPLayerFormStore);
+            ShowCombatSelectionCommand = new ShowCombatSelectionCommand(combatSelectionStore);
 
             _combatantsManager = combatantsManager;
 

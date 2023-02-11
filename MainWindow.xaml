@@ -26,11 +26,11 @@
             
             <TabItem Header="Combat">
                 <Grid x:Name="CombatTabRoot">
-                    <views:CombatView DataContext="{Binding CombatVM}"/>
+                    <views:CombatView DataContext="{Binding CombatListVM}"/>
 
-                    <!--<Grid Visibility="{Binding Path=IsModalOpen, Converter={StaticResource BoolToVisibility}}">
-                        <views:NewPlayerFormView DataContext="{Binding CombatantsSelectionVM}" />
-                    </Grid>-->
+                    <Grid Visibility="{Binding Path=IsCombatSelectionOpen, Converter={StaticResource BoolToVisibility}}">
+                        <views:CombatSelectionView DataContext="{Binding CombatSelectionVM}" />
+                    </Grid>
                 </Grid>
             </TabItem>
             <TabItem Header="DM Screen">

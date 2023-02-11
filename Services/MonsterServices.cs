@@ -13,14 +13,7 @@ namespace Deez_Notes_Dm.Services
 {
     public class MonsterServices
     {
-        public CombatantsManager _creatureManager;
-
-        public MonsterServices(CombatantsManager creatureManager)
-        {
-            _creatureManager = creatureManager;
-        }
-
-        private Action? ToAction(ActionDTO actionDTO)
+        private static Action? ToAction(ActionDTO actionDTO)
         {
             if (actionDTO == null)
             {
@@ -37,7 +30,7 @@ namespace Deez_Notes_Dm.Services
             };
         }
 
-        private Monster ToMonster(int id, MonsterDTO monsterDTO)
+        private static Monster ToMonster(int id, MonsterDTO monsterDTO)
         {
             Stats stats = new Stats()
             {
@@ -103,13 +96,13 @@ namespace Deez_Notes_Dm.Services
             );
         }
 
-        public async Task<List<MonsterDTO>> FindMonster(string name)
+        public static async Task<List<MonsterDTO>> GetMonstersData(string name)
         {
             List<MonsterDTO> monsterDTOs = await MonsterAPI.GetMonsterAsync(name);
 
             return monsterDTOs;
 
-            //nu tb convertit aici, ci unde se adauga in lupta, dar tb sa aiba un id cand e selectat in lista (??),
+            //nu tb convertit aici, ci unde se adauga in lupta, dar tb sa aiba un id cand e selectat in lista (??), - or just the name, since it's unique
             //eventual primeste MonsterDTO direct din lista? sau index-ul monstrului gasit?
 
             //return (List<Monster>)monsterDTOs.Select(monsterDTO => ToMonster(

@@ -12,23 +12,27 @@ namespace Deez_Notes_Dm
     {
         private readonly PlayersManager _playersManager;
         private readonly MonstersManager _monstersManager;
+        private readonly CombatantsManager _combatantsManager;
 
 
         private readonly NewPLayerFormStore _newPLayerFormStore;
+        private readonly CombatSelectionStore _combatSelectionStore;
 
         public App()
         {
             _playersManager = new PlayersManager();
             _monstersManager = new MonstersManager();
-
             _newPLayerFormStore = new NewPLayerFormStore();
+
+            _combatantsManager = new CombatantsManager(_playersManager);
+            _combatSelectionStore = new CombatSelectionStore();
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
             MainWindow = new MainWindow()
             {
-                DataContext = new MainViewModel(_playersManager, _newPLayerFormStore)
+                DataContext = new MainViewModel(_playersManager, _newPLayerFormStore, _combatantsManager, _combatSelectionStore, _monstersManager)
             };
             MainWindow.Show();
 

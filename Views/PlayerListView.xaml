@@ -270,6 +270,7 @@
                     </Grid>
                     <!-- END Player PassiveSkills -->
                 </Grid>
+                <!-- END Player Container(Description + Stats) -->
             </Border>
         </DataTemplate>
         <!-- END Player List Data -->

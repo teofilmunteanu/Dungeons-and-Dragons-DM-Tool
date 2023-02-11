@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Deez_Notes_Dm.Json_DTOs;
+using Deez_Notes_Dm.Services;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Deez_Notes_Dm.Models
 {
@@ -25,6 +28,11 @@ namespace Deez_Notes_Dm.Models
         public void AddMonster(Monster monster)
         {
             SavedMonsters.Add(monster);
+        }
+
+        public async Task<List<MonsterDTO>> GetMonstersDataAsync(string monsterName)
+        {
+            return await MonsterServices.GetMonstersData(monsterName);
         }
     }
 }

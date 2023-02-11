@@ -7,27 +7,40 @@ namespace Deez_Notes_Dm.ViewModels
     {
         public PlayerListViewModel PlayerListVM { get; }
         public NewPlayerFormViewModel NewPlayerFormVM { get; }
-        public CombatListViewModel CombatVM { get; }
-
         private readonly NewPLayerFormStore _newPLayerFormStore;
         public bool IsPlayerFormOpen => _newPLayerFormStore.IsOpen;
 
-        public MainViewModel(PlayersManager playersManager, NewPLayerFormStore newPLayerFormStore)
+
+        public CombatListViewModel CombatListVM { get; }
+        public CombatSelectionViewModel CombatSelectionVM { get; }
+        private readonly CombatSelectionStore _combatSelectionStore;
+        public bool IsCombatSelectionOpen => _combatSelectionStore.IsOpen;
+
+
+        public MainViewModel(PlayersManager playersManager, NewPLayerFormStore newPLayerFormStore,
+            CombatantsManager combatantsManager, CombatSelectionStore combatSelectionStore,
+            MonstersManager monstersManager)
         {
             _newPLayerFormStore = newPLayerFormStore;
-
+            _newPLayerFormStore.IsOpenChanged += OnIsModalOpenChanged;
             PlayerListVM = new PlayerListViewModel(playersManager, newPLayerFormStore);
             NewPlayerFormVM = new NewPlayerFormViewModel(PlayerListVM, playersManager, newPLayerFormStore);
 
-            _newPLayerFormStore.IsOpenChanged += OnIsModalOpenChanged;
 
-
-            //CombatVM = new CombatViewModel(playersManager, newPLayerFormStore, PlayerListVM);
+            _combatSelectionStore = combatSelectionStore;
+            _combatSelectionStore.IsOpenChanged += OnIsCombatSelectionOpenChanged;
+            CombatListVM = new CombatListViewModel(combatantsManager, combatSelectionStore);
+            CombatSelectionVM = new CombatSelectionViewModel(CombatListVM, combatantsManager, combatSelectionStore, monstersManager);
         }
 
         private void OnIsModalOpenChanged()
         {
             OnPropertyChanged(nameof(IsPlayerFormOpen));
+        }
+
+        private void OnIsCombatSelectionOpenChanged()
+        {
+            OnPropertyChanged(nameof(IsCombatSelectionOpen));
         }
     }
 }
