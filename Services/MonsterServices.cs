@@ -30,7 +30,7 @@ namespace Deez_Notes_Dm.Services
             };
         }
 
-        private static Monster ToMonster(int id, MonsterDTO monsterDTO)
+        public static Monster ToMonster(int id, MonsterDTO monsterDTO)
         {
             Stats stats = new Stats()
             {
@@ -62,10 +62,29 @@ namespace Deez_Notes_Dm.Services
                 }
             }
 
-            Action[]? actions = (Action[])monsterDTO.actions.Select(a => ToAction(a));
-            Action[]? reactions = (Action[])monsterDTO.reactions.Select(a => ToAction(a));
-            Action[]? legendaryActions = (Action[])monsterDTO.legendary_actions.Select(a => ToAction(a));
-            Action[]? specialAbilities = (Action[])monsterDTO.special_abilities.Select(a => ToAction(a));
+            List<Action> reactions = new List<Action>();
+            if (monsterDTO.reactions != null)
+            {
+                reactions = monsterDTO.reactions.Select(a => ToAction(a)).ToList<Action>();
+            }
+
+            List<Action> actions = new List<Action>();
+            if (monsterDTO.actions != null)
+            {
+                actions = monsterDTO.actions.Select(a => ToAction(a)).ToList<Action>();
+            }
+
+            List<Action> legendaryActions = new List<Action>();
+            if (monsterDTO.legendary_actions != null)
+            {
+                legendaryActions = monsterDTO.legendary_actions.Select(a => ToAction(a)).ToList<Action>();
+            }
+
+            List<Action> specialAbilities = new List<Action>();
+            if (monsterDTO.special_abilities != null)
+            {
+                actions = monsterDTO.special_abilities.Select(a => ToAction(a)).ToList<Action>();
+            }
 
             return new Monster(
                 id,
@@ -98,18 +117,16 @@ namespace Deez_Notes_Dm.Services
 
         public static async Task<List<MonsterDTO>> GetMonstersData(string name)
         {
-            List<MonsterDTO> monsterDTOs = await MonsterAPI.GetMonsterAsync(name);
+            List<MonsterDTO> monsterDTOs = await MonsterAPI.GetMonstersAsync(name);
 
             return monsterDTOs;
+        }
 
-            //nu tb convertit aici, ci unde se adauga in lupta, dar tb sa aiba un id cand e selectat in lista (??), - or just the name, since it's unique
-            //eventual primeste MonsterDTO direct din lista? sau index-ul monstrului gasit?
+        public static async Task<MonsterDTO> GetSingleMonsterData(string name)
+        {
+            MonsterDTO monsterDTO = await MonsterAPI.GetSingleMonsterAsync(name);
 
-            //return (List<Monster>)monsterDTOs.Select(monsterDTO => ToMonster(
-            //        _creatureManager.GetCombatants().Count(),
-            //        monsterDTO
-            //    )
-            //);
+            return monsterDTO;
         }
     }
 }

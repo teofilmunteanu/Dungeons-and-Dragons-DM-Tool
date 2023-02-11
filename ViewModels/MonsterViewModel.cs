@@ -1,10 +1,11 @@
 ﻿using Deez_Notes_Dm.Models;
+using System.Collections.Generic;
 using System.Windows.Input;
 using static Deez_Notes_Dm.Models.Monster;
 
 namespace Deez_Notes_Dm.ViewModels
 {
-    public class MonsterViewModel : CombatantViewModel
+    public class MonsterViewModel : CreatureViewModel
     {
         public string Size { get; set; }
         public string Alignment { get; set; }
@@ -34,14 +35,14 @@ namespace Deez_Notes_Dm.ViewModels
         public int XP_Drop { get; set; } // generate using challangeRating
 
 
-        public Action[] Actions { get; set; } //make class?
-        public Action[] Reactions { get; set; }
+        public List<Action> Actions { get; set; } //make class?
+        public List<Action> Reactions { get; set; }
 
 
         public string LegendaryActionDescription { get; set; }
-        public Action[] LegendaryActions { get; set; }
+        public List<Action> LegendaryActions { get; set; }
 
-        public Action[] SpecialAbilities { get; set; }
+        public List<Action> SpecialAbilities { get; set; }
 
 
         public ICommand AddHPCommand { get; }

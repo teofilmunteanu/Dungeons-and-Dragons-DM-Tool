@@ -34,19 +34,47 @@ namespace Deez_Notes_Dm.Models
             {"1/4", 50},
             {"1/2", 100},
             {"1", 200},
-            {"2", 450}
+            {"2", 450},
+            {"3", 700 },
+            {"4", 1100 },
+            {"5", 1800 },
+            {"6", 2300 },
+            {"7", 2900 },
+            {"8", 3900 },
+            {"9", 5000 },
+            {"10", 5900 },
+            {"11", 7200 },
+            {"12", 8400 },
+            {"13", 10000 },
+            {"14", 11500 },
+            {"15", 13000 },
+            {"16", 15000 },
+            {"17", 18000 },
+            {"18", 20000 },
+            {"19", 22000 },
+            {"20", 25000 },
+            {"21", 33000 },
+            {"22", 41000 },
+            {"23", 50000 },
+            {"24", 62000 },
+            {"25", 75000 },
+            {"26", 90000 },
+            {"27", 105000 },
+            {"28", 120000 },
+            {"29", 142000 },
+            {"30", 155000 }
         };
         public int XP_Drop { get; set; }
 
 
-        public Action[]? Actions { get; set; }
-        public Action[]? Reactions { get; set; }
+        public List<Action>? Actions { get; set; }
+        public List<Action>? Reactions { get; set; }
 
 
         public string? LegendaryActionDescription { get; set; }
-        public Action[]? LegendaryActions { get; set; }
+        public List<Action>? LegendaryActions { get; set; }
 
-        public Action[]? SpecialAbilities { get; set; }
+        public List<Action>? SpecialAbilities { get; set; }
 
         public Monster()
         {
@@ -58,8 +86,8 @@ namespace Deez_Notes_Dm.Models
         public Monster(int id, string name, string race, int maxHP, int ac, Speed speeds, Stats stats,
             string size, string alignment, string hit_Dice, SavingStats savingThrows, string skills,
             string? damageVulnerabilities, string? damageResistances, string? damageImmunities, string? conditionImmunities,
-            string? senses, string languages, string challengeRating, int xp_Drop, Action[]? actions, Action[]? reactions,
-            string? legendaryActionDescription, Action[]? legendaryActions, Action[]? specialAbilities) : base(id, name, race, maxHP, maxHP, ac, speeds, stats)
+            string? senses, string languages, string challengeRating, int xp_Drop, List<Action>? actions, List<Action>? reactions,
+            string? legendaryActionDescription, List<Action>? legendaryActions, List<Action>? specialAbilities) : base(id, name, race, maxHP, maxHP, ac, speeds, stats)
         {
             Size = size;
             Alignment = alignment;

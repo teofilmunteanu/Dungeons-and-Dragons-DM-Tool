@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Deez_Notes_Dm.Services;
+using System;
 using System.Reflection;
 
 namespace Deez_Notes_Dm.Models
@@ -51,6 +52,11 @@ namespace Deez_Notes_Dm.Models
         protected static int getModifier(int statusValue)
         {
             return (int)Math.Floor(((statusValue - 10)) / 2.0);
+        }
+
+        protected bool isMonster()
+        {
+            return ID >= PlayerServices.GetPlayersData().Count;
         }
 
         public class Stats

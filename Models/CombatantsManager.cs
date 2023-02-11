@@ -1,17 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 
 namespace Deez_Notes_Dm.Models
 {
     public class CombatantsManager
     {
-        public List<Creature> Combatants { get; set; } //reset after fight is over
+        private List<Creature> Combatants { get; set; }
 
         private readonly PlayersManager _playersManager;
 
         public CombatantsManager(PlayersManager playersManager)
         {
             _playersManager = playersManager;
+
+            Combatants = new List<Creature>();
+        }
+
+        public void Reset()
+        {
+            Combatants.Clear();
         }
 
         public List<Creature> GetCombatants()
@@ -22,6 +31,18 @@ namespace Deez_Notes_Dm.Models
         public Creature GetCombatantById(int id)
         {
             return Combatants.Where(c => c.ID == id).First();
+        }
+
+        public void AddCombatant(Creature creature)
+        {
+            try
+            {
+                Combatants.Add(creature);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         public void HealCombatantWithId(int id, int hp)

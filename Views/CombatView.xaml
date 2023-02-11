@@ -12,7 +12,7 @@
             <Border Name="border" BorderBrush="DeepSkyBlue" Background="White" BorderThickness="2"  
                 CornerRadius="2" Padding="5" Margin="5">
                 <!-- Combatant Container(Description + Stats) -->
-                <Grid x:Name="PlayerContainer">
+                <Grid x:Name="CombatantContainer">
                     <Grid.Resources>
                         <Style TargetType="Grid">
                             <Style.Resources>
@@ -51,11 +51,7 @@
                             </Grid.RowDefinitions>
 
                             <TextBlock Grid.Row="0" Text="{Binding Path=Name}" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center"/>
-                            <TextBlock Grid.Row="1"  HorizontalAlignment="Center" Margin="0 5">
-                                <Run Text="{Binding Path=Race}"/>
-                                <Run Text="&#8211; Level"/>
-                                <Run Text="{Binding Path=totalLevel}"/>
-                            </TextBlock>
+                            <TextBlock Grid.Row="1" Text="{Binding Path=Race}" HorizontalAlignment="Center" Margin="0 5"/>
                         </Grid>
                     </Border>
                     <!-- END Combatant Description -->

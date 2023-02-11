@@ -9,17 +9,17 @@ namespace Deez_Notes_Dm.ViewModels
 {
     public class CombatListViewModel : ViewModelBase
     {
-        private readonly ObservableCollection<CombatantViewModel> _combatants;
+        private readonly ObservableCollection<CreatureViewModel> _combatants;
         private readonly CombatantsManager _combatantsManager;
 
-        public ObservableCollection<CombatantViewModel> Combatants => _combatants;
+        public ObservableCollection<CreatureViewModel> Combatants => _combatants;
 
         public ICommand ShowCombatSelectionCommand { get; }
 
 
         public CombatListViewModel(CombatantsManager combatantsManager, CombatSelectionStore combatSelectionStore)
         {
-            _combatants = new ObservableCollection<CombatantViewModel>();
+            _combatants = new ObservableCollection<CreatureViewModel>();
 
             ShowCombatSelectionCommand = new ShowCombatSelectionCommand(combatSelectionStore);
 
@@ -35,10 +35,10 @@ namespace Deez_Notes_Dm.ViewModels
 
             if (combatantList != null)
             {
-                foreach (Player player in combatantList)
+                foreach (Creature creature in combatantList)
                 {
-                    //CombatantViewModel combatantViewModel = new CombatantViewModel(player, this, _combatantsManager);
-                    //Combatants.Add(combatantViewModel);
+                    CreatureViewModel combatantViewModel = new CreatureViewModel(creature, this, _combatantsManager);
+                    Combatants.Add(combatantViewModel);
                 }
             }
         }

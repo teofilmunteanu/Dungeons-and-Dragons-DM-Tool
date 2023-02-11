@@ -34,5 +34,28 @@ namespace Deez_Notes_Dm.Models
         {
             return await MonsterServices.GetMonstersData(monsterName);
         }
+
+        public async Task<MonsterDTO> GetSingleMonsterDataAsync(string monsterName)
+        {
+            return await MonsterServices.GetSingleMonsterData(monsterName);
+        }
+
+        public async Task<List<Monster>> GetMonstersForCombatAsync(List<string> monstersNames)
+        {
+            int id = PlayerServices.GetPlayersData().Count;
+
+            List<Monster> monsters = new List<Monster>();
+
+            foreach (string monsterName in monstersNames)
+            {
+                MonsterDTO monsterDTO = await GetSingleMonsterDataAsync(monsterName);
+
+                monsters.Add(MonsterServices.ToMonster(id, monsterDTO));
+
+                id++;
+            }
+
+            return monsters;
+        }
     }
 }

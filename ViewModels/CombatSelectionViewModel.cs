@@ -47,9 +47,8 @@ namespace Deez_Notes_Dm.ViewModels
             get => selectedItem;
             set
             {
-                selectedItem = value;
-                OnPropertyChanged(nameof(SelectedItem));
-                AddSelectedCombatantCommand.Execute(null);
+                SetField(ref selectedItem, value);
+                SelectedCombatants.Add(selectedItem);
             }
         }
 
@@ -63,16 +62,14 @@ namespace Deez_Notes_Dm.ViewModels
         public ICommand CancelCommand { get; }
         public ICommand StartCommand { get; }
         public ICommand SearchMonsterCommand { get; }
-        public ICommand AddSelectedCombatantCommand { get; }
 
-        public CombatSelectionViewModel(CombatListViewModel combatListViewModel, CombatantsManager combatantsManager, CombatSelectionStore combatSelectionStore, MonstersManager monstersManager)
+        public CombatSelectionViewModel(CombatListViewModel combatListViewModel, CombatantsManager combatantsManager, CombatSelectionStore combatSelectionStore, PlayersManager playersManager, MonstersManager monstersManager)
         {
             selectedCombatants = new List<string>();
 
             CancelCommand = new CancelCombatSelectionCommand(this, combatSelectionStore);
             SearchMonsterCommand = new SearchMonsterCommand(this, monstersManager);
-            AddSelectedCombatantCommand = new AddSelectedCombatantCommand(this);
-            //StartCommand = new StartCombatCommand(this, playerListViewModel, playersManager);
+            StartCommand = new StartCombatCommand(this, combatListViewModel, playersManager, monstersManager, combatantsManager);
         }
     }
 }
