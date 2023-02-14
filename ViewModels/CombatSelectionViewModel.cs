@@ -48,7 +48,11 @@ namespace Deez_Notes_Dm.ViewModels
             set
             {
                 SetField(ref selectedMonsterItem, value);
-                SelectedMonsters.Add(selectedMonsterItem);
+
+                if (selectedMonsterItem is not null)
+                {
+                    SelectedMonsters.Add(selectedMonsterItem);
+                }
             }
         }
 
@@ -56,7 +60,7 @@ namespace Deez_Notes_Dm.ViewModels
         public List<string> SelectedMonsters
         {
             get => selectedMonsters;
-            set => SetField(ref selectedMonsters, value);
+            //set => SetField(ref selectedMonsters, value);
         }
 
         public ICommand CancelCommand { get; }

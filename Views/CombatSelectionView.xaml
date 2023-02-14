@@ -54,7 +54,7 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Row="1" Grid.Column="1" Text="Search:" FontWeight="Bold" TextAlignment="Center"/>
-                <TextBox x:Name="SearchField" Grid.Row="1" Grid.Column="2" Text="{Binding SearchInput,UpdateSourceTrigger=PropertyChanged, Delay=100}"/>
+                <TextBox x:Name="SearchField" Grid.Row="1" Grid.Column="2" Text="{Binding SearchInput,UpdateSourceTrigger=PropertyChanged, Delay=30}"/>
                 <ListBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" ItemsSource="{Binding FoundMonsters,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedMonsterItem, Mode=TwoWay}" SelectionChanged="ListBox_SelectionChanged">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
