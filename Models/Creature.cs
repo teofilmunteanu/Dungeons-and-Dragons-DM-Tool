@@ -9,7 +9,6 @@ namespace Deez_Notes_Dm.Models
 
         public string Name { get; set; }
         public string Race { get; set; }
-
         public int MaxHP { get; set; }
         public int HP { get; set; }
         public int AC { get; set; }

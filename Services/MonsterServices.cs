@@ -32,6 +32,8 @@ namespace Deez_Notes_Dm.Services
 
         public static Monster ToMonster(int id, MonsterDTO monsterDTO)
         {
+            string race = monsterDTO.subtype != "" ? monsterDTO.type + " - " + monsterDTO.subtype : monsterDTO.type;
+
             Stats stats = new Stats()
             {
                 STR = monsterDTO.strength,
@@ -89,7 +91,7 @@ namespace Deez_Notes_Dm.Services
             return new Monster(
                 id,
                 monsterDTO.name,
-                monsterDTO.type,
+                race,
                 monsterDTO.hit_points,
                 monsterDTO.armor_class,
                 monsterDTO.speed,

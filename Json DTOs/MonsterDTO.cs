@@ -8,6 +8,7 @@ namespace Deez_Notes_Dm.Json_DTOs
         public string name { get; set; }
         public string size { get; set; }
         public string type { get; set; }
+        public string subtype { get; set; }
 
         public string alignment { get; set; }
         public int armor_class { get; set; }

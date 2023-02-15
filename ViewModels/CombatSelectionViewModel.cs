@@ -60,7 +60,7 @@ namespace Deez_Notes_Dm.ViewModels
         public List<string> SelectedMonsters
         {
             get => selectedMonsters;
-            //set => SetField(ref selectedMonsters, value);
+            set => SetField(ref selectedMonsters, value);
         }
 
         public ICommand CancelCommand { get; }
