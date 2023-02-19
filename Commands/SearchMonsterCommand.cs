@@ -56,7 +56,6 @@ namespace Deez_Notes_Dm.Commands
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
     }
 }

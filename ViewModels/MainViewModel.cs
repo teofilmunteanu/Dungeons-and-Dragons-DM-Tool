@@ -29,7 +29,7 @@ namespace Deez_Notes_Dm.ViewModels
 
             _combatSelectionStore = combatSelectionStore;
             _combatSelectionStore.IsOpenChanged += OnIsCombatSelectionOpenChanged;
-            CombatListVM = new CombatListViewModel(combatantsManager, combatSelectionStore);
+            CombatListVM = new CombatListViewModel(combatantsManager, monstersManager, combatSelectionStore);
             CombatSelectionVM = new CombatSelectionViewModel(CombatListVM, combatantsManager, combatSelectionStore, playersManager, monstersManager);
         }
 

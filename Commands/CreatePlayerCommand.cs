@@ -88,7 +88,6 @@ namespace Deez_Notes_Dm.Commands
 
 
             _newPlayerFormViewModel.CancelCommand.Execute(null);
-
         }
     }
 }

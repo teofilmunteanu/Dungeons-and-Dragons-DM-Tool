@@ -3,27 +3,70 @@ using Deez_Notes_Dm.Models;
 using Deez_Notes_Dm.Stores;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
 namespace Deez_Notes_Dm.ViewModels
 {
     public class CombatListViewModel : ViewModelBase
     {
+        protected void SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        {
+            field = value;
+            OnPropertyChanged(propertyName);
+        }
+
         private readonly ObservableCollection<CreatureViewModel> _combatants;
         private readonly CombatantsManager _combatantsManager;
+        private readonly MonstersManager _monstersManager;
 
         public ObservableCollection<CreatureViewModel> Combatants => _combatants;
 
+
+        CreatureViewModel selectedCreature;
+        public CreatureViewModel SelectedCreature
+        {
+            get => selectedCreature;
+            set
+            {
+                SetField(ref selectedCreature, value);
+
+                SetSelectedMonsterCommand.Execute(null);
+                //if (selectedCreature != null)
+                //{
+                //    if (_combatantsManager.IsCombatantMonster(selectedCreature.ID))
+                //    {
+
+                //    }
+                //    else
+                //    {
+                //        SelectedMonster = null;
+                //    }
+                //}
+            }
+        }
+
+        private MonsterViewModel? selectedMonster = null;
+        public MonsterViewModel? SelectedMonster
+        {
+            get => selectedMonster;
+            set => SetField(ref selectedMonster, value);
+        }
+
+
         public ICommand ShowCombatSelectionCommand { get; }
+        public ICommand SetSelectedMonsterCommand { get; }
 
 
-        public CombatListViewModel(CombatantsManager combatantsManager, CombatSelectionStore combatSelectionStore)
+        public CombatListViewModel(CombatantsManager combatantsManager, MonstersManager monstersManager, CombatSelectionStore combatSelectionStore)
         {
             _combatants = new ObservableCollection<CreatureViewModel>();
 
-            ShowCombatSelectionCommand = new ShowCombatSelectionCommand(combatSelectionStore);
-
             _combatantsManager = combatantsManager;
+            _monstersManager = monstersManager;
+
+            ShowCombatSelectionCommand = new ShowCombatSelectionCommand(combatSelectionStore);
+            SetSelectedMonsterCommand = new SetSelectedCombatMonster(this, monstersManager);
 
             UpdateCombatList();
         }
