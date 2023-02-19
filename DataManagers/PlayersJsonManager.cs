@@ -9,28 +9,27 @@ namespace Deez_Notes_Dm.DataManagers
     //ONLY operations on the json!!!
     public static class PlayersJsonManager
     {
-        //Directory.GetCurrentDirectory() + "/Resources/Players/Players.json";
-        private static string appDirPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/DeezNotesDm";
-        private static string playerSavesPath = appDirPath + "/Players/Players.json";
+        private static string playerSavesDirPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/DeezNotesDm/Players";
+        private static string playerSavesFilePath = playerSavesDirPath + "/Players.json";
 
         public static List<PlayerDTO>? GetPlayersFromJson()
         {
-            if (!Directory.Exists(appDirPath))
+            if (!Directory.Exists(playerSavesDirPath))
             {
-                Directory.CreateDirectory(appDirPath + "/Players");
+                Directory.CreateDirectory(playerSavesDirPath);
             }
 
             List<PlayerDTO> Players = new List<PlayerDTO>();
 
-            if (File.Exists(playerSavesPath))
+            if (File.Exists(playerSavesFilePath))
             {
-                string json = File.ReadAllText(playerSavesPath);
+                string json = File.ReadAllText(playerSavesFilePath);
 
                 Players = JsonConvert.DeserializeObject<List<PlayerDTO>>(json);
             }
             else
             {
-                File.Create(playerSavesPath);
+                File.Create(playerSavesFilePath);
             }
 
             return Players;
@@ -40,7 +39,7 @@ namespace Deez_Notes_Dm.DataManagers
         {
             string newJson = JsonConvert.SerializeObject(Players);
 
-            File.WriteAllText(playerSavesPath, newJson);
+            File.WriteAllText(playerSavesFilePath, newJson);
         }
     }
 }
