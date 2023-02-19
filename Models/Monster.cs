@@ -73,6 +73,7 @@ namespace Deez_Notes_Dm.Models
         public List<Action>? LegendaryActions { get; set; }
 
         public List<Action>? SpecialAbilities { get; set; }
+        public List<Spell>? Spells { get; set; }
 
         public Monster()
         {
@@ -85,7 +86,7 @@ namespace Deez_Notes_Dm.Models
             string size, string alignment, string hit_Dice, SavingStats savingThrows, string skills,
             string? damageVulnerabilities, string? damageResistances, string? damageImmunities, string? conditionImmunities,
             string? senses, string languages, string challengeRating, int xp_Drop, List<Action>? actions, List<Action>? reactions,
-            string? legendaryActionDescription, List<Action>? legendaryActions, List<Action>? specialAbilities) : base(id, name, race, maxHP, maxHP, ac, speeds, stats)
+            string? legendaryActionDescription, List<Action>? legendaryActions, List<Action>? specialAbilities, List<Spell>? spells) : base(id, name, race, maxHP, maxHP, ac, speeds, stats)
         {
             Size = size;
             Alignment = alignment;
@@ -105,6 +106,7 @@ namespace Deez_Notes_Dm.Models
             LegendaryActionDescription = legendaryActionDescription;
             LegendaryActions = legendaryActions;
             SpecialAbilities = specialAbilities;
+            Spells = spells;
         }
 
         public class Action
@@ -118,12 +120,31 @@ namespace Deez_Notes_Dm.Models
 
         public class SavingStats
         {
-            public int? STR { get; set; }
-            public int? DEX { get; set; }
-            public int? CON { get; set; }
-            public int? INT { get; set; }
-            public int? WIS { get; set; }
-            public int? CHA { get; set; }
+            public int? STR;
+            public int? DEX;
+            public int? CON;
+            public int? INT;
+            public int? WIS;
+            public int? CHA;
+        }
+
+        public class Spell
+        {
+            public string name;
+            public string desc;
+            public string higherLevel;
+            public string range;
+            public string components;
+            public string material;
+            public string ritual;
+            public string duration;
+            public string concentration;
+            public string castingTime;
+            public string level;
+            public string school;
+            public string dndClass;
+            public string archetype;
+            public string circles;
         }
     }
 }

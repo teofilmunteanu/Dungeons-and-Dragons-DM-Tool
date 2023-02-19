@@ -43,6 +43,7 @@ namespace Deez_Notes_Dm.ViewModels
         public List<Action> LegendaryActions { get; set; }
 
         public List<Action> SpecialAbilities { get; set; }
+        public List<Spell> Spells { get; set; }
 
 
         public ICommand AddHPCommand { get; }
@@ -69,10 +70,7 @@ namespace Deez_Notes_Dm.ViewModels
             LegendaryActionDescription = monster.LegendaryActionDescription;
             LegendaryActions = monster.LegendaryActions;
             SpecialAbilities = monster.SpecialAbilities;
-
-            //creatureManager????
-            //AddHPCommand = new AddHPCommand(this, playerListViewModel, playersManager); 
-            //SubtractHPCommand = new SubtractHPCommand(this, playerListViewModel, playersManager); 
+            Spells = monster.Spells;
         }
     }
 }

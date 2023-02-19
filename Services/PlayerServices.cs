@@ -46,7 +46,6 @@ namespace Deez_Notes_Dm.Services
             {
                 return new List<Player>();
             }
-
         }
 
         public static void UpdatePlayerDataWith(List<Player> players)

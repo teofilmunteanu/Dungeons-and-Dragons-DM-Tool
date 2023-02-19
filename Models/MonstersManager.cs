@@ -41,19 +41,14 @@ namespace Deez_Notes_Dm.Models
             return await MonsterServices.GetMonstersData(monsterName);
         }
 
-        public async Task<MonsterDTO> GetSingleMonsterDataAsync(string monsterName)
-        {
-            return await MonsterServices.GetSingleMonsterData(monsterName);
-        }
-
         public async Task<Monster> GetMonsterForCombatAsync(string monsterName)
         {
             //ensures monster ids are higher than player ids, in case a player joins the combat later
             int id = _playersManager.GetPlayers().Count + MonstersInCombat.Count;
 
-            MonsterDTO monsterDTO = await GetSingleMonsterDataAsync(monsterName);
+            MonsterDTO monsterDTO = await MonsterServices.GetSingleMonsterData(monsterName);
 
-            Monster monster = MonsterServices.ToMonster(id, monsterDTO);
+            Monster monster = await MonsterServices.ToMonster(id, monsterDTO);
 
             return monster;
         }

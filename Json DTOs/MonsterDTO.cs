@@ -14,7 +14,7 @@ namespace Deez_Notes_Dm.Json_DTOs
         public int armor_class { get; set; }
         public int hit_points { get; set; }
 
-        public string hit_Dice { get; set; }
+        public string hit_dice { get; set; }
         public Speed speed { get; set; }
 
         public int strength { get; set; }
@@ -53,6 +53,7 @@ namespace Deez_Notes_Dm.Json_DTOs
         public ActionDTO[]? legendary_actions { get; set; }
 
         public ActionDTO[]? special_abilities { get; set; }
+        public string[]? spell_list { get; set; }
 
         public class Skills
         {
@@ -83,6 +84,25 @@ namespace Deez_Notes_Dm.Json_DTOs
             public int? attack_bonus { get; set; }
             public string? damage_dice { get; set; }
             public int? damage_bonus { get; set; }
+        }
+
+        public class SpellDTO
+        {
+            public string name { get; set; }
+            public string desc { get; set; }
+            public string higher_level { get; set; }
+            public string range { get; set; }
+            public string components { get; set; }
+            public string material { get; set; }
+            public string ritual { get; set; }
+            public string duration { get; set; }
+            public string concentration { get; set; }
+            public string casting_time { get; set; }
+            public string level { get; set; }
+            public string school { get; set; }
+            public string dnd_class { get; set; }
+            public string archetype { get; set; }
+            public string circles { get; set; }
         }
     }
 }

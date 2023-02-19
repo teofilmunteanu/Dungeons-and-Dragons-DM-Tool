@@ -9,10 +9,14 @@ namespace Deez_Notes_Dm.API_Managers
 {
     public static class MonsterAPI
     {
+        private readonly static string Open5eAPI_MonsterSearchPath = "https://api.open5e.com/monsters/?format=json&search=";
+        private readonly static string Open5eAPI_MonsterByNamePath = "https://api.open5e.com/monsters/?name=";
+        private readonly static string Open5eAPI_SpellBySlugPath = "https://api.open5e.com/spells/";
+
         public static async Task<string> searchMonsterAsync(string monsterName)
         {
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync("https://api.open5e.com/monsters/?format=json&search=" + monsterName);
+            HttpResponseMessage response = await client.GetAsync(Open5eAPI_MonsterSearchPath + monsterName);
             response.EnsureSuccessStatusCode();
 
             var responseBody = await response.Content.ReadAsStringAsync();
@@ -33,14 +37,13 @@ namespace Deez_Notes_Dm.API_Managers
             }
 
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync("https://api.open5e.com/monsters/?name=" + monsterName);
+            HttpResponseMessage response = await client.GetAsync(Open5eAPI_MonsterByNamePath + monsterName);
             response.EnsureSuccessStatusCode();
 
             var responseBody = await response.Content.ReadAsStringAsync();
 
             return responseBody;
         }
-
 
         public static async Task<List<MonsterDTO>> GetMonstersAsync(string monsterName)
         {
@@ -63,6 +66,29 @@ namespace Deez_Notes_Dm.API_Managers
             MonsterDTO Monster = dynamicObject.results[0].ToObject<MonsterDTO>();
 
             return Monster;
+        }
+
+
+        public static async Task<string> fetchSpellAsync(string spellAPI_Path)
+        {
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.GetAsync(spellAPI_Path);
+            response.EnsureSuccessStatusCode();
+
+            var responseBody = await response.Content.ReadAsStringAsync();
+
+            return responseBody;
+        }
+
+        public static async Task<MonsterDTO.SpellDTO> GetSpellAsync(string spellAPI_Path)
+        {
+            string json = await fetchSpellAsync(spellAPI_Path);
+
+            var dynamicObject = JsonConvert.DeserializeObject<dynamic>(json)!;
+
+            MonsterDTO.SpellDTO Spell = dynamicObject.ToObject<MonsterDTO.SpellDTO>();
+
+            return Spell;
         }
     }
 }

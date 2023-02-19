@@ -1,4 +1,5 @@
 ﻿using Deez_Notes_Dm.API_Managers;
+using Deez_Notes_Dm.DataManagers;
 using Deez_Notes_Dm.Json_DTOs;
 using Deez_Notes_Dm.Models;
 using System.Collections.Generic;
@@ -30,7 +31,36 @@ namespace Deez_Notes_Dm.Services
             };
         }
 
-        public static Monster ToMonster(int id, MonsterDTO monsterDTO)
+        private async static Task<Spell>? ToSpell(string spellAPI_Path)
+        {
+            if (spellAPI_Path == null)
+            {
+                return null;
+            }
+
+            SpellDTO spellDTO = await MonsterAPI.GetSpellAsync(spellAPI_Path);
+
+            return new Spell()
+            {
+                name = spellDTO.name,
+                desc = spellDTO.desc,
+                higherLevel = spellDTO.higher_level,
+                range = spellDTO.range,
+                components = spellDTO.components,
+                material = spellDTO.material,
+                ritual = spellDTO.ritual,
+                duration = spellDTO.duration,
+                concentration = spellDTO.concentration,
+                castingTime = spellDTO.casting_time,
+                level = spellDTO.level,
+                school = spellDTO.school,
+                dndClass = spellDTO.dnd_class,
+                archetype = spellDTO.archetype,
+                circles = spellDTO.circles
+            };
+        }
+
+        public async static Task<Monster> ToMonster(int id, MonsterDTO monsterDTO)
         {
             string race = monsterDTO.subtype != "" ? monsterDTO.type + " - " + monsterDTO.subtype : monsterDTO.type;
 
@@ -85,7 +115,17 @@ namespace Deez_Notes_Dm.Services
             List<Action> specialAbilities = new List<Action>();
             if (monsterDTO.special_abilities != null)
             {
-                actions = monsterDTO.special_abilities.Select(a => ToAction(a)).ToList<Action>();
+                specialAbilities = monsterDTO.special_abilities.Select(a => ToAction(a)).ToList<Action>();
+            }
+
+            List<Spell> spells = new List<Spell>();
+            if (monsterDTO.spell_list != null)
+            {
+                foreach (string spellPath in monsterDTO.spell_list)
+                {
+                    Spell spellDTO = await ToSpell(spellPath);
+                    spells.Add(spellDTO);
+                }
             }
 
             return new Monster(
@@ -98,7 +138,7 @@ namespace Deez_Notes_Dm.Services
                 stats,
                 monsterDTO.size,
                 monsterDTO.alignment,
-                monsterDTO.hit_Dice,
+                monsterDTO.hit_dice,
                 savingThrows,
                 skills,
                 monsterDTO.damage_vulnerabilities,
@@ -113,20 +153,35 @@ namespace Deez_Notes_Dm.Services
                 reactions,
                 monsterDTO.legendary_desc,
                 legendaryActions,
-                specialAbilities
+                specialAbilities,
+                spells
             );
         }
 
         public static async Task<List<MonsterDTO>> GetMonstersData(string name)
         {
-            List<MonsterDTO> monsterDTOs = await MonsterAPI.GetMonstersAsync(name);
+            List<MonsterDTO> monsterDTOs;
+
+            monsterDTOs = MonstersJsonManager.GetMonstersFromJson(name);
+
+            if (monsterDTOs == null || monsterDTOs.Count == 0)
+            {
+                monsterDTOs = await MonsterAPI.GetMonstersAsync(name);
+            }
 
             return monsterDTOs;
         }
 
         public static async Task<MonsterDTO> GetSingleMonsterData(string name)
         {
-            MonsterDTO monsterDTO = await MonsterAPI.GetSingleMonsterAsync(name);
+            MonsterDTO monsterDTO = new MonsterDTO();
+
+            monsterDTO = MonstersJsonManager.GetSingleMonsterFromJson(name);
+
+            if (monsterDTO == null)
+            {
+                monsterDTO = await MonsterAPI.GetSingleMonsterAsync(name);
+            }
 
             return monsterDTO;
         }

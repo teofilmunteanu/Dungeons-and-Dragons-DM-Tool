@@ -3,42 +3,77 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Deez_Notes_Dm.DataManagers
 {
     public static class MonstersJsonManager
     {
-        private static string appDirPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/DeezNotesDm";
-        private static string playerSavesPath = appDirPath + "/Monsters/Players.json";
+        private static string monsterSavesDirPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/DeezNotesDm/Monsters";
+        private static string monsterSavesFilePath = monsterSavesDirPath + "/Monsters.json";
 
-        public static List<PlayerDTO>? GetPlayersFromJson()
+        public static List<MonsterDTO>? GetMonstersFromJson()
         {
-            if (!Directory.Exists(appDirPath))
+            if (!Directory.Exists(monsterSavesDirPath))
             {
-                Directory.CreateDirectory(appDirPath + "/Players");
+                Directory.CreateDirectory(monsterSavesDirPath);
             }
 
-            List<PlayerDTO> Players = new List<PlayerDTO>();
 
-            if (File.Exists(playerSavesPath))
+            List<MonsterDTO> Monsters = new List<MonsterDTO>();
+
+            if (File.Exists(monsterSavesFilePath))
             {
-                string json = File.ReadAllText(playerSavesPath);
+                string json = File.ReadAllText(monsterSavesFilePath);
 
-                Players = JsonConvert.DeserializeObject<List<PlayerDTO>>(json);
+                Monsters = JsonConvert.DeserializeObject<List<MonsterDTO>>(json);
             }
             else
             {
-                File.Create(playerSavesPath);
+                File.Create(monsterSavesFilePath);
             }
 
-            return Players;
+            return Monsters;
         }
 
-        public static void SavePlayers(List<PlayerDTO> Players)
+        public static List<MonsterDTO>? GetMonstersFromJson(string name)
         {
-            string newJson = JsonConvert.SerializeObject(Players);
+            List<MonsterDTO> MonstersFromJson = GetMonstersFromJson();
+            List<MonsterDTO> MonstersWithName = new List<MonsterDTO>();
 
-            File.WriteAllText(playerSavesPath, newJson);
+            if (MonstersFromJson != null)
+            {
+                foreach (MonsterDTO monster in MonstersFromJson)
+                {
+                    if (monster.name.Contains(name))
+                    {
+                        MonstersWithName.Add(monster);
+                    }
+                }
+            }
+
+            return MonstersWithName;
+        }
+
+        public static MonsterDTO? GetSingleMonsterFromJson(string name)
+        {
+            List<MonsterDTO> MonstersFromJson = GetMonstersFromJson();
+
+            if (MonstersFromJson != null)
+            {
+                return MonstersFromJson.Where(m => m.name == name).FirstOrDefault();
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static void SaveMonsters(List<MonsterDTO> Monsters)
+        {
+            string newJson = JsonConvert.SerializeObject(Monsters);
+
+            File.WriteAllText(monsterSavesFilePath, newJson);
         }
     }
 }
