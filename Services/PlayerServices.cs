@@ -36,9 +36,17 @@ namespace Deez_Notes_Dm.Services
 
         public static List<Player> GetPlayersData()
         {
-            List<PlayerDTO> playerDTOs = PlayersJsonManager.GetPlayersFromJson();
+            List<PlayerDTO>? playerDTOs = PlayersJsonManager.GetPlayersFromJson();
 
-            return playerDTOs.Select(p => ToPlayer(p)).ToList();
+            if (playerDTOs != null)
+            {
+                return playerDTOs.Select(p => ToPlayer(p)).ToList();
+            }
+            else
+            {
+                return new List<Player>();
+            }
+
         }
 
         public static void UpdatePlayerDataWith(List<Player> players)

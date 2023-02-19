@@ -1,5 +1,6 @@
 ﻿using Deez_Notes_Dm.Json_DTOs;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -8,34 +9,22 @@ namespace Deez_Notes_Dm.DataManagers
     //ONLY operations on the json!!!
     public static class PlayersJsonManager
     {
-        private static string playerSavesPath = Directory.GetCurrentDirectory() + "/Resources/Players/Players.json";
+        //Directory.GetCurrentDirectory() + "/Resources/Players/Players.json";
+        private static string appDirPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/DeezNotesDm";
+        private static string playerSavesPath = appDirPath + "/Players/Players.json";
 
-        //private PlayersJsonManager()
-        //{
-
-        //}
-
-        //private static PlayersJsonManager? instance = null;
-        //public static PlayersJsonManager Instance
-        //{
-        //    get
-        //    {
-        //        if (instance == null)
-        //        {
-        //            instance = new PlayersJsonManager();
-        //        }
-
-        //        return instance;
-        //    }
-        //}
-
-        public static List<PlayerDTO> GetPlayersFromJson()
+        public static List<PlayerDTO>? GetPlayersFromJson()
         {
+            if (!Directory.Exists(appDirPath))
+            {
+                Directory.CreateDirectory(appDirPath + "/Players");
+            }
+
             List<PlayerDTO> Players = new List<PlayerDTO>();
 
             if (File.Exists(playerSavesPath))
             {
-                string json = File.ReadAllText(@"Resources/Players/Players.json");
+                string json = File.ReadAllText(playerSavesPath);
 
                 Players = JsonConvert.DeserializeObject<List<PlayerDTO>>(json);
             }
@@ -51,7 +40,7 @@ namespace Deez_Notes_Dm.DataManagers
         {
             string newJson = JsonConvert.SerializeObject(Players);
 
-            File.WriteAllText(@"Resources/Players/Players.json", newJson);
+            File.WriteAllText(playerSavesPath, newJson);
         }
     }
 }
