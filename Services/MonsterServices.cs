@@ -4,7 +4,6 @@ using Deez_Notes_Dm.Json_DTOs;
 using Deez_Notes_Dm.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using static Deez_Notes_Dm.Json_DTOs.MonsterDTO;
 using static Deez_Notes_Dm.Models.Creature;
@@ -84,15 +83,27 @@ namespace Deez_Notes_Dm.Services
                 CHA = monsterDTO.charisma_save
             };
 
-            string skills = "";
-            PropertyInfo[] skillsProps = monsterDTO.skills.GetType().GetProperties();
-            foreach (PropertyInfo p in skillsProps)
+            SkillsStats skills = new SkillsStats()
             {
-                if (p.GetValue(monsterDTO.skills) != null)
-                {
-                    skills += p.Name + "+" + (int)p.GetValue(monsterDTO.skills) + " ";
-                }
-            }
+                acrobatics = monsterDTO.skills.acrobatics,
+                animalHandling = monsterDTO.skills.animal_handling,
+                arcana = monsterDTO.skills.arcana,
+                athletics = monsterDTO.skills.athletics,
+                deception = monsterDTO.skills.deception,
+                history = monsterDTO.skills.history,
+                insight = monsterDTO.skills.insight,
+                intimidation = monsterDTO.skills.intimidation,
+                investigation = monsterDTO.skills.investigation,
+                medicine = monsterDTO.skills.medicine,
+                nature = monsterDTO.skills.nature,
+                perception = monsterDTO.skills.perception,
+                performance = monsterDTO.skills.performance,
+                persuasion = monsterDTO.skills.persuasion,
+                religion = monsterDTO.skills.religion,
+                sleightOfHand = monsterDTO.skills.sleight_of_hand,
+                stealth = monsterDTO.skills.stealth,
+                survival = monsterDTO.skills.survival,
+            };
 
             List<Action> reactions = new List<Action>();
             if (monsterDTO.reactions != null)

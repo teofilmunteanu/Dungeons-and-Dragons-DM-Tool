@@ -12,7 +12,7 @@ namespace Deez_Notes_Dm.Models
 
         public SavingStats SavingThrows { get; set; }
 
-        public string Skills { get; set; }
+        public SkillsStats Skills { get; set; }
 
         public string? DamageVulnerabilities { get; set; }
         public string? DamageResistances { get; set; }
@@ -83,7 +83,7 @@ namespace Deez_Notes_Dm.Models
         //At the mosnter creator service: if id> players.count, then it's a mosnter
         //Show on right stats of monster with id same as current creature(cuz the monster attributes can't be accessed from the creature class)
         public Monster(int id, string name, string race, int maxHP, int ac, Speed speeds, Stats stats,
-            string size, string alignment, string hit_Dice, SavingStats savingThrows, string skills,
+            string size, string alignment, string hit_Dice, SavingStats savingThrows, SkillsStats skills,
             string? damageVulnerabilities, string? damageResistances, string? damageImmunities, string? conditionImmunities,
             string? senses, string languages, string challengeRating, int xp_Drop, List<Action>? actions, List<Action>? reactions,
             string? legendaryActionDescription, List<Action>? legendaryActions, List<Action>? specialAbilities, List<Spell>? spells) : base(id, name, race, maxHP, maxHP, ac, speeds, stats)
@@ -126,6 +126,28 @@ namespace Deez_Notes_Dm.Models
             public int? INT { get; set; }
             public int? WIS { get; set; }
             public int? CHA { get; set; }
+        }
+
+        public class SkillsStats
+        {
+            public int? acrobatics { get; set; }
+            public int? animalHandling { get; set; }
+            public int? arcana { get; set; }
+            public int? athletics { get; set; }
+            public int? deception { get; set; }
+            public int? history { get; set; }
+            public int? insight { get; set; }
+            public int? intimidation { get; set; }
+            public int? investigation { get; set; }
+            public int? medicine { get; set; }
+            public int? nature { get; set; }
+            public int? perception { get; set; }
+            public int? performance { get; set; }
+            public int? persuasion { get; set; }
+            public int? religion { get; set; }
+            public int? sleightOfHand { get; set; }
+            public int? stealth { get; set; }
+            public int? survival { get; set; }
         }
 
         public class Spell

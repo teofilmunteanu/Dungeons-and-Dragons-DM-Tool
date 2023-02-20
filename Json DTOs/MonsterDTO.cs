@@ -31,7 +31,7 @@ namespace Deez_Notes_Dm.Json_DTOs
         public int? wisdom_save { get; set; }
         public int? charisma_save { get; set; }
 
-        public Skills skills { get; set; }
+        public SkillsDTO skills { get; set; }
 
         public string? damage_vulnerabilities { get; set; }
         public string? damage_resistances { get; set; }
@@ -55,7 +55,7 @@ namespace Deez_Notes_Dm.Json_DTOs
         public ActionDTO[]? special_abilities { get; set; }
         public string[]? spell_list { get; set; }
 
-        public class Skills
+        public class SkillsDTO
         {
             public int? acrobatics { get; set; }
             public int? animal_handling { get; set; }

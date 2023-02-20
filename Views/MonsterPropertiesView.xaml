@@ -38,72 +38,55 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Text="{Binding Path=name}"/>
-                <TextBlock Grid.Row="1" Text="{Binding Path=description}"/>
-                <TextBlock Grid.Row="2" Text="{Binding Path=attackBonus}"/>
-                <TextBlock Grid.Row="3" Text="{Binding Path=damageDice}"/>
-                <TextBlock Grid.Row="4" Text="{Binding Path=damageBonus}"/>
+                <TextBlock Grid.Row="0" Text="{Binding Path=name}" FontWeight="Bold"/>
+                <TextBlock Grid.Row="1" Text="{Binding Path=description}" TextWrapping="WrapWithOverflow"/>
             </Grid>
 
         </DataTemplate>
     </UserControl.Resources>
     
     <Border BorderBrush="DarkGray" Background="#FFAEAEAE" BorderThickness="3,3,3,3" Margin="5,5,5,5">
-        <ScrollViewer HorizontalScrollBarVisibility="Auto"
-                      VerticalScrollBarVisibility="Auto"
-                      CanContentScroll="True">
-            <Grid x:Name="CreatureDescBlock1"  HorizontalAlignment="Center">
+        
+        <Grid x:Name="CreatureDescBlock1"  HorizontalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="{Binding Path=Size}" FontSize="15" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="1" Text="{Binding Path=Alignment}" FontSize="15" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="2" Text="{Binding Path=Hit_Dice}" FontSize="15" HorizontalAlignment="Center"/>
+            <!--<TextBlock Grid.Row="3" Text="{Binding Path=SavingThrowsString, StringFormat='Saving Throws: {0}'}" FontSize="12" HorizontalAlignment="Center"/>-->
+            
+            <Grid Grid.Row="3" HorizontalAlignment="Left" Margin="10 0 0 0">
                 <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
+                    <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Text="{Binding Path=Size}" FontSize="15" HorizontalAlignment="Center"/>
-                <TextBlock Grid.Row="1" Text="{Binding Path=Alignment}" FontSize="15" HorizontalAlignment="Center"/>
-                <TextBlock Grid.Row="2" Text="{Binding Path=Hit_Dice}" FontSize="15" HorizontalAlignment="Center"/>
-
-                <TextBlock Grid.Row="3" Text="{Binding Path=SavingThrows.STR}" FontSize="15"/>
-                 <!--Saving Throws(STR,...)-->
-                <!--<Grid x:Name="PlayerStatsBlock" Grid.Row="3" Margin="15,0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="15"/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-
-                    <TextBlock Grid.Row="0" Grid.Column="1" Text="STR" HorizontalAlignment="Left" FontWeight="Bold"/>
-                    <TextBlock Grid.Row="0" Grid.Column="5" HorizontalAlignment="Left" Text="{Binding Path=SavingThrows.STR}" />
-                    <TextBlock Grid.Row="0" Grid.Column="4" Text="DEX" HorizontalAlignment="Left" FontWeight="Bold"/>
-                    <TextBlock Grid.Row="0" Grid.Column="5" HorizontalAlignment="Left" Text="{Binding Path=SavingThrows.DEX}" />
-                    <TextBlock Grid.Row="1" Grid.Column="1" Text="CON" HorizontalAlignment="Left" FontWeight="Bold"/>
-                    <TextBlock Grid.Row="0" Grid.Column="5" HorizontalAlignment="Left" Text="{Binding Path=SavingThrows.CON}" />
-                    <TextBlock Grid.Row="1" Grid.Column="4" Text="INT" HorizontalAlignment="Left" FontWeight="Bold"/>
-                    <TextBlock Grid.Row="0" Grid.Column="5" HorizontalAlignment="Left" Text="{Binding Path=SavingThrows.INT}" />
-                    <TextBlock Grid.Row="2" Grid.Column="1" Text="WIS" HorizontalAlignment="Left" FontWeight="Bold"/>
-                    <TextBlock Grid.Row="0" Grid.Column="5" HorizontalAlignment="Left" Text="{Binding Path=SavingThrows.WIS}" />
-                    <TextBlock Grid.Row="2" Grid.Column="4" Text="CHA" HorizontalAlignment="Left" FontWeight="Bold"/>
-                    <TextBlock Grid.Row="0" Grid.Column="5" HorizontalAlignment="Left" Text="{Binding Path=SavingThrows.CHA}" />
-
-                </Grid>-->
-
-                <ListBox Grid.Row="4" ItemsSource="{Binding Path=Actions}" ItemTemplate="{StaticResource ActionsListData}" BorderThickness="0" MaxWidth="150px"/>
-
+                <TextBlock Grid.Row="0" Text="Saving Throws" FontSize="12" FontWeight="Bold" VerticalAlignment="Bottom" />
+                <TextBlock Grid.Row="1" Text="{Binding Path=SavingThrowsString}" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             </Grid>
-        </ScrollViewer>
+            
+            <Grid Grid.Row="4" HorizontalAlignment="Left" Margin="10 0 0 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="Skills" FontSize="12" FontWeight="Bold" VerticalAlignment="Bottom" />
+                <TextBlock Grid.Row="1" Text="{Binding Path=SkillsString}" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            </Grid>
+
+            <ListBox Grid.Row="5" ItemsSource="{Binding Path=Actions}" ItemTemplate="{StaticResource ActionsListData}" BorderThickness="0" MinWidth="150px" 
+                         ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="5 5 5 30"/>
+
+        </Grid>
+        
     </Border>
     
 </UserControl>
