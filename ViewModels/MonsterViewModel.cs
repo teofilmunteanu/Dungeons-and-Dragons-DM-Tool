@@ -32,10 +32,10 @@ namespace Deez_Notes_Dm.ViewModels
 
 
         public string ChallengeRating { get; set; }
-        public int XP_Drop { get; set; } // generate using challangeRating
+        public int XP_Drop { get; set; }
 
 
-        public List<Action> Actions { get; set; } //make class?
+        public List<Action> Actions { get; set; }
         public List<Action> Reactions { get; set; }
 
 

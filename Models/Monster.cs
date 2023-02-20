@@ -111,40 +111,40 @@ namespace Deez_Notes_Dm.Models
 
         public class Action
         {
-            public string name;
-            public string description;
-            public int? attackBonus;
-            public string? damageDice;
-            public int? damageBonus;
+            public string name { get; set; }
+            public string description { get; set; }
+            public int? attackBonus { get; set; }
+            public string? damageDice { get; set; }
+            public int? damageBonus { get; set; }
         }
 
         public class SavingStats
         {
-            public int? STR;
-            public int? DEX;
-            public int? CON;
-            public int? INT;
-            public int? WIS;
-            public int? CHA;
+            public int? STR { get; set; }
+            public int? DEX { get; set; }
+            public int? CON { get; set; }
+            public int? INT { get; set; }
+            public int? WIS { get; set; }
+            public int? CHA { get; set; }
         }
 
         public class Spell
         {
-            public string name;
-            public string desc;
-            public string higherLevel;
-            public string range;
-            public string components;
-            public string material;
-            public string ritual;
-            public string duration;
-            public string concentration;
-            public string castingTime;
-            public string level;
-            public string school;
-            public string dndClass;
-            public string archetype;
-            public string circles;
+            public string name { get; set; }
+            public string desc { get; set; }
+            public string higherLevel { get; set; }
+            public string range { get; set; }
+            public string components { get; set; }
+            public string material { get; set; }
+            public string ritual { get; set; }
+            public string duration { get; set; }
+            public string concentration { get; set; }
+            public string castingTime { get; set; }
+            public string level { get; set; }
+            public string school { get; set; }
+            public string dndClass { get; set; }
+            public string archetype { get; set; }
+            public string circles { get; set; }
         }
     }
 }
