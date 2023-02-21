@@ -25,7 +25,7 @@ namespace Deez_Notes_Dm.ViewModels
 
         public string DamageImmunities { get; set; }
 
-        public string ConditionImmuniuties { get; set; }
+        public string ConditionImmunities { get; set; }
 
         public string Senses { get; set; }
 
@@ -61,7 +61,7 @@ namespace Deez_Notes_Dm.ViewModels
             DamageVulnerabilities = monster.DamageVulnerabilities;
             DamageResistances = monster.DamageResistances;
             DamageImmunities = monster.DamageImmunities;
-            ConditionImmuniuties = ConditionImmuniuties;
+            ConditionImmunities = monster.ConditionImmunities;
             Senses = monster.Senses;
             Languages = monster.Languages;
             ChallengeRating = monster.ChallengeRating;

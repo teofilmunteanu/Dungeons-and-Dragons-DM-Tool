@@ -61,7 +61,8 @@ namespace Deez_Notes_Dm.Services
 
         public async static Task<Monster> ToMonster(int id, MonsterDTO monsterDTO)
         {
-            string race = monsterDTO.subtype != "" ? monsterDTO.type + " - " + monsterDTO.subtype : monsterDTO.type;
+            string race = monsterDTO.subtype != "" ? monsterDTO.type[0].ToString().ToUpper() + monsterDTO.type.Substring(1) + "(" + monsterDTO.subtype[0].ToString().ToUpper() + monsterDTO.subtype.Substring(1) + ")" :
+                monsterDTO.type[0].ToString().ToUpper() + monsterDTO.type.Substring(1);
 
             Stats stats = new Stats()
             {
