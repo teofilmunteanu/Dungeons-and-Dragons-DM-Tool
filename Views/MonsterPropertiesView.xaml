@@ -25,7 +25,6 @@
                 <TextBlock Grid.Row="4" Text="{Binding Path=WIS}"/>
                 <TextBlock Grid.Row="4" Text="{Binding Path=CHA}"/>
             </Grid>
-            
         </DataTemplate>
 
         <DataTemplate x:Key="ActionsListData">
@@ -40,6 +39,35 @@
 
                 <TextBlock Grid.Row="0" Text="{Binding Path=name}" FontWeight="Bold"/>
                 <TextBlock Grid.Row="1" Text="{Binding Path=description}" TextWrapping="Wrap"/>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="SpellsListData">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.ColumnSpan="3" Text="{Binding Path=name}" FontWeight="Bold"/>
+                
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding Path=level}"/>
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=castingTime}"/>
+                <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Path=range}"/>
+
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="{Binding Path=components}"/>
+                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=material}" TextWrapping="Wrap"/>
+                <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding Path=duration}"/>
+                
+                <TextBlock Grid.Row="3" Grid.ColumnSpan="3" Text="{Binding Path=desc}" TextWrapping="Wrap"/>
             </Grid>
 
         </DataTemplate>
@@ -84,6 +112,8 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto" MinHeight="20px"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto" MinHeight="20px"/>
                     <RowDefinition Height="Auto"/>
@@ -256,6 +286,20 @@
                     <TextBlock Grid.Row="0" Text="Legendary Actions" FontSize="15" FontWeight="Bold" Margin="0 5"/>
                     <TextBlock Grid.Row="1" Text="{Binding Path=LegendaryActionDescription}" FontSize="13" Margin="0 5"/>
                     <ListBox Grid.Row="2" ItemsSource="{Binding Path=LegendaryActions}" ItemTemplate="{StaticResource ActionsListData}" BorderThickness="0" MinWidth="150px" 
+                        ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
+                </Grid>
+
+                <Rectangle Grid.Row="19"/>
+
+                <Grid Grid.Row="20" Margin="0 5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="Spells" FontSize="15" FontWeight="Bold" Margin="0 5"/>
+                    <ListBox Grid.Row="2" ItemsSource="{Binding Path=Spells}" ItemTemplate="{StaticResource SpellsListData}" BorderThickness="0" MinWidth="150px" 
                         ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
                 </Grid>
             </Grid>
