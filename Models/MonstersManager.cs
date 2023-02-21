@@ -58,6 +58,17 @@ namespace Deez_Notes_Dm.Models
             return monster;
         }
 
+
+        public List<Monster> GetCombatMonsters()
+        {
+            return MonstersInCombat;
+        }
+
+        public Monster GetCombatMonsterById(int id)
+        {
+            return MonstersInCombat.Where(c => c.ID == id).First();
+        }
+
         public void AddMonsterToCombat(Monster monster)
         {
             MonstersInCombat.Add(monster);

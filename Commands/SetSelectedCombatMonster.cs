@@ -39,7 +39,7 @@ namespace Deez_Notes_Dm.Commands
             {
                 if (_combatListViewModel.SelectedCreature != null)
                 {
-                    Monster monster = await _monstersManager.GetMonsterForCombatAsync(_combatListViewModel.SelectedCreature.Name);
+                    Monster monster = _monstersManager.GetCombatMonsterById(_combatListViewModel.SelectedCreature.ID);// await _monstersManager.GetMonsterForCombatAsync(_combatListViewModel.SelectedCreature.Name);
                     _combatListViewModel.SelectedMonster = new MonsterViewModel(monster);
                 }
             }
