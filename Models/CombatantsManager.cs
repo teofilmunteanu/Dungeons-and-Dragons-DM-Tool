@@ -98,5 +98,10 @@ namespace Deez_Notes_Dm.Models
 
             return 0;
         }
+
+        public void SortByInitiative()
+        {
+            Combatants = Combatants.OrderBy(c => c.Initiative).ToList();
+        }
     }
 }

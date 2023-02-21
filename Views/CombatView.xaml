@@ -33,6 +33,7 @@
                             </Style.Resources>
                         </Style>
                     </Grid.Resources>
+                    
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
@@ -40,6 +41,7 @@
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
+
 
                     <!-- Combatant Description(Name,Race,Level,Classes) -->
                     <Border Grid.Row="0" BorderThickness="0 0 0 3" Padding="15" BorderBrush="Gray" >
@@ -57,7 +59,7 @@
                     <!-- END Combatant Description -->
 
                     <!-- Combatant Description2(AC, HP, Speed) -->
-                    <Grid x:Name="PlayerHpBlock" Grid.Row="2" Margin="15,12,15,2">
+                    <Grid x:Name="PlayerHpBlock" Grid.Row="1" Margin="15,12,15,2">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>
@@ -101,7 +103,7 @@
                     <!-- END Combatant Description2 -->
 
                     <!-- Combatant Stats(STR,...) -->
-                    <Grid x:Name="PlayerStatsBlock" Grid.Row="3" Margin="15,0">
+                    <Grid x:Name="PlayerStatsBlock" Grid.Row="2" Margin="15,0">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition />
@@ -177,6 +179,16 @@
                         <Rectangle Grid.Row="3" Grid.ColumnSpan="7"/>
                     </Grid>
                     <!-- END Combatant Stats -->
+                    <Grid Grid.Row="3" HorizontalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        
+                        <TextBlock Grid.Row="0" Text="Initiative"/>
+                        <TextBox Grid.Row="1" Text="{Binding Path=Initiative, UpdateSourceTrigger=PropertyChanged}"/>
+                    </Grid>
+                    
                 </Grid>
             </Border>
         </DataTemplate>

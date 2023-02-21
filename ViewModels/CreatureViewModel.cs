@@ -24,7 +24,20 @@ namespace Deez_Notes_Dm.ViewModels
 
         public Stats StatsMod { get; set; }
 
-        public double Initiative { get; set; }
+        private double initiative;
+        public double Initiative { 
+            get=>initiative;
+            set
+            {
+                initiative = (int)value;
+                OnPropertyChanged(nameof(Initiative));
+                if (this != null && (int)value != 0 && SortCombatListCommand!=null)
+                {
+                    SortCombatListCommand.Execute(this);
+                }
+                
+            }
+        }
 
         private string hpInput;
         public string HP_Input
@@ -40,10 +53,11 @@ namespace Deez_Notes_Dm.ViewModels
 
         public ICommand AddHPCommand { get; }
         public ICommand SubtractHPCommand { get; }
+        public ICommand SortCombatListCommand { get; }
 
         //for inheritance
         public CreatureViewModel(int id, string name, string race, int hp, int maxHP, int ac,
-            Speed speeds, Stats baseStats, Stats statsMod)
+            Speed speeds, Stats baseStats, Stats statsMod, double initiative)
         {
             ID = id;
             Name = name;
@@ -53,6 +67,7 @@ namespace Deez_Notes_Dm.ViewModels
             AC = ac;
             BaseStats = baseStats;
             StatsMod = statsMod;
+            Initiative = initiative;
 
             SpeedsList = new List<string>();
             if (speeds is not null)
@@ -72,6 +87,7 @@ namespace Deez_Notes_Dm.ViewModels
             AC = creature.AC;
             BaseStats = creature.BaseStats;
             StatsMod = creature.StatsMod;
+            Initiative = creature.Initiative;
 
             SpeedsList = new List<string>();
             if (creature.Speeds is not null)
@@ -81,6 +97,7 @@ namespace Deez_Notes_Dm.ViewModels
 
             AddHPCommand = new AddHPCombatCommand(this, combatListViewModel, combatantsManager);
             SubtractHPCommand = new SubtractHPCombatCommand(this, combatListViewModel, combatantsManager);
+            SortCombatListCommand = new SortCombatListCommand(this, combatListViewModel, combatantsManager);
         }
 
         public List<string> ToSpeedList(Speed speeds)

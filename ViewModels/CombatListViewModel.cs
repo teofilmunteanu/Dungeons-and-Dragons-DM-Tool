@@ -18,7 +18,6 @@ namespace Deez_Notes_Dm.ViewModels
 
         private readonly ObservableCollection<CreatureViewModel> _combatants;
         private readonly CombatantsManager _combatantsManager;
-        private readonly MonstersManager _monstersManager;
 
         public ObservableCollection<CreatureViewModel> Combatants => _combatants;
 
@@ -32,17 +31,6 @@ namespace Deez_Notes_Dm.ViewModels
                 SetField(ref selectedCreature, value);
 
                 SetSelectedMonsterCommand.Execute(null);
-                //if (selectedCreature != null)
-                //{
-                //    if (_combatantsManager.IsCombatantMonster(selectedCreature.ID))
-                //    {
-
-                //    }
-                //    else
-                //    {
-                //        SelectedMonster = null;
-                //    }
-                //}
             }
         }
 
@@ -63,7 +51,6 @@ namespace Deez_Notes_Dm.ViewModels
             _combatants = new ObservableCollection<CreatureViewModel>();
 
             _combatantsManager = combatantsManager;
-            _monstersManager = monstersManager;
 
             ShowCombatSelectionCommand = new ShowCombatSelectionCommand(combatSelectionStore);
             SetSelectedMonsterCommand = new SetSelectedCombatMonster(this, monstersManager);
