@@ -1,5 +1,6 @@
 ﻿using Deez_Notes_Dm.Json_DTOs;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.RegularExpressions;
@@ -83,13 +84,20 @@ namespace Deez_Notes_Dm.API_Managers
 
         public static async Task<MonsterDTO.SpellDTO> GetSpellAsync(string spellAPI_Path)
         {
-            string json = await fetchSpellAsync(spellAPI_Path);
+            try
+            {
+                string json = await fetchSpellAsync(spellAPI_Path);
 
-            var dynamicObject = JsonConvert.DeserializeObject<dynamic>(json)!;
+                var dynamicObject = JsonConvert.DeserializeObject<dynamic>(json)!;
 
-            MonsterDTO.SpellDTO Spell = dynamicObject.ToObject<MonsterDTO.SpellDTO>();
+                MonsterDTO.SpellDTO Spell = dynamicObject.ToObject<MonsterDTO.SpellDTO>();
 
-            return Spell;
+                return Spell;
+            }
+            catch
+            {
+                throw new Exception("Spell at path " + spellAPI_Path + " not found!");
+            }
         }
     }
 }

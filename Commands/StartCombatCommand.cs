@@ -1,5 +1,7 @@
 ﻿using Deez_Notes_Dm.Models;
 using Deez_Notes_Dm.ViewModels;
+using System;
+using System.Windows;
 
 namespace Deez_Notes_Dm.Commands
 {
@@ -29,17 +31,32 @@ namespace Deez_Notes_Dm.Commands
             //{
             //    _combatantsManager.AddCombatant(player);
             //}
-
-            foreach (string monsterName in _combatSelectionViewModel.SelectedMonsters)
+            try
             {
-                Monster monster = await _monstersManager.GetMonsterForCombatAsync(monsterName);
-                _combatantsManager.AddCombatant(monster);
-                _monstersManager.AddMonsterToCombat(monster);
+                foreach (string monsterName in _combatSelectionViewModel.SelectedMonsters)
+                {
+                    Monster monster = await _monstersManager.GetMonsterForCombatAsync(monsterName);
+                    _combatantsManager.AddCombatant(monster);
+                    _monstersManager.AddMonsterToCombat(monster);
+                }
+
+                _combatListViewModel.UpdateCombatList();
             }
-
-            _combatListViewModel.UpdateCombatList();
-
-            _combatSelectionViewModel.CancelCommand.Execute(null);
+            catch (Exception ex)
+            {
+                if (ex is InvalidOperationException)
+                {
+                    MessageBox.Show("Aborted");
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            finally
+            {
+                _combatSelectionViewModel.CancelCommand.Execute(null);
+            }
         }
     }
 }

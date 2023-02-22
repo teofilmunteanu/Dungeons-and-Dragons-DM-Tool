@@ -13,14 +13,14 @@ namespace Deez_Notes_Dm.Services
 {
     public class MonsterServices
     {
-        private static Action? ToAction(ActionDTO actionDTO)
+        private static ActionStats? ToAction(ActionDTO actionDTO)
         {
             if (actionDTO == null)
             {
                 return null;
             }
 
-            return new Action()
+            return new ActionStats()
             {
                 description = actionDTO.desc,
                 name = actionDTO.name,
@@ -106,28 +106,28 @@ namespace Deez_Notes_Dm.Services
                 survival = monsterDTO.skills.survival,
             };
 
-            List<Action> reactions = new List<Action>();
+            List<ActionStats> reactions = new List<ActionStats>();
             if (monsterDTO.reactions != null)
             {
-                reactions = monsterDTO.reactions.Select(a => ToAction(a)).ToList<Action>();
+                reactions = monsterDTO.reactions.Select(a => ToAction(a)).ToList();
             }
 
-            List<Action> actions = new List<Action>();
+            List<ActionStats> actions = new List<ActionStats>();
             if (monsterDTO.actions != null)
             {
-                actions = monsterDTO.actions.Select(a => ToAction(a)).ToList<Action>();
+                actions = monsterDTO.actions.Select(a => ToAction(a)).ToList();
             }
 
-            List<Action> legendaryActions = new List<Action>();
+            List<ActionStats> legendaryActions = new List<ActionStats>();
             if (monsterDTO.legendary_actions != null)
             {
-                legendaryActions = monsterDTO.legendary_actions.Select(a => ToAction(a)).ToList<Action>();
+                legendaryActions = monsterDTO.legendary_actions.Select(a => ToAction(a)).ToList();
             }
 
-            List<Action> specialAbilities = new List<Action>();
+            List<ActionStats> specialAbilities = new List<ActionStats>();
             if (monsterDTO.special_abilities != null)
             {
-                specialAbilities = monsterDTO.special_abilities.Select(a => ToAction(a)).ToList<Action>();
+                specialAbilities = monsterDTO.special_abilities.Select(a => ToAction(a)).ToList();
             }
 
             List<Spell> spells = new List<Spell>();

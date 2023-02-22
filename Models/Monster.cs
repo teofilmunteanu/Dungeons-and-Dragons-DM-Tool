@@ -65,14 +65,14 @@ namespace Deez_Notes_Dm.Models
         };
         public int XP_Drop { get; set; }
 
-        public List<Action>? Actions { get; set; }
-        public List<Action>? Reactions { get; set; }
+        public List<ActionStats>? Actions { get; set; }
+        public List<ActionStats>? Reactions { get; set; }
 
 
         public string? LegendaryActionDescription { get; set; }
-        public List<Action>? LegendaryActions { get; set; }
+        public List<ActionStats>? LegendaryActions { get; set; }
 
-        public List<Action>? SpecialAbilities { get; set; }
+        public List<ActionStats>? SpecialAbilities { get; set; }
         public List<Spell>? Spells { get; set; }
 
         public Monster()
@@ -85,8 +85,8 @@ namespace Deez_Notes_Dm.Models
         public Monster(int id, string name, string race, int maxHP, int ac, Speed speeds, Stats stats,
             string size, string alignment, string hit_Dice, SavingStats savingThrows, SkillsStats skills,
             string? damageVulnerabilities, string? damageResistances, string? damageImmunities, string? conditionImmunities,
-            string? senses, string languages, string challengeRating, int xp_Drop, List<Action>? actions, List<Action>? reactions,
-            string? legendaryActionDescription, List<Action>? legendaryActions, List<Action>? specialAbilities, List<Spell>? spells) : base(id, name, race, maxHP, maxHP, ac, speeds, stats)
+            string? senses, string languages, string challengeRating, int xp_Drop, List<ActionStats>? actions, List<ActionStats>? reactions,
+            string? legendaryActionDescription, List<ActionStats>? legendaryActions, List<ActionStats>? specialAbilities, List<Spell>? spells) : base(id, name, race, maxHP, maxHP, ac, speeds, stats)
         {
             Size = size;
             Alignment = alignment;
@@ -109,7 +109,7 @@ namespace Deez_Notes_Dm.Models
             Spells = spells;
         }
 
-        public class Action
+        public class ActionStats
         {
             public string name { get; set; }
             public string description { get; set; }

@@ -36,14 +36,14 @@ namespace Deez_Notes_Dm.ViewModels
         public int XP_Drop { get; set; }
 
 
-        public List<Action> Actions { get; set; }
-        public List<Action> Reactions { get; set; }
+        public List<ActionStats> Actions { get; set; }
+        public List<ActionStats> Reactions { get; set; }
 
 
         public string LegendaryActionDescription { get; set; }
-        public List<Action> LegendaryActions { get; set; }
+        public List<ActionStats> LegendaryActions { get; set; }
 
-        public List<Action> SpecialAbilities { get; set; }
+        public List<ActionStats> SpecialAbilities { get; set; }
         public List<Spell> Spells { get; set; }
 
 
