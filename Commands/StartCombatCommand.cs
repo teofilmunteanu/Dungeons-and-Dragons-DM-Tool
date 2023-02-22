@@ -27,10 +27,11 @@ namespace Deez_Notes_Dm.Commands
             _combatantsManager.Reset();
 
             //TO DO: add only selected players (make separate player selection list)
-            //foreach (Player player in _playersManager.GetPlayers())
-            //{
-            //    _combatantsManager.AddCombatant(player);
-            //}
+            foreach (Player player in _playersManager.GetPlayers())
+            {
+                _combatantsManager.AddCombatant(player);
+            }
+
             try
             {
                 foreach (string monsterName in _combatSelectionViewModel.SelectedMonsters)

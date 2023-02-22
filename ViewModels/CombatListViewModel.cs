@@ -53,7 +53,7 @@ namespace Deez_Notes_Dm.ViewModels
             _combatantsManager = combatantsManager;
 
             ShowCombatSelectionCommand = new ShowCombatSelectionCommand(combatSelectionStore);
-            SetSelectedMonsterCommand = new SetSelectedCombatMonster(this, monstersManager);
+            SetSelectedMonsterCommand = new SetSelectedCombatantCommand(this, monstersManager);
 
             UpdateCombatList();
         }

@@ -6,12 +6,12 @@ using System.Windows;
 
 namespace Deez_Notes_Dm.Commands
 {
-    public class SetSelectedCombatMonster : CommandBase
+    public class SetSelectedCombatantCommand : CommandBase
     {
         private readonly CombatListViewModel _combatListViewModel;
         private readonly MonstersManager _monstersManager;
 
-        public SetSelectedCombatMonster(CombatListViewModel combatListViewModel, MonstersManager monstersManager)
+        public SetSelectedCombatantCommand(CombatListViewModel combatListViewModel, MonstersManager monstersManager)
         {
             _combatListViewModel = combatListViewModel;
             _monstersManager = monstersManager;
@@ -27,20 +27,21 @@ namespace Deez_Notes_Dm.Commands
             }
         }
 
-        public override bool CanExecute(object? parameter)
-        {
-            bool IsMonster = _combatListViewModel.SelectedCreature != null && _monstersManager.IsCombatantMonster(_combatListViewModel.SelectedCreature.ID);
-            return IsMonster && base.CanExecute(parameter);
-        }
-
         public async override void Execute(object? parameter)
         {
             try
             {
                 if (_combatListViewModel.SelectedCreature != null)
                 {
-                    Monster monster = _monstersManager.GetCombatMonsterById(_combatListViewModel.SelectedCreature.ID);// await _monstersManager.GetMonsterForCombatAsync(_combatListViewModel.SelectedCreature.Name);
-                    _combatListViewModel.SelectedMonster = new MonsterViewModel(monster);
+                    if (_monstersManager.IsCombatantMonster(_combatListViewModel.SelectedCreature.ID))
+                    {
+                        Monster monster = _monstersManager.GetCombatMonsterById(_combatListViewModel.SelectedCreature.ID);// await _monstersManager.GetMonsterForCombatAsync(_combatListViewModel.SelectedCreature.Name);
+                        _combatListViewModel.SelectedMonster = new MonsterViewModel(monster);
+                    }
+                    else
+                    {
+                        _combatListViewModel.SelectedMonster = null;
+                    }
                 }
             }
             catch (Exception ex)
