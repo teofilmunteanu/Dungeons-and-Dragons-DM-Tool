@@ -172,14 +172,11 @@ namespace Deez_Notes_Dm.Services
 
         public static async Task<List<MonsterDTO>> GetMonstersData(string name)
         {
-            List<MonsterDTO> monsterDTOs;
+            List<MonsterDTO> monsterDTOs = new List<MonsterDTO>();
 
-            monsterDTOs = MonstersJsonManager.GetMonstersFromJson(name);
+            monsterDTOs.AddRange(MonstersJsonManager.GetMonstersFromJson(name));
 
-            if (monsterDTOs == null || monsterDTOs.Count == 0)
-            {
-                monsterDTOs = await MonsterAPI.GetMonstersAsync(name);
-            }
+            monsterDTOs.AddRange(await MonsterAPI.GetMonstersAsync(name));
 
             return monsterDTOs;
         }
