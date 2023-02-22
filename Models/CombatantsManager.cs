@@ -101,7 +101,7 @@ namespace Deez_Notes_Dm.Models
 
         public void SortByInitiative()
         {
-            Combatants = Combatants.OrderBy(c => c.Initiative).ToList();
+            Combatants = Combatants.OrderByDescending(c => c.Initiative).ToList();
         }
     }
 }

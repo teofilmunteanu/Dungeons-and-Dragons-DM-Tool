@@ -72,7 +72,8 @@ namespace Deez_Notes_Dm.API_Managers
         public static async Task<string> fetchSpellAsync(string spellAPI_Path)
         {
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync(spellAPI_Path);
+            string spellPath = spellAPI_Path + "?format=json";
+            HttpResponseMessage response = await client.GetAsync(spellPath);
             response.EnsureSuccessStatusCode();
 
             var responseBody = await response.Content.ReadAsStringAsync();

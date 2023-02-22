@@ -186,7 +186,7 @@
                         </Grid.RowDefinitions>
                         
                         <TextBlock Grid.Row="0" Text="Initiative"/>
-                        <TextBox Grid.Row="1" Text="{Binding Path=Initiative, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Grid.Row="1" Text="{Binding Path=Initiative, UpdateSourceTrigger=PropertyChanged, Delay=500}"/>
                     </Grid>
                     
                 </Grid>
