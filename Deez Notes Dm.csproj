@@ -20,6 +20,9 @@
     <None Update="Resources\DMScreen.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Resources\Monsters\Monsters.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Resources\Players\Players.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
