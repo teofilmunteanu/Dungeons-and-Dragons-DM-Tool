@@ -11,7 +11,7 @@ namespace Deez_Notes_Dm.DataManagers
         private static string monsterSavesDirPath = System.AppDomain.CurrentDomain.BaseDirectory + "Resources/Monsters";//Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/DeezNotesDm/Monsters";
         private static string monsterSavesFilePath = monsterSavesDirPath + "/Monsters.json";
 
-        public static MonstersJsonManager()
+        static MonstersJsonManager()
         {
             if (!Directory.Exists(monsterSavesDirPath))
             {
