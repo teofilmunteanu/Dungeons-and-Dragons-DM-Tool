@@ -24,12 +24,15 @@ namespace Deez_Notes_Dm.Commands
 
         public async override void Execute(object? parameter)
         {
-            _combatantsManager.Reset();
+            //_combatantsManager.Reset();
 
             //TO DO: add only selected players (make separate player selection list)
-            foreach (Player player in _playersManager.GetPlayers())
+            if (_combatListViewModel.Combatants.Count == 0)
             {
-                _combatantsManager.AddCombatant(player);
+                foreach (Player player in _playersManager.GetPlayers())
+                {
+                    _combatantsManager.AddCombatant(player);
+                }
             }
 
             try

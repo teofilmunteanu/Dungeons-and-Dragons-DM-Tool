@@ -44,6 +44,7 @@ namespace Deez_Notes_Dm.ViewModels
 
         public ICommand ShowCombatSelectionCommand { get; }
         public ICommand SetSelectedMonsterCommand { get; }
+        public ICommand StopCombatCommand { get; }
 
 
         public CombatListViewModel(CombatantsManager combatantsManager, MonstersManager monstersManager, CombatSelectionStore combatSelectionStore)
@@ -54,6 +55,7 @@ namespace Deez_Notes_Dm.ViewModels
 
             ShowCombatSelectionCommand = new ShowCombatSelectionCommand(combatSelectionStore);
             SetSelectedMonsterCommand = new SetSelectedCombatantCommand(this, monstersManager);
+            StopCombatCommand = new StopCombatCommand(this, combatantsManager);
 
             UpdateCombatList();
         }
