@@ -34,9 +34,25 @@
                 </Grid>
             </TabItem>
             <TabItem Header="DM Screen">
-                <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="0,1" >
+                <Border BorderBrush="Gray" BorderThickness="0,1" >
                     <!-- Image source given in xaml.cs after initialization-->
-                    <WebBrowser x:Name="webBrowser"></WebBrowser>
+                    <WebBrowser x:Name="imageWebBrowser"></WebBrowser>
+                </Border>
+            </TabItem>
+            <TabItem x:Name="BrowserTab">
+                <TabItem.Header>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <TextBlock Grid.Column="0" Text="Browser" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Button Grid.Column="1" Content="&#x2302;" Margin="5,0,0,0" Background="White" Foreground="DeepSkyBlue" FontWeight="Bold" FontSize="15" BorderThickness="2" Click="HomePage" VerticalAlignment="Center" Width="25"/>
+                    </Grid>
+                </TabItem.Header>
+                <Border BorderBrush="Gray" BorderThickness="0,1">
+                    <wpf:ChromiumWebBrowser x:Name="InternetBrowser" Address="https://www.google.com/"/>
                 </Border>
             </TabItem>
         </TabControl>
