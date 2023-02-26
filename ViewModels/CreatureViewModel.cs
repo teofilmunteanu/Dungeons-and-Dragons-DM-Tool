@@ -15,7 +15,25 @@ namespace Deez_Notes_Dm.ViewModels
         public string Race { get; set; }
 
         public int MaxHP { get; set; }
-        public int HP { get; set; }
+
+        private int hp;
+        public int HP
+        {
+            get => hp;
+            set
+            {
+                hp = value;
+                if (hp > 0)
+                {
+                    Opacity = 1;
+                }
+                else
+                {
+                    Opacity = 0.5;
+                }
+
+            }
+        }
         public int AC { get; set; }
 
         public List<string> SpeedsList { get; set; }
@@ -25,17 +43,18 @@ namespace Deez_Notes_Dm.ViewModels
         public Stats StatsMod { get; set; }
 
         private double initiative;
-        public double Initiative { 
-            get=>initiative;
+        public double Initiative
+        {
+            get => initiative;
             set
             {
                 initiative = (int)value;
                 OnPropertyChanged(nameof(Initiative));
-                if (this != null && (int)value != 0 && SortCombatListCommand!=null)
+                if (this != null && (int)value != 0 && SortCombatListCommand != null)
                 {
                     SortCombatListCommand.Execute(this);
                 }
-                
+
             }
         }
 
@@ -47,6 +66,17 @@ namespace Deez_Notes_Dm.ViewModels
             {
                 hpInput = value;
                 OnPropertyChanged(nameof(HP_Input));
+            }
+        }
+
+        private double opacity = 1;
+        public double Opacity
+        {
+            get => opacity;
+            set
+            {
+                opacity = value;
+                OnPropertyChanged(nameof(Opacity));
             }
         }
 
