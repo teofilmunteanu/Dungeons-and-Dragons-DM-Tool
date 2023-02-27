@@ -33,7 +33,7 @@
                             </Style.Resources>
                         </Style>
                     </Grid.Resources>
-                    
+
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
@@ -184,11 +184,11 @@
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        
+
                         <TextBlock Grid.Row="0" Text="Initiative"/>
                         <TextBox Grid.Row="1" Text="{Binding Path=Initiative, UpdateSourceTrigger=PropertyChanged, Delay=500}"/>
                     </Grid>
-                    
+
                 </Grid>
             </Border>
         </DataTemplate>
@@ -219,12 +219,13 @@
                 </Style>
             </ListBox.ItemContainerStyle>
         </ListBox>
-        
+
         <views:MonsterPropertiesView Grid.Column="1" Grid.Row="0" DataContext="{Binding SelectedMonster, Mode=TwoWay}"/>
-        
+
         <!--<ListBox Grid.Column="1" Grid.Row="0" x:Name="CombatantProperties" BorderBrush="DarkGray" BorderThickness="3,3,3,3" Margin="5,5,5,5" Background="#FFAEAEAE"/>-->
         <Button Grid.Column="0" Grid.Row="1" Content="+" Width="50" FontSize="24" Height="31" VerticalAlignment="Center" Cursor="Hand" Command="{Binding ShowCombatSelectionCommand}"/>
         <Button Grid.Column="0" Grid.Row="1" Content="End" Width="50" FontSize="20" Height="31" Margin="110,0,0,0" VerticalAlignment="Center" Cursor="Hand" Background="#FFEB4747" Foreground="White" Command="{Binding StopCombatCommand}"/>
+        <GridSplitter Grid.Column="1" HorizontalAlignment="Left" Width="5" Margin="3,5,0,5" />
     </Grid>
-    <!-- END Combatants List --> 
+    <!-- END Combatants List -->
 </UserControl>

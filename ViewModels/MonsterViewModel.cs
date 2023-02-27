@@ -51,7 +51,7 @@ namespace Deez_Notes_Dm.ViewModels
         public ICommand SubtractHPCommand { get; }
 
         public MonsterViewModel(Monster monster) : base(monster.ID, monster.Name, monster.Race, monster.HP, monster.MaxHP, monster.AC,
-            monster.Speeds, monster.BaseStats, monster.StatsMod, monster.Initiative)
+            monster.Speeds, monster.BaseStats, monster.StatsMod, monster.Initiative, monster.Notes)
         {
             Size = monster.Size;
             Alignment = monster.Alignment;

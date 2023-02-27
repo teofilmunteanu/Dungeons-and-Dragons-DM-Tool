@@ -55,6 +55,11 @@ namespace Deez_Notes_Dm.Json_DTOs
         public ActionDTO[]? special_abilities { get; set; }
         public string[]? spell_list { get; set; }
 
+
+        public string notes { get; set; }
+
+
+
         public class SkillsDTO
         {
             public int? acrobatics { get; set; }

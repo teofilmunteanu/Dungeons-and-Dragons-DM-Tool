@@ -50,7 +50,7 @@ namespace Deez_Notes_Dm.ViewModels
 
 
         public PlayerViewModel(Player player, PlayerListViewModel playerListViewModel, PlayersManager playersManager) : base(player.ID, player.Name, player.Race, player.HP, player.MaxHP, player.AC,
-            player.Speeds, player.BaseStats, player.StatsMod, player.Initiative)
+            player.Speeds, player.BaseStats, player.StatsMod, player.Initiative, player.Notes)
         {
             XP = player.XP + "";
             totalLevel = player.totalLevel;
@@ -59,7 +59,6 @@ namespace Deez_Notes_Dm.ViewModels
             PassiveInsight = player.PassiveInsight;
             PassivePerception = player.PassivePerception;
             PassiveInvestigation = player.PassiveInvestigation;
-            Initiative = player.Initiative;
 
             AddXPCommand = new AddXPCommand(this, playerListViewModel, playersManager);
 

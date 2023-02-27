@@ -103,5 +103,12 @@ namespace Deez_Notes_Dm.Models
         {
             Combatants = Combatants.OrderByDescending(c => c.Initiative).ToList();
         }
+
+        public void UpdateNotesWith(int id, string notes)
+        {
+            Creature combatant = GetCombatantById(id);
+
+            combatant.Notes = notes;
+        }
     }
 }

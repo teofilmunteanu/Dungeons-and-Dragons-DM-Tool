@@ -287,7 +287,8 @@
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
 
-        <ListBox Grid.Column="0" Grid.Row="0" x:Name="PlayerList" ItemsSource="{Binding Players,UpdateSourceTrigger=PropertyChanged}" ItemTemplate="{StaticResource PlayerListData}" IsSynchronizedWithCurrentItem="True" BorderBrush="DarkGray" BorderThickness="3,3,3,3" Margin="5,5,5,5">
+        <ListBox Grid.Column="0" Grid.Row="0" x:Name="PlayerList" ItemsSource="{Binding Players,UpdateSourceTrigger=PropertyChanged}" ItemTemplate="{StaticResource PlayerListData}" 
+                 IsSynchronizedWithCurrentItem="True" BorderBrush="DarkGray" BorderThickness="3,3,3,3" Margin="5,5,5,5">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal"/>

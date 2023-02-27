@@ -100,10 +100,11 @@
         </Border.Resources>
         
         <ScrollViewer VerticalScrollBarVisibility="Visible" >
-            <Grid x:Name="CreatureDescBlock"  HorizontalAlignment="Left">
+            <Grid x:Name="CreatureDescBlock"  HorizontalAlignment="Left" Margin="10,0,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto" MinHeight="20px"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -147,9 +148,15 @@
                     </TextBlock>
                 </Grid>
 
-                <Rectangle Grid.Row="1"/>
+                <Rectangle Grid.Row="2" Margin="0,0,10,0"/>
 
-                <Grid Grid.Row="2" Margin="0 5">
+                <Expander Grid.Row="1" HorizontalAlignment="Left" Header="Notes" Width="100" Margin="0 10">
+                    <Grid Background="#FFE5E5E5">
+                        <TextBox TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" Text="{Binding Notes, UpdateSourceTrigger=PropertyChanged}"/>
+                    </Grid>
+                </Expander>
+                
+                <Grid Grid.Row="3" Margin="0 5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition/>
@@ -159,7 +166,7 @@
                     <TextBlock Grid.Row="1" Text="{Binding Path=SavingThrowsString}" FontSize="13"/>
                 </Grid>
 
-                <Grid Grid.Row="3" Margin="0 5">
+                <Grid Grid.Row="4" Margin="0 5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition/>
@@ -169,7 +176,7 @@
                     <TextBlock Grid.Row="1" Text="{Binding Path=SkillsString}" FontSize="13"/>
                 </Grid>
 
-                <Grid Grid.Row="4" Margin="0 5">
+                <Grid Grid.Row="5" Margin="0 5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition/>
@@ -179,7 +186,7 @@
                     <TextBlock Grid.Row="1" Text="{Binding Path=DamageVulnerabilities}" FontSize="13"/>
                 </Grid>
 
-                <Grid Grid.Row="5" Margin="0 5">
+                <Grid Grid.Row="6" Margin="0 5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition/>
@@ -189,7 +196,7 @@
                     <TextBlock Grid.Row="1" Text="{Binding Path=DamageResistances}" FontSize="13"/>
                 </Grid>
 
-                <Grid Grid.Row="6" Margin="0 5">
+                <Grid Grid.Row="7" Margin="0 5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition/>
@@ -199,7 +206,7 @@
                     <TextBlock Grid.Row="1" Text="{Binding Path=DamageImmunities}" FontSize="13"/>
                 </Grid>
 
-                <Grid Grid.Row="7" Margin="0 5">
+                <Grid Grid.Row="8" Margin="0 5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition/>
@@ -209,7 +216,7 @@
                     <TextBlock Grid.Row="1" Text="{Binding Path=ConditionImmunities}" FontSize="13"/>
                 </Grid>
 
-                <Grid Grid.Row="8" Margin="0 5">
+                <Grid Grid.Row="9" Margin="0 5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition/>
@@ -219,7 +226,7 @@
                     <TextBlock Grid.Row="1" Text="{Binding Path=Senses}" FontSize="13"/>
                 </Grid>
 
-                <Grid Grid.Row="9" Margin="0 5">
+                <Grid Grid.Row="10" Margin="0 5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition/>
@@ -229,15 +236,15 @@
                     <TextBlock Grid.Row="1" Text="{Binding Path=Languages}" FontSize="13"/>
                 </Grid>
 
-                <TextBlock Grid.Row="10" Margin="0 5" FontSize="13">
+                <TextBlock Grid.Row="11" Margin="0 5" FontSize="13">
                     <Run Text="Challenge " FontSize="15" FontWeight="Bold"/>
                     <Run Text="{Binding Path=ChallengeRating}" />
                     <Run Text="{Binding Path=XP_Drop, StringFormat='({0} XP)'}"/>
                 </TextBlock>
 
-                <Rectangle Grid.Row="11"/>
+                <Rectangle Grid.Row="12"/>
 
-                <Grid Grid.Row="12" Margin="0 5">
+                <Grid Grid.Row="13" Margin="0 5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition/>
@@ -248,9 +255,9 @@
                          ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
                 </Grid>
 
-                <Rectangle Grid.Row="13"/>
+                <Rectangle Grid.Row="14"/>
 
-                <Grid Grid.Row="14" Margin="0 5">
+                <Grid Grid.Row="15" Margin="0 5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition/>
@@ -261,9 +268,9 @@
                          ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
                 </Grid>
                 
-                <Rectangle Grid.Row="15"/>
+                <Rectangle Grid.Row="16"/>
 
-                <Grid Grid.Row="16" Margin="0 5">
+                <Grid Grid.Row="17" Margin="0 5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition/>
@@ -274,9 +281,9 @@
                          ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
                 </Grid>
 
-                <Rectangle Grid.Row="17"/>
+                <Rectangle Grid.Row="18"/>
 
-                <Grid Grid.Row="18" Margin="0 5">
+                <Grid Grid.Row="19" Margin="0 5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition/>
@@ -289,9 +296,9 @@
                         ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
                 </Grid>
 
-                <Rectangle Grid.Row="19"/>
+                <Rectangle Grid.Row="20"/>
 
-                <Grid Grid.Row="20" Margin="0 5">
+                <Grid Grid.Row="21" Margin="0 5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition/>

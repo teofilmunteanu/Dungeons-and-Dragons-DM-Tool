@@ -20,6 +20,8 @@ namespace Deez_Notes_Dm.Services
                 AC = player.AC,
                 Speeds = player.Speeds,
                 BaseStats = player.BaseStats,
+                Notes = player.Notes,
+
                 XP = player.XP,
                 levelByClass = player.levelByClass,
                 HitDice = player.HitDice,
@@ -31,7 +33,7 @@ namespace Deez_Notes_Dm.Services
 
         private static Player ToPlayer(PlayerDTO p)
         {
-            return new Player(p.ID, p.Name, p.Race, p.HP, p.MaxHP, p.AC, p.Speeds, p.BaseStats, p.XP, p.levelByClass, p.HitDice, p.PassiveInsight, p.PassivePerception, p.PassiveInvestigation);
+            return new Player(p.ID, p.Name, p.Race, p.HP, p.MaxHP, p.AC, p.Speeds, p.BaseStats, p.Notes, p.XP, p.levelByClass, p.HitDice, p.PassiveInsight, p.PassivePerception, p.PassiveInvestigation);
         }
 
         public static List<Player> GetPlayersData()

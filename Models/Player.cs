@@ -34,14 +34,10 @@ namespace Deez_Notes_Dm.Models
         public bool ProficiencyPerception;
         public bool ProficiencyInvestigation;
 
-        public Player()
-        {
-
-        }
 
         //for creator
         public Player(int id, string name, string race, int maxHP, int ac, Speed speeds, Stats stats,
-            string _class, bool proficiency_insight, bool proficiency_perception, bool proficiency_investigation) : base(id, name, race, maxHP, maxHP, ac, speeds, stats)
+            string _class, bool proficiency_insight, bool proficiency_perception, bool proficiency_investigation) : base(id, name, race, maxHP, maxHP, ac, speeds, stats, "testPlayer")
         {
             XP = 0;
             totalLevel = 1;
@@ -59,8 +55,8 @@ namespace Deez_Notes_Dm.Models
         }
 
         //for provider
-        public Player(int id, string name, string race, int hp, int maxHP, int ac, Speed speeds, Stats stats,
-            int xp, SortedDictionary<string, int> classes, int hitDiceLeft, int passiveInsight, int passivePerception, int passiveInvestigation) : base(id, name, race, hp, maxHP, ac, speeds, stats)
+        public Player(int id, string name, string race, int hp, int maxHP, int ac, Speed speeds, Stats stats, string notes,
+            int xp, SortedDictionary<string, int> classes, int hitDiceLeft, int passiveInsight, int passivePerception, int passiveInvestigation) : base(id, name, race, hp, maxHP, ac, speeds, stats, notes)
         {
             XP = xp;
             foreach (var item in classes)

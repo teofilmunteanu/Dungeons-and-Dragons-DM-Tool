@@ -20,13 +20,10 @@ namespace Deez_Notes_Dm.Models
 
         //TO USE FOR SORTING COMBATANTS
         public double Initiative { get; set; }
+        public string Notes { get; set; }
 
 
-        public Creature()
-        {
-
-        }
-        public Creature(int id, string name, string race, int hp, int maxHP, int ac, Speed speeds, Stats baseStats)
+        public Creature(int id, string name, string race, int hp, int maxHP, int ac, Speed speeds, Stats baseStats, string notes)
         {
             ID = id;
             Name = name;
@@ -46,6 +43,8 @@ namespace Deez_Notes_Dm.Models
                 WIS = getModifier(baseStats.WIS),
                 CHA = getModifier(baseStats.CHA)
             };
+
+            Notes = notes;
         }
 
         protected static int getModifier(int statusValue)

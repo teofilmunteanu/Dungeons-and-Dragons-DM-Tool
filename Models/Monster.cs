@@ -75,18 +75,12 @@ namespace Deez_Notes_Dm.Models
         public List<ActionStats>? SpecialAbilities { get; set; }
         public List<Spell>? Spells { get; set; }
 
-        public Monster()
-        {
 
-        }
-
-        //At the mosnter creator service: if id> players.count, then it's a mosnter
-        //Show on right stats of monster with id same as current creature(cuz the monster attributes can't be accessed from the creature class)
-        public Monster(int id, string name, string race, int maxHP, int ac, Speed speeds, Stats stats,
+        public Monster(int id, string name, string race, int maxHP, int ac, Speed speeds, Stats stats, string notes,
             string size, string alignment, string hit_Dice, SavingStats savingThrows, SkillsStats skills,
             string? damageVulnerabilities, string? damageResistances, string? damageImmunities, string? conditionImmunities,
             string? senses, string languages, string challengeRating, int xp_Drop, List<ActionStats>? actions, List<ActionStats>? reactions,
-            string? legendaryActionDescription, List<ActionStats>? legendaryActions, List<ActionStats>? specialAbilities, List<Spell>? spells) : base(id, name, race, maxHP, maxHP, ac, speeds, stats)
+            string? legendaryActionDescription, List<ActionStats>? legendaryActions, List<ActionStats>? specialAbilities, List<Spell>? spells) : base(id, name, race, maxHP, maxHP, ac, speeds, stats, notes)
         {
             Size = size;
             Alignment = alignment;

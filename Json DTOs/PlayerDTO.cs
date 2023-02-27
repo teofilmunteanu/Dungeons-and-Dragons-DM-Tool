@@ -17,6 +17,7 @@ namespace Deez_Notes_Dm.Json_DTOs
         public Speed Speeds { get; set; }
 
         public Stats BaseStats { get; set; }
+        public string Notes { get; set; }
 
         public int XP { get; set; }
         public SortedDictionary<string, int> levelByClass { get; set; }
