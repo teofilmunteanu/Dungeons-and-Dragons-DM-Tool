@@ -50,7 +50,7 @@ namespace Deez_Notes_Dm.Commands
             {
                 if (ex is InvalidOperationException)
                 {
-                    MessageBox.Show("Aborted" + ex.Message);
+                    MessageBox.Show("Aborted; " + ex.Message);
                 }
                 else
                 {
