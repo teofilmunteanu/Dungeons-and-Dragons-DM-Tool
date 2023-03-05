@@ -3,16 +3,44 @@ using Deez_Notes_Dm.Models;
 using Deez_Notes_Dm.Stores;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
 namespace Deez_Notes_Dm.ViewModels
 {
     public class PlayerListViewModel : ViewModelBase
     {
+        protected void SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        {
+            field = value;
+            OnPropertyChanged(propertyName);
+        }
+
         private readonly ObservableCollection<PlayerViewModel> _players;
         private readonly PlayersManager _playersManager;
 
         public ObservableCollection<PlayerViewModel> Players => _players;
+
+
+        private PlayerViewModel? selectedPlayer = null;
+        public PlayerViewModel? SelectedPlayer
+        {
+            get => selectedPlayer;
+            set
+            {
+                SetField(ref selectedPlayer, value);
+
+                IsPlayerSelected = SelectedPlayer != null ? true : false;
+            }
+        }
+
+        private bool isPlayerSelected = false;
+        public bool IsPlayerSelected
+        {
+            get => isPlayerSelected;
+            set => SetField(ref isPlayerSelected, value);
+        }
+
 
         public ICommand ShowPlayerFormCommand { get; }
 
@@ -21,9 +49,9 @@ namespace Deez_Notes_Dm.ViewModels
         {
             _players = new ObservableCollection<PlayerViewModel>();
 
-            ShowPlayerFormCommand = new ShowPlayerFormCommand(newPLayerFormStore);
-
             _playersManager = playersManager;
+
+            ShowPlayerFormCommand = new ShowPlayerFormCommand(newPLayerFormStore);
 
             UpdatePlayerList();
         }
@@ -41,6 +69,11 @@ namespace Deez_Notes_Dm.ViewModels
                     _players.Add(playerViewModel);
                 }
             }
+        }
+
+        public void UpdatePlayerProperties()
+        {
+
         }
     }
 }

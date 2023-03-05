@@ -148,13 +148,13 @@
                 </TextBlock>
             </Grid>
 
-            <Rectangle Grid.Row="2" Margin="0,0,10,0"/>
-
             <Expander Grid.Row="1" HorizontalAlignment="Left" Header="Notes" Width="100" Margin="0 10">
                 <Grid Background="#FFE5E5E5">
                     <TextBox TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" Text="{Binding Notes}"/>
                 </Grid>
             </Expander>
+
+            <Rectangle Grid.Row="2" Margin="0,0,10,0"/>
 
             <Grid Grid.Row="3" Margin="0 5">
                 <Grid.RowDefinitions>

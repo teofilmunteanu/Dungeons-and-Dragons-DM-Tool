@@ -57,22 +57,6 @@ namespace Deez_Notes_Dm.ViewModels
             }
         }
 
-        //possibly not needed!!!!!!!!!!!!!!!!!!
-        //private string notes;
-        public string Notes { get; set; }
-        //{
-        //    get => notes;
-        //    set
-        //    {
-        //        notes = value;
-        //        OnPropertyChanged(nameof(Notes));
-        //        if (UpdateNotesCommand != null)
-        //        {
-        //            UpdateNotesCommand.Execute(null);
-        //        }
-        //    }
-        //}
-
         private string hpInput;
         public string HP_Input
         {
@@ -101,27 +85,6 @@ namespace Deez_Notes_Dm.ViewModels
         public ICommand SortCombatListCommand { get; }
 
 
-        //for inheritance
-        public CreatureViewModel(int id, string name, string race, int hp, int maxHP, int ac,
-            Speed speeds, Stats baseStats, Stats statsMod, double initiative, string notes)
-        {
-            ID = id;
-            Name = name;
-            Race = race;
-            HP = hp;
-            MaxHP = maxHP;
-            AC = ac;
-            BaseStats = baseStats;
-            StatsMod = statsMod;
-            Initiative = initiative;
-            Notes = notes;
-
-            SpeedsList = new List<string>();
-            if (speeds is not null)
-            {
-                SpeedsList = ToSpeedList(speeds);
-            }
-        }
 
         //for combat list
         public CreatureViewModel(Creature creature, CombatListViewModel combatListViewModel, CombatantsManager combatantsManager)
@@ -135,7 +98,6 @@ namespace Deez_Notes_Dm.ViewModels
             BaseStats = creature.BaseStats;
             StatsMod = creature.StatsMod;
             Initiative = creature.Initiative;
-            Notes = creature.Notes;
 
             SpeedsList = new List<string>();
             if (creature.Speeds is not null)
@@ -148,7 +110,7 @@ namespace Deez_Notes_Dm.ViewModels
             SortCombatListCommand = new SortCombatListCommand(this, combatListViewModel, combatantsManager);
         }
 
-        public List<string> ToSpeedList(Speed speeds)
+        public static List<string> ToSpeedList(Speed speeds)
         {
             List<string> SpeedsList = new List<string>();
             foreach (PropertyInfo prop in speeds.GetType().GetProperties())

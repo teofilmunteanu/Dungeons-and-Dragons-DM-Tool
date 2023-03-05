@@ -125,5 +125,13 @@ namespace Deez_Notes_Dm.Models
 
             return 0;
         }
+
+        public void SetNotesToPlayerWithId(int id, string notes)
+        {
+            Player player = GetPlayerById(id);
+            player.Notes = notes;
+
+            PlayerServices.UpdatePlayerDataWith(Players);
+        }
     }
 }

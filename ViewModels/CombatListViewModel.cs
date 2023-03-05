@@ -30,9 +30,10 @@ namespace Deez_Notes_Dm.ViewModels
             {
                 SetField(ref selectedCreature, value);
 
-                SetSelectedMonsterCommand.Execute(null);
+                SetSelectedCreatureTypeCommand.Execute(null);
             }
         }
+
 
         private MonsterViewModel? selectedMonster = null;
         public MonsterViewModel? SelectedMonster
@@ -54,19 +55,39 @@ namespace Deez_Notes_Dm.ViewModels
         }
 
 
+        private PlayerViewModel? selectedPlayer = null;
+        public PlayerViewModel? SelectedPlayer
+        {
+            get => selectedPlayer;
+            set
+            {
+                SetField(ref selectedPlayer, value);
+
+                IsPlayerSelected = SelectedPlayer != null ? true : false;
+            }
+        }
+
+        private bool isPlayerSelected = false;
+        public bool IsPlayerSelected
+        {
+            get => isPlayerSelected;
+            set => SetField(ref isPlayerSelected, value);
+        }
+
+
         public ICommand ShowCombatSelectionCommand { get; }
-        public ICommand SetSelectedMonsterCommand { get; }
+        public ICommand SetSelectedCreatureTypeCommand { get; }
         public ICommand StopCombatCommand { get; }
 
 
-        public CombatListViewModel(CombatantsManager combatantsManager, MonstersManager monstersManager, CombatSelectionStore combatSelectionStore)
+        public CombatListViewModel(CombatantsManager combatantsManager, MonstersManager monstersManager, PlayersManager playersManager, CombatSelectionStore combatSelectionStore, PlayerListViewModel playerListViewModel)
         {
             _combatants = new ObservableCollection<CreatureViewModel>();
 
             _combatantsManager = combatantsManager;
 
             ShowCombatSelectionCommand = new ShowCombatSelectionCommand(combatSelectionStore);
-            SetSelectedMonsterCommand = new SetSelectedCombatantCommand(this, monstersManager);
+            SetSelectedCreatureTypeCommand = new SetSelectedCombatantCommand(this, playerListViewModel, monstersManager, playersManager);
             StopCombatCommand = new StopCombatCommand(this, combatantsManager);
 
             UpdateCombatList();

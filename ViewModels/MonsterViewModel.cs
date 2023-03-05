@@ -25,7 +25,6 @@ namespace Deez_Notes_Dm.ViewModels
 
         public Stats StatsMod { get; set; }
 
-        public double Initiative { get; set; }
 
         private string notes;
         public string Notes
@@ -35,6 +34,7 @@ namespace Deez_Notes_Dm.ViewModels
             {
                 notes = value;
                 OnPropertyChanged(nameof(Notes));
+
                 if (UpdateNotesCommand != null)
                 {
                     UpdateNotesCommand.Execute(null);
@@ -97,11 +97,10 @@ namespace Deez_Notes_Dm.ViewModels
             SpeedsList = new List<string>();
             if (monster.Speeds is not null)
             {
-                SpeedsList = ToSpeedList(monster.Speeds);
+                SpeedsList = CreatureViewModel.ToSpeedList(monster.Speeds);
             }
             BaseStats = monster.BaseStats;
             StatsMod = monster.StatsMod;
-            Initiative = monster.Initiative;
             Notes = monster.Notes;
 
             Size = monster.Size;
@@ -168,29 +167,6 @@ namespace Deez_Notes_Dm.ViewModels
             }
 
             return skillsString;
-        }
-
-        public List<string> ToSpeedList(Speed speeds)
-        {
-            List<string> SpeedsList = new List<string>();
-            foreach (PropertyInfo prop in speeds.GetType().GetProperties())
-            {
-                if (prop.Name != "hover")
-                {
-                    int? speedVal = (int?)prop.GetValue(speeds);
-
-                    if (speedVal != 0 && speedVal != null)
-                    {
-                        SpeedsList.Add($"{prop.Name} {speedVal} ft");
-                    }
-                }
-                else if (speeds.hover != null && speeds.hover == true)
-                {
-                    SpeedsList.Add("hovers");
-                }
-            }
-
-            return SpeedsList;
         }
     }
 }
