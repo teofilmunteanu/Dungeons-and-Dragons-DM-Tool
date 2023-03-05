@@ -38,7 +38,19 @@ namespace Deez_Notes_Dm.ViewModels
         public MonsterViewModel? SelectedMonster
         {
             get => selectedMonster;
-            set => SetField(ref selectedMonster, value);
+            set
+            {
+                SetField(ref selectedMonster, value);
+
+                IsMonsterSelected = SelectedMonster != null ? true : false;
+            }
+        }
+
+        private bool isMonsterSelected = false;
+        public bool IsMonsterSelected
+        {
+            get => isMonsterSelected;
+            set => SetField(ref isMonsterSelected, value);
         }
 
 

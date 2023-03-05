@@ -193,6 +193,8 @@
             </Border>
         </DataTemplate>
         <!-- END Combatant List Data -->
+
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
     </UserControl.Resources>
 
     <!-- Combatants List -->
@@ -220,11 +222,15 @@
             </ListBox.ItemContainerStyle>
         </ListBox>
 
-        <views:MonsterPropertiesView Grid.Column="1" Grid.Row="0" DataContext="{Binding SelectedMonster, Mode=TwoWay}"/>
-        <!--Visibility based on the nature of the selected creature-->
-        <!--<views:PlayerPropertiesView Grid.Column="1" Grid.Row="0" DataContext="{Binding SelectedPlayer, Mode=TwoWay}"/>-->
+        <Border Grid.Column="1" Grid.Row="0" BorderBrush="DarkGray" BorderThickness="3" Margin="5,5,5,5" Background="#FFAEAEAE">
+            <Grid Visibility="{Binding IsMonsterSelected, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibility}}">
+                <views:MonsterPropertiesView DataContext="{Binding SelectedMonster, Mode=TwoWay}"/>
+            </Grid>
+            <!--<Grid Visibility="{Binding IsPlayerSelected, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibility}}">
+                <views:PlayerPropertiesView DataContext="{Binding SelectedPlayer, Mode=TwoWay}"/>
+            </Grid>-->
+        </Border>
 
-        <!--<ListBox Grid.Column="1" Grid.Row="0" x:Name="CombatantProperties" BorderBrush="DarkGray" BorderThickness="3,3,3,3" Margin="5,5,5,5" Background="#FFAEAEAE"/>-->
         <Button Grid.Column="0" Grid.Row="1" Content="+" Width="50" FontSize="24" Height="31" VerticalAlignment="Center" Cursor="Hand" Command="{Binding ShowCombatSelectionCommand}"/>
         <Button Grid.Column="0" Grid.Row="1" Content="End" Width="50" FontSize="20" Height="31" Margin="110,0,0,0" VerticalAlignment="Center" Cursor="Hand" Background="#FFEB4747" Foreground="White" Command="{Binding StopCombatCommand}"/>
         <GridSplitter Grid.Column="1" HorizontalAlignment="Left" Width="5" Margin="3,5,0,5" />
