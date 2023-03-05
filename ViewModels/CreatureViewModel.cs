@@ -57,6 +57,7 @@ namespace Deez_Notes_Dm.ViewModels
             }
         }
 
+        //possibly not needed!!!!!!!!!!!!!!!!!!
         //private string notes;
         public string Notes { get; set; }
         //{
