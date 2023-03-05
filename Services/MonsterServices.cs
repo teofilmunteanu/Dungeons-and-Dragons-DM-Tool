@@ -60,7 +60,7 @@ namespace Deez_Notes_Dm.Services
         }
 
         //eventually take notes from somewhere else(maybe a store or smth)
-        public async static Task<Monster> ToMonster(int id, string notes, MonsterDTO monsterDTO)
+        public async static Task<Monster> ToMonster(int id, MonsterDTO monsterDTO)
         {
             string race = monsterDTO.subtype != "" ? monsterDTO.type[0].ToString().ToUpper() + monsterDTO.type.Substring(1) + "(" + monsterDTO.subtype[0].ToString().ToUpper() + monsterDTO.subtype.Substring(1) + ")" :
                 monsterDTO.type[0].ToString().ToUpper() + monsterDTO.type.Substring(1);
@@ -140,6 +140,8 @@ namespace Deez_Notes_Dm.Services
                     spells.Add(spellDTO);
                 }
             }
+
+            string notes = "";
 
             return new Monster(
                 id,

@@ -50,15 +50,10 @@ namespace Deez_Notes_Dm.Models
         {
             //ensures monster ids are higher than player ids, in case a player joins the combat later
             int id = _playersManager.GetPlayers().Count + MonstersInCombat.Count;
-            //string notes = GetCombatMonsterById(id) == null ? "" : GetCombatMonsterById(id).Notes;
-
-            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            //save it in a store or smth
-            string notes = "testMonstersManager";
 
             MonsterDTO monsterDTO = await GetSingleMonsterDataAsync(monsterName);
 
-            Monster monster = await MonsterServices.ToMonster(id, notes, monsterDTO);
+            Monster monster = await MonsterServices.ToMonster(id, monsterDTO);
 
             return monster;
         }
@@ -87,6 +82,12 @@ namespace Deez_Notes_Dm.Models
         public bool IsCombatantMonster(int id)
         {
             return id >= _playersManager.GetPlayers().Count;
+        }
+
+        public void SetNotesToMonsterWithId(int id, string notes)
+        {
+            Monster monster = GetCombatMonsterById(id);
+            monster.Notes = notes;
         }
     }
 }

@@ -18,7 +18,6 @@ namespace Deez_Notes_Dm.Models
         public Stats BaseStats { get; set; }
         public Stats StatsMod { get; set; }
 
-        //TO USE FOR SORTING COMBATANTS
         public double Initiative { get; set; }
         public string Notes { get; set; }
 

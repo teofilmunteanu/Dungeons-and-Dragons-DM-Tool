@@ -24,8 +24,6 @@ namespace Deez_Notes_Dm.Commands
 
         public async override void Execute(object? parameter)
         {
-            //_combatantsManager.Reset();
-
             //TO DO: add only selected players (make separate player selection list)
             if (_combatListViewModel.Combatants.Count == 0)
             {

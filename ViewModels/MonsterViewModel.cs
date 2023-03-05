@@ -1,13 +1,49 @@
-﻿using Deez_Notes_Dm.Models;
+﻿using Deez_Notes_Dm.Commands;
+using Deez_Notes_Dm.Models;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Windows.Input;
+using static Deez_Notes_Dm.Models.Creature;
 using static Deez_Notes_Dm.Models.Monster;
 
 namespace Deez_Notes_Dm.ViewModels
 {
-    public class MonsterViewModel : CreatureViewModel
+    public class MonsterViewModel : ViewModelBase
     {
+        public int ID { get; }
+
+        public string Name { get; set; }
+        public string Race { get; set; }
+
+        public int MaxHP { get; set; }
+        public int HP { get; set; }
+        public int AC { get; set; }
+
+        public List<string> SpeedsList { get; set; }
+
+        public Stats BaseStats { get; set; }
+
+        public Stats StatsMod { get; set; }
+
+        public double Initiative { get; set; }
+
+        private string notes;
+        public string Notes
+        {
+            get => notes;
+            set
+            {
+                notes = value;
+                OnPropertyChanged(nameof(Notes));
+                if (UpdateNotesCommand != null)
+                {
+                    UpdateNotesCommand.Execute(null);
+                }
+            }
+        }
+
+
+
         public string Size { get; set; }
         public string Alignment { get; set; }
 
@@ -47,12 +83,27 @@ namespace Deez_Notes_Dm.ViewModels
         public List<Spell> Spells { get; set; }
 
 
-        public ICommand AddHPCommand { get; }
-        public ICommand SubtractHPCommand { get; }
+        public ICommand UpdateNotesCommand { get; }
 
-        public MonsterViewModel(Monster monster) : base(monster.ID, monster.Name, monster.Race, monster.HP, monster.MaxHP, monster.AC,
-            monster.Speeds, monster.BaseStats, monster.StatsMod, monster.Initiative, monster.Notes)
+
+        public MonsterViewModel(Monster monster, MonstersManager monstersManager)
         {
+            ID = monster.ID;
+            Name = monster.Name;
+            Race = monster.Race;
+            HP = monster.HP;
+            MaxHP = monster.MaxHP;
+            AC = monster.AC;
+            SpeedsList = new List<string>();
+            if (monster.Speeds is not null)
+            {
+                SpeedsList = ToSpeedList(monster.Speeds);
+            }
+            BaseStats = monster.BaseStats;
+            StatsMod = monster.StatsMod;
+            Initiative = monster.Initiative;
+            Notes = monster.Notes;
+
             Size = monster.Size;
             Alignment = monster.Alignment;
             Hit_Dice = monster.Hit_Dice;
@@ -72,6 +123,8 @@ namespace Deez_Notes_Dm.ViewModels
             LegendaryActions = monster.LegendaryActions;
             SpecialAbilities = monster.SpecialAbilities;
             Spells = monster.Spells;
+
+            UpdateNotesCommand = new UpdateMonsterNotesCommand(this, monstersManager);
         }
 
         private string SavingThrowsToString(SavingStats savingThrows)
@@ -115,6 +168,29 @@ namespace Deez_Notes_Dm.ViewModels
             }
 
             return skillsString;
+        }
+
+        public List<string> ToSpeedList(Speed speeds)
+        {
+            List<string> SpeedsList = new List<string>();
+            foreach (PropertyInfo prop in speeds.GetType().GetProperties())
+            {
+                if (prop.Name != "hover")
+                {
+                    int? speedVal = (int?)prop.GetValue(speeds);
+
+                    if (speedVal != 0 && speedVal != null)
+                    {
+                        SpeedsList.Add($"{prop.Name} {speedVal} ft");
+                    }
+                }
+                else if (speeds.hover != null && speeds.hover == true)
+                {
+                    SpeedsList.Add("hovers");
+                }
+            }
+
+            return SpeedsList;
         }
     }
 }

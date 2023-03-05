@@ -35,8 +35,8 @@ namespace Deez_Notes_Dm.Commands
                 {
                     if (_monstersManager.IsCombatantMonster(_combatListViewModel.SelectedCreature.ID))
                     {
-                        Monster monster = _monstersManager.GetCombatMonsterById(_combatListViewModel.SelectedCreature.ID);// await _monstersManager.GetMonsterForCombatAsync(_combatListViewModel.SelectedCreature.Name);
-                        _combatListViewModel.SelectedMonster = new MonsterViewModel(monster);
+                        Monster monster = _monstersManager.GetCombatMonsterById(_combatListViewModel.SelectedCreature.ID);
+                        _combatListViewModel.SelectedMonster = new MonsterViewModel(monster, _monstersManager);
                     }
                     else
                     {

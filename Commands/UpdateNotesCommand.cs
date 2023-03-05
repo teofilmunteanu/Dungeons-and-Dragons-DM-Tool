@@ -5,17 +5,15 @@ using System.Windows;
 
 namespace Deez_Notes_Dm.Commands
 {
-    public class UpdateNotesCommand : CommandBase
+    public class UpdateMonsterNotesCommand : CommandBase
     {
-        private readonly CreatureViewModel _combatantViewModel;
-        private readonly CombatListViewModel _combatListViewModel;
-        private readonly CombatantsManager _combatantsManager;
+        private readonly MonsterViewModel _monsterViewModel;
+        private readonly MonstersManager _monstersManager;
 
-        public UpdateNotesCommand(CreatureViewModel combatantViewModel, CombatListViewModel combatListViewModel, CombatantsManager combatantsManager)
+        public UpdateMonsterNotesCommand(MonsterViewModel monsterViewModel, MonstersManager monstersManager)
         {
-            _combatantViewModel = combatantViewModel;
-            _combatListViewModel = combatListViewModel;
-            _combatantsManager = combatantsManager;
+            _monsterViewModel = monsterViewModel;
+            _monstersManager = monstersManager;
         }
 
 
@@ -23,11 +21,7 @@ namespace Deez_Notes_Dm.Commands
         {
             try
             {
-                string notes = _combatantViewModel.Notes;
-
-                _combatantsManager.UpdateNotesWith(_combatantViewModel.ID, notes);
-
-                _combatListViewModel.UpdateCombatList();
+                _monstersManager.SetNotesToMonsterWithId(_monsterViewModel.ID, _monsterViewModel.Notes);
             }
             catch (Exception ex)
             {
