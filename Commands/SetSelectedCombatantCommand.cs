@@ -34,6 +34,7 @@ namespace Deez_Notes_Dm.Commands
                     }
                     else
                     {
+                        //getting the actual playerVM so the properties are connected between tabs
                         _combatListViewModel.SelectedPlayer = _playerListViewModel.Players.Where(p => p.ID == _combatListViewModel.SelectedCreature.ID).First();
 
                         _combatListViewModel.SelectedMonster = null;
