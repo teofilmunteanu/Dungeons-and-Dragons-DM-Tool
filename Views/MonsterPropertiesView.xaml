@@ -100,7 +100,7 @@
             </Style>
         </ScrollViewer.Resources>
 
-        <Grid x:Name="CreatureDescBlock"  HorizontalAlignment="Left" Margin="10,0">
+        <Grid x:Name="CreatureDescBlock" HorizontalAlignment="Stretch" Margin="10,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto" MinHeight="20px"/>
