@@ -70,10 +70,5 @@ namespace Deez_Notes_Dm.ViewModels
                 }
             }
         }
-
-        public void UpdatePlayerProperties()
-        {
-
-        }
     }
 }

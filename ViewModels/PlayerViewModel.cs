@@ -21,7 +21,14 @@ namespace Deez_Notes_Dm.ViewModels
         public string Race { get; set; }
 
         public int MaxHP { get; set; }
-        public int HP { get; set; }
+
+        private int hp;
+        public int HP
+        {
+            get => hp;
+            set => SetField(ref hp, value);
+        }
+
         public int AC { get; set; }
 
         public List<string> SpeedsList { get; set; }
@@ -37,8 +44,8 @@ namespace Deez_Notes_Dm.ViewModels
             get => notes;
             set
             {
-                notes = value;
-                OnPropertyChanged(nameof(Notes));
+                SetField(ref notes, value);
+
                 if (UpdateNotesCommand != null)
                 {
                     UpdateNotesCommand.Execute(null);

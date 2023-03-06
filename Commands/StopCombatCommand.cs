@@ -7,11 +7,14 @@ namespace Deez_Notes_Dm.Commands
     {
         private readonly CombatListViewModel _combatListViewModel;
         private readonly CombatantsManager _combatantsManager;
+        private readonly PlayerListViewModel _playerListViewModel;
 
-        public StopCombatCommand(CombatListViewModel combatListViewModel, CombatantsManager combatantsManager)
+
+        public StopCombatCommand(CombatListViewModel combatListViewModel, CombatantsManager combatantsManager, PlayerListViewModel playerListViewModel)
         {
             _combatListViewModel = combatListViewModel;
             _combatantsManager = combatantsManager;
+            _playerListViewModel = playerListViewModel;
         }
 
         public override void Execute(object? parameter)
@@ -19,6 +22,8 @@ namespace Deez_Notes_Dm.Commands
             _combatantsManager.Reset();
 
             _combatListViewModel.UpdateCombatList();
+
+            _playerListViewModel.UpdatePlayerList();
         }
     }
 }

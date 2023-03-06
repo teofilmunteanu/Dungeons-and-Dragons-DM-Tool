@@ -11,14 +11,12 @@ namespace Deez_Notes_Dm.Commands
         private readonly CombatListViewModel _combatListViewModel;
         private readonly PlayerListViewModel _playerListViewModel;
         private readonly MonstersManager _monstersManager;
-        private readonly PlayersManager _playersManager;
 
         public SetSelectedCombatantCommand(CombatListViewModel combatListViewModel, PlayerListViewModel playerListViewModel, MonstersManager monstersManager, PlayersManager playersManager)
         {
             _combatListViewModel = combatListViewModel;
             _playerListViewModel = playerListViewModel;
             _monstersManager = monstersManager;
-            _playersManager = playersManager;
         }
 
         public async override void Execute(object? parameter)

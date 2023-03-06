@@ -9,14 +9,16 @@ namespace Deez_Notes_Dm.Commands
     {
         private readonly CombatSelectionViewModel _combatSelectionViewModel;
         private readonly CombatListViewModel _combatListViewModel;
+        private readonly PlayerListViewModel _playerListViewModel;
         private readonly PlayersManager _playersManager;
         private readonly MonstersManager _monstersManager;
         private readonly CombatantsManager _combatantsManager;
 
-        public StartCombatCommand(CombatSelectionViewModel combatSelectionViewModel, CombatListViewModel combatListViewModel, PlayersManager playersManager, MonstersManager monstersManager, CombatantsManager combatantsManager)
+        public StartCombatCommand(CombatSelectionViewModel combatSelectionViewModel, CombatListViewModel combatListViewModel/*, PlayerListViewModel playerListViewModel*/, PlayersManager playersManager, MonstersManager monstersManager, CombatantsManager combatantsManager)
         {
             _combatSelectionViewModel = combatSelectionViewModel;
             _combatListViewModel = combatListViewModel;
+            //_playerListViewModel = playerListViewModel;
             _playersManager = playersManager;
             _monstersManager = monstersManager;
             _combatantsManager = combatantsManager;
@@ -31,6 +33,8 @@ namespace Deez_Notes_Dm.Commands
                 {
                     _combatantsManager.AddCombatant(player);
                 }
+
+                //add the actual viewModels from the list of players in the combatList for direct realtion between combat hp and player list hp, and others
             }
 
             try

@@ -88,7 +88,7 @@ namespace Deez_Notes_Dm.ViewModels
 
             ShowCombatSelectionCommand = new ShowCombatSelectionCommand(combatSelectionStore);
             SetSelectedCreatureTypeCommand = new SetSelectedCombatantCommand(this, playerListViewModel, monstersManager, playersManager);
-            StopCombatCommand = new StopCombatCommand(this, combatantsManager);
+            StopCombatCommand = new StopCombatCommand(this, combatantsManager, playerListViewModel);
 
             UpdateCombatList();
         }
