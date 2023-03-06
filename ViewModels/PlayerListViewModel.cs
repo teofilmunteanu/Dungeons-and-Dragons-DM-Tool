@@ -42,6 +42,14 @@ namespace Deez_Notes_Dm.ViewModels
         }
 
 
+        private bool isNotInCombat = true;
+        public bool IsNotInCombat
+        {
+            get => isNotInCombat;
+            set => SetField(ref isNotInCombat, value);
+        }
+
+
         public ICommand ShowPlayerFormCommand { get; }
 
 

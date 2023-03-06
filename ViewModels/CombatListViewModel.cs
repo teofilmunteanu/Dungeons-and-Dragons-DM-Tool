@@ -80,11 +80,16 @@ namespace Deez_Notes_Dm.ViewModels
         public ICommand StopCombatCommand { get; }
 
 
+        public PlayerListViewModel _playerListViewModel;
+
+
         public CombatListViewModel(CombatantsManager combatantsManager, MonstersManager monstersManager, PlayersManager playersManager, CombatSelectionStore combatSelectionStore, PlayerListViewModel playerListViewModel)
         {
             _combatants = new ObservableCollection<CreatureViewModel>();
 
             _combatantsManager = combatantsManager;
+
+            _playerListViewModel = playerListViewModel;
 
             ShowCombatSelectionCommand = new ShowCombatSelectionCommand(combatSelectionStore);
             SetSelectedCreatureTypeCommand = new SetSelectedCombatantCommand(this, playerListViewModel, monstersManager, playersManager);
@@ -106,6 +111,12 @@ namespace Deez_Notes_Dm.ViewModels
                     Combatants.Add(combatantViewModel);
                 }
             }
+        }
+
+        public void UpdatePlayerAndCombatList()
+        {
+            UpdateCombatList();
+            _playerListViewModel.UpdatePlayerList();
         }
     }
 }

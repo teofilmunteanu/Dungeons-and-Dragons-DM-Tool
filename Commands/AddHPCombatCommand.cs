@@ -44,7 +44,7 @@ namespace Deez_Notes_Dm.Commands
 
                 _combatantsManager.HealCombatantWithId(_combatantViewModel.ID, hp);
 
-                _combatListViewModel.UpdateCombatList();
+                _combatListViewModel.UpdatePlayerAndCombatList();
             }
             catch (Exception ex)
             {

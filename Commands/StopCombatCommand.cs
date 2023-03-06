@@ -23,7 +23,7 @@ namespace Deez_Notes_Dm.Commands
 
             _combatListViewModel.UpdateCombatList();
 
-            _playerListViewModel.UpdatePlayerList();
+            _playerListViewModel.IsNotInCombat = true;
         }
     }
 }

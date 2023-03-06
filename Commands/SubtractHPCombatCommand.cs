@@ -53,7 +53,7 @@ namespace Deez_Notes_Dm.Commands
                 }
 
 
-                _combatListViewModel.UpdateCombatList();
+                _combatListViewModel.UpdatePlayerAndCombatList();
             }
             catch (Exception ex)
             {

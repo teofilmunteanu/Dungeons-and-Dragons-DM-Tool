@@ -9,19 +9,21 @@ namespace Deez_Notes_Dm.Commands
     {
         private readonly CombatSelectionViewModel _combatSelectionViewModel;
         private readonly CombatListViewModel _combatListViewModel;
-        private readonly PlayerListViewModel _playerListViewModel;
-        private readonly PlayersManager _playersManager;
-        private readonly MonstersManager _monstersManager;
         private readonly CombatantsManager _combatantsManager;
+        private readonly MonstersManager _monstersManager;
+        private readonly PlayersManager _playersManager;
+        private readonly PlayerListViewModel _playerListViewModel;
 
-        public StartCombatCommand(CombatSelectionViewModel combatSelectionViewModel, CombatListViewModel combatListViewModel/*, PlayerListViewModel playerListViewModel*/, PlayersManager playersManager, MonstersManager monstersManager, CombatantsManager combatantsManager)
+
+        public StartCombatCommand(CombatSelectionViewModel combatSelectionViewModel, CombatListViewModel combatListViewModel, CombatantsManager combatantsManager,
+            MonstersManager monstersManager, PlayersManager playersManager, PlayerListViewModel playerListViewModel)
         {
             _combatSelectionViewModel = combatSelectionViewModel;
             _combatListViewModel = combatListViewModel;
-            //_playerListViewModel = playerListViewModel;
-            _playersManager = playersManager;
-            _monstersManager = monstersManager;
             _combatantsManager = combatantsManager;
+            _monstersManager = monstersManager;
+            _playersManager = playersManager;
+            _playerListViewModel = playerListViewModel;
         }
 
         public async override void Execute(object? parameter)
@@ -33,8 +35,6 @@ namespace Deez_Notes_Dm.Commands
                 {
                     _combatantsManager.AddCombatant(player);
                 }
-
-                //add the actual viewModels from the list of players in the combatList for direct realtion between combat hp and player list hp, and others
             }
 
             try
@@ -47,6 +47,8 @@ namespace Deez_Notes_Dm.Commands
                 }
 
                 _combatListViewModel.UpdateCombatList();
+
+                _playerListViewModel.IsNotInCombat = false;
             }
             catch (Exception ex)
             {

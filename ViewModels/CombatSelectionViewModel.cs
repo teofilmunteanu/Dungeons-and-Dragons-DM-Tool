@@ -73,7 +73,7 @@ namespace Deez_Notes_Dm.ViewModels
 
             CancelCommand = new CancelCombatSelectionCommand(this, combatSelectionStore);
             SearchMonsterCommand = new SearchMonsterCommand(this, monstersManager);
-            StartCommand = new StartCombatCommand(this, combatListViewModel, playersManager, monstersManager, combatantsManager);
+            StartCommand = new StartCombatCommand(this, combatListViewModel, combatantsManager, monstersManager, playersManager, combatListViewModel._playerListViewModel);
         }
     }
 }
