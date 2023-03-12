@@ -1,13 +1,13 @@
 [
     {
-        "name": "glass",
+        "name": "Glass Staff",
         "size": "Medium",
         "type": "humanoid",
         "subtype": "human",
         "alignment": "lawful evil",
         "armor_class": 12,
         "hit_points": 50,
-        "hit_dice": "18d8",
+        "hit_dice": "8d8",
         "speed": {
             "walk": 30
         },
@@ -137,65 +137,6 @@
         ]
     },
     {
-        "name": "glass",
-        "size": "Medium",
-        "type": "humanoid",
-        "subtype": "human",
-        "alignment": "lawful evil",
-        "armor_class": 12,
-        "hit_points": 50,
-        "hit_dice": "18d8",
-        "speed": {
-            "walk": 30
-        },
-        "strength": 9,
-        "dexterity": 14,
-        "constitution": 11,
-        "intelligence": 17,
-        "wisdom": 12,
-        "charisma": 11,
-        "strength_save": null,
-        "dexterity_save": null,
-        "constitution_save": null,
-        "intelligence_save": 5,
-        "wisdom_save": 3,
-        "charisma_save": null,
-        "skills": {
-            "arcana": 5,
-            "history": 5
-        },
-        "damage_vulnerabilities": "",
-        "damage_resistances": "",
-        "damage_immunities": "",
-        "condition_immunities": "",
-        "languages": "Common, Draconic, Dwarvish, Elvish",
-        "challenge_rating": "1",
-        "actions": [
-            {
-                "name": "Quarterstaff",
-                "desc": "Melee Weapon Attack: +1 to hit, reach 5 ft., one target. Hit: 3 (1d8-1) bludgeoning damage."
-            }
-        ],
-        "reactions": "",
-        "legendary_desc": "",
-        "legendary_actions": "",
-        "special_abilities": [
-            {
-                "name": "Spellcasting",
-                "desc": "The mage is a 4th-level spellcaster that uses Intelligence as its spellcasting ability (spell save DC 13; +5 to hit with spell attacks). The mage knows the following spells from the wizard's spell list: Cantrips (at will): light, mage hand, shocking grasp 1st Level (4 slots): charm person, magic missile 2nd Level (3 slots): hold person, misty step"
-            }
-        ],
-        "spell_list": [
-            "https://api.open5e.com/spells/light/",
-            "https://api.open5e.com/spells/mage-hand/",
-            "https://api.open5e.com/spells/shocking-grasp/",
-            "https://api.open5e.com/spells/charm-person/",
-            "https://api.open5e.com/spells/magic-missile/",
-            "https://api.open5e.com/spells/hold-person/",
-            "https://api.open5e.com/spells/misty-step/"
-        ]
-    },
-    {
         "name": "TestNicu",
         "size": "Medium",
         "type": "humanoid",
@@ -254,5 +195,55 @@
         "spell_list": [
             "https://api.open5e.com/spells/shocking-grasp/"
         ]
+    },
+    {
+        "name": "Redbrand Ruffian",
+        "size": "Medium",
+        "type": "humanoid",
+        "subtype": "human",
+        "alignment": "lawful evil",
+        "armor_class": 14,
+        "hit_points": 16,
+        "hit_dice": "3d8 + 3",
+        "speed": {
+            "walk": 30
+        },
+        "strength": 9,
+        "dexterity": 14,
+        "constitution": 11,
+        "intelligence": 17,
+        "wisdom": 12,
+        "charisma": 11,
+        "strength_save": null,
+        "dexterity_save": null,
+        "constitution_save": null,
+        "intelligence_save": null,
+        "wisdom_save": null,
+        "charisma_save": null,
+        "skills": {
+            "intimidation": 9
+        },
+        "damage_vulnerabilities": "",
+        "damage_resistances": "",
+        "damage_immunities": "",
+        "condition_immunities": "",
+        "senses": "passive Perception 9",
+        "languages": "Common",
+        "challenge_rating": "1/2",
+        "actions": [
+            {
+                "name": "Multiattack",
+                "attack": "The ruffian makes two melee attacks"
+            },
+            {
+                "name": "Shortsword",
+                "attack": "Melee Weapon Attack: +4 to hit, reach 5 ft., one atarget. Hit: 5 (1d6 + 2) piercing damage."
+            }
+        ],
+        "reactions": "",
+        "legendary_desc": "",
+        "legendary_actions": "",
+        "special_abilities": [],
+        "spell_list": []
     }
 ]
