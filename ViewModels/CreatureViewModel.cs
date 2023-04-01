@@ -14,7 +14,19 @@ namespace Deez_Notes_Dm.ViewModels
         public string Name { get; set; }
         public string Race { get; set; }
 
-        public int MaxHP { get; set; }
+        //to change TempHP
+        private int maxHP { get; set; }
+        public int MaxHP
+        {
+            get => maxHP;
+            set
+            {
+                maxHP = value;
+                OnPropertyChanged(nameof(MaxHP));
+
+                TempMaxHP = value;
+            }
+        }
 
         private int hp;
         public int HP
@@ -79,6 +91,14 @@ namespace Deez_Notes_Dm.ViewModels
             }
         }
 
+        private int tempMaxHP = 0;
+        public int TempMaxHP {
+            get => tempMaxHP;
+            set
+            {
+                tempMaxHP = value;
+            }
+        }
 
         public ICommand AddHPCommand { get; }
         public ICommand SubtractHPCommand { get; }

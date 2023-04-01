@@ -82,13 +82,19 @@
                             <Run Text="&#128737;" Foreground="SlateGray"/>
                         </TextBlock>
 
-                        <TextBlock Grid.Row="2" Grid.Column="0" x:Name="PlayerHp" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <!--<TextBlock Grid.Row="2" Grid.Column="0" x:Name="PlayerHp" HorizontalAlignment="Left" VerticalAlignment="Center">
                             <Run FontWeight="Bold" Text="HP: "/>
                             <Run Text="{Binding Path=HP}"/>
                             <Run Text="/"/>
                             <Run Text="{Binding Path=MaxHP}"/>
                             <Run Text="&#9829;" Foreground="Crimson"/>
-                        </TextBlock>
+                        </TextBlock>-->
+                        <StackPanel Grid.Row="2" Grid.Column="0" x:Name="PlayerHp" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <TextBlock FontWeight="Bold" Text="HP: "/>
+                            <TextBlock Text="{Binding Path=HP, StringFormat=' {0} / '}"/>
+                            <TextBox Text="{Binding Path=MaxHP, UpdateSourceTrigger=PropertyChanged}" MinWidth="20px"/>
+                            <TextBlock Text="&#9829;" Foreground="Crimson"/>
+                        </StackPanel>
 
                         <Button Grid.Row="2" Grid.Column="3" FontWeight="Bold" FontFamily="Arial" Margin="5,0,0,0" Content=" &#8211; " Command="{Binding SubtractHPCommand}"/>
                         <TextBox Grid.Row="2" Grid.Column="4" Name="HPAddInput" MaxLength="3" Margin="5,0,0,0" FontSize="14" Text="{Binding Path = HP_Input, UpdateSourceTrigger=PropertyChanged}"/>

@@ -3,6 +3,7 @@ using Deez_Notes_Dm.Models;
 using Deez_Notes_Dm.Stores;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
@@ -100,14 +101,29 @@ namespace Deez_Notes_Dm.ViewModels
 
         public void UpdateCombatList()
         {
+            List<CreatureViewModel> TempCombatants = Combatants.ToList();
+
             _combatants.Clear();
             List<Creature> combatantList = _combatantsManager.GetCombatants();
 
             if (combatantList != null)
             {
-                foreach (Creature creature in combatantList)
+                //foreach (Creature creature in combatantList)
+                //{
+                //    CreatureViewModel combatantViewModel = new CreatureViewModel(creature, this, _combatantsManager);
+                    
+                //    Combatants.Add(combatantViewModel);
+                //}
+                for(int i = 0; i < combatantList.Count; i++)
                 {
-                    CreatureViewModel combatantViewModel = new CreatureViewModel(creature, this, _combatantsManager);
+                    CreatureViewModel combatantViewModel = new CreatureViewModel(combatantList[i], this, _combatantsManager);
+                    
+                    //when MaxHP changed in frontend, also change TempHP
+                    if(TempCombatants[i].TempMaxHP != 0)
+                    {
+                        combatantViewModel.MaxHP = TempCombatants[i].TempMaxHP;
+                    }
+
                     Combatants.Add(combatantViewModel);
                 }
             }
